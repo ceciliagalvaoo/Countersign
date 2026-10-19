@@ -1,0 +1,25 @@
+{
+  "name": "@countersign/tests",
+  "version": "0.1.0",
+  "license": "GPL-3.0-only",
+  "private": true,
+  "type": "module",
+  "description": "Countersign suites: benign B01 to B12 and adversarial A01 to A12 in one command",
+  "scripts": {
+    "suites": "bash suites/run.sh",
+    "suites:adversarial": "bash suites/run.sh --only adversarial",
+    "suites:benign": "bash suites/run.sh --only benign",
+    "typecheck": "tsc --noEmit",
+    "check:m1": "../apps/api/node_modules/.bin/tsx ../scripts/evidence/check-m1.ts",
+    "evidence": "../apps/api/node_modules/.bin/tsx ../scripts/evidence/export.ts",
+    "evidence:tamper-check": "bash scripts/evidence-tamper-check.sh"
+  },
+  "dependencies": {
+    "@stellar/stellar-sdk": "^16.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.4",
+    "tsx": "^4.6.2",
+    "typescript": "^5.3.3"
+  }
+}
