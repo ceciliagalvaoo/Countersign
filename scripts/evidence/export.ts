@@ -18,7 +18,7 @@
 //               of fund onboarding: not investor tasks.
 //   gap         product transactions that should have a log line and do not (listed for their owner; not counted).
 // Credentials only from the environment (never printed): CS_INVESTOR_EMAIL and CS_INVESTOR_PASSWORD (or
-// CS_INVESTOR_JWT) for the demo investor, CS_API_URL (default http://localhost:3001/api). Without them, the
+// CS_INVESTOR_JWT) for the demo investor, optionally CS_INVESTOR2_EMAIL and CS_INVESTOR2_PASSWORD for a second one, CS_API_URL (default http://localhost:3001/api). Without them, the
 // team-database rows are marked "pending: the human runs this with her credentials".
 import dns from 'node:dns';
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
@@ -110,16 +110,19 @@ async function dbSource(name: string, label: string, url: string | undefined): P
 }
 
 // The API returns only the logged-in user's rows: investor rows (purchases) and manager rows (vault steps) are read separately
-async function apiSource(role: 'INVESTOR' | 'MANAGER' = 'INVESTOR'): Promise<Source> {
-  const name = role === 'INVESTOR' ? 'team' : 'team-manager';
-  const label = role === 'INVESTOR' ? 'team database (read through the API as the demo investor)' : 'team database (read through the API as the fund manager)';
+// A second demo investor (CS_INVESTOR2_*) is read as its own source, so purchases recorded with a new account
+// (for example, the demo video) join the evidence without dropping the first investor's rows.
+async function apiSource(role: 'INVESTOR' | 'MANAGER' = 'INVESTOR', n: '' | '2' = ''): Promise<Source> {
+  const name = role === 'INVESTOR' ? `team${n ? `-${n}` : ''}` : 'team-manager';
+  const label = role === 'INVESTOR' ? `team database (read through the API as demo investor${n ? ` ${n}` : ''})` : 'team database (read through the API as the fund manager)';
   const api = (process.env.CS_API_URL ?? 'http://localhost:3001/api').replace(/\/+$/, '');
-  let token = process.env[`CS_${role}_JWT`]?.trim();
+  const env = `CS_${role}${n}`;
+  let token = process.env[`${env}_JWT`]?.trim();
   try {
     if (!token) {
-      const email = process.env[`CS_${role}_EMAIL`]?.trim();
-      const password = process.env[`CS_${role}_PASSWORD`] ?? '';
-      if (!email || !password) return { name, label, rows: [], verify: null, pending: `pending: the human runs this with CS_${role}_EMAIL and CS_${role}_PASSWORD` };
+      const email = process.env[`${env}_EMAIL`]?.trim();
+      const password = process.env[`${env}_PASSWORD`] ?? '';
+      if (!email || !password) return { name, label, rows: [], verify: null, pending: `pending: the human runs this with ${env}_EMAIL and ${env}_PASSWORD` };
       const res = await fetch(`${api}/auth/login`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email, password }) });
       if (!res.ok) return { name, label, rows: [], verify: null, pending: `pending: login failed with HTTP ${res.status}` };
       token = ((await res.json()) as { token?: string }).token;
@@ -279,6 +282,7 @@ async function main() {
     await dbSource('e2e', 'disposable e2e database (countersign_test, port 55432)', process.env.EVIDENCE_E2E_DATABASE_URL || testsEnv.DATABASE_URL),
     await dbSource('suites', 'disposable suites database (countersign_suites, port 55432)', process.env.EVIDENCE_SUITES_DATABASE_URL || testsEnv.SUITES_DATABASE_URL),
     await apiSource('INVESTOR'),
+    ...(process.env.CS_INVESTOR2_EMAIL || process.env.CS_INVESTOR2_JWT ? [await apiSource('INVESTOR', '2')] : []),
     await apiSource('MANAGER'),
   ];
   declareFiles();
