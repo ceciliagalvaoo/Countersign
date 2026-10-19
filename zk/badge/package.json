@@ -1,0 +1,19 @@
+{
+  "name": "@countersign/zk-badge",
+  "private": true,
+  "version": "1.0.0",
+  "license": "GPL-3.0-only",
+  "description": "Circom circuit and Groth16 setup for the privacy-preserving investor tier badge",
+  "type": "module",
+  "scripts": {
+    "build": "bash scripts/build.sh",
+    "ceremony": "bash scripts/ceremony.sh",
+    "fixture": "node scripts/make-fixture.mjs ../../contracts/badge-verifier/contracts/badge-verifier/src/test_fixture.rs"
+  },
+  "devDependencies": {
+    "circomlib": "2.0.5",
+    "snarkjs": "0.7.6",
+    "poseidon-lite": "0.3.0",
+    "@stellar/stellar-sdk": "^17.2.1"
+  }
+}
