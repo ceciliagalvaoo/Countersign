@@ -201,19 +201,19 @@ const FundCreate: React.FC = () => {
   }
 
   const inputBase =
-    'w-full rounded-lg px-3 py-2 bg-white/5 border border-white/15 text-white text-sm placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#169976] focus:border-transparent transition';
+    'w-full rounded-lg px-3 py-2 bg-white/5 border border-white/15 text-white text-sm placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-cobalt focus:border-transparent transition';
   const labelBase = 'block text-xs font-semibold text-white/80 mb-1 tracking-wide uppercase';
-  const sectionTitle = 'text-sm font-semibold text-emerald-300';
+  const sectionTitle = 'font-display text-20 font-medium text-cobalt';
   const sectionSubtitle = 'text-xs text-white/60';
 
   return (
-    <div className="min-h-screen bg-[#00000] text-white">
+    <div className="min-h-screen bg-cream-deep text-white">
       <div className="max-w-5xl mx-auto px-4 py-10">
-        <div className="bg-white/[0.04] border border-white/[0.12] backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-[0_18px_60px_rgba(0,0,0,0.45)]">
+        <div className="bg-cream-deep/70 border border-navy/10 rounded-card p-6 md:p-8 shadow-ink">
           {/* Header */}
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white">
+              <h2 className="text-28 md:text-40 font-medium text-white">
                 Create Fund
               </h2>
               <p className="text-xs md:text-sm text-white/70 mt-1">
@@ -693,7 +693,7 @@ const FundCreate: React.FC = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="px-6 py-3 text-sm font-medium rounded-2xl bg-white text-black hover:opacity-90 hover:scale-[1.02] shadow-[0_10px_30px_rgba(0,0,0,0.35)] transition disabled:opacity-60 disabled:cursor-not-allowed"
+                className="px-6 py-3 text-sm font-medium rounded-full bg-cobalt text-cream hover:bg-navy shadow-ink transition disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 {loading ? 'Saving…' : 'Create Fund'}
               </button>

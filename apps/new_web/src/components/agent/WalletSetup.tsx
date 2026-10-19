@@ -30,8 +30,8 @@ const contractUrl = (id: string) => `https://stellar.expert/explorer/testnet/con
 const Step: React.FC<{ n: number; title: string; done: boolean; children?: React.ReactNode }> = ({ n, title, done, children }) => (
   <li className="flex gap-3">
     <span
-      className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-[11px] font-mono ${
-        done ? 'border-primary-400 bg-primary-700 text-white' : 'border-white/50 text-gray-100'
+      className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-11 font-mono ${
+        done ? 'border-primary-400 bg-primary-700 text-cream' : 'border-white/50 text-gray-100'
       }`}
     >
       {done ? '✓' : n}
@@ -131,11 +131,11 @@ const TestUsdc: React.FC = () => {
   return (
     <div className="mt-1">
       {!review ? (
-        <button onClick={start} disabled={!publicKey || state !== 'idle'} className="rounded border border-white/40 px-3 py-1 text-xs font-semibold disabled:opacity-40">
+        <button onClick={start} disabled={!publicKey || state !== 'idle'} className="btn btn-sm btn-secondary disabled:opacity-40">
           {state === 'idle' ? 'Get test USDC' : 'Preparing...'}
         </button>
       ) : (
-        <div className="rounded border border-white/[0.12] bg-white/[0.04] p-2 text-xs">
+        <div className="rounded border border-navy/10 bg-cream-deep/70 p-2 text-xs">
           <p className="text-gray-400">What you sign (read in your browser), network {NETWORK_LABEL}:</p>
           <ul className="mt-1 space-y-0.5 font-mono">
             {review.ops.map((op, i) => (
@@ -154,7 +154,7 @@ const TestUsdc: React.FC = () => {
               : 'Testnet faucet: adds trustlines for test assets, including USDC, and sends test USDC. Check each line before signing.'}
           </p>
           <div className="mt-2 flex gap-2">
-            <button onClick={sign} disabled={state === 'signing'} className="rounded bg-primary-700 hover:bg-primary-600 px-3 py-1 font-semibold text-white disabled:opacity-40">
+            <button onClick={sign} disabled={state === 'signing'} className="rounded-full bg-primary-700 hover:bg-navy px-3 py-1 font-semibold text-cream disabled:opacity-40">
               {state === 'signing' ? 'Waiting...' : 'Sign in your wallet'}
             </button>
             <button onClick={() => setReview(null)} className="text-gray-400 underline underline-offset-2">
@@ -175,14 +175,14 @@ const WalletSetup: React.FC<Props> = ({ wallet, loading, mandateApproved, flowBu
   const funded = !!balance && /^\d+$/.test(balance) && BigInt(balance) > 0n;
 
   return (
-    <section className="rounded-2xl border border-white/[0.12] bg-white/[0.04] backdrop-blur-xl shadow-[0_18px_60px_rgba(0,0,0,0.45)] p-4 text-gray-100 " aria-label="Mandate wallet">
+    <section className="ink-card p-5 text-navy" aria-label="Mandate wallet">
       <div className="flex items-baseline justify-between">
-        <h3 className="text-base font-semibold !text-white">Your mandate wallet</h3>
+        <h3 className="text-28">Your mandate wallet</h3>
         <button onClick={onRefresh} disabled={loading} className="text-xs text-gray-400 underline underline-offset-2 disabled:opacity-50">
           {loading ? 'Reading...' : 'Refresh'}
         </button>
       </div>
-      <p className="text-[11px] text-gray-400">{LABEL_WALLET_CONTRACT}</p>
+      <p className="text-11 text-gray-400">{LABEL_WALLET_CONTRACT}</p>
 
       {wallet && funded ? (
         <div className="mt-2 space-y-1 text-sm">
@@ -193,12 +193,12 @@ const WalletSetup: React.FC<Props> = ({ wallet, loading, mandateApproved, flowBu
             </a>
           </p>
           <p>
-            Balance (read from the chain): <span className="font-mono tabular-nums">{formatUnits(balance)} USDC</span>
+            Balance (read from the chain): <span className="font-mono tabular">{formatUnits(balance)} USDC</span>
           </p>
           {wallet.limits && (
             <p className="text-xs text-gray-400">
-              Limits on-chain: <span className="font-mono tabular-nums text-gray-100">{formatUnits(wallet.limits.perTxCapUnits)}</span> per purchase,{' '}
-              <span className="font-mono tabular-nums text-gray-100">{formatUnits(wallet.limits.periodCapUnits)}</span> per period
+              Limits on-chain: <span className="font-mono tabular text-gray-100">{formatUnits(wallet.limits.perTxCapUnits)}</span> per purchase,{' '}
+              <span className="font-mono tabular text-gray-100">{formatUnits(wallet.limits.periodCapUnits)}</span> per period
             </p>
           )}
           <p className="text-xs">
@@ -214,7 +214,7 @@ const WalletSetup: React.FC<Props> = ({ wallet, loading, mandateApproved, flowBu
         <ol className="mt-3 space-y-3">
           <Step n={1} title="Connect your wallet" done={isConnected && !!publicKey}>
             {!isConnected && (
-              <button onClick={connect} className="mt-1 rounded bg-primary-700 hover:bg-primary-600 px-3 py-1 text-xs font-semibold text-white">
+              <button onClick={connect} className="mt-1 btn btn-sm btn-primary">
                 Connect wallet
               </button>
             )}
@@ -237,7 +237,7 @@ const WalletSetup: React.FC<Props> = ({ wallet, loading, mandateApproved, flowBu
                     ? 'It starts with the limits of your approved mandate. You own it and can revoke the agent at any time. A card shows the deploy before your wallet opens.'
                     : 'Approve your mandate first: the wallet starts with its limits.'}
                 </p>
-                <button onClick={onCreate} disabled={!publicKey || flowBusy || !mandateApproved} className="mt-1 rounded bg-primary-700 hover:bg-primary-600 px-3 py-1 text-xs font-semibold text-white disabled:opacity-40">
+                <button onClick={onCreate} disabled={!publicKey || flowBusy || !mandateApproved} className="mt-1 btn btn-sm btn-primary disabled:opacity-40">
                   Review the deploy
                 </button>
               </>
@@ -252,7 +252,7 @@ const WalletSetup: React.FC<Props> = ({ wallet, loading, mandateApproved, flowBu
           </Step>
         </ol>
       )}
-      <p className="mt-3 text-[11px] text-gray-400">{LABEL_TEST_ASSETS}</p>
+      <p className="mt-3 text-11 text-gray-400">{LABEL_TEST_ASSETS}</p>
     </section>
   );
 };
@@ -277,10 +277,10 @@ const DepositForm: React.FC<{ amount: string; setAmount: (v: string) => void; di
         onChange={(e) => setAmount(e.target.value)}
         inputMode="decimal"
         placeholder="Amount"
-        className="w-28 rounded border border-white/[0.12] bg-white/5 px-2 py-1 font-mono text-xs tabular-nums text-gray-100 focus:outline-none focus:ring-1 focus:ring-primary"
+        className="w-28 rounded border border-navy/10 bg-white/5 px-2 py-1 font-mono text-xs tabular text-gray-100 focus:outline-none focus:ring-1 focus:ring-primary"
       />
       <span className="text-xs text-gray-400">USDC</span>
-      <button type="submit" disabled={disabled || !valid} className="rounded bg-primary-700 hover:bg-primary-600 px-3 py-1 text-xs font-semibold text-white disabled:opacity-40">
+      <button type="submit" disabled={disabled || !valid} className="btn btn-sm btn-primary disabled:opacity-40">
         Review the deposit
       </button>
     </form>

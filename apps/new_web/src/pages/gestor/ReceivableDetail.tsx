@@ -48,7 +48,7 @@ export default function ReceivableDetail() {
   if (user?.role !== 'GESTOR') return <Navigate to="/dashboard" />;
   if (loading || (item && item.id !== id)) return <div className={`${receivablePanel} text-sm text-white/60`}>Loading receivable...</div>;
   if (!item) return <div className={`${receivablePanel} space-y-4 text-white`}>
-    <h1 className="text-xl font-semibold">Unable to load receivable</h1><p role="alert" className="text-sm text-red-200">{error}</p>
+    <h1 className="text-28 font-medium">Unable to load receivable</h1><p role="alert" className="text-sm text-red-200">{error}</p>
     <Link to="/receivables" className={secondaryButton}>Back to receivables</Link>
     <button onClick={() => void loadData()} disabled={refreshing} className={secondaryButton}>Try again</button>
   </div>;
@@ -96,7 +96,7 @@ export default function ReceivableDetail() {
     <section className={receivablePanel}>
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div className="min-w-0"><p className="text-xs uppercase tracking-[0.2em] text-emerald-300">Fund manager</p>
-          <h1 className="mt-1 text-2xl font-semibold text-white">Receivable details</h1>
+          <h1 className="mt-1 text-28 font-medium text-white">Receivable details</h1>
           <p className="mt-2 text-sm text-white/60">{item.fund?.name} <span className="text-white/40">· {item.fund?.symbol}</span></p>
         </div>
         <div className="flex flex-wrap items-center gap-2">

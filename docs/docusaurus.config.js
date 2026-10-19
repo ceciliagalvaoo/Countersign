@@ -1,5 +1,5 @@
 // @ts-check
-// Countersign documentation site (Docusaurus). The Markdown sources in docs/docs are the same content, readable in the repository.
+// Countersign documentation site (Docusaurus), painted Ink on Cream like the app. The Markdown sources in docs/docs are the same content, readable in the repository.
 
 import { themes as prismThemes } from "prism-react-renderer";
 
@@ -12,7 +12,7 @@ const githubUrl = githubOwner ? `https://github.com/${githubOwner}/${githubRepo}
 const config = {
   title: "Countersign",
   tagline: "Sign only what you can read.",
-  favicon: "img/countersign.svg",
+  favicon: "img/favicon.svg",
 
   url: githubOwner ? `https://${githubOwner.toLowerCase()}.github.io` : "http://localhost:3000",
   baseUrl: githubRepo ? `/${githubRepo}/` : "/",
@@ -57,9 +57,10 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       image: "img/countersign.svg",
+      // The product is Ink on Cream; the documentation follows it rather than a default theme.
       colorMode: {
-        defaultMode: "dark",
-        disableSwitch: true,
+        defaultMode: "light",
+        disableSwitch: false,
         respectPrefersColorScheme: false,
       },
       mermaid: {
@@ -73,6 +74,11 @@ const config = {
         },
         items: [
           {
+            href: "https://countersign-web-rt1a.onrender.com",
+            label: "Live demo",
+            position: "right",
+          },
+          {
             href: githubUrl,
             label: "GitHub",
             position: "right",
@@ -80,13 +86,35 @@ const config = {
         ],
       },
       footer: {
-        style: "dark",
+        style: "light",
+        links: [
+          {
+            title: "Read",
+            items: [
+              { label: "Overview", to: "/" },
+              { label: "How it works", to: "/how-it-works" },
+              { label: "Limitations", to: "/limitations" },
+            ],
+          },
+          {
+            title: "Use",
+            items: [
+              { label: "Live demo", href: "https://countersign-web-rt1a.onrender.com" },
+              { label: "Walkthrough", to: "/live-demo" },
+              { label: "Run it yourself", to: "/run-it-yourself" },
+            ],
+          },
+          {
+            title: "Source",
+            items: [{ label: "GitHub", href: githubUrl }],
+          },
+        ],
         copyright:
           "Countersign. Licensed under GPL-3.0-only. Test assets on the Stellar test network; no monetary value. Our contracts are not audited.",
       },
       prism: {
-        theme: prismThemes.vsDark,
-        darkTheme: prismThemes.vsDark,
+        theme: prismThemes.github,
+        darkTheme: prismThemes.dracula,
       },
     }),
 };

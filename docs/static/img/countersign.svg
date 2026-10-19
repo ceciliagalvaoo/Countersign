@@ -1,5 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Countersign">
-  <rect width="64" height="64" rx="14" fill="#127259"/>
-  <text x="32" y="41" text-anchor="middle" font-family="Inter, 'Be Vietnam Pro', Arial, sans-serif" font-size="34" font-weight="800" fill="#FFFFFF">C</text>
-  <line x1="16" y1="49" x2="48" y2="49" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="40 16 190 210" role="img" aria-label="Countersign">
+  <g stroke="#2547C9" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-width="14">
+    <path d="M80 30C98 25 142 25 160 31"/>
+    <path d="M80 30C63 54 57 82 65 104C77 136 100 166 120 196"/>
+    <path d="M160 31C177 55 183 82 175 104C163 136 140 166 120 196"/>
+    <path d="M111 104a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" stroke-width="10"/>
+    <path d="M120 122C118.6 146 121.2 170 120 190" stroke-width="10"/>
+    <path d="M120 196C134 214 158 220 180 208C194 200 206 202 222 212" stroke-width="10"/>
+  </g>
 </svg>

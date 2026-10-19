@@ -32,6 +32,7 @@ import PlanDag from '../../components/agent/PlanDag';
 import WalletSetup from '../../components/agent/WalletSetup';
 import { currentPlanNodes, inFlightViews, isInFlight, latestPurchase as pickLatest, planPurchase, purchaseViews } from '../../components/agent/purchaseStatus';
 import { errorText, parseContractError } from '../../utils/contractErrors';
+import { BrushStroke } from '../../components/ink/BrushStroke';
 import { LABEL_RECURRING, LABEL_TEST_ASSETS, NETWORK_LABEL, PRODUCT_NAME, TAGLINE } from '../../constants/labels';
 
 /**
@@ -467,14 +468,15 @@ const AgentPage: React.FC = () => {
 
   return (
     <div className="min-h-full">
-      <header className="mb-4 flex flex-wrap items-end justify-between gap-2 text-white">
+      <header className="mb-6 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold !text-white">{PRODUCT_NAME}</h1>
-          <p className="text-sm text-white/80">{TAGLINE}</p>
+          <p className="eyebrow">{PRODUCT_NAME} agent</p>
+          <h1 className="mt-1 text-40">{TAGLINE}</h1>
+          <BrushStroke variant={2} className="mt-1 h-5 w-44" delay={0.3} />
         </div>
-        <div className="text-right text-xs text-white/80">
+        <div className="text-right text-12 text-ink-soft">
           <p>
-            Network: <span className="font-semibold text-white">{NETWORK_LABEL}</span>
+            Network: <span className="font-medium text-navy">{NETWORK_LABEL}</span>
           </p>
           <p>{LABEL_TEST_ASSETS}</p>
         </div>
@@ -520,34 +522,34 @@ const AgentPage: React.FC = () => {
             onInterrupt={() => control(() => agentClient.interrupt(sessionId))}
             onResume={() => control(() => agentClient.resume(sessionId))}
           />
-          <section className="rounded-2xl border border-white/[0.12] bg-white/[0.04] backdrop-blur-xl shadow-[0_18px_60px_rgba(0,0,0,0.45)] p-4 text-gray-100" aria-label="Controls">
-            <h3 className="text-base font-semibold !text-white">Controls</h3>
+          <section className="ink-card p-5 text-navy" aria-label="Controls">
+            <h3 className="text-28">Controls</h3>
             <div className="mt-2 flex flex-wrap gap-2">
-              <button onClick={runRecurring} disabled={controlBusy || !session || interrupted} className="rounded bg-primary-700 hover:bg-primary-600 px-3 py-1.5 text-xs font-semibold text-white disabled:opacity-40">
+              <button onClick={runRecurring} disabled={controlBusy || !session || interrupted} className="btn btn-sm btn-primary disabled:opacity-40">
                 Run recurring now
               </button>
               {canStop && !interrupted && (
-                <button onClick={() => control(() => agentClient.interrupt(sessionId))} disabled={controlBusy} className="rounded border border-white/40 px-3 py-1.5 text-xs font-semibold disabled:opacity-40">
+                <button onClick={() => control(() => agentClient.interrupt(sessionId))} disabled={controlBusy} className="btn btn-sm btn-secondary disabled:opacity-40">
                   Stop
                 </button>
               )}
               {wallet && !wallet.revoked && (
-                <button onClick={startRevoke} disabled={showCard} className="rounded border border-red-400 px-3 py-1.5 text-xs font-semibold text-red-300 disabled:opacity-40">
+                <button onClick={startRevoke} disabled={showCard} className="btn btn-sm btn-danger disabled:opacity-40">
                   Revoke agent
                 </button>
               )}
             </div>
-            <p className="mt-1 text-[11px] text-gray-400">{LABEL_RECURRING}</p>
+            <p className="mt-1 text-11 text-gray-400">{LABEL_RECURRING}</p>
             {wallet?.revoked && <p className="mt-1 text-xs font-semibold text-red-300">{'✕'} Agent revoked: our wallet contract on Stellar (not audited) refuses its purchases.</p>}
             {windowOpen && (
               <div className="mt-3 rounded border border-amber-400 p-3" role="status" aria-live="polite">
                 <p className="text-sm font-semibold text-amber-300">
-                  Scheduled: executes in <span className="font-mono tabular-nums">{Math.ceil(holdLeftMs / 1000)}</span> s, pending, not done
+                  Scheduled: executes in <span className="font-mono tabular">{Math.ceil(holdLeftMs / 1000)}</span> s, pending, not done
                 </p>
                 <button
                   onClick={() => control(() => agentClient.interrupt(sessionId))}
                   disabled={controlBusy}
-                  className="mt-2 w-full rounded bg-primary-700 hover:bg-primary-600 px-4 py-2 text-sm font-semibold text-white disabled:opacity-40"
+                  className="mt-2 w-full btn btn-md btn-primary disabled:opacity-40"
                 >
                   Interrupt
                 </button>
@@ -561,7 +563,7 @@ const AgentPage: React.FC = () => {
             )}
             {recurringView && <div className="mt-2"><TxStatus view={recurringView} /></div>}
             {recurringNote && <p className="mt-2 text-xs text-gray-100">{recurringNote}</p>}
-            {recurringLabel && <p className="mt-2 text-[11px] text-gray-400">{recurringLabel}</p>}
+            {recurringLabel && <p className="mt-2 text-11 text-gray-400">{recurringLabel}</p>}
           </section>
         </div>
 
@@ -583,7 +585,7 @@ const AgentPage: React.FC = () => {
             />
           )}
           {showCard && !flow.prepared && (
-            <section className="rounded-2xl border border-white/[0.12] bg-white/[0.04] backdrop-blur-xl shadow-[0_18px_60px_rgba(0,0,0,0.45)] p-4 text-sm text-gray-100">
+            <section className="ink-card p-5 text-14 text-navy">
               {flow.phase.kind === 'preparing' ? (
                 <p>Building and decoding the transaction...</p>
               ) : (
@@ -604,7 +606,7 @@ const AgentPage: React.FC = () => {
             </section>
           )}
           {signatureNeeded && !showCard && wallet && focusFundId && (
-            <section className="rounded-md border border-amber-400 bg-white/[0.04] p-4 text-sm text-gray-100">
+            <section className="rounded-md border border-amber-400 bg-cream-deep/70 p-4 text-sm text-gray-100">
               <p className="font-semibold text-amber-300">awaiting your signature</p>
               <p className="text-xs">The plan waits for your approval of a new fund.</p>
               <label className="mt-2 flex items-center gap-2 text-xs">
@@ -613,22 +615,22 @@ const AgentPage: React.FC = () => {
                   value={capValue}
                   onChange={(e) => setFundCapUsdc(e.target.value)}
                   inputMode="decimal"
-                  className="w-28 rounded border border-white/[0.12] bg-white/5 px-2 py-1 font-mono tabular-nums text-gray-100"
+                  className="w-28 rounded border border-navy/10 bg-white/5 px-2 py-1 font-mono tabular text-gray-100"
                 />
                 USDC
               </label>
-              <button onClick={() => startAllowFund(focusFundId, decisionForFund?.seq ?? null, capValue)} disabled={!capValid} className="mt-2 rounded bg-primary-700 hover:bg-primary-600 px-3 py-1.5 text-xs font-semibold text-white disabled:opacity-40">
+              <button onClick={() => startAllowFund(focusFundId, decisionForFund?.seq ?? null, capValue)} disabled={!capValid} className="mt-2 btn btn-sm btn-primary disabled:opacity-40">
                 Review the card
               </button>
             </section>
           )}
           {active === 'allow_fund' && flow.phase.kind === 'confirmed' && (
-            <button onClick={() => void send('I signed the approval for this fund. Please continue.')} disabled={sending} className="rounded bg-white/[0.04] px-3 py-2 text-xs font-semibold text-gray-100 disabled:opacity-40">
+            <button onClick={() => void send('I signed the approval for this fund. Please continue.')} disabled={sending} className="rounded bg-cream-deep/70 px-3 py-2 text-xs font-semibold text-gray-100 disabled:opacity-40">
               Tell the agent to continue
             </button>
           )}
           {awaitingExecution && (
-            <section className="rounded-2xl border border-white/[0.12] bg-white/[0.04] backdrop-blur-xl shadow-[0_18px_60px_rgba(0,0,0,0.45)] p-4 text-gray-100" aria-label="Approved decision">
+            <section className="ink-card p-5 text-navy" aria-label="Approved decision">
               <TxStatus
                 title="Agent payment"
                 view={{
@@ -639,16 +641,16 @@ const AgentPage: React.FC = () => {
             </section>
           )}
           {inFlightViews(purchases).map((v, i) => (
-            <section key={`f${i}`} className="rounded-2xl border border-white/[0.12] bg-white/[0.04] backdrop-blur-xl shadow-[0_18px_60px_rgba(0,0,0,0.45)] p-4 text-gray-100">
+            <section key={`f${i}`} className="ink-card p-5 text-navy">
               <TxStatus view={v} title="Agent payment" />
             </section>
           ))}
           {latestPurchase && (
-            <section className="rounded-2xl border border-white/[0.12] bg-white/[0.04] backdrop-blur-xl shadow-[0_18px_60px_rgba(0,0,0,0.45)] p-4 text-gray-100" aria-label="Latest purchase">
-              <h3 className="text-base font-semibold !text-white">Latest agent purchase</h3>
+            <section className="ink-card p-5 text-navy" aria-label="Latest purchase">
+              <h3 className="text-28">Latest agent purchase</h3>
               <p className="text-xs text-gray-400">
                 {latestPurchase.fund.name} ({latestPurchase.fund.symbol}),{' '}
-                <span className="font-mono tabular-nums text-gray-100">{latestPurchase.amountUsdc}</span> USDC
+                <span className="font-mono tabular text-gray-100">{latestPurchase.amountUsdc}</span> USDC
               </p>
               {purchaseError && <p role="status" className="mt-2 text-xs text-amber-300">{purchaseError}</p>}
               <div className="mt-2 space-y-2">

@@ -25,14 +25,14 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({ status, type }) => {
         );
       case 'FAILED':
         return (
-          <span className="inline-flex items-center space-x-1 px-3 py-1 text-xs font-semibold rounded-full bg-[#fa7f7f]-100 text-red-800">
+          <span className="inline-flex items-center space-x-1 px-3 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800">
             <FiXCircle />
             <span>Failed</span>
           </span>
         );
       default:
         return (
-          <span className="px-3 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-800">
+          <span className="px-3 py-1 text-xs font-semibold rounded-full bg-navy/5 text-ink-soft">
             {status}
           </span>
         );
@@ -57,7 +57,7 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({ status, type }) => {
       );
     case 'REJECTED':
       return (
-        <span className="inline-flex items-center space-x-1 px-3 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-800">
+        <span className="inline-flex items-center space-x-1 px-3 py-1 text-xs font-semibold rounded-full bg-navy/5 text-ink-soft">
           <FiXCircle />
           <span>Rejected</span>
         </span>

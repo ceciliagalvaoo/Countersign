@@ -52,16 +52,14 @@ const PauseFundUnits: React.FC<Props> = ({ fund, onDone }) => {
     <>
       <button
         onClick={start}
-        className={`px-3 py-1.5 text-sm rounded-md border transition-colors ${
-          paused ? 'border-white/40 text-white hover:bg-white/10' : 'border-[#9E2A2B] text-white bg-[#9E2A2B] hover:bg-[#9E2A2B]/90'
-        }`}
+        className={`btn btn-sm ${paused ? 'btn-secondary' : 'btn-danger'}`}
       >
         {paused ? 'Resume' : 'Pause fund units'}
       </button>
-      {paused && <span className="px-2 py-1 text-xs rounded-md border border-[#9E2A2B] text-white">Units paused</span>}
+      {paused && <span className="eyebrow rounded-full border border-vermilion/40 px-3 py-1.5 !text-vermilion">Units paused</span>}
       {open && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
-          <div className="w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-2xl bg-[#020617]">
+        <div className="module-scrim fixed inset-0 z-50 flex items-center justify-center bg-navy/30 p-4">
+          <div className="w-full max-w-3xl max-h-[90vh] overflow-y-auto module-panel rounded-card bg-cream shadow-ink-lg">
             {flow.prepared ? (
               <ApprovalCard
                 prepared={flow.prepared}
@@ -74,7 +72,7 @@ const PauseFundUnits: React.FC<Props> = ({ fund, onDone }) => {
                 onConnect={connect}
               />
             ) : (
-              <div className="rounded-md bg-white/[0.04] p-4 text-sm text-gray-100 ">
+              <div className="rounded-md bg-cream-deep/70 p-4 text-sm text-gray-100">
                 {flow.phase.kind === 'preparing' && <p>Building and decoding the transaction...</p>}
                 {flow.phase.kind === 'failed' && <TxStatus view={{ state: 'failed', message: flow.phase.message }} />}
                 {flow.phase.kind === 'refused_contract' && (

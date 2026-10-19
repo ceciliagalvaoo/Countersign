@@ -75,14 +75,14 @@ const Marketplace: React.FC = () => {
       )}
 
       <div className="max-w-6xl mx-auto px-4 py-8">
-        <div className="bg-white/[0.04] border border-white/[0.12] backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-[0_18px_60px_rgba(0,0,0,0.45)]">
+        <div className="bg-cream-deep/70 border border-navy/10 rounded-card p-6 md:p-8 shadow-ink">
           {/* Header + search */}
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-6">
             <div>
               <p className="text-[10px] tracking-[0.2em] uppercase text-emerald-300">
                 Primary market
               </p>
-              <h2 className="text-2xl md:text-3xl font-bold text-white">
+              <h2 className="text-28 md:text-40 font-medium text-white">
                 Marketplace
               </h2>
               <p className="mt-1 text-xs md:text-sm text-white/70">
@@ -96,7 +96,7 @@ const Marketplace: React.FC = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search funds..."
-                className="w-full rounded-lg px-3 pl-10 py-2 bg-white/5 border border-white/15 text-white text-sm placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#169976] focus:border-transparent transition"
+                className="w-full rounded-lg px-3 pl-10 py-2 bg-white/5 border border-white/15 text-white text-sm placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-cobalt focus:border-transparent transition"
               />
               <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-white/50" />
             </div>
@@ -104,7 +104,7 @@ const Marketplace: React.FC = () => {
 
           {/* Wallet notice */}
           {!isConnected && (
-            <div className="mb-6 rounded-2xl border border-amber-300/40 bg-amber-500/10 px-4 py-3 text-xs md:text-sm text-amber-100 flex gap-2">
+            <div className="mb-6 rounded-card border border-amber-300/40 bg-amber-500/10 px-4 py-3 text-xs md:text-sm text-amber-100 flex gap-2">
               <span>💡</span>
               <p>
                 <strong>Connect your wallet</strong> in the header to invest and
@@ -129,10 +129,10 @@ const Marketplace: React.FC = () => {
                 return (
                   <div
                     key={fund.id}
-                    className="bg-white/[0.03] border border-white/[0.12] backdrop-blur-xl rounded-2xl p-5 md:p-6 shadow-[0_12px_40px_rgba(0,0,0,0.35)] flex flex-col justify-between gap-4"
+                    className="bg-cream-deep/70 border border-navy/10 rounded-card p-5 md:p-6 shadow-ink flex flex-col justify-between gap-4"
                   >
                     <div className="space-y-2">
-                      <h3 className="text-lg md:text-xl font-semibold text-white">
+                      <h3 className="text-20 md:text-28 font-medium text-white">
                         {fund.name}
                       </h3>
                       <p className="text-xs uppercase tracking-wide text-white/50">
@@ -167,7 +167,7 @@ const Marketplace: React.FC = () => {
                               style={{ width: `${availablePct}%` }}
                             />
                           </div>
-                          <p className="text-[11px] text-white/50">
+                          <p className="text-11 text-white/50">
                             {availablePct.toFixed(0)}% of max supply still
                             available
                           </p>
@@ -178,14 +178,14 @@ const Marketplace: React.FC = () => {
                     <div className="flex flex-col gap-2 mt-2">
                       <button
                         onClick={() => setSelectedFund(fund)}
-                        className="w-full px-4 py-2.5 text-sm font-medium rounded-2xl bg-white text-black hover:opacity-90 hover:scale-[1.02] shadow-[0_10px_30px_rgba(0,0,0,0.35)] transition disabled:opacity-60 disabled:cursor-not-allowed"
+                        className="w-full px-4 py-2.5 text-sm font-medium rounded-full bg-cobalt text-cream hover:bg-navy shadow-ink transition disabled:opacity-60 disabled:cursor-not-allowed"
                         disabled={!isConnected}
                       >
                         {isConnected ? 'Invest now' : 'Connect wallet to invest'}
                       </button>
                       <Link
                         to={`/marketplace/${fund.id}`}
-                        className="w-full px-4 py-2.5 text-sm text-center rounded-2xl bg-white/5 border border-white/15 text-white/90 hover:bg-white/10 transition"
+                        className="w-full px-4 py-2.5 text-sm text-center rounded-card bg-white/5 border border-white/15 text-white/90 hover:bg-white/10 transition"
                       >
                         View details
                       </Link>

@@ -81,17 +81,17 @@ const PlanDag: React.FC<Props> = ({ nodes, interrupted, busy, onInterrupt, onRes
   const eligibilityRefused = nodes.some((n) => n.id === 'eligibility' && n.state === 'refused');
 
   return (
-    <section className="rounded-2xl border border-white/[0.12] bg-white/[0.04] backdrop-blur-xl shadow-[0_18px_60px_rgba(0,0,0,0.45)] p-4 text-gray-100 " aria-label="Plan">
+    <section className="ink-card p-5 text-navy" aria-label="Plan">
       <div className="flex items-baseline justify-between">
-        <h3 className="text-base font-semibold !text-white">Plan</h3>
+        <h3 className="text-28">Plan</h3>
         <div className="flex gap-2">
           {onRefresh && <button onClick={onRefresh} disabled={refreshing} className="text-xs text-gray-400 underline underline-offset-2 disabled:opacity-40">{refreshing ? 'Reading...' : 'Refresh status'}</button>}
           {interrupted ? (
-            <button onClick={onResume} disabled={busy || !available} className="rounded border border-white/40 px-3 py-1 text-xs font-semibold disabled:opacity-40">
+            <button onClick={onResume} disabled={busy || !available} className="btn btn-sm btn-secondary disabled:opacity-40">
               Resume
             </button>
           ) : (
-            <button onClick={onInterrupt} disabled={busy || !available} className="rounded border border-white/40 px-3 py-1 text-xs font-semibold disabled:opacity-40">
+            <button onClick={onInterrupt} disabled={busy || !available} className="btn btn-sm btn-secondary disabled:opacity-40">
               Interrupt
             </button>
           )}
@@ -113,16 +113,16 @@ const PlanDag: React.FC<Props> = ({ nodes, interrupted, busy, onInterrupt, onRes
                 <p className="text-sm">
                   <span className="font-semibold">{n.label}</span> <span className={`text-xs ${w.tone}`}>{w.word}</span>
                 </p>
-                <p className="text-[10px] uppercase tracking-wide text-gray-400" data-tier>{TIER[n.id] ?? TIER_GREEN}</p>
-                {n.rule && <p className="font-mono text-[11px] text-gray-400 break-all">rule: {n.rule}</p>}
-                {n.detail && <p className="text-[11px] text-gray-400 break-words">{n.detail}</p>}
+                <p className="eyebrow !text-[10px]" data-tier>{TIER[n.id] ?? TIER_GREEN}</p>
+                {n.rule && <p className="font-mono text-11 text-gray-400 break-all">rule: {n.rule}</p>}
+                {n.detail && <p className="text-11 text-gray-400 break-words">{n.detail}</p>}
                 {n.id === 'eligibility' && eligibilityRefused && (
                   <p className="mt-1 text-xs">
                     Not eligible.{' '}
                     <Link to="/dashboard" className="font-semibold text-gray-100 underline underline-offset-2">
                       Prove your tier
                     </Link>
-                    <span className="block text-[11px] text-gray-400">{LABEL_ZK_TIER}</span>
+                    <span className="block text-11 text-gray-400">{LABEL_ZK_TIER}</span>
                   </p>
                 )}
               </div>
@@ -130,7 +130,7 @@ const PlanDag: React.FC<Props> = ({ nodes, interrupted, busy, onInterrupt, onRes
           );
         })}
       </ol>
-      <p className="text-[11px] text-gray-400">Perimeter, profile and suitability: {LABEL_COMPLIANCE}</p>
+      <p className="text-11 text-gray-400">Perimeter, profile and suitability: {LABEL_COMPLIANCE}</p>
     </section>
   );
 };

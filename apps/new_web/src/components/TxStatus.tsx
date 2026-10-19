@@ -58,7 +58,7 @@ export const HashLink: React.FC<{ hash: string; label?: string }> = ({ hash, lab
     href={getTransactionUrl(hash)}
     target="_blank"
     rel="noopener noreferrer"
-    className="font-mono tabular-nums text-gray-100 underline decoration-gray-500/60 underline-offset-2 hover:decoration-white"
+    className="font-mono tabular text-cobalt underline decoration-cobalt/40 underline-offset-2 hover:decoration-cobalt"
     title={hash}
   >
     {label ? `${label} ` : ''}
@@ -70,12 +70,12 @@ export const TxStatus: React.FC<{ view: TxView; title?: string; onRetry?: () => 
   const hash = 'hash' in view ? view.hash : undefined;
   return (
     <div className={`border-l-2 pl-3 py-1 text-sm text-gray-100 ${TONE[view.state].split(' ')[1]}`} data-tx-state={view.state}>
-      {title && <p className="text-xs uppercase tracking-wide text-gray-400">{title}</p>}
+      {title && <p className="eyebrow">{title}</p>}
       <p className={`font-semibold ${TONE[view.state].split(' ')[0]}`}>
         <span aria-hidden="true" className="mr-1">{MARK[view.state]}</span>
         {WORD[view.state]}
         {view.state === 'refused_contract' && (
-          <span className="ml-2 font-mono tabular-nums">
+          <span className="ml-2 font-mono tabular">
             #{view.code} {view.name}
           </span>
         )}
@@ -92,7 +92,7 @@ export const TxStatus: React.FC<{ view: TxView; title?: string; onRetry?: () => 
         )}
         {view.state === 'confirmed' && view.decision && (
           <p>
-            decision: <span className="font-mono tabular-nums text-gray-100" title={view.decision}>{shortHash(view.decision)}</span>
+            decision: <span className="font-mono tabular text-gray-100" title={view.decision}>{shortHash(view.decision)}</span>
             {view.logSeq != null && (
               <span>
                 {' '}

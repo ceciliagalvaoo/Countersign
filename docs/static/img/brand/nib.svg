@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240" role="img" aria-label="The Countersign nib">
+  <style>.cs-nib path{stroke-dasharray:1;stroke-dashoffset:1;animation:d 1.2s cubic-bezier(.22,.72,.2,1) forwards}.cs-nib path:nth-child(2){animation-delay:.16s}.cs-nib path:nth-child(3){animation-delay:.32s}.cs-nib path:nth-child(4){animation-delay:.5s}.cs-nib path:nth-child(5){animation-delay:.62s}.cs-nib path:nth-child(6){animation-delay:.9s}.cs-nib path:nth-child(7){animation-delay:1.15s}@keyframes d{to{stroke-dashoffset:0}}@media (prefers-reduced-motion:reduce){.cs-nib path{animation:none;stroke-dashoffset:0}}</style>
+  <g class="cs-nib" stroke="#2547C9" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path pathLength="1" d="M80 30C63 54 57 82 65 104C77 136 100 166 120 196" stroke-width="7" stroke-opacity="0.9"/>
+    <path pathLength="1" d="M160 31C177 55 183 82 175 104C163 136 140 166 120 196" stroke-width="7" stroke-opacity="0.9"/>
+    <path pathLength="1" d="M80 30C98 25 142 25 160 31" stroke-width="6" stroke-opacity="0.8"/>
+    <path pathLength="1" d="M111 104a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" stroke-width="4.5"/>
+    <path pathLength="1" d="M120 122C118.6 146 121.2 170 120 190" stroke-width="4.5"/>
+    <path pathLength="1" d="M120 196C134 214 158 220 180 208C194 200 206 202 222 212" stroke-width="4.6" stroke-opacity="0.85"/>
+    <path pathLength="1" d="M20 226C78 220 162 222 222 226" stroke-width="2.4" stroke-opacity="0.4"/>
+  </g>
+</svg>

@@ -67,11 +67,11 @@ const InvestidorDashboard: React.FC = () => {
   if (user?.status !== 'APPROVED') {
     return (
       <div className="max-w-4xl mx-auto px-4 py-10">
-        <div className="bg-white/[0.04] border border-white/[0.12] backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-[0_18px_60px_rgba(0,0,0,0.45)] text-center">
+        <div className="bg-cream-deep/70 border border-navy/10 rounded-card p-6 md:p-8 shadow-ink text-center">
           <p className="text-[10px] tracking-[0.2em] uppercase text-emerald-300 mb-2">
             Investor onboarding
           </p>
-          <h2 className="text-2xl md:text-3xl font-bold mb-2 text-white">
+          <h2 className="text-28 md:text-40 font-medium mb-2 text-white">
             Awaiting approval
           </h2>
           <p className="text-sm text-white/70 max-w-md mx-auto">
@@ -87,11 +87,11 @@ const InvestidorDashboard: React.FC = () => {
   return (
     <div className="max-w-6xl mx-auto px-4 py-8 space-y-8">
       {/* Header */}
-      <div className="bg-white/[0.04] border border-white/[0.12] backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-[0_18px_60px_rgba(0,0,0,0.45)]">
+      <div className="bg-cream-deep/70 border border-navy/10 rounded-card p-6 md:p-8 shadow-ink">
         <p className="text-[10px] tracking-[0.2em] uppercase text-emerald-300">
           Investor dashboard
         </p>
-        <h1 className="text-2xl md:text-3xl font-bold text-white mt-2">
+        <h1 className="text-28 md:text-40 font-medium text-white mt-2">
           Welcome, Investor
         </h1>
         <p className="mt-2 text-sm text-white/70">
@@ -152,27 +152,27 @@ const InvestidorDashboard: React.FC = () => {
 
           {/* Investor Badge */}
           {user?.id && (
-            <div className="bg-white/[0.04] border border-white/[0.12] backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-[0_18px_60px_rgba(0,0,0,0.45)]">
+            <div className="bg-cream-deep/70 border border-navy/10 rounded-card p-6 md:p-8 shadow-ink">
               <InvestorBadge userId={user.id} />
             </div>
           )}
 
           {/* Recommended Funds */}
           {user?.id && (
-            <div className="bg-white/[0.04] border border-white/[0.12] backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-[0_18px_60px_rgba(0,0,0,0.45)]">
+            <div className="bg-cream-deep/70 border border-navy/10 rounded-card p-6 md:p-8 shadow-ink">
               <RecommendedFunds />
             </div>
           )}
 
           {/* Pending orders detail */}
           {pendingOrders.length > 0 && (
-            <div className="bg-white/[0.04] border border-white/[0.12] backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-[0_18px_60px_rgba(0,0,0,0.45)]">
+            <div className="bg-cream-deep/70 border border-navy/10 rounded-card p-6 md:p-8 shadow-ink">
               <div className="flex items-start gap-3">
                 <div className="mt-1">
                   <FiClock className="text-amber-300 text-xl" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-white mb-1">
+                  <h3 className="text-20 font-medium text-white mb-1">
                     Pending orders
                   </h3>
                   <p className="text-sm text-white/70 mb-4">
@@ -192,7 +192,7 @@ const InvestidorDashboard: React.FC = () => {
                     {pendingOrders.map((order) => (
                       <div
                         key={order.id}
-                        className="bg-white/[0.03] border border-white/[0.12] rounded-xl px-4 py-3 flex flex-col gap-1"
+                        className="bg-cream-deep/70 border border-navy/10 rounded-card px-4 py-3 flex flex-col gap-1"
                       >
                         <div className="flex items-center justify-between">
                           <span className="font-medium text-sm text-white">
@@ -206,7 +206,7 @@ const InvestidorDashboard: React.FC = () => {
                             </span>
                           </span>
                         </div>
-                        <p className="text-[11px] text-white/50">
+                        <p className="text-11 text-white/50">
                           Status: awaiting approval from fund manager.
                         </p>
                       </div>
@@ -255,7 +255,7 @@ const StatCard: React.FC<{
   const cls = accentClasses[accent];
 
   return (
-    <div className="bg-white/[0.03] border border-white/[0.12] backdrop-blur-xl rounded-2xl p-5 md:p-6 shadow-[0_12px_40px_rgba(0,0,0,0.35)] flex items-center gap-4">
+    <div className="bg-cream-deep/70 border border-navy/10 rounded-card p-5 md:p-6 shadow-ink flex items-center gap-4">
       <div
         className={`p-3 rounded-full text-xl flex items-center justify-center ${cls.icon}`}
       >
@@ -267,7 +267,7 @@ const StatCard: React.FC<{
         </p>
         <p className={`text-2xl font-bold ${cls.title}`}>{value}</p>
         {subtitle && (
-          <p className="text-[11px] text-white/60 mt-1">{subtitle}</p>
+          <p className="text-11 text-white/60 mt-1">{subtitle}</p>
         )}
       </div>
     </div>

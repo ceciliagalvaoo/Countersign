@@ -71,10 +71,10 @@ const RecommendedFunds: React.FC = React.memo(() => {
 
     if (loading) {
         return (
-            <div className="bg-white/[0.04] border border-white/[0.12] backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-[0_18px_60px_rgba(0,0,0,0.45)]">
+            <div className="bg-cream-deep/70 border border-navy/10 rounded-card p-6 md:p-8 shadow-ink">
                 <div className="flex items-center space-x-2 mb-4">
                     <FiStar className="text-primary text-xl" />
-                    <h2 className="text-xl font-bold text-white">Recommended for You</h2>
+                    <h2 className="text-28 font-medium text-white">Recommended for You</h2>
                 </div>
                 <div className="flex items-center justify-center py-8">
                     <div className="w-8 h-8 border-4 border-dashed rounded-full animate-spin border-primary"></div>
@@ -85,10 +85,10 @@ const RecommendedFunds: React.FC = React.memo(() => {
 
     if (error) {
         return (
-            <div className="bg-white/[0.04] border border-white/[0.12] backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-[0_18px_60px_rgba(0,0,0,0.45)]">
+            <div className="bg-cream-deep/70 border border-navy/10 rounded-card p-6 md:p-8 shadow-ink">
                 <div className="flex items-center space-x-2 mb-4">
                     <FiStar className="text-primary text-xl" />
-                    <h2 className="text-xl font-bold text-white">Recommended for You</h2>
+                    <h2 className="text-28 font-medium text-white">Recommended for You</h2>
                 </div>
                 <div className="text-center py-6">
                     <p className="text-gray-300">Unable to load recommendations at this time.</p>
@@ -99,10 +99,10 @@ const RecommendedFunds: React.FC = React.memo(() => {
 
     if (recommendations.length === 0) {
         return (
-            <div className="bg-white/[0.04] border border-white/[0.12] backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-[0_18px_60px_rgba(0,0,0,0.45)]">
+            <div className="bg-cream-deep/70 border border-navy/10 rounded-card p-6 md:p-8 shadow-ink">
                 <div className="flex items-center space-x-2 mb-4">
                     <FiStar className="text-primary text-xl" />
-                    <h2 className="text-xl font-bold text-white">Recommended for You</h2>
+                    <h2 className="text-28 font-medium text-white">Recommended for You</h2>
                 </div>
                 <div className="text-center py-8">
                     <FiTrendingUp className="mx-auto text-5xl text-gray-300 mb-3" />
@@ -116,11 +116,11 @@ const RecommendedFunds: React.FC = React.memo(() => {
     }
 
     return (
-        <div className="bg-white/[0.04] border border-white/[0.12] backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-[0_18px_60px_rgba(0,0,0,0.45)]">
+        <div className="bg-cream-deep/70 border border-navy/10 rounded-card p-6 md:p-8 shadow-ink">
             <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center space-x-2">
                     <FiStar className="text-primary text-xl" />
-                    <h2 className="text-xl font-bold text-white">Recommended for You</h2>
+                    <h2 className="text-28 font-medium text-white">Recommended for You</h2>
                 </div>
                 <span className="text-sm text-gray-300">
                     {recommendations.length} {recommendations.length === 1 ? 'fund' : 'funds'}
@@ -132,12 +132,12 @@ const RecommendedFunds: React.FC = React.memo(() => {
                     <div
                         key={fund.id}
                         onClick={() => handleFundClick(fund.id)}
-                        className="bg-white/[0.04] border border-white/[0.12] backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-[0_18px_60px_rgba(0,0,0,0.45)] transition-all cursor-pointer group"
+                        className="bg-cream-deep/70 border border-navy/10 rounded-card p-6 md:p-8 shadow-ink transition-all cursor-pointer group"
                     >
                         <div className="flex justify-between items-start mb-3">
                             <div className="flex-1">
                                 <div className="flex items-center space-x-2 mb-1">
-                                    <h3 className="text-lg font-semibold text-white group-hover:text-primary transition-colors">
+                                    <h3 className="text-20 font-medium text-white group-hover:text-primary transition-colors">
                                         {fund.name}
                                     </h3>
                                     <span className="text-xs font-mono text-gray-500 bg-gray-100 px-2 py-0.5 rounded">

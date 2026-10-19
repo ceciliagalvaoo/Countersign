@@ -1,4 +1,5 @@
 import React from 'react';
+import { OrbGlyph } from '../ink/Orb';
 import type { MandateOverview } from '../../types/countersign';
 import { shortHash } from '../../utils/units';
 
@@ -77,11 +78,11 @@ const MandatePanel: React.FC<Props> = ({ overview, sessionDraft, sessionMissing,
   const canApprove = !!overview?.complete && !!draftHash && !approvedIsCurrent;
 
   return (
-    <section className="rounded-2xl border border-white/[0.12] bg-white/[0.04] backdrop-blur-xl shadow-[0_18px_60px_rgba(0,0,0,0.45)] p-4 text-gray-100 " aria-label="Mandate">
+    <section className="ink-card p-5 text-navy" aria-label="Mandate">
       <div className="flex items-baseline justify-between">
-        <h3 className="text-base font-semibold !text-white">Investment mandate</h3>
+        <h3 className="text-28">Investment mandate</h3>
         <span className="text-xs text-gray-400">
-          Turns: <span className="font-mono tabular-nums text-gray-100">{turns}</span>
+          Turns: <span className="font-mono tabular text-gray-100">{turns}</span>
         </span>
       </div>
       <p className="text-xs text-gray-400">
@@ -90,15 +91,20 @@ const MandatePanel: React.FC<Props> = ({ overview, sessionDraft, sessionMissing,
           {status === 'active' ? 'active on-chain' : status === 'approved' ? (hasWallet ? 'approved, waiting for your set_limits signature' : 'approved, anchored when you create your wallet') : 'draft'}
         </span>
       </p>
+      {status === 'draft' && (
+        <p className="mt-1 flex items-center gap-1.5 text-12 text-ink-soft">
+          <OrbGlyph className="!h-3 !w-3" title="Drafted by the agent" /> Drafted by the agent from your messages. Nothing is valid until you approve it.
+        </p>
+      )}
 
       <dl className="mt-3 grid grid-cols-1 gap-x-4 gap-y-1.5 text-sm sm:grid-cols-2">
         {FIELDS.map((f) => {
           const isMissing = missing.has(f.key);
           const value = show(f.key, draft[f.key], f.unit);
           return (
-            <div key={f.key} className={isMissing ? 'rounded border border-amber-400/70 px-2 py-1' : 'px-2 py-1'}>
-              <dt className="text-[11px] text-gray-400">{f.label}</dt>
-              <dd className={`font-mono tabular-nums ${isMissing ? 'text-amber-300' : ''}`}>
+            <div key={f.key} className={isMissing ? 'rounded-well border border-dashed border-ochre/70 bg-ochre/5 px-2 py-1' : 'px-2 py-1'}>
+              <dt className="eyebrow !text-[10px]">{f.label}</dt>
+              <dd className={`font-mono tabular ${isMissing ? 'text-amber-300' : ''}`}>
                 {value || (isMissing ? 'missing' : OPTIONAL.has(f.key) ? 'none' : '')}
               </dd>
             </div>
@@ -108,22 +114,22 @@ const MandatePanel: React.FC<Props> = ({ overview, sessionDraft, sessionMissing,
 
       {draftHash && (
         <p className="mt-3 text-xs text-gray-400">
-          Mandate hash you approve: <span className="font-mono tabular-nums text-gray-100" title={draftHash}>{shortHash(draftHash)}</span>
+          Mandate hash you approve: <span className="font-mono tabular text-gray-100" title={draftHash}>{shortHash(draftHash)}</span>
         </p>
       )}
       {overview?.onChainMandateHash && (
         <p className="text-xs text-gray-400">
-          On-chain mandate hash: <span className="font-mono tabular-nums text-gray-100" title={overview.onChainMandateHash}>{shortHash(overview.onChainMandateHash)}</span>
+          On-chain mandate hash: <span className="font-mono tabular text-gray-100" title={overview.onChainMandateHash}>{shortHash(overview.onChainMandateHash)}</span>
         </p>
       )}
 
       <div className="mt-3 flex flex-wrap items-center gap-2">
         {needsAnchor && approvedIsCurrent ? (
-          <button onClick={onAnchor} disabled={busy} className="rounded bg-primary-700 hover:bg-primary-600 px-4 py-2 text-sm font-semibold text-white disabled:opacity-40">
+          <button onClick={onAnchor} disabled={busy} className="btn btn-md btn-primary disabled:opacity-40">
             Review set_limits card
           </button>
         ) : (
-          <button onClick={onApprove} disabled={busy || !canApprove} className="rounded bg-primary-700 hover:bg-primary-600 px-4 py-2 text-sm font-semibold text-white disabled:opacity-40">
+          <button onClick={onApprove} disabled={busy || !canApprove} className="btn btn-md btn-primary disabled:opacity-40">
             Approve mandate
           </button>
         )}

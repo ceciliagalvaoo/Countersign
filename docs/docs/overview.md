@@ -63,6 +63,7 @@ You do not need to run anything to check the central claim.
 - [Evidence](evidence.md): real testnet hashes and the mainnet slice, with links.
 - [Limitations](limitations.md): the literal list, identical in every document, and why each one is there.
 - [Run it yourself](run-it-yourself.md): from a clean machine.
+- [Design](design.md): the nib, the palette, the type, and where the agent is shown.
 
 ## Roadmap
 

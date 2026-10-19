@@ -195,10 +195,10 @@ const FundDetail: React.FC = () => {
   if (!fund) return <div className="p-8 text-center text-gray-300">Fund not found.</div>;
 
   return (
-    <div className="bg-white/[0.04] border border-white/[0.12] backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-[0_18px_60px_rgba(0,0,0,0.45)] space-y-6 relative">
+    <div className="bg-cream-deep/70 border border-navy/10 rounded-card p-6 md:p-8 shadow-ink space-y-6 relative">
       <div className="flex items-center justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-semibold text-white">{fund.name}</h1>
+          <h1 className="text-28 font-medium text-white">{fund.name}</h1>
           <p className="text-sm text-gray-300">{fund.description}</p>
         </div>
         <div className="flex items-center gap-3">
@@ -214,14 +214,14 @@ const FundDetail: React.FC = () => {
                 <button
                   onClick={() => handleApprove('approve')}
                   disabled={processing}
-                  className="px-4 py-2 text-white bg-primary rounded-lg hover:bg-primary/90 disabled:bg-primary/50"
+                  className="px-4 py-2 text-cream bg-primary rounded-full hover:bg-navy disabled:bg-primary/50"
                 >
                   {processing ? 'Approving...' : 'Approve'}
                 </button>
                 <button
                   onClick={() => handleApprove('reject')}
                   disabled={processing}
-                  className="px-4 py-2 text-white bg-[#fa7f7f]-500 rounded-lg hover:bg-[#fa7f7f]-600 disabled:bg-[#fa7f7f]-400"
+                  className="px-4 py-2 text-cream bg-vermilion-500 rounded-full hover:bg-vermilion-600 disabled:bg-vermilion-400"
                 >
                   {processing ? 'Rejecting...' : 'Reject'}
                 </button>
@@ -234,7 +234,7 @@ const FundDetail: React.FC = () => {
                   setSelectedFund(fund);
                   setShowInvest(true);
                 }}
-                className="px-4 py-2 text-white bg-primary rounded-lg hover:bg-primary/90"
+                className="px-4 py-2 text-cream bg-primary rounded-full hover:bg-navy"
               >
                 Invest Now
               </button>
@@ -245,14 +245,14 @@ const FundDetail: React.FC = () => {
               {!fund.tokenContractId && (
                 <button
                   onClick={deployShareToken}
-                  className="px-4 py-2 text-white bg-primary rounded-lg hover:bg-primary/90"
+                  className="px-4 py-2 text-cream bg-primary rounded-full hover:bg-navy"
                 >
                   Deploy share token
                 </button>
               )}
               <button
                 onClick={() => setShowIssueModal(true)}
-                className="px-4 py-2 text-white bg-primary rounded-lg hover:bg-primary/90"
+                className="px-4 py-2 text-cream bg-primary rounded-full hover:bg-navy"
               >
                 Issue quotas
               </button>
@@ -291,7 +291,7 @@ const FundDetail: React.FC = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <h3 className="font-semibold text-white">Service providers</h3>
+          <h3 className="font-medium text-white">Service providers</h3>
           <Field label="Administrator" value={fund.administratorName} />
           <Field label="Administrator registry ID" value={fund.administratorCnpj} />
           <Field label="Manager" value={fund.managerName} />
@@ -301,7 +301,7 @@ const FundDetail: React.FC = () => {
           <Field label="Fiduciary agent" value={fund.fiduciaryAgentName} />
         </div>
         <div className="space-y-2">
-          <h3 className="font-semibold text-white">Policy & limits</h3>
+          <h3 className="font-medium text-white">Policy & limits</h3>
           <Field label="Strategy / Sector focus" value={fund.sectorFocus} />
           <Field label="Eligibility" value={fund.eligibilityCriteria} />
           <Field label="% limit per cedente" value={fund.maxCedenteConcentrationPercent} />
@@ -314,14 +314,14 @@ const FundDetail: React.FC = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <h3 className="font-semibold text-white">Fees</h3>
+          <h3 className="font-medium text-white">Fees</h3>
           <Field label="Admin fee (% a.a.)" value={fund.administrationFee} />
           <Field label="Management fee (% a.a.)" value={fund.managementFee} />
           <Field label="Performance fee (%)" value={fund.performanceFee} />
           <Field label="Other fees" value={fund.otherFees} />
         </div>
         <div className="space-y-2">
-          <h3 className="font-semibold text-white">Liquidity</h3>
+          <h3 className="font-medium text-white">Liquidity</h3>
           <Field label="Type" value={fund.liquidityType} />
           <Field label="Lockup (days)" value={fund.lockupDays} />
           <Field label="Redemption terms" value={fund.redemptionTerms} />
@@ -340,9 +340,9 @@ const FundDetail: React.FC = () => {
       )}
 
       {showIssueModal && fund && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white/[0.04] border border-white/[0.12] backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-[0_18px_60px_rgba(0,0,0,0.45)] w-full max-w-md m-4">
-            <h2 className="text-xl font-bold mb-4 text-white">Issue Quotas - {fund.name}</h2>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-navy/30">
+          <div className="bg-cream-deep/70 border border-navy/10 rounded-card p-6 md:p-8 shadow-ink w-full max-w-md m-4">
+            <h2 className="text-28 font-medium mb-4 text-white">Issue Quotas - {fund.name}</h2>
             <form onSubmit={handleIssueSubmit} className="space-y-4">
               <div>
                 <p className="text-sm text-gray-300 mb-2">
@@ -364,7 +364,7 @@ const FundDetail: React.FC = () => {
                   placeholder="Enter amount"
                   min="1"
                   max={(fund.maxSupply ?? 0) - (fund.totalIssued ?? 0)}
-                  className="w-full rounded-lg px-3 py-2 bg-white/5 border border-white/15 text-white text-sm placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#169976] focus:border-transparent transition"
+                  className="w-full rounded-lg px-3 py-2 bg-white/5 border border-white/15 text-white text-sm placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-cobalt focus:border-transparent transition"
                   required
                 />
               </div>
@@ -382,7 +382,7 @@ const FundDetail: React.FC = () => {
                 <button
                   type="submit"
                   disabled={issuing || !issueAmount}
-                  className="px-4 py-2 text-white bg-primary rounded-md hover:bg-primary/90 disabled:bg-primary/50 transition-colors"
+                  className="px-4 py-2 text-cream bg-primary rounded-full hover:bg-navy disabled:bg-primary/50 transition-colors"
                 >
                   {issuing ? 'Issuing...' : 'Issue Quotas'}
                 </button>

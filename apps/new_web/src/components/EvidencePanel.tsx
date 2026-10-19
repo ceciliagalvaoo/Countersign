@@ -33,9 +33,9 @@ const EvidencePanel: React.FC<Props> = ({ entries, verify, purchases, loading, o
   const rows = [...entries].sort((a, b) => b.seq - a.seq);
 
   return (
-    <section className="rounded-2xl border border-white/[0.12] bg-white/[0.04] backdrop-blur-xl shadow-[0_18px_60px_rgba(0,0,0,0.45)] p-4 text-gray-100 " aria-label="Evidence">
+    <section className="ink-card p-5 text-navy" aria-label="Evidence">
       <div className="flex items-baseline justify-between">
-        <h3 className="text-base font-semibold !text-white">Evidence</h3>
+        <h3 className="text-28">Evidence</h3>
         {onRefresh && (
           <button onClick={onRefresh} disabled={loading} className="text-xs text-gray-400 underline underline-offset-2 disabled:opacity-50">
             {loading ? 'Reading...' : 'Refresh'}
@@ -51,7 +51,7 @@ const EvidencePanel: React.FC<Props> = ({ entries, verify, purchases, loading, o
           <p>
             <span className="font-semibold text-emerald-300">{'✓'} chain verified</span>{' '}
             <span className="text-gray-400">
-              {verify.count} lines recomputed, head <span className="font-mono tabular-nums">{shortHash(verify.headHash)}</span>
+              {verify.count} lines recomputed, head <span className="font-mono tabular">{shortHash(verify.headHash)}</span>
             </span>
           </p>
         ) : (
@@ -81,11 +81,11 @@ const EvidencePanel: React.FC<Props> = ({ entries, verify, purchases, loading, o
                 const purchase = purchaseByDecision.get(e.hash.toLowerCase());
                 return (
                   <tr key={e.seq} className="border-t border-white/10 align-top">
-                    <td className="py-1.5 pr-2 font-mono tabular-nums">{e.seq}</td>
+                    <td className="py-1.5 pr-2 font-mono tabular">{e.seq}</td>
                     <td className="py-1.5 pr-2 font-mono break-all">{e.payload.rule}</td>
                     <td className={`py-1.5 pr-2 ${out.tone}`}>{out.word}</td>
                     <td className="py-1.5">
-                      <span className="font-mono tabular-nums text-gray-400" title={e.hash}>
+                      <span className="font-mono tabular text-gray-400" title={e.hash}>
                         {shortHash(e.hash)}
                       </span>
                       {e.payload.txHash && (
