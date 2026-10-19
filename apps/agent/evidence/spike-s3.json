@@ -1,0 +1,184 @@
+{
+  "spike": "S3",
+  "at": "2026-10-18T09:17:50.787Z",
+  "model": "claude-opus-5-5",
+  "sdk": "@anthropic-ai/sdk",
+  "fallback": {
+    "fallbacks": "default",
+    "beta": "server-side-fallback-2026-07-01"
+  },
+  "toolChoice": "auto",
+  "strict": true,
+  "runs": [
+    {
+      "effort": "low",
+      "run": 1,
+      "latencyMs": 3505,
+      "stopReason": "tool_use",
+      "servedBy": "claude-opus-5-5",
+      "toolCalled": true,
+      "inputValid": true,
+      "input": {
+        "fundLabel": "Agri receivables demo fund",
+        "units": 5,
+        "amountSource": "investor_message"
+      },
+      "usage": {
+        "input": 106,
+        "output": 112,
+        "cacheRead": 0,
+        "cacheCreation": 1207
+      }
+    },
+    {
+      "effort": "low",
+      "run": 2,
+      "latencyMs": 2286,
+      "stopReason": "tool_use",
+      "servedBy": "claude-opus-5-5",
+      "toolCalled": true,
+      "inputValid": true,
+      "input": {
+        "fundLabel": "Agri receivables demo fund",
+        "units": 5,
+        "amountSource": "investor_message"
+      },
+      "usage": {
+        "input": 106,
+        "output": 112,
+        "cacheRead": 1207,
+        "cacheCreation": 0
+      }
+    },
+    {
+      "effort": "low",
+      "run": 3,
+      "latencyMs": 2214,
+      "stopReason": "tool_use",
+      "servedBy": "claude-opus-5-5",
+      "toolCalled": true,
+      "inputValid": true,
+      "input": {
+        "fundLabel": "Agri receivables demo fund",
+        "units": 5,
+        "amountSource": "investor_message"
+      },
+      "usage": {
+        "input": 106,
+        "output": 112,
+        "cacheRead": 1207,
+        "cacheCreation": 0
+      }
+    },
+    {
+      "effort": "medium",
+      "run": 1,
+      "latencyMs": 2273,
+      "stopReason": "tool_use",
+      "servedBy": "claude-opus-5-5",
+      "toolCalled": true,
+      "inputValid": true,
+      "input": {
+        "fundLabel": "Agri receivables demo fund",
+        "units": 5,
+        "amountSource": "investor_message"
+      },
+      "usage": {
+        "input": 106,
+        "output": 112,
+        "cacheRead": 1207,
+        "cacheCreation": 0
+      }
+    },
+    {
+      "effort": "medium",
+      "run": 2,
+      "latencyMs": 2134,
+      "stopReason": "tool_use",
+      "servedBy": "claude-opus-5-5",
+      "toolCalled": true,
+      "inputValid": true,
+      "input": {
+        "fundLabel": "Agri receivables demo fund",
+        "units": 5,
+        "amountSource": "investor_message"
+      },
+      "usage": {
+        "input": 106,
+        "output": 112,
+        "cacheRead": 1207,
+        "cacheCreation": 0
+      }
+    },
+    {
+      "effort": "medium",
+      "run": 3,
+      "latencyMs": 2062,
+      "stopReason": "tool_use",
+      "servedBy": "claude-opus-5-5",
+      "toolCalled": true,
+      "inputValid": true,
+      "input": {
+        "fundLabel": "Agri receivables demo fund",
+        "units": 5,
+        "amountSource": "investor_message"
+      },
+      "usage": {
+        "input": 106,
+        "output": 112,
+        "cacheRead": 1207,
+        "cacheCreation": 0
+      }
+    }
+  ],
+  "summary": [
+    {
+      "effort": "low",
+      "completed": 3,
+      "meanLatencyMs": 2668,
+      "minLatencyMs": 2214,
+      "maxLatencyMs": 3505,
+      "allToolCalled": true,
+      "allInputValid": true,
+      "meanOutputTokens": 112,
+      "anyCacheRead": true
+    },
+    {
+      "effort": "medium",
+      "completed": 3,
+      "meanLatencyMs": 2156,
+      "minLatencyMs": 2062,
+      "maxLatencyMs": 2273,
+      "allToolCalled": true,
+      "allInputValid": true,
+      "meanOutputTokens": 112,
+      "anyCacheRead": true
+    }
+  ],
+  "probes": [
+    {
+      "label": "tool_choice {type:\"tool\"}",
+      "status": 400,
+      "rejected": true,
+      "message": "tool_choice: type \"tool\" and \"any\" are not supported for this model."
+    },
+    {
+      "label": "tool_choice {type:\"any\"}",
+      "status": 400,
+      "rejected": true,
+      "message": "tool_choice: type \"tool\" and \"any\" are not supported for this model."
+    },
+    {
+      "label": "thinking {type:\"disabled\"}",
+      "status": 400,
+      "rejected": true,
+      "message": "\"thinking.type.disabled\" is not supported for this model. Use \"thinking.type.adaptive\" and \"output_config.effort\" to control thinking behavior."
+    },
+    {
+      "label": "assistant prefill",
+      "status": 400,
+      "rejected": true,
+      "message": "This model does not support assistant message prefill. The conversation must end with a user message."
+    }
+  ]
+}
