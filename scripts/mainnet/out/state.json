@@ -1,0 +1,60 @@
+{
+  "wasm": {
+    "mandate_wallet": {
+      "hash": "79c767890079ad06c833e2fba68a36919386fadd8048679741057679b936f087",
+      "txHash": "999f0b0d740a1ad2a1f0e6e11b86a60221e80950d51309ebca79101aba7ec207"
+    }
+  },
+  "pending": {},
+  "txs": [
+    {
+      "step": "upload mandate_wallet Wasm",
+      "hash": "999f0b0d740a1ad2a1f0e6e11b86a60221e80950d51309ebca79101aba7ec207",
+      "status": "SUCCESS",
+      "link": "https://stellar.expert/explorer/public/tx/999f0b0d740a1ad2a1f0e6e11b86a60221e80950d51309ebca79101aba7ec207",
+      "logSeq": 1
+    },
+    {
+      "step": "deploy fund unit SAC",
+      "hash": "285f5eda4415c01791533673843204818022d7f763c0633ca3b0533a75e38a12",
+      "status": "SUCCESS",
+      "link": "https://stellar.expert/explorer/public/tx/285f5eda4415c01791533673843204818022d7f763c0633ca3b0533a75e38a12",
+      "logSeq": 2
+    },
+    {
+      "step": "wallet_deploy",
+      "hash": "f8a97c653cf2d378eb18a85d8fd543e6ff0ed429e3b89805e4538087f8ccddaa",
+      "status": "SUCCESS",
+      "link": "https://stellar.expert/explorer/public/tx/f8a97c653cf2d378eb18a85d8fd543e6ff0ed429e3b89805e4538087f8ccddaa",
+      "logSeq": 3
+    },
+    {
+      "step": "deposit",
+      "hash": "82aaf6cd2900a5a6aa21177b11c7ebf604ab826aeaebf2f4f4edb1cf04dae56d",
+      "status": "SUCCESS",
+      "link": "https://stellar.expert/explorer/public/tx/82aaf6cd2900a5a6aa21177b11c7ebf604ab826aeaebf2f4f4edb1cf04dae56d",
+      "logSeq": 4
+    },
+    {
+      "step": "allow_fund",
+      "hash": "a377f7b1ade8ee79b520948d58313789894d8aeef3d54684648f4e6380cad19b",
+      "status": "SUCCESS",
+      "link": "https://stellar.expert/explorer/public/tx/a377f7b1ade8ee79b520948d58313789894d8aeef3d54684648f4e6380cad19b",
+      "logSeq": 5
+    },
+    {
+      "step": "subscribe",
+      "hash": "31c0399aba5b6e927ca106f576e6aa0a1b55e7e2152fbf2fa978c5e359909c97",
+      "status": "SUCCESS",
+      "link": "https://stellar.expert/explorer/public/tx/31c0399aba5b6e927ca106f576e6aa0a1b55e7e2152fbf2fa978c5e359909c97",
+      "logSeq": 7
+    }
+  ],
+  "fundToken": "CCBWLCWVHGZLJQ6JLVVWYMHZJPYBQTFD3SVT6FWXZEKBYVVITRJTYLHA",
+  "wallet": "CAIUDASJVR5XHXQDGBKDFUYGNL7BQJAQPWLBCA4OFHSYYVFL7GP34HVV",
+  "decision": {
+    "seq": 6,
+    "hash": "b5a949daddd3e3d8fd88caea696f30fdd2075afd230fe6f88477d7d70fdf0324",
+    "amountUnits": "40000000"
+  }
+}

@@ -1,0 +1,335 @@
+{
+  "run": "a40494",
+  "network": "Stellar testnet",
+  "at": "2026-10-18T15:26:02.909Z",
+  "owner": "GAEZO27HHGDAXXCXQPIZ5SKWLSRCXV7OLSMUWZFFEC7YV2QLRWKPIEBO",
+  "fundWallet": "GDJRXKOLWFQYFMCZFY6J5NZF6RJLJTK52V6W22H4VUWGZKB3K5SEIPRT",
+  "fundToken": "CDC2RC2KHUMF3MLYJZOGT5VY6JZICFILI2LP5XJBHFEN3MWFHJ73OGRQ",
+  "wallet": "CA7JMFSZI2IBTEIDKFHVZ6FMLVGTVRMHCTRJYAIX7L62IKHGNB66KDRG",
+  "records": [
+    {
+      "step": "deploy_wallet",
+      "hash": "f6a65840bbb87a04fbd237e98761a66539c4a4a99875ebfe11bc20c69facfd18",
+      "status": "SUCCESS",
+      "link": "https://stellar.expert/explorer/testnet/tx/f6a65840bbb87a04fbd237e98761a66539c4a4a99875ebfe11bc20c69facfd18",
+      "logSeq": 85
+    },
+    {
+      "step": "deposit",
+      "hash": "92072546030df5a828119826ba9a4bf5809a7330cd46b9aeb9f52b447a8003df",
+      "status": "SUCCESS",
+      "link": "https://stellar.expert/explorer/testnet/tx/92072546030df5a828119826ba9a4bf5809a7330cd46b9aeb9f52b447a8003df",
+      "logSeq": 86
+    },
+    {
+      "step": "set_limits",
+      "hash": "0322a084ee003c494865a713fe2d33eb563bd3cbe22fec621282901874b410dc",
+      "status": "SUCCESS",
+      "link": "https://stellar.expert/explorer/testnet/tx/0322a084ee003c494865a713fe2d33eb563bd3cbe22fec621282901874b410dc",
+      "logSeq": 87
+    },
+    {
+      "step": "allow_fund",
+      "hash": "1d905c7cdac1c3e8bdb907b03cc9ee7979e12fbbbf6ef893c88590b872b57852",
+      "status": "SUCCESS",
+      "link": "https://stellar.expert/explorer/testnet/tx/1d905c7cdac1c3e8bdb907b03cc9ee7979e12fbbbf6ef893c88590b872b57852",
+      "logSeq": 89
+    },
+    {
+      "step": "subscribe (agent)",
+      "hash": "40a2a96a0173e2ca5c2079f0a8e49f5b6622436f7427215e91e7aeb2f1923676",
+      "status": "SUCCESS",
+      "link": "https://stellar.expert/explorer/testnet/tx/40a2a96a0173e2ca5c2079f0a8e49f5b6622436f7427215e91e7aeb2f1923676",
+      "note": "decision = log row 90 hash 1591d6c9433abef9e2a188b0134fc205a2373e0947becc281993cc477beaf5d6",
+      "logSeq": 91
+    },
+    {
+      "step": "whitelist_add(C)",
+      "hash": "edfa7561ae8c34579dce858eb7f619f8f7d33fb3afb9e8f72b4313d9ce94112d",
+      "status": "SUCCESS",
+      "link": "https://stellar.expert/explorer/testnet/tx/edfa7561ae8c34579dce858eb7f619f8f7d33fb3afb9e8f72b4313d9ce94112d",
+      "logSeq": 92
+    },
+    {
+      "step": "mint(C)",
+      "hash": "e432ab1b87d2c1d132fe0fd5c0da71452d9bd54ab18956f720ee8220bb59180f",
+      "status": "SUCCESS",
+      "link": "https://stellar.expert/explorer/testnet/tx/e432ab1b87d2c1d132fe0fd5c0da71452d9bd54ab18956f720ee8220bb59180f",
+      "logSeq": 93
+    },
+    {
+      "step": "subscribe (agent) #2",
+      "hash": "5b793c3d2f79553ac3966a027a55087b9a13f70219baa862e5494e329cb9f5da",
+      "status": "SUCCESS",
+      "link": "https://stellar.expert/explorer/testnet/tx/5b793c3d2f79553ac3966a027a55087b9a13f70219baa862e5494e329cb9f5da",
+      "note": "decision = log row 94 hash c7c7b67225f5a3188597758660ebf1d732fefeb727379b6913a808a2afdd9a4c",
+      "logSeq": 95
+    },
+    {
+      "step": "refund to C (SAC transfer)",
+      "hash": "b9781373b1c13ef387ed75d1426352996e67126951569de45c4f9b1cfe7fb380",
+      "status": "SUCCESS",
+      "link": "https://stellar.expert/explorer/testnet/tx/b9781373b1c13ef387ed75d1426352996e67126951569de45c4f9b1cfe7fb380",
+      "logSeq": 96
+    },
+    {
+      "step": "revoke_agent",
+      "hash": "553b264ab5a614abe978a6e7b7ede48328336b03d852217d8edd7ad5a1ac96b0",
+      "status": "SUCCESS",
+      "link": "https://stellar.expert/explorer/testnet/tx/553b264ab5a614abe978a6e7b7ede48328336b03d852217d8edd7ad5a1ac96b0",
+      "logSeq": 97
+    },
+    {
+      "step": "set_agent (re-enable)",
+      "hash": "9bc620d5b84843deee28305f065def899bf2c03b84b305744421c24335469c50",
+      "status": "SUCCESS",
+      "link": "https://stellar.expert/explorer/testnet/tx/9bc620d5b84843deee28305f065def899bf2c03b84b305744421c24335469c50",
+      "logSeq": 100
+    },
+    {
+      "step": "subscribe (agent) #3",
+      "hash": "0cf2331d5811a76e40b62402b4cde253c9ac0775e259d3a7937221fd95daa503",
+      "status": "SUCCESS",
+      "link": "https://stellar.expert/explorer/testnet/tx/0cf2331d5811a76e40b62402b4cde253c9ac0775e259d3a7937221fd95daa503",
+      "note": "decision = log row 101 hash cac3b9bffeef2f928852d6a6aeef22a8bb360f4d541f7eaabde1ad2f58680e9b",
+      "logSeq": 102
+    },
+    {
+      "step": "set_pause(true)",
+      "hash": "54bcb144aaa9bed9b9786b5a2c1eee019a711523e3220a4124e702be4f80a8bb",
+      "status": "SUCCESS",
+      "link": "https://stellar.expert/explorer/testnet/tx/54bcb144aaa9bed9b9786b5a2c1eee019a711523e3220a4124e702be4f80a8bb",
+      "logSeq": 103
+    },
+    {
+      "step": "mint(C) while paused",
+      "hash": "1d0f0b5f70acfbbb7d8137c540c653d533795156cb3f3944226087f392690635",
+      "status": "FAILED",
+      "link": "https://stellar.expert/explorer/testnet/tx/1d0f0b5f70acfbbb7d8137c540c653d533795156cb3f3944226087f392690635",
+      "note": "RPC diagnostic events: Error(Contract, #3)",
+      "logSeq": null
+    },
+    {
+      "step": "set_pause(false)",
+      "hash": "01da3ddbda9825a5f6e724c281f1057293edbd80df5c310961c06a09186d4a10",
+      "status": "SUCCESS",
+      "link": "https://stellar.expert/explorer/testnet/tx/01da3ddbda9825a5f6e724c281f1057293edbd80df5c310961c06a09186d4a10",
+      "logSeq": 104
+    },
+    {
+      "step": "mint(C) after unpause",
+      "hash": "f94aff21704e76e4ef1cf334b47ef5da29a1a76645dd3fb5fb645e81f27d57e1",
+      "status": "SUCCESS",
+      "link": "https://stellar.expert/explorer/testnet/tx/f94aff21704e76e4ef1cf334b47ef5da29a1a76645dd3fb5fb645e81f27d57e1",
+      "logSeq": 105
+    },
+    {
+      "step": "usdc trustline (fresh account)",
+      "hash": "2e1928dc634f6dec474c21a814d0b7070f71b7cd1b8e86e86085c15eb7d77629",
+      "status": "SUCCESS",
+      "link": "https://stellar.expert/explorer/testnet/tx/2e1928dc634f6dec474c21a814d0b7070f71b7cd1b8e86e86085c15eb7d77629"
+    },
+    {
+      "step": "test-usdc-transfer (operator)",
+      "hash": "200cb9503e626700e1bb79230c765f547e3131fabb2215a303bd5e2ca24e661c",
+      "status": "SUCCESS",
+      "link": "https://stellar.expert/explorer/testnet/tx/200cb9503e626700e1bb79230c765f547e3131fabb2215a303bd5e2ca24e661c"
+    }
+  ],
+  "checks": [
+    {
+      "check": "CSAGRI seeded with the fund wallet of this run",
+      "ok": true,
+      "detail": "CDC2RC2KHUMF3MLYJZOGT5VY6JZICFILI2LP5XJBHFEN3MWFHJ73OGRQ"
+    },
+    {
+      "check": "mandate approved with hash",
+      "ok": true,
+      "detail": "e03ce86f237f12d8f3f9776a02a710d149128cd6b79468e1dcd0434a7c3f724b"
+    },
+    {
+      "check": "build-deploy decoded: create_contract with 7 constructor args",
+      "ok": true
+    },
+    {
+      "check": "decoded network is out of band",
+      "ok": true
+    },
+    {
+      "check": "wallet is a contract address",
+      "ok": true,
+      "detail": "CA7JMFSZI2IBTEIDKFHVZ6FMLVGTVRMHCTRJYAIX7L62IKHGNB66KDRG"
+    },
+    {
+      "check": "deploy anchored the approved mandate hash",
+      "ok": true
+    },
+    {
+      "check": "deposit decoded: transfer to \"your mandate wallet\"",
+      "ok": true,
+      "detail": "30.0000000 USDC"
+    },
+    {
+      "check": "set_limits decoded caps",
+      "ok": true,
+      "detail": "20.0000000 USDC | 50.0000000 USDC | 30 days (2592000 seconds) | e03ce86f...7c3f724b (32 bytes)"
+    },
+    {
+      "check": "proposal before allow_fund is NEEDS_INVESTOR_SIGNATURE",
+      "ok": true,
+      "detail": "first_purchase_needs_investor seq 88"
+    },
+    {
+      "check": "allow_fund decoded: fund wallet label from DB",
+      "ok": true,
+      "detail": "fund wallet of Agri Receivables Demo Fund (GDJRXKOLWFQYFMCZFY6J5NZF6RJLJTK52V6W22H4VUWGZKB3K5SEIPRT)"
+    },
+    {
+      "check": "one byte changed in the XDR changes the decoded card",
+      "ok": true,
+      "detail": "50.0000000 USDC -> 76.8435456 USDC"
+    },
+    {
+      "check": "proposal APPROVED",
+      "ok": true,
+      "detail": "all_rules_passed seq 90 hash 1591d6c9433abef9e2a188b0134fc205a2373e0947becc281993cc477beaf5d6"
+    },
+    {
+      "check": "execute CONFIRMED with a hash",
+      "ok": true,
+      "detail": "40a2a96a0173e2ca5c2079f0a8e49f5b6622436f7427215e91e7aeb2f1923676"
+    },
+    {
+      "check": "decision argument on-chain equals the log row hash",
+      "ok": true,
+      "detail": "1591d6c9433abef9e2a188b0134fc205a2373e0947becc281993cc477beaf5d6"
+    },
+    {
+      "check": "order COMPLETED, awaiting issuer countersignature",
+      "ok": true,
+      "detail": "{\"orderId\":\"cmvdz687h000c9y8fnry0g0g8\",\"decisionSeq\":90}"
+    },
+    {
+      "check": "order payer is the wallet and decisionHash is the log row",
+      "ok": true
+    },
+    {
+      "check": "approve step whitelist destination is the wallet",
+      "ok": true
+    },
+    {
+      "check": "approve step mint destination is the wallet",
+      "ok": true
+    },
+    {
+      "check": "mint submitted",
+      "ok": true
+    },
+    {
+      "check": "order APPROVED after verified mint",
+      "ok": true
+    },
+    {
+      "check": "wallet holds the fund units on-chain",
+      "ok": true,
+      "detail": "100000000 units (10.0000000)"
+    },
+    {
+      "check": "status COUNTERSIGNED",
+      "ok": true
+    },
+    {
+      "check": "second proposal APPROVED",
+      "ok": true,
+      "detail": "seq 94"
+    },
+    {
+      "check": "second execute CONFIRMED",
+      "ok": true,
+      "detail": "5b793c3d2f79553ac3966a027a55087b9a13f70219baa862e5494e329cb9f5da"
+    },
+    {
+      "check": "refund details are a SAC transfer to the wallet",
+      "ok": true
+    },
+    {
+      "check": "order REJECTED after verified refund",
+      "ok": true
+    },
+    {
+      "check": "wallet USDC increased by the refund",
+      "ok": true,
+      "detail": "150000000 -> 200000000"
+    },
+    {
+      "check": "policy re-reads is_revoked before building: 409 agent_revoked, no order",
+      "ok": true,
+      "detail": "agent_revoked"
+    },
+    {
+      "check": "wallet contract refuses subscribe after revoke: Error(Contract, #3) AgentRevoked",
+      "ok": true,
+      "detail": "simulation with the agent key as source"
+    },
+    {
+      "check": "purchase after set_agent CONFIRMED",
+      "ok": true,
+      "detail": "0cf2331d5811a76e40b62402b4cde253c9ac0775e259d3a7937221fd95daa503"
+    },
+    {
+      "check": "approve returns the mint (wallet already whitelisted)",
+      "ok": true
+    },
+    {
+      "check": "pause decoded: set_pause(true) on the unit token",
+      "ok": true
+    },
+    {
+      "check": "pause verified and read back",
+      "ok": true
+    },
+    {
+      "check": "GET /api/funds/:id exposes paused = true",
+      "ok": true
+    },
+    {
+      "check": "mint while paused FAILED on-chain with Error(Contract, #3) Paused",
+      "ok": true,
+      "detail": "1d0f0b5f70acfbbb7d8137c540c653d533795156cb3f3944226087f392690635 code 3"
+    },
+    {
+      "check": "API refuses to build a mint while paused (409)",
+      "ok": true,
+      "detail": "409"
+    },
+    {
+      "check": "mint after unpause verified",
+      "ok": true
+    },
+    {
+      "check": "state: spent in period 16 USDC, fund allowed",
+      "ok": true,
+      "detail": "balance 19.0000000"
+    },
+    {
+      "check": "decision log chain verifies",
+      "ok": true,
+      "detail": "rows 105"
+    },
+    {
+      "check": "every wallet and order hash has a log row",
+      "ok": true,
+      "detail": "deploy_wallet:85, deposit:86, set_limits:87, allow_fund:89, subscribe (agent):91, whitelist_add(C):92, mint(C):93, subscribe (agent) #2:95, refund to C (SAC transfer):96, revoke_agent:97, set_agent (re-enable):100, subscribe (agent) #3:102, set_pause(true):103, set_pause(false):104, mint(C) after unpause:105"
+    },
+    {
+      "check": "test-usdc-transfer sent 100 test USDC",
+      "ok": true,
+      "detail": "200cb9503e626700e1bb79230c765f547e3131fabb2215a303bd5e2ca24e661c"
+    },
+    {
+      "check": "second transfer the same day refused",
+      "ok": true,
+      "detail": "429"
+    }
+  ]
+}

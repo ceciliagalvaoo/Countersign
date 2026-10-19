@@ -1,0 +1,35 @@
+{
+  "_note": "Mainnet slice (D25, option B, approved by the human): mandate BR, LOW, AGRO, per purchase 4, period 5 USDC every 30 days. The fund unit token is the Stellar Asset Contract of a team-issued test asset CSAGRI issued by the test fund wallet; no unit is issued. The script refuses any USDC total above 5.",
+  "owner": "GCMBNCBWY3BONBVVI6N2KZ2GXOR6YH7RZVOBUYPASGX665DLOUXCVH4R",
+  "fundWallet": "GCKZRX3QF3CK22RPEAAJFURYVPW3BSZORQKLZDWFSYIO2JE76IZUOOVY",
+  "depositUsdc": "4",
+  "fundCapUsdc": "4",
+  "purchaseUsdc": "4",
+  "mandate": {
+    "residences": [
+      "BR"
+    ],
+    "horizonMonths": 12,
+    "liquidityNeedPct": 0,
+    "liquidityWithinMonths": 0,
+    "maxLossTolerance": "LOW",
+    "totalAmountUsdc": "5",
+    "perPurchaseCapUsdc": "4",
+    "periodCapUsdc": "5",
+    "periodDays": 30,
+    "allowedSectors": [
+      "AGRO"
+    ],
+    "maxPerSectorPct": 100
+  },
+  "fund": {
+    "id": "mainnet-test-fund",
+    "name": "Mainnet Test Fund (team wallet, no real investors)",
+    "symbol": "CSAGRI",
+    "sector": "AGRO",
+    "riskLevel": "BAIXO",
+    "investorProfile": "GERAL",
+    "liquidityType": "ABERTO",
+    "lockupDays": 0
+  }
+}

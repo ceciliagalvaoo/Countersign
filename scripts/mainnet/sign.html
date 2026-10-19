@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Countersign mainnet slice: sign without re-simulation</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 900px; margin: 2rem auto; padding: 0 1rem; background: #111; color: #eee; }
+  pre { background: #1c1c1c; padding: 1rem; white-space: pre-wrap; word-break: break-all; border: 1px solid #333; }
+  .net { background: #5a1d1d; padding: .6rem 1rem; border: 1px solid #a33; font-weight: 600; }
+  button { padding: .5rem 1rem; margin: .3rem .3rem .3rem 0; cursor: pointer; }
+  .ok { color: #6c6; } .err { color: #f77; } textarea { width: 100%; height: 6rem; background: #1c1c1c; color: #eee; }
+</style>
+<!-- Freighter API, pinned version with subresource integrity -->
+<script src="https://cdn.jsdelivr.net/npm/@stellar/freighter-api@6.0.1/build/index.min.js"
+        integrity="sha384-PBwq0JVfqy16Z6jvKJPx93jpStXbwF2oWvsRTODkvE/3hOX5zmLvAuMiKgAaxe2b"
+        crossorigin="anonymous"></script>
+</head>
+<body>
+<h1>Mainnet slice: sign a pending transaction</h1>
+<p class="net">Network: Stellar mainnet (Public Global Stellar Network ; September 2015). The network is not inside the XDR:
+it is stated here, out of band, and passed to Freighter as the network passphrase.</p>
+<p>This page signs exactly the XDR built by <code>scripts/mainnet/run.sh build</code>, with no re-simulation, and saves the
+signed XDR for the terminal. It never submits: sending still needs <code>run.sh submit</code> and <code>SEND MAINNET</code>.</p>
+<div id="list">Loading pending transactions...</div>
+<h3>Status</h3>
+<pre id="status">-</pre>
+<script>
+const $ = (id) => document.getElementById(id);
+const say = (msg, cls) => { $('status').textContent = msg; $('status').className = cls || ''; };
+async function load() {
+  const res = await fetch('/pending');
+  const items = await res.json();
+  if (!items.length) { $('list').textContent = 'Nothing pending. Run scripts/mainnet/run.sh build <step> first.'; return; }
+  $('list').innerHTML = '';
+  for (const it of items) {
+    const box = document.createElement('div');
+    const expired = new Date(it.expires).getTime() < Date.now();
+    box.innerHTML = `<h2>${it.name}</h2>
+      <p>Signer: <code>${it.signer}</code><br>Built hash: <code>${it.hash}</code><br>
+      Expires: <b class="${expired ? 'err' : ''}">${new Date(it.expires).toLocaleString()}</b>${expired ? ' (expired: run build again)' : ''}</p>
+      <pre></pre>`;
+    box.querySelector('pre').textContent = it.decoded;
+    const btn = document.createElement('button');
+    btn.textContent = `Sign ${it.name} with Freighter (${it.signer.slice(0, 4)}...${it.signer.slice(-4)})`;
+    btn.disabled = expired;
+    btn.onclick = () => sign(it);
+    box.appendChild(btn);
+    const paste = document.createElement('details');
+    paste.innerHTML = `<summary>Signed elsewhere? Paste the signed XDR</summary><textarea></textarea><button>Check and save</button>`;
+    paste.querySelector('button').onclick = () => save(it.name, paste.querySelector('textarea').value);
+    box.appendChild(paste);
+    $('list').appendChild(box);
+  }
+}
+async function sign(it) {
+  try {
+    const api = window.freighterApi;
+    if (!api) return say('Freighter API script did not load (check the internet connection).', 'err');
+    const conn = await api.isConnected();
+    if (!conn || !conn.isConnected) return say('Freighter is not installed or not enabled in this browser.', 'err');
+    const access = await api.requestAccess();
+    if (access.error) return say('Freighter access refused: ' + access.error, 'err');
+    if (access.address !== it.signer) return say(`Freighter is on ${access.address}; switch to ${it.signer} and try again.`, 'err');
+    say('Waiting for Freighter...');
+    const out = await api.signTransaction(it.xdr, { networkPassphrase: it.networkPassphrase, address: it.signer });
+    if (out.error) return say('Freighter did not sign: ' + (out.error.message || JSON.stringify(out.error)), 'err');
+    await save(it.name, out.signedTxXdr);
+  } catch (e) {
+    say('Error: ' + e.message, 'err');
+  }
+}
+async function save(name, signedXdr) {
+  const res = await fetch('/signed/' + name, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ signedXdr: signedXdr.trim() }) });
+  const j = await res.json();
+  if (!res.ok) return say('Refused: ' + j.error, 'err');
+  say(`Checked and saved to ${j.saved}\nSigned hash: ${j.hash}\nNext, in the terminal:\n  ${j.next}\n(and type SEND MAINNET after checking the decoded call)`, 'ok');
+}
+load().catch((e) => say('Could not load: ' + e.message, 'err'));
+</script>
+</body>
+</html>
