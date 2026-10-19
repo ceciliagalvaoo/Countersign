@@ -1,0 +1,444 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  role      String   // CONSULTOR, GESTOR, INVESTIDOR
+  status    String   @default("PENDING") // PENDING, APPROVED, REJECTED (for CONSULTOR approval)
+  publicKey String?  @map("public_key")
+  
+  // Investor Badge System with ZK Proof
+  totalInvested Float @default(0) @map("total_invested") // Total investido na plataforma
+  investorBadge String @default("NONE") @map("investor_badge") // NONE, BRONZE, SILVER, GOLD, DIAMOND
+  badgeProofHash String? @map("badge_proof_hash") // legacy SHA-256 tag (kept for history)
+  // Real ZK badge: Poseidon commitment to the verified total (in cents) and its blinding salt.
+  // The salt is only revealed to the investor, who proves their tier in the browser (Groth16) without revealing the total.
+  badgeCommitment String? @map("badge_commitment")
+  badgeSalt       String? @map("badge_salt")
+  badgeOnChainThreshold Int?    @map("badge_onchain_threshold") // tier threshold proven on-chain, in USDC cents
+  badgeClaimTxHash      String? @map("badge_claim_tx_hash")
+  lastBadgeUpdate DateTime? @map("last_badge_update")
+  
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  orders    Order[]
+  cedentes  Cedente[]
+  sacados   Sacado[]
+  funds     Fund[]   @relation("ConsultorFunds")
+  fundInteractions FundInteraction[]
+
+  @@index([email])
+  @@index([role])
+  @@index([status])
+  @@index([investorBadge])
+  @@index([role, status])
+  @@index([totalInvested])
+  @@index([createdAt])
+  @@map("users")
+}
+
+model Cedente {
+  id        String   @id @default(cuid())
+  name      String
+  document  String   // CNPJ/CPF
+  fantasyName String? @map("fantasy_name")
+  cnae      String?
+  email     String?
+  phone     String?
+  website   String?
+  address   String?
+  city      String?
+  state     String?
+  country   String? @default("BR")
+  postalCode String? @map("postal_code")
+  beneficialOwners String? @map("beneficial_owners")
+  isPep     Boolean? @map("is_pep")
+  revenueLast12m Float? @map("revenue_last_12m")
+  totalDebt Float? @map("total_debt")
+  mainBanks String? @map("main_banks")
+  riskRating String? @map("risk_rating")
+  operationDescription String? @map("operation_description")
+  creditPolicy String? @map("credit_policy")
+  guarantees String?
+  publicKey String?  @map("public_key")
+  status    String   @default("PENDING") // PENDING, APPROVED, REJECTED
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  consultorId String @map("consultor_id")
+  consultor   User   @relation(fields: [consultorId], references: [id])
+  fundId      String @map("fund_id")
+  fund        Fund   @relation(fields: [fundId], references: [id])
+  receivables Receivable[]
+
+  @@index([consultorId])
+  @@index([fundId])
+  @@index([status])
+  @@index([consultorId, status])
+  @@index([fundId, status])
+  @@index([document])
+  @@index([createdAt])
+  @@map("cedentes")
+}
+
+model Sacado {
+  id        String   @id @default(cuid())
+  name      String
+  document  String   // CNPJ/CPF
+  personType String? @map("person_type")
+  email     String?
+  phone     String?
+  address   String?
+  city      String?
+  state     String?
+  country   String? @default("BR")
+  postalCode String? @map("postal_code")
+  sector    String?
+  size      String?
+  rating    String?
+  paymentHistory String? @map("payment_history")
+  exposure  Float?
+  creditLimitFund Float? @map("credit_limit_fund")
+  concentrationPercent Float? @map("concentration_percent")
+  defaultRate30d Float? @map("default_rate_30d")
+  defaultRate60d Float? @map("default_rate_60d")
+  defaultRate90d Float? @map("default_rate_90d")
+  publicKey String?  @map("public_key")
+  status    String   @default("PENDING") // PENDING, APPROVED, REJECTED
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  consultorId String       @map("consultor_id")
+  consultor   User         @relation(fields: [consultorId], references: [id])
+  fundId      String       @map("fund_id")
+  fund        Fund         @relation(fields: [fundId], references: [id])
+  receivables Receivable[]
+
+  @@index([consultorId])
+  @@index([fundId])
+  @@index([status])
+  @@index([consultorId, status])
+  @@index([fundId, status])
+  @@index([document])
+  @@index([createdAt])
+  @@map("sacados")
+}
+
+model Fund {
+  id              String   @id @default(cuid())
+  name            String
+  symbol          String   @unique
+  cnpj            String?
+  investorProfile String?   @map("investor_profile")
+  cvmCode         String?   @map("cvm_code")
+  administratorName String? @map("administrator_name")
+  administratorCnpj String? @map("administrator_cnpj")
+  managerName     String?   @map("manager_name")
+  managerCnpj     String?   @map("manager_cnpj")
+  custodianName   String?   @map("custodian_name")
+  auditorName     String?   @map("auditor_name")
+  fiduciaryAgentName String? @map("fiduciary_agent_name")
+  sectorFocus     String?   @map("sector_focus")
+  eligibilityCriteria String? @map("eligibility_criteria")
+  maxCedenteConcentrationPercent Float? @map("max_cedente_concentration_pct")
+  maxSacadoConcentrationPercent Float? @map("max_sacado_concentration_pct")
+  sectorConcentrationPercent Float? @map("sector_concentration_pct")
+  targetPmt       Float?    @map("target_pmt")
+  keyRisks        String?   @map("key_risks")
+  administrationFee Float?  @map("administration_fee")
+  managementFee   Float?    @map("management_fee")
+  performanceFee  Float?    @map("performance_fee")
+  otherFees       String?   @map("other_fees")
+  liquidityType   String?   @map("liquidity_type")
+  lockupDays      Int?      @map("lockup_days")
+  redemptionTerms String?   @map("redemption_terms")
+  navPerShare     Float?    @map("nav_per_share")
+  aum             Float?
+  return12m       Float?    @map("return_12m")
+  returnYtd       Float?    @map("return_ytd")
+  returnSinceInception Float? @map("return_since_inception")
+  contractAddress String?  @map("contract_address")
+  tokenContractId String?  @map("token_contract_id")
+  vaultContractId String?  @map("vault_contract_id")
+  fundWalletPublicKey String? @map("fund_wallet_public_key") // Wallet do fundo que recebe investimentos
+  maxSupply       Int      @map("max_supply")
+  totalIssued     Int      @default(0) @map("total_issued")
+  price           Float    @default(1.0) // Price per quota in USDC
+  status          String   @default("PENDING") // PENDING, APPROVED, REJECTED, ACTIVE, CLOSED
+  targetAmount    Float?   @map("target_amount")
+  description     String?
+  
+  // Metadados para recomendação
+  fundType        String        @default("FIDC") @map("fund_type")       // tipo do fundo (FIDC, FII, AGRO, VAREJO, OUTROS)
+  riskLevel       String?       @map("risk_level")      // nível de risco (BAIXO, MEDIO, ALTO)
+  sector          String?       @map("sector")          // setor principal (AGRO, VAREJO, etc.)
+  durationMonths  Int?          @map("duration_months") // prazo médio da carteira
+  minTicket       Float?        @map("min_ticket")      // ticket mínimo recomendado
+  
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  consultorId String? @map("consultor_id")
+  consultor   User?   @relation("ConsultorFunds", fields: [consultorId], references: [id])
+  receivables Receivable[]
+  orders      Order[]
+  cedentes    Cedente[]
+  sacados     Sacado[]
+  pools       Pool[]
+  fundInteractions FundInteraction[]
+
+  @@index([symbol])
+  @@index([status])
+  @@index([consultorId])
+  @@index([fundType])
+  @@index([riskLevel])
+  @@index([sector])
+  @@index([status, fundType])
+  @@index([status, riskLevel])
+  @@index([status, sector])
+  @@index([fundType, riskLevel, sector])
+  @@index([consultorId, status])
+  @@index([createdAt])
+  @@index([price])
+  @@map("funds")
+}
+
+model Pool {
+  id                  String   @id @default(cuid())
+  name                String
+  blendPoolAddress    String   @map("blend_pool_address") // Endereço do pool no Blend Protocol
+  assetAddress        String   @map("asset_address") // Endereço do asset (USDC, XLM, etc)
+  totalDeposited      Float    @default(0) @map("total_deposited") // Total depositado no pool
+  currentBalance      Float    @default(0) @map("current_balance") // Saldo atual (deposited + yield)
+  yieldEarned         Float    @default(0) @map("yield_earned") // Yield acumulado
+  apy                 Float?   // APY atual do pool
+  status              String   @default("ACTIVE") // ACTIVE, PAUSED, CLOSED
+  lastYieldUpdate     DateTime? @map("last_yield_update")
+  depositTxHash       String?  @map("deposit_tx_hash") // Hash da última transação de depósito
+  withdrawTxHash      String?  @map("withdraw_tx_hash") // Hash da última transação de saque
+  processedTxHashes   String[] @default([]) @map("processed_tx_hashes") // every verified deposit/withdraw tx (replay protection)
+  createdAt           DateTime @default(now()) @map("created_at")
+  updatedAt           DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  fundId String @map("fund_id")
+  fund   Fund   @relation(fields: [fundId], references: [id])
+
+  @@index([fundId])
+  @@index([status])
+  @@index([fundId, status])
+  @@index([lastYieldUpdate])
+  @@index([createdAt])
+  @@map("pools")
+}
+
+model Receivable {
+  id        String            @id @default(cuid())
+  faceValue Float             @map("face_value")
+  dueDate   DateTime          @map("due_date")
+  status    String            @default("PENDING") // PENDING, PAID, DISTRIBUTED
+  paidValue Float?            @map("paid_value")
+  paidAt    DateTime?         @map("paid_at")
+  createdAt DateTime          @default(now()) @map("created_at")
+  updatedAt DateTime          @updatedAt @map("updated_at")
+
+  // Relations
+  fundId  String @map("fund_id")
+  fund    Fund   @relation(fields: [fundId], references: [id])
+  sacadoId String @map("sacado_id")
+  sacado  Sacado @relation(fields: [sacadoId], references: [id])
+  cedenteId String?  @map("cedente_id")
+  cedente   Cedente? @relation(fields: [cedenteId], references: [id])
+
+  // On-chain audit trail in the ReceivableVault contract (the database is the working copy)
+  chainStatus String  @default("NOT_REGISTERED") @map("chain_status") // NOT_REGISTERED, PENDING, PAID, DISTRIBUTED
+  chainTxHash String? @map("chain_tx_hash") // last verified vault transaction for this receivable
+
+  @@index([fundId])
+  @@index([sacadoId])
+  @@index([status])
+  @@index([dueDate])
+  @@index([fundId, status])
+  @@index([sacadoId, status])
+  @@index([status, dueDate])
+  @@index([createdAt])
+  @@map("receivables")
+}
+
+model Order {
+  id             String      @id @default(cuid())
+  quantity       Float // shares, up to 7 decimals (same precision as the FundToken contract)
+  price          Float
+  total          Float
+  status         String      @default("PENDING") // PENDING, COMPLETED, FAILED
+  approvalStatus String      @default("PENDING_APPROVAL") @map("approval_status") // PENDING_APPROVAL, APPROVED, REJECTED
+  txHash         String?     @map("tx_hash")
+  refundTxHash   String?     @map("refund_tx_hash")
+  tokenMintTxHash String?    @map("token_mint_tx_hash")
+  // Wallet the shares are minted to (recorded before the whitelist/mint is signed), so pro-rata
+  // distributions keep paying it even if the investor later connects another wallet
+  shareHolder    String?     @map("share_holder")
+  // Countersign: orders paid by the investor's mandate wallet (C...) through subscribe, executed by the agent.
+  // decisionHash is the hash of the APPROVED decision log row, passed on-chain as the `decision` argument.
+  payerAddress   String?     @map("payer_address")
+  decisionHash   String?     @unique @map("decision_hash")
+  createdAt      DateTime    @default(now()) @map("created_at")
+  updatedAt      DateTime    @updatedAt @map("updated_at")
+
+  // Relations
+  investorId String @map("investor_id")
+  investor   User   @relation(fields: [investorId], references: [id])
+  fundId     String @map("fund_id")
+  fund       Fund   @relation(fields: [fundId], references: [id])
+
+  @@index([investorId])
+  @@index([fundId])
+  @@index([status])
+  @@index([approvalStatus])
+  @@index([createdAt])
+  @@index([investorId, status])
+  @@index([fundId, status])
+  @@index([investorId, createdAt])
+  @@index([status, approvalStatus])
+  @@index([status, createdAt])
+  @@index([updatedAt])
+  @@map("orders")
+}
+
+// A transaction whose source is a multisig account (e.g. the platform admin after contracts/scripts/secure-admin.sh):
+// each signer adds their signature from their own wallet and the API submits it once the threshold is reached.
+model MultisigTransaction {
+  id        String   @id @default(cuid())
+  purpose   String   // what it does, e.g. "receivable:<id>:register_receivable:<args hash>"
+  account   String   // the multisig account (transaction source)
+  xdr       String   // envelope with the signatures collected so far
+  txHash    String   @map("tx_hash") // hash of the transaction body (does not change as signatures are added)
+  signedBy  String[] @default([]) @map("signed_by")
+  status    String   @default("PENDING") // PENDING, SUBMITTED, EXPIRED
+  expiresAt DateTime @map("expires_at")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([purpose, status])
+  @@map("multisig_transactions")
+}
+
+model FundInteraction {
+  id         String              @id @default(cuid())
+
+  investorId String              @map("investor_id")
+  investor   User                @relation(fields: [investorId], references: [id])
+
+  fundId     String              @map("fund_id")
+  fund       Fund                @relation(fields: [fundId], references: [id])
+
+  type       String              // tipo de interação (VIEW, CLICK, FAVORITE, START_ORDER)
+  createdAt  DateTime            @default(now()) @map("created_at")
+
+  @@index([investorId])
+  @@index([fundId])
+  @@index([type])
+  @@index([investorId, fundId])
+  @@index([investorId, type])
+  @@index([fundId, type])
+  @@index([investorId, createdAt])
+  @@index([createdAt])
+  @@map("fund_interactions")
+}
+
+// ===== Countersign: policy-guard models (mandate, decision log, agent key) =====
+
+// Investment mandate. One DRAFT row per investor (version 0, edited by the investor or the agent scope);
+// every approval inserts a new APPROVED row (version >= 1) holding the canonical JSON and its sha256.
+// The mandate is only ACTIVE when the wallet contract's mandate_hash() equals `hash` (she signed set_limits).
+model Mandate {
+  id            String    @id @default(cuid())
+  userId        String    @map("user_id")
+  version       Int
+  json          String // DRAFT: draft JSON as edited; APPROVED: canonical JSON (see apps/api/src/policy/canonical.ts)
+  hash          String? // sha256(canonical(mandate)) in hex; null while DRAFT
+  status        String // DRAFT, APPROVED, SUPERSEDED
+  approvedAt    DateTime? @map("approved_at")
+  onChainTxHash String?   @map("on_chain_tx_hash") // confirmed set_limits (or wallet deploy) that anchored `hash`
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+
+  @@unique([userId, version])
+  @@index([userId, status])
+  @@map("mandates")
+}
+
+// Append-only, hash-chained decision log. Rows are only ever INSERTed (a database trigger rejects UPDATE,
+// DELETE and TRUNCATE). hash = sha256(prevHash || canonical(payload)); see apps/api/src/policy/decisionLog.ts.
+model DecisionLog {
+  seq       Int      @id @default(autoincrement())
+  userId    String   @map("user_id")
+  prevHash  String   @map("prev_hash")
+  hash      String   @unique
+  payload   String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([userId, seq])
+  @@map("decision_logs")
+}
+
+// Execution state of an APPROVED decision (mutable, kept outside the log). The primary key on the decision
+// seq makes "execute once" atomic: a second claim of the same decision fails on the unique constraint.
+model DecisionExecution {
+  seq       Int      @id // DecisionLog.seq of the APPROVED decision
+  userId    String   @map("user_id")
+  status    String // PENDING (claimed), SIGNED (agent signer signed it), CONFIRMED, FAILED (retryable), REFUSED (contract or network said no: final), EXPIRED (older than DECISION_TTL_MS: final), PENDING_NETWORK (RPC did not answer: result unknown, verified later)
+  txHash    String?  @map("tx_hash")
+  error     String?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([userId, status])
+  @@map("decision_executions")
+}
+
+// The agent's signing key for one investor's mandate wallet. The secret seed is encrypted at rest with
+// AES-256-GCM (key derived from AGENT_KEY_ENCRYPTION_SECRET) and only decrypted in memory by the signer.
+model AgentKey {
+  id         String   @id @default(cuid())
+  userId     String   @unique @map("user_id")
+  publicKey  String   @unique @map("public_key")
+  ciphertext String // base64
+  iv         String // base64, 12 bytes
+  authTag    String   @map("auth_tag") // base64, 16 bytes
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  @@map("agent_keys")
+}
+
+// ===== Countersign: stellar-integrator models =====
+
+// The investor's mandate wallet contract, recorded only after its deploy transaction was decoded and verified
+// (Wasm hash, source = owner, constructor arguments) and owner(), agent() and limits() were read back.
+model MandateWallet {
+  id             String   @id @default(cuid())
+  userId         String   @unique @map("user_id")
+  contractId     String   @unique @map("contract_id") // C... address of the wallet
+  ownerAddress   String   @map("owner_address") // G... of the investor (constructor owner, transaction source)
+  agentPublicKey String   @map("agent_public_key") // G... agent key at deploy time (rotations: set_agent)
+  usdcContractId String   @map("usdc_contract_id") // USDC Stellar Asset Contract passed to the constructor
+  deployTxHash   String   @unique @map("deploy_tx_hash")
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  @@map("mandate_wallets")
+}
