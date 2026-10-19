@@ -22,7 +22,6 @@
   "include": ["src/**/*"],
   "exclude": [
     "node_modules",
-    "dist",
-    "src/scripts"   // 👈 isso tira sua seed antiga da build
+    "dist"
   ]
 }

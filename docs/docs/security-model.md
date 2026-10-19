@@ -42,7 +42,7 @@ The mandate wallet's refusal codes: `InvalidConfig` 1, `InvalidAmount` 2, `Agent
 
 - **Approval card.** Every Red operation is shown decoded from the exact bytes she will sign, with the network stated separately, the loss scenario and "The agent cannot change these limits. Enforced by our wallet contract on Stellar, not audited." The browser decodes the bytes a second time and blocks signing if its reading differs from the API's.
 - **Decision log.** Canonical JSON (sorted keys, integers only, money as strings in 7 decimal units), `hash = sha256(prevHash || canonical(payload))`, genesis of 32 zero bytes. The database refuses UPDATE, DELETE and TRUNCATE on the log through a trigger; an owner of the database could disable it, which is why the hash also goes on chain as `decision`.
-- **Execution.** A policy approval is valid for 15 minutes. At execution the policy evaluates the proposal again and re-reads the mandate hash, spending and revocation on chain. If the RPC fails, the state is "pending, not done", never "done".
+- **Execution.** A policy approval is valid for 15 minutes. At execution the policy evaluates the proposal again and re-reads the mandate hash, caps, spending and revocation on chain. If the RPC fails, the state is "pending, not done", never "done".
 - **Verification after confirmation.** The API decodes each confirmed transaction (contract, method, origin, arguments) before changing its database.
 
 ## Suites

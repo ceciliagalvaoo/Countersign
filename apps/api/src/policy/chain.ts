@@ -5,8 +5,8 @@ import { getMandateWalletContractId } from '../services/mandateWallet.js';
 
 /**
  * Everything the policy reads from the network, behind one interface so the rules stay pure and the tests can
- * inject a fake. The default implementation reads the investor's mandate wallet contract (views agreed in
- * projeto/Agents/README.md section 6) and the BadgeVerifier contract by simulation (readContract).
+ * inject a fake. The default implementation reads the investor's mandate wallet contract (its read
+ * functions) and the BadgeVerifier contract by simulation (readContract).
  */
 export interface ChainReader {
   /** Mandate wallet contract (C...) of this investor, or null when she has not deployed one */

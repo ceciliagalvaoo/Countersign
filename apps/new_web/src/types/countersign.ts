@@ -1,6 +1,6 @@
 /**
- * Shapes consumed by the /agent page from the Countersign API and from apps/agent
- * (projeto/Agents/README.md section 6). Where the owner has not published a shape yet, the adapter
+ * Shapes consumed by the /agent page from the Countersign API and from apps/agent.
+ * Where the owner has not published a shape yet, the adapter
  * below is the single place to reconcile it.
  */
 

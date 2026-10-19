@@ -119,7 +119,7 @@ const Portfolio: React.FC = () => {
         )}
       </div>
 
-      {/* Loading / vazio / conteúdo */}
+      {/* Loading, empty or content */}
       {loading ? (
         <div className="flex items-center justify-center py-12">
           <div className="w-10 h-10 border-2 border-white/20 border-t-emerald-400 rounded-full animate-spin" />

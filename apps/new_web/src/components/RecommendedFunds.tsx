@@ -5,6 +5,7 @@ import { useAuth } from '../contexts/useAuth';
 import { getErrorMessage } from '../utils/errorHandler';
 import api from '../services/api';
 import { useFundInteraction } from '../hooks/useFundInteraction';
+import { valueLabel } from '../constants/valueLabels';
 
 interface RecommendedFund {
     id: string;
@@ -157,18 +158,18 @@ const RecommendedFunds: React.FC = React.memo(() => {
                             {fund.fundType && (
                                 <span className="inline-flex items-center space-x-1 text-xs font-medium text-primary-300 bg-primary-900/50 px-2 py-1 rounded">
                                     <FiTrendingUp className="text-xs" />
-                                    <span>{fund.fundType}</span>
+                                    <span>{valueLabel(fund.fundType)}</span>
                                 </span>
                             )}
                             {fund.riskLevel && (
                                 <span className={`inline-flex items-center space-x-1 text-xs font-medium px-2 py-1 rounded ${getRiskColor(fund.riskLevel)}`}>
                                     <FiShield className="text-xs" />
-                                    <span>{fund.riskLevel}</span>
+                                    <span>{valueLabel(fund.riskLevel)}</span>
                                 </span>
                             )}
                             {fund.sector && (
                                 <span className="inline-flex items-center space-x-1 text-xs font-medium text-primary-300 bg-primary-900/50 px-2 py-1 rounded">
-                                    <span>{fund.sector}</span>
+                                    <span>{valueLabel(fund.sector)}</span>
                                 </span>
                             )}
                             {fund.durationMonths && (

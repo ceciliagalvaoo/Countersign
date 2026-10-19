@@ -2,7 +2,7 @@
 import { FastifyInstance } from 'fastify';
 import { requireAuth } from '../config/auth.js';
 
-// Tipos válidos de interação (armazenados como texto)
+// Valid interaction types (stored as text)
 const VALID_INTERACTION_TYPES = ['VIEW', 'CLICK', 'FAVORITE', 'START_ORDER'] as const;
 type FundInteractionType = typeof VALID_INTERACTION_TYPES[number];
 
@@ -21,40 +21,40 @@ export default async function fundInteractionRoutes(fastify: FastifyInstance) {
       const investorId = authUser.id;
 
       if (!type) {
-        return reply.status(400).send({ error: 'type é obrigatório' });
+        return reply.status(400).send({ error: 'type is required' });
       }
 
-      // Validar se o type é válido
+      // Check that type is valid
       if (!VALID_INTERACTION_TYPES.includes(type as FundInteractionType)) {
         return reply.status(400).send({ 
-          error: 'type inválido',
+          error: 'invalid type',
           validTypes: VALID_INTERACTION_TYPES 
         });
       }
 
-      // Verificar se o fundo existe
+      // Check that the fund exists
       const fund = await prisma.fund.findUnique({
         where: { id: fundId },
       });
 
       if (!fund) {
-        return reply.status(404).send({ error: 'Fundo não encontrado' });
+        return reply.status(404).send({ error: 'Fund not found' });
       }
 
-      // Verificar se o investidor existe
+      // Check that the investor exists
       const investor = await prisma.user.findUnique({
         where: { id: investorId },
       });
 
       if (!investor) {
-        return reply.status(404).send({ error: 'Investidor não encontrado' });
+        return reply.status(404).send({ error: 'Investor not found' });
       }
 
       if (investor.role !== 'INVESTIDOR') {
-        return reply.status(403).send({ error: 'Apenas investidores podem registrar interações' });
+        return reply.status(403).send({ error: 'Only investors can record interactions' });
       }
 
-      // Criar a interação
+      // Create the interaction
       const interaction = await prisma.fundInteraction.create({
         data: {
           investorId,
@@ -73,12 +73,12 @@ export default async function fundInteractionRoutes(fastify: FastifyInstance) {
       });
     } catch (err) {
       console.error(err);
-      return reply.status(500).send({ error: 'Erro ao registrar interação' });
+      return reply.status(500).send({ error: 'Error recording the interaction' });
     }
   });
 
   // GET /api/funds/:fundId/interactions
-  // Obter todas as interações de um fundo (útil para analytics)
+  // All interactions of a fund (for analytics)
   fastify.get('/funds/:fundId/interactions', async (request, reply) => {
     try {
       const authUser = requireAuth(request, reply, ['GESTOR', 'CONSULTOR']);
@@ -102,7 +102,7 @@ export default async function fundInteractionRoutes(fastify: FastifyInstance) {
         },
       });
 
-      // Estatísticas agregadas
+      // Aggregated statistics
       const stats = {
         total: interactions.length,
         byType: {
@@ -120,12 +120,12 @@ export default async function fundInteractionRoutes(fastify: FastifyInstance) {
       });
     } catch (err) {
       console.error(err);
-      return reply.status(500).send({ error: 'Erro ao buscar interações' });
+      return reply.status(500).send({ error: 'Error fetching interactions' });
     }
   });
 
   // GET /api/investors/:investorId/interactions
-  // Obter todas as interações de um investidor
+  // All interactions of an investor
   fastify.get('/investors/:investorId/interactions', async (request, reply) => {
     try {
       const authUser = requireAuth(request, reply);
@@ -160,7 +160,7 @@ export default async function fundInteractionRoutes(fastify: FastifyInstance) {
       });
     } catch (err) {
       console.error(err);
-      return reply.status(500).send({ error: 'Erro ao buscar interações do investidor' });
+      return reply.status(500).send({ error: 'Error fetching the investor interactions' });
     }
   });
 }

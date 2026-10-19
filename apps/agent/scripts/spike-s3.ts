@@ -1,4 +1,4 @@
-// Spike S3 (projeto/08-BUILD-PROMPT.md line 0.4): minimal Claude call with one
+// Spike S3: minimal Claude call with one
 // strict tool. Measures latency (mean of N calls per effort level), checks that
 // the tool was called and that its input validates against the schema, checks
 // prompt caching, and probes the parameters the reference says return 400.

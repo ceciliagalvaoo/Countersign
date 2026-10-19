@@ -27,8 +27,8 @@ pub enum Status { Pending = 0, Approved = 1, Rejected = 2 }
 #[contracttype]
 pub enum DataKey {
     Admin,
-    FundTokenAddress,           // endereço do contrato de cotas deste fundo
-    PaymentToken,               // ativo de pagamento (USDC Stellar Asset Contract)
+    FundTokenAddress,           // fund unit token contract of this fund
+    PaymentToken,               // payment asset (USDC Stellar Asset Contract)
     Consultants(Address),       // whitelist de consultores
     Cedente(String),            // id -> EntityRecord
     Sacado(String),
@@ -43,7 +43,7 @@ pub enum DataKey {
 pub struct EntityRecord {
     pub id: String,             // CNPJ/CPF ou identificador
     pub name: String,
-    pub created_by: Address,    // Consultor que propôs
+    pub created_by: Address,    // Consultor who proposed it
     pub status: Status,
 }
 
@@ -52,9 +52,9 @@ pub struct EntityRecord {
 pub struct FundRecord {
     pub id: String,             // ex. "FUND-AGRO-001"
     pub name: String,
-    pub created_by: Address,    // Consultor que propôs
+    pub created_by: Address,    // Consultor who proposed it
     pub status: Status,
-    pub token: Address,         // endereço do FundToken (pode ficar zerado até aprovação)
+    pub token: Address,         // FundToken address (may stay unset until approval)
 }
 
 #[derive(Clone)]
@@ -70,7 +70,7 @@ pub struct Receivable {
     pub sacado_id: String,
     pub face_value: i128,
     pub due_date: u64,
-    pub debtor_address: Address, // opcional: sacado on-chain
+    pub debtor_address: Address, // optional: account debtor on chain
     pub status: ReceivableStatus,
     pub paid_amount: i128,
     pub paid_date: u64,
@@ -227,7 +227,7 @@ impl ReceivableVault {
         env.storage().persistent().get(&DataKey::Consultants(addr.clone())).unwrap_or(false)
     }
 
-    // -------- Cadastros propostos pelo Consultor --------
+    // -------- Registrations proposed by the Consultor --------
     pub fn submit_cedente(env: Env, consultant: Address, id: String, name: String) -> Result<(), VaultError> {
         consultant.require_auth();
         bump_instance(&env);
@@ -270,7 +270,7 @@ impl ReceivableVault {
         Ok(())
     }
 
-    // -------- Registro direto pelo admin (entidades já aprovadas off-chain pelo Gestor) --------
+    // -------- Direct registration by the admin (entities already approved off chain by the manager) --------
     /// Registers an already-approved cedente or sacado (kind: "cedente" | "sacado"), skipping the consultant proposal step
     pub fn admin_register_entity(env: Env, kind: Symbol, id: String, name: String) -> Result<(), VaultError> {
         require_admin(&env);
@@ -317,7 +317,7 @@ impl ReceivableVault {
         env.storage().persistent().has(&key)
     }
 
-    // -------- Aprovação pelo Gestor --------
+    // -------- Approval by the manager --------
     pub fn approve_entity(env: Env, kind: Symbol, id: String, approve: bool) -> Result<(), VaultError> {
         require_admin(&env);
         let st = if approve { Status::Approved } else { Status::Rejected };
@@ -341,7 +341,7 @@ impl ReceivableVault {
         Ok(())
     }
 
-    // -------- Recebíveis --------
+    // -------- Receivables --------
     pub fn register_receivable(
         env: Env,
         id: String,
@@ -357,7 +357,7 @@ impl ReceivableVault {
         if face_value <= 0 { return Err(VaultError::Invalid); }
         if env.storage().persistent().has(&DataKey::Receivable(id.clone())) { return Err(VaultError::DuplicateId); }
 
-        // checagens de aprovação
+        // approval checks
         let fund: FundRecord = env.storage().persistent().get(&DataKey::Fund(fund_id.clone())).ok_or(VaultError::NotFound)?;
         if let Status::Approved = fund.status {} else { return Err(VaultError::BadStatus); }
 

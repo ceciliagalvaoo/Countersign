@@ -334,7 +334,7 @@ export async function badgeRoutes(fastify: FastifyInstance) {
             icon: badgeInfo.icon,
             color: badgeInfo.color,
           },
-          // Não revelar valor exato, apenas range
+          // Do not reveal the exact amount, only the range
           investmentRange: {
             min: badgeInfo.minAmount,
             max: badgeInfo.badge === InvestorBadge.GOLD ? null : undefined,

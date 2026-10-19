@@ -7,33 +7,33 @@ const prisma = new PrismaClient();
 
 async function createTestData() {
   try {
-    console.log('🗃️  Limpando dados existentes...');
+    console.log('🗃️  Deleting existing data...');
 
-    // Limpar dados existentes na ordem correta devido às foreign keys
+    // Delete existing data in foreign key order
     await prisma.$transaction([
       // Tabelas que dependem de User e Fund
       prisma.fundInteraction.deleteMany(), // fund_interactions (depende de fund e investor)
 
       prisma.order.deleteMany(),           // orders (depende de fund e investor)
-      prisma.receivable.deleteMany(),      // receivables (depende de fund e sacado)
+      prisma.receivable.deleteMany(),      // receivables (depends on fund and sacado)
 
       prisma.pool.deleteMany(),            // pools (depende de fund)
-      prisma.cedente.deleteMany(),         // cedentes (depende de fund e consultor)
-      prisma.sacado.deleteMany(),          // sacados (depende de fund e consultor)
+      prisma.cedente.deleteMany(),         // cedentes (depends on fund and consultor)
+      prisma.sacado.deleteMany(),          // sacados (depends on fund and consultor)
 
-      prisma.fund.deleteMany(),            // funds (depende de consultor?)
+      prisma.fund.deleteMany(),            // funds (depends on consultor)
       prisma.user.deleteMany(),            // users
     ]);
 
-    console.log('👥 Criando usuários de teste...');
+    console.log('👥 Creating demo users...');
 
-    // Senha padrão para todos os usuários de teste
+    // Same password for every demo user
     const defaultPassword = await bcrypt.hash('123456', 10);
 
-    // 1. Criar GESTOR
+    // 1. Create the GESTOR (manager)
     const gestor = await prisma.user.create({
       data: {
-        email: 'gestor@vero.com',
+        email: 'gestor@example.com',
         password: defaultPassword,
         role: 'GESTOR',
         status: 'APPROVED',
@@ -41,10 +41,10 @@ async function createTestData() {
     });
     console.log('✅ Gestor criado:', gestor.email);
 
-    // 2. Criar CONSULTOR
+    // 2. Create the CONSULTOR
     const consultor = await prisma.user.create({
       data: {
-        email: 'consultor@vero.com',
+        email: 'consultor@example.com',
         password: defaultPassword,
         role: 'CONSULTOR',
         status: 'APPROVED',
@@ -52,10 +52,10 @@ async function createTestData() {
     });
     console.log('✅ Consultor criado:', consultor.email);
 
-    // 3. Criar INVESTIDOR
+    // 3. Create the INVESTIDOR (investor)
     const investidor = await prisma.user.create({
       data: {
-        email: 'investidor@vero.com',
+        email: 'investidor@example.com',
         password: defaultPassword,
         role: 'INVESTIDOR',
         status: 'APPROVED',
@@ -63,10 +63,10 @@ async function createTestData() {
     });
     console.log('✅ Investidor criado:', investidor.email);
 
-    // 4. Usuários pendentes
+    // 4. Pending users
     const consultorPendente = await prisma.user.create({
       data: {
-        email: 'consultor.pendente@vero.com',
+        email: 'consultor.pendente@example.com',
         password: defaultPassword,
         role: 'CONSULTOR',
         status: 'PENDING',
@@ -76,7 +76,7 @@ async function createTestData() {
 
     const investidorPendente = await prisma.user.create({
       data: {
-        email: 'investidor.pendente@vero.com',
+        email: 'investidor.pendente@example.com',
         password: defaultPassword,
         role: 'INVESTIDOR',
         status: 'PENDING',
@@ -84,34 +84,34 @@ async function createTestData() {
     });
     console.log('⏳ Investidor pendente criado:', investidorPendente.email);
 
-    console.log('\n🎉 Dados de teste criados com sucesso!\n');
+    console.log('\n🎉 Demo data created.\n');
     
-    console.log('📋 CREDENCIAIS DE TESTE:');
+    console.log('📋 DEMO CREDENTIALS:');
     console.log('═══════════════════════════════════════');
     console.log('👨‍💼 GESTOR:');
-    console.log('   Email: gestor@vero.com');
-    console.log('   Senha: 123456');
-    console.log('   Status: APROVADO');
+    console.log('   Email: gestor@example.com');
+    console.log('   Password: 123456');
+    console.log('   Status: APPROVED');
     console.log('');
     console.log('👨‍💻 CONSULTOR:');
-    console.log('   Email: consultor@vero.com');
-    console.log('   Senha: 123456');
-    console.log('   Status: APROVADO');
+    console.log('   Email: consultor@example.com');
+    console.log('   Password: 123456');
+    console.log('   Status: APPROVED');
     console.log('');
     console.log('💰 INVESTIDOR:');
-    console.log('   Email: investidor@vero.com');
-    console.log('   Senha: 123456');
-    console.log('   Status: APROVADO');
+    console.log('   Email: investidor@example.com');
+    console.log('   Password: 123456');
+    console.log('   Status: APPROVED');
     console.log('');
-    console.log('⏳ USUÁRIOS PENDENTES (para testar aprovação):');
-    console.log('   consultor.pendente@vero.com - 123456');
-    console.log('   investidor.pendente@vero.com - 123456');
+    console.log('⏳ PENDING USERS (to test approval):');
+    console.log('   consultor.pendente@example.com - 123456');
+    console.log('   investidor.pendente@example.com - 123456');
     console.log('');
-    console.log('💡 BANCO LIMPO - Apenas usuários criados');
+    console.log('💡 Clean database: only users were created');
     console.log('═══════════════════════════════════════');
 
   } catch (error) {
-    console.error('❌ Erro ao criar dados de teste:', error);
+    console.error('❌ Error creating demo data:', error);
   } finally {
     await prisma.$disconnect();
   }

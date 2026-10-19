@@ -4,6 +4,7 @@ import { sacadoService } from '../../services/api';
 import { getErrorMessage } from '../../utils/errorHandler';
 import { useAuth } from '../../contexts/useAuth';
 import { Link, Navigate } from 'react-router-dom';
+import { valueLabel } from '../../constants/valueLabels';
 
 interface Debtor {
   id: string;
@@ -168,7 +169,7 @@ const DebtorList: React.FC = () => {
                             <Info label="State" value={selected.state} />
                             <Info label="Country" value={selected.country} />
                             <Info label="Postal code" value={selected.postalCode} />
-                            <Info label="Sector" value={selected.sector} />
+                            <Info label="Sector" value={valueLabel(selected.sector)} />
                             <Info label="Size" value={selected.size} />
                             <Info label="Rating" value={selected.rating} />
                             <Info label="Payment history" value={selected.paymentHistory} />

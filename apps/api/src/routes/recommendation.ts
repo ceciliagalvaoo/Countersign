@@ -13,7 +13,7 @@ export default async function recommendationRoutes(fastify: FastifyInstance) {
       const { investorId } = request.query as { investorId?: string };
 
       if (!investorId) {
-        return reply.status(400).send({ error: "investorId é obrigatório" });
+        return reply.status(400).send({ error: "investorId is required" });
       }
       if (authUser.id !== investorId && authUser.role !== "GESTOR") {
         return reply.status(403).send({ error: "Access denied" });
@@ -46,12 +46,12 @@ export default async function recommendationRoutes(fastify: FastifyInstance) {
       console.error(err);
       return reply
         .status(500)
-        .send({ error: "Erro ao buscar fundos recomendados" });
+        .send({ error: "Error fetching recommended funds" });
     }
   });
 
   // GET /api/investor-profile?investorId=abc123
-  // Endpoint adicional para ver o perfil do investidor
+  // Investor profile used by the recommendations
   fastify.get("/investor-profile", async (request, reply) => {
     try {
       const authUser = requireAuth(request, reply);
@@ -60,7 +60,7 @@ export default async function recommendationRoutes(fastify: FastifyInstance) {
       const { investorId } = request.query as { investorId?: string };
 
       if (!investorId) {
-        return reply.status(400).send({ error: "investorId é obrigatório" });
+        return reply.status(400).send({ error: "investorId is required" });
       }
       if (authUser.id !== investorId && authUser.role !== "GESTOR") {
         return reply.status(403).send({ error: "Access denied" });
@@ -74,7 +74,7 @@ export default async function recommendationRoutes(fastify: FastifyInstance) {
       if (!profile) {
         return reply.send({
           message:
-            "Perfil ainda não disponível. Interaja com fundos para construir seu perfil.",
+            "Profile not available yet. Interact with funds to build your profile.",
           profile: null,
         });
       }
@@ -84,7 +84,7 @@ export default async function recommendationRoutes(fastify: FastifyInstance) {
       console.error(err);
       return reply
         .status(500)
-        .send({ error: "Erro ao buscar perfil do investidor" });
+        .send({ error: "Error fetching the investor profile" });
     }
   });
 }

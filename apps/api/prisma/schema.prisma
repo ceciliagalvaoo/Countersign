@@ -174,7 +174,7 @@ model Fund {
   contractAddress String?  @map("contract_address")
   tokenContractId String?  @map("token_contract_id")
   vaultContractId String?  @map("vault_contract_id")
-  fundWalletPublicKey String? @map("fund_wallet_public_key") // Wallet do fundo que recebe investimentos
+  fundWalletPublicKey String? @map("fund_wallet_public_key") // Fund wallet that receives investments
   maxSupply       Int      @map("max_supply")
   totalIssued     Int      @default(0) @map("total_issued")
   price           Float    @default(1.0) // Price per quota in USDC
@@ -182,12 +182,12 @@ model Fund {
   targetAmount    Float?   @map("target_amount")
   description     String?
   
-  // Metadados para recomendação
-  fundType        String        @default("FIDC") @map("fund_type")       // tipo do fundo (FIDC, FII, AGRO, VAREJO, OUTROS)
-  riskLevel       String?       @map("risk_level")      // nível de risco (BAIXO, MEDIO, ALTO)
+  // Metadata used by recommendations
+  fundType        String        @default("FIDC") @map("fund_type")       // fund type (FIDC, FII, AGRO, VAREJO, OUTROS)
+  riskLevel       String?       @map("risk_level")      // risk level (BAIXO, MEDIO, ALTO)
   sector          String?       @map("sector")          // setor principal (AGRO, VAREJO, etc.)
-  durationMonths  Int?          @map("duration_months") // prazo médio da carteira
-  minTicket       Float?        @map("min_ticket")      // ticket mínimo recomendado
+  durationMonths  Int?          @map("duration_months") // average portfolio duration
+  minTicket       Float?        @map("min_ticket")      // recommended minimum ticket
   
   createdAt       DateTime @default(now()) @map("created_at")
   updatedAt       DateTime @updatedAt @map("updated_at")
@@ -221,16 +221,16 @@ model Fund {
 model Pool {
   id                  String   @id @default(cuid())
   name                String
-  blendPoolAddress    String   @map("blend_pool_address") // Endereço do pool no Blend Protocol
-  assetAddress        String   @map("asset_address") // Endereço do asset (USDC, XLM, etc)
+  blendPoolAddress    String   @map("blend_pool_address") // Pool address on Blend Protocol
+  assetAddress        String   @map("asset_address") // Asset address (USDC, XLM, etc)
   totalDeposited      Float    @default(0) @map("total_deposited") // Total depositado no pool
-  currentBalance      Float    @default(0) @map("current_balance") // Saldo atual (deposited + yield)
+  currentBalance      Float    @default(0) @map("current_balance") // Current balance (deposited + yield)
   yieldEarned         Float    @default(0) @map("yield_earned") // Yield acumulado
   apy                 Float?   // APY atual do pool
   status              String   @default("ACTIVE") // ACTIVE, PAUSED, CLOSED
   lastYieldUpdate     DateTime? @map("last_yield_update")
-  depositTxHash       String?  @map("deposit_tx_hash") // Hash da última transação de depósito
-  withdrawTxHash      String?  @map("withdraw_tx_hash") // Hash da última transação de saque
+  depositTxHash       String?  @map("deposit_tx_hash") // Hash of the latest deposit transaction
+  withdrawTxHash      String?  @map("withdraw_tx_hash") // Hash of the latest withdrawal transaction
   processedTxHashes   String[] @default([]) @map("processed_tx_hashes") // every verified deposit/withdraw tx (replay protection)
   createdAt           DateTime @default(now()) @map("created_at")
   updatedAt           DateTime @updatedAt @map("updated_at")
@@ -347,7 +347,7 @@ model FundInteraction {
   fundId     String              @map("fund_id")
   fund       Fund                @relation(fields: [fundId], references: [id])
 
-  type       String              // tipo de interação (VIEW, CLICK, FAVORITE, START_ORDER)
+  type       String              // interaction type (VIEW, CLICK, FAVORITE, START_ORDER)
   createdAt  DateTime            @default(now()) @map("created_at")
 
   @@index([investorId])

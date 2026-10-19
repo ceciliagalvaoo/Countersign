@@ -6,11 +6,11 @@ sidebar_position: 6
 
 # Run it yourself
 
-You can verify without running anything: open any hash on the [Evidence](evidence.md) page and read the `subscribe` arguments on stellar.expert. To reproduce, follow the steps below on a clean machine. Nothing here touches mainnet.
+You can verify without running anything: open any hash on the [Evidence](evidence.md) page and read the `subscribe` arguments on stellar.expert, or use the [Live demo](live-demo.md). To reproduce, follow the steps below on a clean machine. Nothing here touches mainnet.
 
 ## Requirements
 
-- Linux or macOS (Windows through WSL2); Node.js 20; Docker.
+- Linux or macOS (Windows through WSL2); Node.js 24 (npm 11; the web app's dependencies require Node.js 22.12 or later); Docker.
 - Rust stable with `rustup target add wasm32v1-none`; Stellar CLI 25.2.0 or later (28.1.0 recommended).
 - A browser with the Freighter extension set to Testnet.
 - An Anthropic API key for the agent service (the agent tests use a scripted model client and need no key).
@@ -105,3 +105,7 @@ cd apps/new_web && npx tsc --noEmit -p tsconfig.app.json
 ```
 
 The testnet is reset periodically (next reset 16 Dec 2026, per Stellar Docs, Networks). After a reset, run `contracts/scripts/deploy-testnet.sh` and `scripts/e2e/run.sh` again.
+
+## Deploying your own copy
+
+`render.yaml` at the repository root is a Render Blueprint for the three services: the API and the agent as Node web services, the web app as a static site with every path rewritten to `index.html`. Each secret is entered in the Render dashboard, never in the repository. After the first deploy, set `API_BASE_URL` of the agent and `VITE_API_URL` of the web app to the API's public URL plus `/api`, `VITE_AGENT_URL` to the agent's public URL, and `CORS_ORIGIN` of the API and the agent to the web app's URL. The `VITE_` variables are read at build time, so the web app has to be built again after they change. The documentation site is built and published to GitHub Pages by `.github/workflows/deploy-doc.yaml`.

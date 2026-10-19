@@ -11,7 +11,11 @@ sidebar_position: 1
 
 *Sign only what you can read.*
 
-2026 Shenzhen FinTechathon, International AI Track, Topic F (Agent Wallet). Team: [PENDING: team name]. Demo video: [PENDING: demo video URL]. Repository: [PENDING: GitHub repository URL].
+2026 Shenzhen FinTechathon, International AI Track, Topic F (Agent Wallet). Team: Cecília Galvão ([@ceciliagalvaoo](https://github.com/ceciliagalvaoo)) and Pablo Azevedo ([@zzaved](https://github.com/zzaved)). Demo video: [PENDING: demo video URL].
+
+| Live demo | Repository | Network |
+|---|---|---|
+| [countersign-web-rt1a.onrender.com](https://countersign-web-rt1a.onrender.com) (see [Live demo](live-demo.md)) | [github.com/ceciliagalvaoo/Countersign](https://github.com/ceciliagalvaoo/Countersign) | Stellar testnet; one mainnet slice (limitation 14) |
 
 All USDC and fund units in this submission are test assets on the Stellar public test network, with no monetary value, except the mainnet transactions described in limitation 14 (one mandate wallet, less than US$5 in USDC, one agent purchase). Transaction hashes prove the mechanism, not a market.
 
@@ -40,12 +44,24 @@ The person we design for (composite persona, built from public data; not validat
 
 Without Stellar's USDC being the same asset as a trustline and as a contract (the Stellar Asset Contract), with authorization done by the host for any address, the investor's existing USDC could not sit in an agent wallet contract and be paid to a fund wallet in one contract call; the caps would move back to our server. Protocol 25 made BN254 and Poseidon native, which lets our `badge-verifier` check a Groth16 eligibility proof on chain. Every hash opens in a public explorer. This is an advantage of cost and simplicity, not exclusivity: the same rules could be written as a smart account on another chain.
 
+## Verify it in five minutes
+
+You do not need to run anything to check the central claim.
+
+1. Open the agent purchase made through the interface: [`ca285502...b47bd1`](https://stellar.expert/explorer/testnet/tx/ca28550282a909fc3d625dc3ef09825bd53a1be100d87f057b4b1d54a6b47bd1). It calls `subscribe` on the investor's mandate wallet, signed by the agent's key.
+2. Read its first argument, the `decision`. It is the hash of line #5 of our decision log (`all_rules_passed`), as listed on the [Evidence](evidence.md) page.
+3. Open the issuer's mint to the same wallet: [`b9d1ad65...16674d`](https://stellar.expert/explorer/testnet/tx/b9d1ad650a9cdafb6f8ae1c488baac57baca1489c57fcb3913fffeb8a016674d). The fund wallet signed it: that is the countersignature.
+4. Open a refusal: [`cfff9ced...3a3b5c`](https://stellar.expert/explorer/testnet/tx/cfff9ced3f87e3ce9ef712fa90a287bd77aad95ba6ea96b17214b328033a3b5c). The agent's key tried to pay a wallet outside the allowlist, with our server out of the path, and our wallet contract refused it (FAILED).
+5. Read the [Limitations](limitations.md), and why each one is there.
+
 ## Where to read next
 
+- [Live demo](live-demo.md): the deployed app on testnet, and a first purchase step by step.
 - [How it works](how-it-works.md): the purchase, step by step (Figure 1 and Figure 2).
 - [Security model](security-model.md): tiers, who enforces what, and the two suites.
+- [Contracts](contracts.md): addresses, functions and refusal codes of the four contracts.
 - [Evidence](evidence.md): real testnet hashes and the mainnet slice, with links.
-- [Limitations](limitations.md): the literal list, identical in every document.
+- [Limitations](limitations.md): the literal list, identical in every document, and why each one is there.
 - [Run it yourself](run-it-yourself.md): from a clean machine.
 
 ## Roadmap

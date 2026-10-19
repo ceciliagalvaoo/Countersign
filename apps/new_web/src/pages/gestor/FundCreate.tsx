@@ -100,7 +100,7 @@ const FundCreate: React.FC = () => {
 
   const handleMockFill = () => {
     setForm({
-      name: 'Fundo Recebíveis Agro',
+      name: 'Agri Receivables Fund',
       symbol: 'FRA',
       maxSupply: '1000000',
       price: '1.00',
@@ -110,11 +110,11 @@ const FundCreate: React.FC = () => {
       cvmCode: '99999',
       administratorName: 'Admin XYZ',
       administratorCnpj: '11.222.333/0001-44',
-      managerName: 'Gestora ABC',
+      managerName: 'Manager ABC',
       managerCnpj: '55.666.777/0001-88',
-      custodianName: 'Custódia Segura',
-      auditorName: 'Auditoria Audit',
-      fiduciaryAgentName: 'Agente Fiduciário',
+      custodianName: 'Custodian XYZ',
+      auditorName: 'Auditor XYZ',
+      fiduciaryAgentName: 'Fiduciary Agent XYZ',
       strategy: 'Multisector focus in agro',
       eligibility: 'Approved assignors; debtors with internal rating min B; registered invoices/receivables.',
       limitCedente: '20',
@@ -290,7 +290,7 @@ const FundCreate: React.FC = () => {
             />
           </div>
           <div>
-            <label className={labelBase}>CNPJ</label>
+            <label className={labelBase}>Registry ID</label>
             <input
               type="text"
               value={form.cnpj}
@@ -306,8 +306,8 @@ const FundCreate: React.FC = () => {
               onChange={(e) => handleChange('type', e.target.value as FundForm['type'])}
               className={inputBase}
             >
-              <option value="FIDC">FIDC</option>
-              <option value="FIDC_NP">FIDC-NP</option>
+              <option value="FIDC">Receivables fund</option>
+              <option value="FIDC_NP">Receivables fund (non-standard)</option>
             </select>
           </div>
           <div>
@@ -317,13 +317,13 @@ const FundCreate: React.FC = () => {
               onChange={(e) => handleChange('targetInvestor', e.target.value as FundForm['targetInvestor'])}
               className={inputBase}
             >
-              <option value="GERAL">General</option>
-              <option value="QUALIFICADO">Qualified</option>
+              <option value="GERAL">Open to all investors</option>
+              <option value="QUALIFICADO">Tier proof required (zero-knowledge)</option>
               <option value="PROFISSIONAL">Professional</option>
             </select>
           </div>
           <div>
-            <label className={labelBase}>CVM Code</label>
+            <label className={labelBase}>Regulator code</label>
             <input
               type="text"
               value={form.cvmCode}
@@ -411,7 +411,7 @@ const FundCreate: React.FC = () => {
             />
           </div>
           <div>
-            <label className={labelBase}>Administrator CNPJ</label>
+            <label className={labelBase}>Administrator registry ID</label>
             <input
               type="text"
               value={form.administratorCnpj}
@@ -429,7 +429,7 @@ const FundCreate: React.FC = () => {
             />
           </div>
           <div>
-            <label className={labelBase}>Manager CNPJ</label>
+            <label className={labelBase}>Manager registry ID</label>
             <input
               type="text"
               value={form.managerCnpj}
@@ -497,7 +497,7 @@ const FundCreate: React.FC = () => {
             </div>
             <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
-            <label className={labelBase}>% Limit per Cedente</label>
+            <label className={labelBase}>% Limit per assignor</label>
             <input
               type="number"
               value={form.limitCedente}
@@ -507,7 +507,7 @@ const FundCreate: React.FC = () => {
             />
           </div>
           <div>
-            <label className={labelBase}>% Limit per Sacado</label>
+            <label className={labelBase}>% Limit per account debtor</label>
             <input
               type="number"
               value={form.limitSacado}

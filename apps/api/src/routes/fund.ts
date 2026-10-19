@@ -228,7 +228,7 @@ export async function fundRoutes(fastify: FastifyInstance) {
         fastify.prisma.fund.count()
       ]);
 
-      // Buscar métricas apenas para os fundos da página atual
+      // Fetch metrics only for the funds on the current page
       const fundIds = funds.map(f => f.id);
       const [receivablesData, ordersData] = await Promise.all([
         fastify.prisma.receivable.groupBy({
@@ -643,19 +643,19 @@ export async function fundRoutes(fastify: FastifyInstance) {
         }
       });
 
-      // 🚀 CRIAR POOL BLEND AUTOMATICAMENTE quando aprovar o fundo
+      // Create the Blend pool automatically when the fund is approved
       if (body.status === 'APPROVED') {
         try {
-          // Importar configurações do Blend
+          // Import the Blend configuration
           const { BLEND_CONTRACTS } = await import('../config/blend.js');
           
-          // Verificar se já existe uma pool para este fundo
+          // Check whether this fund already has a pool
           const existingPool = await fastify.prisma.pool.findFirst({
             where: { fundId: params.id }
           });
 
           if (!existingPool) {
-            // Criar pool automaticamente
+            // Create the pool
             const pool = await fastify.prisma.pool.create({
               data: {
                 name: `${fund.name} - Yield Pool`,
@@ -669,12 +669,12 @@ export async function fundRoutes(fastify: FastifyInstance) {
               }
             });
 
-            fastify.log.info(`✅ Pool criado automaticamente para o fundo ${fund.name}: ${pool.id}`);
+            fastify.log.info(`Pool created for fund ${fund.name}: ${pool.id}`);
           }
         } catch (poolError) {
           fastify.log.error(poolError);
-          fastify.log.error('Erro ao criar pool automaticamente');
-          // Não falhar a aprovação por causa do erro da pool
+          fastify.log.error('Error creating the pool');
+          // A pool error does not fail the approval
         }
       }
 

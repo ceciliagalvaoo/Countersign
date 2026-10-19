@@ -17,7 +17,7 @@ export const useFundInteraction = () => {
             });
         } catch (error) {
             console.error('Failed to track interaction:', error);
-            // Silent fail - não queremos interromper a UX por causa de tracking
+            // Fail silently: tracking must not interrupt the user
         }
     }, [user?.id]);
 

@@ -5,7 +5,7 @@ import { Network } from '@blend-capital/blend-sdk';
 const SOROBAN_RPC_URL = process.env.SOROBAN_RPC_URL?.trim() || 'https://soroban-testnet.stellar.org';
 const RPC_ALLOW_HTTP = /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?(\/|$)/.test(SOROBAN_RPC_URL);
 
-// Configuração do Blend Protocol para testnet
+// Blend Protocol configuration for testnet
 export const blendConfig: Network = {
   rpc: SOROBAN_RPC_URL,
   passphrase: 'Test SDF Network ; September 2015',
@@ -41,7 +41,7 @@ export const BLEND_CONTRACTS = {
   POOL_FACTORY_V2: 'CDV6RX4CGPCOKGTBFS52V3LMWQGZN3LCQTXF5RVPOOCG4XVMHXQ4NTF6',
 };
 
-// Configuração de pools disponíveis
+// Available pools
 export interface BlendPoolConfig {
   address: string;
   name: string;

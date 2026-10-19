@@ -89,8 +89,8 @@ export class DecoderShapeError extends Error {
 }
 
 /**
- * Adapter from whatever the API decoder returns to DecodedCall. Accepts the field names announced in
- * projeto/Agents/stellar-integrator.md (method, contractId, args, source, fee) and the provisional ones
+ * Adapter from whatever the API decoder returns to DecodedCall. Accepts the current field names
+ * (method, contractId, args, source, fee) and the older ones
  * (function, signer). Throws when the essential fields are missing: no card is better than a wrong card.
  */
 export function toDecodedCall(raw: unknown): DecodedCall {

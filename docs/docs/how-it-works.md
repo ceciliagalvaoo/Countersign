@@ -6,7 +6,7 @@ sidebar_position: 2
 
 # How it works
 
-Figure 1 shows the components and Figure 2 shows one first purchase in a new fund, from the investor's sentence to the issuer's mint. The steps below follow the same order as the demo video.
+Figure 1 shows the components and Figure 2 shows one first purchase in a new fund, from the investor's sentence to the issuer's mint. The steps below follow the order of a first purchase.
 
 ## Architecture
 
@@ -95,7 +95,7 @@ sequenceDiagram
 | S0 Mandate wallet | She deploys her own `mandate-wallet` (owner = her wallet, agent = an agent key generated for her, USDC, caps, mandate hash) and deposits test USDC | She signs |
 | S1 Clarification | She writes her goal in one sentence; the agent asks only what is missing (residences, horizon, liquidity, maximum loss, amount, recurrence) and fills the typed mandate next to the chat | The agent proposes; nothing is valid until she approves |
 | S2 Mandate anchored | The approved mandate hash goes on chain with the wallet deploy, or with `set_limits` if the wallet already exists | She signs |
-| S3 Perimeter | A residence in Mainland China is refused, naming Yinfa [2026] No. 42, with a log line | Policy |
+| S3 Perimeter | A residence in Mainland China is refused by the rule `perimeter_mainland_china`; the reply names Yinfa [2026] No. 42 | Policy |
 | S4 Screening and eligibility | Sector, largest debtor in %, liquidity, loss scenario; no return figure. Fund texts are marked untrusted. Tier funds need a zero-knowledge tier proof verified on chain; the agent only sees "eligible" or "not eligible" | Policy |
 | S5 Quote | Units computed by code, rounded down, never above the amount asked | Code |
 | S6 Correction | "Make it 500, only the agri fund" replans the DAG without starting over | Agent |

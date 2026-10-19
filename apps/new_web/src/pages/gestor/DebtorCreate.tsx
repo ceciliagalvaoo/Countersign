@@ -188,7 +188,7 @@ const DebtorCreate: React.FC = () => {
                 />
               </div>
               <div>
-                <label className={labelBase}>Document (CNPJ/CPF) *</label>
+                <label className={labelBase}>Registry ID (company or person) *</label>
                 <input
                   type="text"
                   value={form.document}

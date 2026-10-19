@@ -7,6 +7,7 @@ import InvestmentModal from '../../components/InvestmentModal';
 import { useAuth } from '../../contexts/useAuth';
 import { useWallet } from '../../contexts/WalletContext';
 import UsdcAmount from '../../components/UsdcAmount';
+import { valueLabel } from '../../constants/valueLabels';
 
 interface Fund {
   id: string;
@@ -267,10 +268,10 @@ const FundDetail: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <Field label="CNPJ" value={fund.cnpj} />
-        <Field label="Type" value={fund.fundType} />
-        <Field label="Target investor" value={fund.investorProfile} />
-        <Field label="CVM code" value={fund.cvmCode} />
+        <Field label="Registry ID" value={fund.cnpj} />
+        <Field label="Type" value={valueLabel(fund.fundType)} />
+        <Field label="Target investor" value={valueLabel(fund.investorProfile)} />
+        <Field label="Regulator code" value={fund.cvmCode} />
         <Field label="Status" value={fund.status} />
         <Field label="Price" value={fund.price ? <UsdcAmount amount={fund.price} /> : undefined} />
         <Field label="NAV (per share)" value={fund.navPerShare ? <UsdcAmount amount={fund.navPerShare} /> : undefined} />
@@ -292,9 +293,9 @@ const FundDetail: React.FC = () => {
         <div className="space-y-2">
           <h3 className="font-semibold text-white">Service providers</h3>
           <Field label="Administrator" value={fund.administratorName} />
-          <Field label="Administrator CNPJ" value={fund.administratorCnpj} />
+          <Field label="Administrator registry ID" value={fund.administratorCnpj} />
           <Field label="Manager" value={fund.managerName} />
-          <Field label="Manager CNPJ" value={fund.managerCnpj} />
+          <Field label="Manager registry ID" value={fund.managerCnpj} />
           <Field label="Custodian" value={fund.custodianName} />
           <Field label="Auditor" value={fund.auditorName} />
           <Field label="Fiduciary agent" value={fund.fiduciaryAgentName} />

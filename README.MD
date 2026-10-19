@@ -4,9 +4,9 @@
 
 *Sign only what you can read.*
 
-| Repository | Demo video | Documentation site | Network |
-|---|---|---|---|
-| [PENDING: GitHub repository URL] | [PENDING: demo video URL] | [PENDING: documentation site URL] (source in [`docs/docs/`](docs/docs/), readable as Markdown) | Stellar testnet ([stellar.expert](https://stellar.expert/explorer/testnet)); one mainnet slice (section 6) |
+| Live demo | Repository | Demo video | Documentation site | Network |
+|---|---|---|---|---|
+| [countersign-web-rt1a.onrender.com](https://countersign-web-rt1a.onrender.com) | [github.com/ceciliagalvaoo/Countersign](https://github.com/ceciliagalvaoo/Countersign) | [PENDING: demo video URL] | [ceciliagalvaoo.github.io/Countersign](https://ceciliagalvaoo.github.io/Countersign/) (source in [`docs/docs/`](docs/docs/), readable as Markdown) | Stellar testnet ([stellar.expert](https://stellar.expert/explorer/testnet)); one mainnet slice (section 6) |
 
 **Contracts on Stellar testnet** (public; ours, not audited):
 
@@ -26,7 +26,7 @@ All USDC and fund units here are test assets on the Stellar public test network,
 ## 1. Project Overview
 
 - **Track:** 2026 Shenzhen FinTechathon, International AI Track, Topic F (Agent Wallet)
-- **Team name:** [PENDING: team name]
+- **Team:** Cecília Galvão ([@ceciliagalvaoo](https://github.com/ceciliagalvaoo)) and Pablo Azevedo ([@zzaved](https://github.com/zzaved))
 - **Project name:** Countersign
 - **One-line summary:** An investing agent that cannot buy a fund unit unless the investor's mandate, the fund's issuer and the network agree.
 
@@ -54,7 +54,7 @@ The person we design for (composite persona, built from public data; not validat
 
 1. **Mandate wallet.** The investor deploys her own `mandate-wallet` contract from the browser (owner = her wallet, agent = an agent key generated for her, USDC, caps, hash of her mandate) and deposits test USDC. She signs in Freighter.
 2. **Clarification.** She writes her goal in one sentence. The agent asks only what is missing (residences, horizon, liquidity, maximum loss, amount, recurrence) and fills a typed mandate shown next to the chat. Nothing is valid until she approves it; the approved mandate hash is anchored on chain.
-3. **Perimeter.** A declared residence in Mainland China is refused, naming the notice (Yinfa [2026] No. 42), with a decision-log line.
+3. **Perimeter.** A declared residence in Mainland China is refused by the policy rule `perimeter_mainland_china`, and the reply names the notice (Yinfa [2026] No. 42).
 4. **Screening and eligibility.** For each approved fund: sector, largest debtor in %, liquidity and a loss scenario; no return figure. Text written by funds and assignors is marked untrusted. Funds that require a tier need a zero-knowledge tier proof verified on chain; the agent only learns "eligible" or "not eligible".
 5. **Quote and correction.** Units are computed by code, never by the model. "Make it 500, only the agri fund" replans the visible plan (a DAG) without starting over.
 6. **Proposal and decision.** The agent calls `propose_subscription`. Our policy service (deterministic code, separate from the model) checks perimeter, eligibility, destination (always the fund wallet from our database, never from text) and caps, and writes a hash chained decision-log line. That line's 32 byte hash becomes the `decision`.
@@ -151,7 +151,7 @@ Models and external services: Claude (`claude-opus-5-5` by default, Anthropic AP
 ## 3. Environment and Dependencies
 
 - **Operating system:** Linux or macOS; Windows through WSL2 (tested on WSL2 Ubuntu).
-- **Runtime versions:** Node.js 20; Rust stable with the `wasm32v1-none` target; Stellar CLI 25.2.0 or later (28.1.0 recommended); Docker (PostgreSQL 16 for local databases); a browser with the Freighter extension set to Testnet.
+- **Runtime versions:** Node.js 24 with npm 11 (the web app's dependencies require Node.js 22.12 or later; CI and the hosted demo use 24); Rust stable with the `wasm32v1-none` target; Stellar CLI 25.2.0 or later (28.1.0 recommended); Docker (PostgreSQL 16 for local databases); a browser with the Freighter extension set to Testnet.
 - **Main dependencies:** API: Fastify 5, Prisma 5, `@stellar/stellar-sdk` 16.3.0. Agent: `@anthropic-ai/sdk`, Fastify, zod. Web: React 19, Vite, Tailwind CSS, `@stellar/stellar-sdk` 17, `@creit.tech/stellar-wallets-kit`. Contracts: `soroban-sdk` 28.0.0. ZK: circom, snarkjs.
 - **Environment variables:** never commit real secrets or sensitive data. Every `.env` file is ignored by git; only `.env.example` files are committed, with empty values.
 
@@ -274,13 +274,13 @@ cd docs && npm run build
 
 | Command | What it does | Last result |
 |---|---|---|
-| `cargo test` in `contracts/mandate-wallet` | One passing and one refusing test per rule (allowlist, caps, period window, fund cap, decision reuse, revocation, owner and agent authorization) | 23/23 |
+| `cargo test` in `contracts/mandate-wallet` | Passing and refusing tests for each rule (allowlist, caps, period window, fund cap, decision reuse, revocation, owner and agent authorization) | 23/23 |
 | `npm test` in `apps/agent` | Agent with a scripted model client (no Anthropic call) | 54/54 |
 | `npm --prefix tests run suites` | Benign B01 to B12 and adversarial A01 to A12 in one command; prints two tables and two rates; writes `evidence/suites-<timestamp>.json` | Adversarial 12/12 blocked (100%); benign 11/12 completed (91.7%), average turns 1.09 |
 | `npm --prefix tests run suites:adversarial` / `suites:benign` | One suite only | as above |
 | `scripts/e2e/run.sh` | End to end on testnet with CLI identities: deploy, deposit, limits, allow_fund, agent subscribe, whitelist and mint, refund, revoke, pause | 42/42 checks (run a40494) |
 | `npm --prefix tests run check:m1 -- --subscribe <hash> --mint <hash> [--tests-db or --api <url>]` | Read only: checks on chain that `subscribe` carried a `decision` equal to an approved decision-log line and that the issuer minted to the same wallet after it | 15/15 on-chain checks for the purchase made through the UI; log part confirmed by `npm --prefix tests run evidence` against the team database (decision = line #5) |
-| `npm --prefix tests run evidence` | Exports `evidence/EVIDENCE.md` and `evidence/evidence.json`; recomputes every chain; fails on any hash without task or log line or any divergent `decision` | 150 transactions; 36 of 36 agent purchases with `decision` equal to an APPROVED decision-log line; 36 on-chain refusals with no log line by design; 0 gaps; 0 divergences |
+| `npm --prefix tests run evidence` | Exports `evidence/EVIDENCE.md` and `evidence/evidence.json`; recomputes every chain; fails on any hash without task or log line or any divergent `decision` | 158 transactions; 37 of 37 agent purchases with `decision` equal to an APPROVED decision-log line; 36 on-chain refusals with no log line by design; 0 gaps; 0 divergences |
 
 Rates use every defined case as the denominator: a case NOT RUN counts as not blocked.
 
@@ -379,22 +379,25 @@ Known limitations (identical in every document, the video and the submission for
     fee charged.
 14. Mainnet slice. One mandate wallet was deployed on Stellar mainnet
     and funded with less than US$5 in USDC; the agent made one purchase from it to a fund
-    wallet controlled by the team. These are the only mainnet transactions in this
-    submission; everything else runs on the Stellar test network. The fund unit token on
+    wallet controlled by the team. These are the only mainnet transactions of the
+    mechanism; the team's other mainnet operations were account setup (XLM funding and
+    USDC trustlines). Everything else runs on the Stellar test network. The fund unit token on
     mainnet is a test asset issued by the team; the purchase proposal there was entered by
     the operator and decided by our policy code.
 ```
+
+Each limitation is a scope decision we took on purpose. For each one, the decision, the reason, what bounds it today and what would lift it are on the [Limitations](https://ceciliagalvaoo.github.io/Countersign/limitations#why-each-limitation-is-there) page of the documentation site.
 
 ---
 
 ## 6. Repository and Deployment
 
-- **GitHub / Git repository:** [PENDING: GitHub repository URL]
-- **Live demo (if available):** no hosted demo; run it locally (section 4). [PENDING: hosted URL, if the team deploys one]
-- **Documentation site:** [PENDING: documentation site URL]; built from `docs/` and deployed to GitHub Pages by `.github/workflows/deploy-doc.yaml` on every push to `main` that touches `docs/`.
+- **GitHub / Git repository:** [github.com/ceciliagalvaoo/Countersign](https://github.com/ceciliagalvaoo/Countersign)
+- **Live demo:** [countersign-web-rt1a.onrender.com](https://countersign-web-rt1a.onrender.com) on the Stellar test network (API [`/health`](https://countersign-api-zy11.onrender.com/health), agent service [`/health`](https://countersign-agent.onrender.com/health)). Free hosting plan: after a period without traffic, the first request can take up to a minute. A walkthrough is on the [Live demo](https://ceciliagalvaoo.github.io/Countersign/live-demo) page of the documentation site.
+- **Documentation site:** [ceciliagalvaoo.github.io/Countersign](https://ceciliagalvaoo.github.io/Countersign/); built from `docs/` and deployed to GitHub Pages by `.github/workflows/deploy-doc.yaml` on every push to `main` that touches `docs/`.
 - **Deployment instructions:**
   - Contracts: `contracts/scripts/deploy-testnet.sh` (all contracts) or `contracts/scripts/deploy-testnet.sh --mandate-wallet-only` (only the MandateWallet Wasm). The testnet is reset periodically (next reset 16 Dec 2026, per Stellar Docs, Networks); run the script again after a reset.
-  - API and agent: any Node 20 host with the environment variables of section 3; Postgres with `npm run db:deploy`.
+  - API, agent and web app: [`render.yaml`](render.yaml) is a Render Blueprint for the three services (secrets are entered in the Render dashboard, never in the repository). Any Node.js 24 host works with the environment variables of section 3; Postgres with `npm run db:deploy`.
   - Web: `npm run build` in `apps/new_web` produces a static site; set `VITE_API_URL` and `VITE_AGENT_URL` at build time.
 - **Execution evidence:** [`evidence/EVIDENCE.md`](evidence/EVIDENCE.md) (task, hash, link, decision-log line for each transaction).
 
@@ -419,7 +422,7 @@ Selected testnet transactions (full table in [`evidence/EVIDENCE.md`](evidence/E
 | `pay` of 10 USDC by the fund wallet | 2026-10-19T08:51:27Z | SUCCESS | team log, line #13 | [`b02e7800...e95e81`](https://stellar.expert/explorer/testnet/tx/b02e7800fe25342cb18a061ad89815099a15eb6b42debd199ea5784498e95e81) |
 | `distribute`: 10 USDC from the vault to the holder, her mandate wallet | 2026-10-19T08:54:22Z | SUCCESS | team log, line #14 | [`1a951aee...747d3b`](https://stellar.expert/explorer/testnet/tx/1a951aee3f1b529d9c5ada42302a53edf09ed5c24eca3b644a072e054d747d3b) |
 
-Her mandate wallet [`CCFF...GZYG`](https://stellar.expert/explorer/testnet/contract/CCFFFHL3FPHZSNVQHIA5OFQY5PTNUA7X4X6CVSVQKTP72WNPCNZKGZYG) was the only holder of the CSAGRI units; the vault required the holders to sum to the total supply before paying. Afterwards the wallet held 25 USDC and 5 fund units read from the chain (20 deposited, minus the 5 USDC purchase, plus 10 USDC distributed). Every `vault_register`, `pay` and `distribute` writes a line in the team decision log after the API verifies the confirmed transaction.
+Her mandate wallet [`CCFF...GZYG`](https://stellar.expert/explorer/testnet/contract/CCFFFHL3FPHZSNVQHIA5OFQY5PTNUA7X4X6CVSVQKTP72WNPCNZKGZYG) was the only holder of the CSAGRI units; the vault required the holders to sum to the total supply before paying. Afterwards the wallet held 25 USDC and 5 fund units read from the chain (20 deposited, minus the 5 USDC purchase, plus 10 USDC distributed). Every vault registration (`vault_register` in the log), `pay` and `distribute` writes a line in the team decision log after the API verifies the confirmed transaction.
 
 **Mainnet slice.**
 
@@ -529,8 +532,9 @@ Known limitations (identical in every document, the video and the submission for
     fee charged.
 14. Mainnet slice. One mandate wallet was deployed on Stellar mainnet
     and funded with less than US$5 in USDC; the agent made one purchase from it to a fund
-    wallet controlled by the team. These are the only mainnet transactions in this
-    submission; everything else runs on the Stellar test network. The fund unit token on
+    wallet controlled by the team. These are the only mainnet transactions of the
+    mechanism; the team's other mainnet operations were account setup (XLM funding and
+    USDC trustlines). Everything else runs on the Stellar test network. The fund unit token on
     mainnet is a test asset issued by the team; the purchase proposal there was entered by
     the operator and decided by our policy code.
 ```

@@ -238,7 +238,7 @@ export async function orderRoutes(fastify: FastifyInstance) {
       const where =
         payload.role === "INVESTIDOR" ? { investorId: payload.id } : {};
 
-      // Otimizado: select apenas os campos necessários
+      // Select only the fields that are needed
       const orders = await fastify.prisma.order.findMany({
         where,
         select: {

@@ -4,6 +4,7 @@ import { cedenteService, sacadoService } from '../services/api';
 import { FiArrowLeft, FiPlus } from 'react-icons/fi';
 import { getErrorMessage } from '../utils/errorHandler';
 import { useNavigate } from 'react-router-dom';
+import { valueLabel } from '../constants/valueLabels';
 
 // --- Type Definitions ---
 interface Fund {
@@ -272,7 +273,7 @@ const DetailModal: React.FC<{
                             <Info label="State" value={item.state} />
                             <Info label="Country" value={item.country} />
                             <Info label="Postal code" value={item.postalCode} />
-                            <Info label="Sector" value={item.sector} />
+                            <Info label="Sector" value={valueLabel(item.sector)} />
                             <Info label="Size" value={item.size} />
                             <Info label="Rating" value={item.rating} />
                             <Info label="Payment history" value={item.paymentHistory} />

@@ -1,4 +1,5 @@
 # Render Blueprint: API, agent service and web app.
+# Each service redeploys only when its own folder changes (buildFilter).
 # Values marked sync: false are asked for in the Render dashboard on the first deploy and never live in the repository.
 services:
   - type: web
@@ -6,6 +7,9 @@ services:
     runtime: node
     plan: free
     rootDir: apps/api
+    buildFilter:
+      paths:
+        - apps/api/**
     buildCommand: npm ci && npm run build
     startCommand: npm start
     healthCheckPath: /health
@@ -44,6 +48,10 @@ services:
     runtime: node
     plan: free
     rootDir: apps/agent
+    buildFilter:
+      paths:
+        - apps/agent/**
+        - apps/api/scripts/countersign-demo-funds.json
     buildCommand: npm ci && npm run build
     startCommand: npm start
     healthCheckPath: /health
@@ -63,6 +71,9 @@ services:
     name: countersign-web
     runtime: static
     rootDir: apps/new_web
+    buildFilter:
+      paths:
+        - apps/new_web/**
     buildCommand: npm ci && npm run build
     staticPublishPath: dist
     routes:

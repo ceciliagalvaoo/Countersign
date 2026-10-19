@@ -200,7 +200,7 @@ const AssignorCreate: React.FC = () => {
                 />
               </div>
               <div>
-                <label className={labelBase}>CNPJ *</label>
+                <label className={labelBase}>Company registry ID *</label>
                 <input
                   type="text"
                   value={form.document}

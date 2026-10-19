@@ -4,8 +4,10 @@
 const sidebars = {
   docs: [
     "overview",
+    "live-demo",
     "how-it-works",
     "security-model",
+    "contracts",
     "evidence",
     "limitations",
     "run-it-yourself",

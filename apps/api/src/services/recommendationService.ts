@@ -127,7 +127,7 @@ export async function buildInvestorProfile(prisma: PrismaClient, investorId: str
 }
 
 /**
- * Busca fundos candidatos:
+ * Candidate funds:
  * - active
  * - not yet invested by the user
  */
@@ -174,7 +174,7 @@ export async function getCandidateFunds(prisma: PrismaClient, investorId: string
 }
 
 /**
- * Função de score simples baseada no perfil + metadados do fundo
+ * Simple score from the profile and the fund metadata
  * Simple scoring function based on profile + fund metadata
  */
 function scoreFund(fund: Partial<Fund>, profile: any) {
@@ -198,7 +198,7 @@ function scoreFund(fund: Partial<Fund>, profile: any) {
     score += 2;
   }
 
-  // duration (prazo médio)
+  // duration (average term)
   if (profile?.durationRange && fund.durationMonths != null) {
     const { min, max } = profile.durationRange;
     if (fund.durationMonths >= min && fund.durationMonths <= max) {
@@ -261,7 +261,6 @@ export async function getRecommendedFunds(prisma: PrismaClient, investorId: stri
 }
 
 /**
- * Gera um "motivo" legível pro usuário ver na UI
  * Builds a readable reason for the UI
  */
 function buildReason(fund: Partial<Fund>, profile: any, score: number): string {

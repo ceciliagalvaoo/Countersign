@@ -4,8 +4,8 @@ import { NETWORK_LABEL } from '../constants/labels';
 import { shortHash } from '../utils/units';
 
 /**
- * On-chain state of a transaction, in words, with colour only as a second channel
- * (projeto/09-BRANDING.md adendo v2): amber for pending and awaiting issuer countersignature,
+ * On-chain state of a transaction, in words, with colour only as a second channel:
+ * amber for pending and awaiting issuer countersignature,
  * green only for confirmed on-chain and completed, seal red only for refusals. Nothing is ever shown
  * as done before the API has read the confirmed transaction.
  */

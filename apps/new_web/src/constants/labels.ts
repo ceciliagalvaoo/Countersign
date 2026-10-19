@@ -1,6 +1,6 @@
 /**
- * Single source of every label the jury reads about what is real and what is simulated
- * (projeto/08-BUILD-PROMPT.md, "Como rotular simulações"). The README uses the same texts.
+ * Single source of every label the jury reads about what is real and what is simulated.
+ * The README uses the same texts.
  * Do not type any of these strings anywhere else: import them from here.
  */
 
@@ -33,13 +33,13 @@ export const LABEL_PERSONA_NOT_INTERVIEWED = '; not validated by interviews';
 
 export const LABEL_UNTRUSTED = 'untrusted data, ignored';
 
-// Permission tiers of the plan nodes (projeto/06 section 5.4). Shown as words only: colours stay reserved for states.
+// Permission tiers of the plan nodes. Shown as words only: colours stay reserved for states.
 export const TIER_GREEN = 'Green: automatic, no signature';
 export const TIER_YELLOW = 'Yellow: agent key, within your mandate';
 export const TIER_RED = 'Red: your signature';
 export const TIER_ISSUER = 'Issuer: fund wallet signature';
 
-// Fixed texts of the approval card (projeto/09-BRANDING.md adendo v2). Kept here so they exist once.
+// Fixed texts of the approval card. Kept here so they exist once.
 
 /** The network is not inside a Stellar envelope: this app states it out of band. */
 export const NETWORK_LABEL = 'Stellar testnet';

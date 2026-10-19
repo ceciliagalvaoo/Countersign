@@ -2,7 +2,7 @@
 // manager routes: it talks to the Countersign API only with the investor's
 // agent scope token, received in each request and never stored.
 //
-// Routes (contract with frontend-engineer, projeto/Agents/README.md section 6):
+// Routes (the contract with the web app):
 //   POST /chat                    { sessionId, message }   Authorization: Bearer <agent token>
 //   GET  /session/:id             { mandateDraft, missingFields, plan, turns, lastToolCalls, pendingAction, transcript }
 //   POST /session/:id/interrupt   freezes the plan (no execution while interrupted)

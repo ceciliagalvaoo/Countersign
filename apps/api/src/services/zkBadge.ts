@@ -6,9 +6,9 @@ import { STELLAR_CONFIG } from '../config/stellar.js';
 import { readContract, toAddressVal } from './soroban.js';
 
 /**
- * Sistema de Badges de Investidor com Zero-Knowledge Proof (Groth16/BN254, verificado on-chain)
+ * Investor tier badges with a zero-knowledge proof (Groth16/BN254, verified on chain)
  * 
- * Níveis:
+ * Tiers:
  * - NONE: < 1,000 USDC
  * - BRONZE: >= 1,000 USDC
  * - SILVER: >= 10,000 USDC
@@ -28,7 +28,7 @@ export interface BadgeThresholds {
   [InvestorBadge.GOLD]: number;
 }
 
-// Limites para cada badge (em USDC)
+// Threshold of each badge (in USDC)
 export const BADGE_THRESHOLDS: BadgeThresholds = {
   [InvestorBadge.BRONZE]: 0,
   [InvestorBadge.SILVER]: 1000,
@@ -36,7 +36,7 @@ export const BADGE_THRESHOLDS: BadgeThresholds = {
 };
 
 /**
- * Determina o badge do investidor baseado no valor total investido
+ * Badge of an investor from the total invested
  * Bronze: R$0 - R$999
  * Silver: R$1,000 - R$9,999
  * Gold: R$10,000+
@@ -136,7 +136,7 @@ export async function refreshInvestorBadge(prisma: PrismaClient, investorId: str
 }
 
 /**
- * Retorna informações públicas sobre o badge sem revelar o valor exato
+ * Public information about a badge, without revealing the exact amount
  */
 export function getBadgeInfo(badge: InvestorBadge): {
   badge: InvestorBadge;
@@ -189,7 +189,7 @@ export function getBadgeInfo(badge: InvestorBadge): {
 }
 
 /**
- * Calcula o progresso até o próximo badge
+ * Progress towards the next badge
  */
 export function getBadgeProgress(totalInvested: number): {
   currentBadge: InvestorBadge;

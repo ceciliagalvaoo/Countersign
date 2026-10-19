@@ -38,7 +38,7 @@ const LoginPage: React.FC = () => {
         <BrandHero className="absolute inset-0" />
       </div>
 
-      {/* Bloco do formulário */}
+      {/* Form */}
       <div className="flex-1 lg:flex-[0.4] flex items-center justify-center px-4 sm:px-6 lg:px-10 xl:px-14 py-8 lg:py-0">
         <div className="w-full max-w-sm sm:max-w-md">
           <div className="bg-white/[0.04] border border-white/[0.12] backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-[0_18px_60px_rgba(0,0,0,0.45)]">
@@ -106,7 +106,7 @@ const LoginPage: React.FC = () => {
                 </div>
               </div>
 
-              {/* Botão principal */}
+              {/* Main button */}
               <button
                 type="submit"
                 disabled={loading}
