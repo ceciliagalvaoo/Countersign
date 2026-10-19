@@ -109,9 +109,9 @@ export async function stellarRoutes(fastify: FastifyInstance) {
   // Testnet only: sends TEST USDC (no monetary value) from an operator account of ours to the caller's own account,
   // for wallets that cannot sign the faucet transaction. TESTNET_USDC_FUNDER_SECRET is a testnet-only key that holds
   // only test XLM and test USDC; it is never a user's key and never used on mainnet. One transfer of up to
-  // 100 test USDC per account per UTC day (in memory: a restart resets the counter, acceptable for a test asset).
+  // 25 test USDC per account per UTC day (in memory: a restart resets the counter, acceptable for a test asset).
   // The account must already have the USDC trustline (POST /usdc-trustline).
-  const TEST_USDC_DAILY_UNITS = 100n * 10_000_000n;
+  const TEST_USDC_DAILY_UNITS = 25n * 10_000_000n;
   const testUsdcSent = new Map<string, string>(); // publicKey -> UTC day of the last transfer
   let funderQueue: Promise<unknown> = Promise.resolve();
   fastify.post('/test-usdc-transfer', { config: { rateLimit: { max: 3, timeWindow: '1 minute' } } }, async (request, reply) => {
