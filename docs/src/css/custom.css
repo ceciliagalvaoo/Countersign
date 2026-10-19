@@ -1,0 +1,77 @@
+/*
+ * Countersign documentation: same visual as the web app (apps/new_web): dark background with a teal radial glow,
+ * Inter for text, IBM Plex Mono for values and hashes, teal #1DCD9F as the accent.
+ * State colours keep one function each, always next to a word: amber #B26B00 pending, seal red #9E2A2B refusal.
+ * No price, return or variation is ever coloured.
+ * Fonts from Google Fonts under the SIL Open Font License 1.1 (no font files in the repository).
+ */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap");
+
+:root,
+[data-theme="dark"] {
+  --ifm-color-primary: #1dcd9f;
+  --ifm-color-primary-dark: #1ab98f;
+  --ifm-color-primary-darker: #19ae87;
+  --ifm-color-primary-darkest: #148f6f;
+  --ifm-color-primary-light: #2ddfb0;
+  --ifm-color-primary-lighter: #3ae2b5;
+  --ifm-color-primary-lightest: #62e8c4;
+
+  --ifm-background-color: #020617;
+  --ifm-background-surface-color: #0b1220;
+  --ifm-font-color-base: #e5e7eb;
+  --ifm-heading-color: #ffffff;
+  --ifm-link-color: #1dcd9f;
+  --ifm-toc-border-color: rgba(255, 255, 255, 0.1);
+  --ifm-hr-border-color: rgba(255, 255, 255, 0.12);
+  --ifm-table-border-color: rgba(255, 255, 255, 0.12);
+  --ifm-table-stripe-background: rgba(255, 255, 255, 0.03);
+
+  --ifm-font-family-base: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --ifm-heading-font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --ifm-font-family-monospace: "IBM Plex Mono", ui-monospace, monospace;
+  --ifm-code-font-size: 92%;
+  --ifm-code-background: rgba(255, 255, 255, 0.06);
+
+  --ifm-navbar-background-color: rgba(2, 6, 23, 0.85);
+  --ifm-footer-background-color: #020617;
+
+  --ifm-color-success: #169976;
+  --ifm-color-warning: #b26b00;
+  --ifm-color-danger: #9e2a2b;
+  --ifm-color-info: #5b6270;
+}
+
+html[data-theme="dark"] body {
+  background: radial-gradient(circle at top, #134e4a 0, #020617 55%, #020617 100%) fixed;
+}
+
+html[data-theme="dark"] .main-wrapper,
+html[data-theme="dark"] .navbar,
+html[data-theme="dark"] .footer {
+  background-color: transparent;
+}
+
+html[data-theme="dark"] .navbar {
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 700;
+}
+
+td {
+  font-variant-numeric: tabular-nums;
+}
+
+code {
+  border: none;
+}
+
+.footer {
+  position: static !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
