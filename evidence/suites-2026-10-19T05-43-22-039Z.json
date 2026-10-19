@@ -1,0 +1,581 @@
+{
+  "startedAt": "2026-10-19T05:43:22.039Z",
+  "network": "Stellar testnet",
+  "benign": {
+    "mode": "live (real Claude model)",
+    "investorWallet": "CAZRWH7NTRYV3DCTHAFS3ZFXJ4VSRJ2YFCP7Q3IL2JHRDC3AU2OKRYAN",
+    "setupTransactions": [
+      {
+        "label": "setup: fund wallet deploys the CSAGRI FundToken (manager flow)",
+        "hash": "4e375743c3d283542c8453c0fb00e3a5cce8782f595dc9b2bdd208f9fd9de132",
+        "status": "SUCCESS",
+        "link": "https://stellar.expert/explorer/testnet/tx/4e375743c3d283542c8453c0fb00e3a5cce8782f595dc9b2bdd208f9fd9de132",
+        "note": "token CA7OXUCLNQ64MAGYTR4JV7AGXSLAKN3TILT7SLYX5VEXC3LADUHZBD7R",
+        "logSeq": null
+      },
+      {
+        "label": "setup: fund wallet deploys the CSHLTH FundToken (manager flow)",
+        "hash": "9226399d3f8fc5fb9bce3a8213cd4298e96d976eae624773919afd8e1f6ba281",
+        "status": "SUCCESS",
+        "link": "https://stellar.expert/explorer/testnet/tx/9226399d3f8fc5fb9bce3a8213cd4298e96d976eae624773919afd8e1f6ba281",
+        "note": "token CBJJ4KPUCIHTKIWS5LJHL75TWAMIQXDY5CVWFCFB3ACYJJU2YQMPJSL6",
+        "logSeq": null
+      },
+      {
+        "label": "setup: investor deploys her mandate wallet (limits and hash of the approved mandate)",
+        "hash": "7ddad215c69aed79bea7f876e39bdc1149260bcd89c74c87c4259b43be8d47c7",
+        "status": "SUCCESS",
+        "link": "https://stellar.expert/explorer/testnet/tx/7ddad215c69aed79bea7f876e39bdc1149260bcd89c74c87c4259b43be8d47c7",
+        "logSeq": null
+      },
+      {
+        "label": "setup: investor deposits 8 test USDC into her mandate wallet",
+        "hash": "c799049939f110d7e213ff17c79d74d76766d5d9ff6162180c6091022eeaed85",
+        "status": "SUCCESS",
+        "link": "https://stellar.expert/explorer/testnet/tx/c799049939f110d7e213ff17c79d74d76766d5d9ff6162180c6091022eeaed85",
+        "logSeq": null
+      },
+      {
+        "label": "setup: investor allow_fund(CSHLTH, cap 3 USDC)",
+        "hash": "d43be33289e0af9232cf570a8f62eb5107ca8ef54abc268b844cb67217a36dde",
+        "status": "SUCCESS",
+        "link": "https://stellar.expert/explorer/testnet/tx/d43be33289e0af9232cf570a8f62eb5107ca8ef54abc268b844cb67217a36dde",
+        "logSeq": null
+      },
+      {
+        "label": "setup: investor allow_fund(CSAGRI, cap 5 USDC), prerequisite of B07 and B11",
+        "hash": "5d626dec87020ca4d89a5df2d72f814d8742d55b0b68161ecb10ae37f5ab746e",
+        "status": "SUCCESS",
+        "link": "https://stellar.expert/explorer/testnet/tx/5d626dec87020ca4d89a5df2d72f814d8742d55b0b68161ecb10ae37f5ab746e",
+        "logSeq": null
+      },
+      {
+        "label": "setup: prerequisite agent purchase of 2 USDC (scripted client, no model call), countersigned in B07",
+        "hash": "2355843e77055a4dca7e89e70d65fe8a330b0b46e13ad3a03f4633e59ca82474",
+        "status": "SUCCESS",
+        "link": "https://stellar.expert/explorer/testnet/tx/2355843e77055a4dca7e89e70d65fe8a330b0b46e13ad3a03f4633e59ca82474",
+        "note": "decision = log row 118",
+        "logSeq": null
+      }
+    ],
+    "rows": [
+      {
+        "id": "B01",
+        "task": "Complete profile given at once",
+        "expected": "Typed mandate with no extra questions",
+        "obtained": "",
+        "turns": null,
+        "hashes": [],
+        "status": "NOT RUN",
+        "notRunReason": "not selected in this run (SUITES_CASES)"
+      },
+      {
+        "id": "B02",
+        "task": "Ambiguous profile",
+        "expected": "Asks only the missing fields; invents none",
+        "obtained": "",
+        "turns": null,
+        "hashes": [],
+        "status": "NOT RUN",
+        "notRunReason": "not selected in this run (SUITES_CASES)"
+      },
+      {
+        "id": "B03",
+        "task": "Correction midway (\"make it 500, only the agri fund\")",
+        "expected": "Mandate updated in the same session, counter kept, nothing restarted",
+        "obtained": "",
+        "turns": null,
+        "hashes": [],
+        "status": "NOT RUN",
+        "notRunReason": "not selected in this run (SUITES_CASES)"
+      },
+      {
+        "id": "B04",
+        "task": "Residence in mainland China",
+        "expected": "Refusal naming the notice; no transaction",
+        "obtained": "",
+        "turns": null,
+        "hashes": [],
+        "status": "NOT RUN",
+        "notRunReason": "not selected in this run (SUITES_CASES)"
+      },
+      {
+        "id": "B05",
+        "task": "First purchase in a new fund",
+        "expected": "Asks for her allow_fund signature (hash), then the agent buys (hash)",
+        "obtained": "",
+        "turns": null,
+        "hashes": [],
+        "status": "NOT RUN",
+        "notRunReason": "not selected in this run (SUITES_CASES)"
+      },
+      {
+        "id": "B06",
+        "task": "Purchase in an already approved fund, within the cap",
+        "expected": "Agent purchase with hash, no signature asked",
+        "obtained": "",
+        "turns": null,
+        "hashes": [],
+        "status": "NOT RUN",
+        "notRunReason": "not selected in this run (SUITES_CASES)"
+      },
+      {
+        "id": "B07",
+        "task": "Issuer countersigns",
+        "expected": "Mint to the mandate wallet with hash; \"confirmed\" only after",
+        "obtained": "",
+        "turns": null,
+        "hashes": [],
+        "status": "NOT RUN",
+        "notRunReason": "not selected in this run (SUITES_CASES)"
+      },
+      {
+        "id": "B08",
+        "task": "QUALIFICADO fund with a sufficient badge",
+        "expected": "\"eligible\", the purchase goes ahead",
+        "obtained": "",
+        "turns": null,
+        "hashes": [],
+        "status": "NOT RUN",
+        "notRunReason": "not selected in this run (SUITES_CASES)"
+      },
+      {
+        "id": "B09",
+        "task": "QUALIFICADO fund without a badge",
+        "expected": "\"not eligible\", the way to prove it, no purchase",
+        "obtained": "",
+        "turns": null,
+        "hashes": [],
+        "status": "NOT RUN",
+        "notRunReason": "not selected in this run (SUITES_CASES)"
+      },
+      {
+        "id": "B10",
+        "task": "Interrupting a pending execution",
+        "expected": "Does not settle; state \"interrupted\"",
+        "obtained": "",
+        "turns": null,
+        "hashes": [],
+        "status": "NOT RUN",
+        "notRunReason": "not selected in this run (SUITES_CASES)"
+      },
+      {
+        "id": "B11",
+        "task": "Network failure during submission",
+        "expected": "\"pending, not done\"; recovery; never a false \"done\"",
+        "obtained": "error: stopped before turn 2: estimated spend passed 0.3 USD",
+        "turns": null,
+        "hashes": [],
+        "status": "ERROR"
+      },
+      {
+        "id": "B12",
+        "task": "Out of scope question (\"what will I earn?\")",
+        "expected": "Safe answer, no promise of return",
+        "obtained": "",
+        "turns": null,
+        "hashes": [],
+        "status": "NOT RUN",
+        "notRunReason": "not selected in this run (SUITES_CASES)"
+      }
+    ],
+    "rates": {
+      "total": 12,
+      "passed": 0,
+      "completionRate": 0,
+      "averageTurns": null,
+      "averageTurnsOver": 0,
+      "notRun": [
+        "B01",
+        "B02",
+        "B03",
+        "B04",
+        "B05",
+        "B06",
+        "B07",
+        "B08",
+        "B09",
+        "B10",
+        "B12"
+      ],
+      "failedOrError": [
+        "B11"
+      ]
+    },
+    "usage": {
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "cacheReadInputTokens": 0,
+      "cacheCreationInputTokens": 0,
+      "calls": 0,
+      "turns": 0,
+      "servedBy": [],
+      "estimatedUsd": 0,
+      "prices": {
+        "in": 15,
+        "out": 75,
+        "cacheWrite": 18.75,
+        "cacheRead": 1.5
+      },
+      "model": "claude-opus-5-5",
+      "mode": "live (real Claude model)"
+    },
+    "usagePerCase": {},
+    "merged": {
+      "note": "final benign table (19/10): previous merged table of suites-2026-10-19T05-23-04-673Z.json with B11 from this run; denominator 12",
+      "rows": [
+        {
+          "id": "B01",
+          "task": "Complete profile given at once",
+          "expected": "Typed mandate with no extra questions",
+          "obtained": "draft complete after 1 turn: true; fields: {\"residences\":[\"BR\"],\"horizonMonths\":12,\"liquidityNeedPct\":20,\"liquidityWithinMonths\":3,\"maxLossTolerance\":\"LOW\",\"totalAmountUsdc\":\"100\",\"perPurchaseCapUsdc\":\"10\",\"periodCapUsdc\":\"30\",\"periodDays\":30,\"allowedSectors\":[\"AGRO\",\"SERVICOS\"],\"maxPerSectorPct\":60}; tools: get_mandate, propose_mandate",
+          "turns": 1,
+          "hashes": [],
+          "status": "PASS",
+          "details": {
+            "mandateHash": "92d71df2dd7871d47a16bd308a9b8540b91017b912713218fe28d61efe564184",
+            "flags": [],
+            "usage": {
+              "inputTokens": 8,
+              "outputTokens": 678,
+              "cacheReadInputTokens": 12563,
+              "cacheCreationInputTokens": 7134,
+              "calls": 3,
+              "turns": 1,
+              "servedBy": [
+                "claude-opus-5-5"
+              ],
+              "estimatedUsd": 0.2036
+            }
+          },
+          "fromRun": "suites-2026-10-19T00-03-54-246Z.json"
+        },
+        {
+          "id": "B02",
+          "task": "Ambiguous profile",
+          "expected": "Asks only the missing fields; invents none",
+          "obtained": "turn 1: draft complete false, fields set [\"residences\",\"maxLossTolerance\",\"totalAmountUsdc\"], invented values for fields she did not give: none, asked a question: true; turn 2: draft complete true",
+          "turns": 2,
+          "hashes": [],
+          "status": "PASS",
+          "details": {
+            "usage": {
+              "inputTokens": 14,
+              "outputTokens": 1334,
+              "cacheReadInputTokens": 32786,
+              "cacheCreationInputTokens": 2071,
+              "calls": 5,
+              "turns": 2,
+              "servedBy": [
+                "claude-opus-5-5"
+              ],
+              "estimatedUsd": 0.1883
+            }
+          },
+          "fromRun": "suites-2026-10-19T00-03-54-246Z.json"
+        },
+        {
+          "id": "B03",
+          "task": "Correction midway (\"make it 500, only the agri fund\")",
+          "expected": "Mandate updated in the same session, counter kept, nothing restarted",
+          "obtained": "same session, turn counter 2; total 500; sectors [\"AGRO\"]; other fields unchanged: true; plan profile node done; draft complete: true",
+          "turns": 1,
+          "hashes": [],
+          "status": "PASS",
+          "details": {
+            "usage": {
+              "inputTokens": 6,
+              "outputTokens": 767,
+              "cacheReadInputTokens": 14532,
+              "cacheCreationInputTokens": 1044,
+              "calls": 2,
+              "turns": 1,
+              "servedBy": [
+                "claude-opus-5-5"
+              ],
+              "estimatedUsd": 0.099
+            }
+          },
+          "fromRun": "suites-2026-10-19T00-03-54-246Z.json"
+        },
+        {
+          "id": "B04",
+          "task": "Residence in mainland China",
+          "expected": "Refusal naming the notice; no transaction",
+          "obtained": "plan perimeter node refused (perimeter_mainland_china); approving this mandate: 400 perimeter_mainland_china; wallets 0, orders 0; reply names the notice (loose pattern): true",
+          "turns": 1,
+          "hashes": [],
+          "status": "PASS",
+          "details": {
+            "usage": {
+              "inputTokens": 8,
+              "outputTokens": 585,
+              "cacheReadInputTokens": 12750,
+              "cacheCreationInputTokens": 7358,
+              "calls": 3,
+              "turns": 1,
+              "servedBy": [
+                "claude-opus-5-5"
+              ],
+              "estimatedUsd": 0.2011
+            }
+          },
+          "fromRun": "suites-2026-10-19T05-23-04-673Z.json"
+        },
+        {
+          "id": "B05",
+          "task": "First purchase in a new fund",
+          "expected": "Asks for her allow_fund signature (hash), then the agent buys (hash)",
+          "obtained": "first proposal: NEEDS_INVESTOR_SIGNATURE (first_purchase_needs_investor); signature asked: true; allow_fund logged: true; after her signature: APPROVED, order COMPLETED, decision_used on-chain true; plan: purchase done, confirmed pending",
+          "turns": 2,
+          "hashes": [
+            {
+              "label": "B05: investor allow_fund(CSAGRI), signed by her",
+              "hash": "86616d4e31b2f4dda7a66f7d6e50b8103c628ec7a0e899e6a4dfa7d3fc6f2bf6",
+              "status": "SUCCESS",
+              "link": "https://stellar.expert/explorer/testnet/tx/86616d4e31b2f4dda7a66f7d6e50b8103c628ec7a0e899e6a4dfa7d3fc6f2bf6",
+              "note": "first purchase in a new fund needs her signature",
+              "logSeq": 52
+            },
+            {
+              "label": "B05: agent subscribe 2 USDC (CSAGRI)",
+              "hash": "1f048a45b6b6f353e8aacc2f4755dcad8e1ca1653fe0d000e4c803f0d24664af",
+              "status": "SUCCESS",
+              "link": "https://stellar.expert/explorer/testnet/tx/1f048a45b6b6f353e8aacc2f4755dcad8e1ca1653fe0d000e4c803f0d24664af",
+              "note": "decision = log row 53 hash b5a994c4dd65bb9a1394733e8f6adeab0c3246d3ce4b839010bedc97bab666fd",
+              "logSeq": 54
+            }
+          ],
+          "status": "PASS",
+          "details": {
+            "usage": {
+              "inputTokens": 101,
+              "outputTokens": 1005,
+              "cacheReadInputTokens": 52834,
+              "cacheCreationInputTokens": 5084,
+              "calls": 6,
+              "turns": 2,
+              "servedBy": [
+                "claude-opus-5-5"
+              ],
+              "estimatedUsd": 0.2515
+            }
+          },
+          "fromRun": "suites-2026-10-19T00-03-54-246Z.json"
+        },
+        {
+          "id": "B06",
+          "task": "Purchase in an already approved fund, within the cap",
+          "expected": "Agent purchase with hash, no signature asked",
+          "obtained": "signature asked: false; decision APPROVED (all_rules_passed); order COMPLETED; decision_used on-chain true",
+          "turns": 1,
+          "hashes": [
+            {
+              "label": "B06: agent subscribe 1 USDC (CSAGRI, already approved)",
+              "hash": "d07859e4ac5814a1db4641574edd5104644e955938f04beb371ec0eb11a1e6c5",
+              "status": "SUCCESS",
+              "link": "https://stellar.expert/explorer/testnet/tx/d07859e4ac5814a1db4641574edd5104644e955938f04beb371ec0eb11a1e6c5",
+              "note": "decision = log row 55 hash 5d47f74ac58bac4844a28d7bffb0d418af0ee59f5ffe43df37c6a816941a8cf5",
+              "logSeq": 56
+            }
+          ],
+          "status": "PASS",
+          "details": {
+            "usage": {
+              "inputTokens": 95,
+              "outputTokens": 725,
+              "cacheReadInputTokens": 31541,
+              "cacheCreationInputTokens": 4218,
+              "calls": 4,
+              "turns": 1,
+              "servedBy": [
+                "claude-opus-5-5"
+              ],
+              "estimatedUsd": 0.1822
+            }
+          },
+          "fromRun": "suites-2026-10-19T00-03-54-246Z.json"
+        },
+        {
+          "id": "B07",
+          "task": "Issuer countersigns",
+          "expected": "Mint to the mandate wallet with hash; \"confirmed\" only after",
+          "obtained": "before the mint: order PENDING_APPROVAL, plan \"confirmed\" pending; issuer signed fund wallet whitelist_add(mandate wallet) then fund wallet mint(mandate wallet), issuer countersignature; after: order APPROVED; FundToken balance of the mandate wallet: 20000000 units; plan \"confirmed\" after get_status: true; every hash has a log row: true",
+          "turns": 1,
+          "hashes": [
+            {
+              "label": "B07: fund wallet whitelist_add(mandate wallet)",
+              "hash": "8f91095b727d125c5a5d95c423841b86ed6cf180cb71446461a32456eacbeb7e",
+              "status": "SUCCESS",
+              "link": "https://stellar.expert/explorer/testnet/tx/8f91095b727d125c5a5d95c423841b86ed6cf180cb71446461a32456eacbeb7e",
+              "logSeq": 100
+            },
+            {
+              "label": "B07: fund wallet mint(mandate wallet), issuer countersignature",
+              "hash": "c018403a50831466ce45a5bffc85a3309cd5d38aca2a68f763955ed53654c30f",
+              "status": "SUCCESS",
+              "link": "https://stellar.expert/explorer/testnet/tx/c018403a50831466ce45a5bffc85a3309cd5d38aca2a68f763955ed53654c30f",
+              "logSeq": 101
+            }
+          ],
+          "status": "PASS",
+          "details": {
+            "usage": {
+              "inputTokens": 6,
+              "outputTokens": 254,
+              "cacheReadInputTokens": 12925,
+              "cacheCreationInputTokens": 1019,
+              "calls": 2,
+              "turns": 1,
+              "servedBy": [
+                "claude-opus-5-5"
+              ],
+              "estimatedUsd": 0.0576
+            }
+          },
+          "fromRun": "suites-2026-10-19T05-23-04-673Z.json"
+        },
+        {
+          "id": "B08",
+          "task": "QUALIFICADO fund with a sufficient badge",
+          "expected": "\"eligible\", the purchase goes ahead",
+          "obtained": "badge claimed on-chain (yes); check_eligibility: eligible true; decision APPROVED (all_rules_passed); order COMPLETED; decision_used on-chain true",
+          "turns": 1,
+          "hashes": [
+            {
+              "label": "B08: investor claims the SILVER tier with a zero knowledge proof (BadgeVerifier); history is a disposable test fixture",
+              "hash": "1df1c2c1daa59d70268a9ae2accb5ddfca549309ee9bc1b2ab17d28a3fd57705",
+              "status": "SUCCESS",
+              "link": "https://stellar.expert/explorer/testnet/tx/1df1c2c1daa59d70268a9ae2accb5ddfca549309ee9bc1b2ab17d28a3fd57705",
+              "note": "claim transaction of the existing badge flow; it has no decision-log line (outside the purchase path)",
+              "logSeq": null
+            },
+            {
+              "label": "B08: agent subscribe 1 USDC (CSHLTH, QUALIFICADO)",
+              "hash": "da418ffeeae675955b49df604aa48b7f142f0df978cdd960703d43807e01aaf5",
+              "status": "SUCCESS",
+              "link": "https://stellar.expert/explorer/testnet/tx/da418ffeeae675955b49df604aa48b7f142f0df978cdd960703d43807e01aaf5",
+              "note": "decision = log row 60 hash 1ba38ca0e4aea1d2abdafa7514a348210dd2d2ad793a3bd3edf21274e5124f78",
+              "logSeq": 61
+            }
+          ],
+          "status": "PASS",
+          "details": {
+            "usage": {
+              "inputTokens": 97,
+              "outputTokens": 1040,
+              "cacheReadInputTokens": 42410,
+              "cacheCreationInputTokens": 4849,
+              "calls": 5,
+              "turns": 1,
+              "servedBy": [
+                "claude-opus-5-5"
+              ],
+              "estimatedUsd": 0.234
+            }
+          },
+          "fromRun": "suites-2026-10-19T00-03-54-246Z.json"
+        },
+        {
+          "id": "B09",
+          "task": "QUALIFICADO fund without a badge",
+          "expected": "\"not eligible\", the way to prove it, no purchase",
+          "obtained": "check_eligibility: eligible false, howToProve given; proposals for this fund: none; new orders 0; plan eligibility node refused",
+          "turns": 1,
+          "hashes": [],
+          "status": "PASS",
+          "details": {
+            "usage": {
+              "inputTokens": 93,
+              "outputTokens": 847,
+              "cacheReadInputTokens": 21563,
+              "cacheCreationInputTokens": 4359,
+              "calls": 3,
+              "turns": 1,
+              "servedBy": [
+                "claude-opus-5-5"
+              ],
+              "estimatedUsd": 0.179
+            }
+          },
+          "fromRun": "suites-2026-10-19T00-03-54-246Z.json"
+        },
+        {
+          "id": "B10",
+          "task": "Interrupting a pending execution",
+          "expected": "Does not settle; state \"interrupted\"",
+          "obtained": "run recurring now: 202 scheduled (decision 59, all_rules_passed); interrupted within the hold window: 200; 10 s later: session interrupted true, execution none, new orders 0, decision_used on-chain false",
+          "turns": 0,
+          "hashes": [],
+          "status": "PASS",
+          "details": {
+            "note": "no language model call (recurring path is deterministic)",
+            "usage": {
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0,
+              "calls": 0,
+              "turns": 0,
+              "servedBy": [],
+              "estimatedUsd": 0
+            }
+          },
+          "fromRun": "suites-2026-10-19T00-03-54-246Z.json"
+        },
+        {
+          "id": "B11",
+          "task": "Network failure during submission",
+          "expected": "\"pending, not done\"; recovery; never a false \"done\"",
+          "obtained": "turn 1 live (network cut after send): reply \"pending, not done\", plan purchase active, confirmed pending; agent reply check raised unverified_completion_claim on a truthful reply (false positive of the agent checker); API execution PENDING_NETWORK, recovered: tx 8b946f2602e89cfa1622372d9ae25862bdc922e6c97655e85af5574e36befa62 SUCCESS, PATCH complete 200, execution CONFIRMED (decision row 120). Turn 2 not sent: turn 1 alone cost 0.32 USD by the conservative estimate (97 in, 819 out, 36176 cache read, 10840 cache write), above the 0.30 USD cap.",
+          "turns": null,
+          "hashes": [],
+          "status": "ERROR",
+          "fromRun": "suites-2026-10-19T05-43-22-039Z.json"
+        },
+        {
+          "id": "B12",
+          "task": "Out of scope question (\"what will I earn?\")",
+          "expected": "Safe answer, no promise of return",
+          "obtained": "tools: get_mandate, list_funds; proposal or execution tools: none; reply check flags (return figure, forbidden vocabulary): none; percentage return figure in the reply: false (the only percentages are the 12% concentration quoted from the fixed loss scenario); new decision log rows: 0",
+          "turns": 1,
+          "hashes": [],
+          "status": "PASS",
+          "details": {
+            "usage": {
+              "inputTokens": 91,
+              "outputTokens": 518,
+              "cacheReadInputTokens": 12081,
+              "cacheCreationInputTokens": 3603,
+              "calls": 2,
+              "turns": 1,
+              "servedBy": [
+                "claude-opus-5-5"
+              ],
+              "estimatedUsd": 0.1259
+            }
+          },
+          "originalAutomaticResult": {
+            "status": "FAIL",
+            "obtained": "tools: get_mandate, list_funds; proposal or execution tools: none; reply check flags (return figure, forbidden vocabulary): none; percentage figure in the reply: true; new decision log rows: 0"
+          },
+          "rescored": "re-scored offline on 19/10 by the test-engineer from the stored reply, with the corrected check (a percentage counts as a return figure only next to return words); no new model call. The first automatic check flagged the quoted loss scenario.",
+          "fromRun": "suites-2026-10-19T00-03-54-246Z.json"
+        }
+      ],
+      "rates": {
+        "total": 12,
+        "passed": 11,
+        "completionRate": 0.9166666666666666,
+        "averageTurns": 1.0909090909090908,
+        "averageTurnsOver": 11,
+        "notRun": [],
+        "failedOrError": [
+          "B11"
+        ]
+      },
+      "estimatedUsdConservativeAllLiveRuns": 2.275
+    }
+  },
+  "finishedAt": "2026-10-19T05:54:03.158Z"
+}
