@@ -1,0 +1,78 @@
+# Render Blueprint: API, agent service and web app.
+# Values marked sync: false are asked for in the Render dashboard on the first deploy and never live in the repository.
+services:
+  - type: web
+    name: countersign-api
+    runtime: node
+    plan: free
+    rootDir: apps/api
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: "24"
+      - key: DATABASE_URL
+        sync: false
+      - key: DIRECT_URL
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: AGENT_KEY_ENCRYPTION_SECRET
+        sync: false
+      - key: CORS_ORIGIN
+        sync: false
+      - key: FUND_TOKEN_CONTRACT_ID
+        sync: false
+      - key: FUND_TOKEN_WASM_HASH
+        sync: false
+      - key: MANDATE_WALLET_WASM_HASH
+        sync: false
+      - key: RECEIVABLE_VAULT_CONTRACT_ID
+        sync: false
+      - key: STELLAR_ADMIN_ADDRESS
+        sync: false
+      - key: BADGE_VERIFIER_CONTRACT_ID
+        sync: false
+      - key: BADGE_ATTESTER_SECRET
+        sync: false
+      - key: TESTNET_USDC_FUNDER_SECRET
+        sync: false
+
+  - type: web
+    name: countersign-agent
+    runtime: node
+    plan: free
+    rootDir: apps/agent
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: "24"
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: AGENT_MODEL
+        sync: false
+      - key: API_BASE_URL
+        sync: false
+      - key: CORS_ORIGIN
+        sync: false
+
+  - type: web
+    name: countersign-web
+    runtime: static
+    rootDir: apps/new_web
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: NODE_VERSION
+        value: "24"
+      - key: VITE_API_URL
+        sync: false
+      - key: VITE_AGENT_URL
+        sync: false
