@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply text-gray-200 bg-[radial-gradient(circle_at_top,#134e4a_0,#020617_55%,_#020617_100%)];
+    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+      sans-serif;
+    font-weight: 400;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-white;
+    font-weight: 700;
+  }
+
+  p,
+  span,
+  label,
+  li {
+    font-weight: 400;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font-weight: 500;
+  }
+}
+
+/*
+ * Countersign: the single animation gesture (projeto/09-BRANDING.md section 2.2).
+ * A signature line draws in ink from left to right once and freezes. The investor's empty line
+ * pulses amber until she signs. Nothing else on the /agent page moves.
+ */
+@layer components {
+  .cs-sign-line {
+    transform-origin: left center;
+    animation: cs-draw 700ms ease-out 1 both;
+  }
+  .cs-await-pulse {
+    animation: cs-pulse 1.6s ease-in-out infinite;
+  }
+}
+
+@keyframes cs-draw {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes cs-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cs-sign-line, .cs-await-pulse { animation: none; }
+}
