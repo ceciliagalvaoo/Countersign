@@ -8,7 +8,7 @@
 
 | Live demo | Repository | Demo video | Documentation site | Network |
 |---|---|---|---|---|
-| [countersign-web-rt1a.onrender.com](https://countersign-web-rt1a.onrender.com) | [github.com/ceciliagalvaoo/Countersign](https://github.com/ceciliagalvaoo/Countersign) | [PENDING: demo video URL] | [ceciliagalvaoo.github.io/Countersign](https://ceciliagalvaoo.github.io/Countersign/) (source in [`docs/docs/`](docs/docs/), readable as Markdown) | Stellar testnet ([stellar.expert](https://stellar.expert/explorer/testnet)); one mainnet slice (section 6) |
+| [countersign-web-rt1a.onrender.com](https://countersign-web-rt1a.onrender.com) | [github.com/ceciliagalvaoo/Countersign](https://github.com/ceciliagalvaoo/Countersign) | [youtu.be/bo6VPN48SOg](https://youtu.be/bo6VPN48SOg) | [ceciliagalvaoo.github.io/Countersign](https://ceciliagalvaoo.github.io/Countersign/) (source in [`docs/docs/`](docs/docs/), readable as Markdown) | Stellar testnet ([stellar.expert](https://stellar.expert/explorer/testnet)); one mainnet slice (section 6) |
 
 **Contracts on Stellar testnet** (public; ours, not audited):
 

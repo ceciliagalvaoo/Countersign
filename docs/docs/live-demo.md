@@ -8,6 +8,8 @@ sidebar_position: 2
 
 Countersign is deployed on the Stellar test network. The web app, the API and the agent service are built from the `main` branch of this repository by `render.yaml`.
 
+Prefer to watch first? The demo video (4:53, English narration and subtitles) walks through the whole flow: [youtu.be/bo6VPN48SOg](https://youtu.be/bo6VPN48SOg).
+
 | Part | URL |
 |---|---|
 | Web app | [countersign-web-rt1a.onrender.com](https://countersign-web-rt1a.onrender.com) |

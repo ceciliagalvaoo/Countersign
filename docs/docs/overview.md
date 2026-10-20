@@ -11,7 +11,7 @@ sidebar_position: 1
 
 *Sign only what you can read.*
 
-2026 Shenzhen FinTechathon, International AI Track, Topic F (Agent Wallet). Team: Cecília Galvão ([@ceciliagalvaoo](https://github.com/ceciliagalvaoo)) and Pablo Azevedo ([@zzaved](https://github.com/zzaved)). Demo video: [PENDING: demo video URL].
+2026 Shenzhen FinTechathon, International AI Track, Topic F (Agent Wallet). Team: Cecília Galvão ([@ceciliagalvaoo](https://github.com/ceciliagalvaoo)) and Pablo Azevedo ([@zzaved](https://github.com/zzaved)). Demo video: [youtu.be/bo6VPN48SOg](https://youtu.be/bo6VPN48SOg).
 
 | Live demo | Repository | Network |
 |---|---|---|
