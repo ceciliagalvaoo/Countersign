@@ -15,6 +15,7 @@ import {
 import toast from 'react-hot-toast';
 import { getErrorMessage } from '../utils/errorHandler';
 import { Link } from 'react-router-dom';
+import { PenLoader } from '../components/ink/PenLoader';
 
 interface Stats {
   totalConsultants: number;
@@ -66,7 +67,7 @@ const GestorDashboard: React.FC = () => {
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center py-16">
-        <div className="w-10 h-10 border-2 border-white/20 border-t-emerald-400 rounded-full animate-spin mb-4" />
+        <PenLoader />
         <p className="text-sm text-white/80">Loading dashboard…</p>
       </div>
     );
@@ -213,23 +214,23 @@ const StatCard: React.FC<{
   > = {
     emerald: {
       icon: 'bg-emerald-500/15 border border-emerald-400/40 text-emerald-300',
-      value: 'text-emerald-100',
-      pill: 'bg-emerald-500/20 text-emerald-100 border border-emerald-400/40',
+      value: 'text-emerald-300',
+      pill: 'bg-emerald-500/20 text-emerald-300 border border-emerald-400/40',
     },
     sky: {
       icon: 'bg-sky-500/15 border border-sky-400/40 text-sky-300',
-      value: 'text-sky-100',
-      pill: 'bg-sky-500/20 text-sky-100 border border-sky-400/40',
+      value: 'text-sky-300',
+      pill: 'bg-sky-500/20 text-sky-300 border border-sky-400/40',
     },
     indigo: {
       icon: 'bg-indigo-500/15 border border-indigo-400/40 text-indigo-300',
-      value: 'text-indigo-100',
-      pill: 'bg-indigo-500/20 text-indigo-100 border border-indigo-400/40',
+      value: 'text-indigo-300',
+      pill: 'bg-indigo-500/20 text-indigo-300 border border-indigo-400/40',
     },
     amber: {
       icon: 'bg-amber-500/15 border border-amber-400/40 text-amber-300',
-      value: 'text-amber-100',
-      pill: 'bg-amber-500/20 text-amber-100 border border-amber-400/40',
+      value: 'text-amber-300',
+      pill: 'bg-amber-500/20 text-amber-300 border border-amber-400/40',
     },
   };
 

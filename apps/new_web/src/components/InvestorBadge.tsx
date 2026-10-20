@@ -5,6 +5,7 @@ import { getErrorMessage } from '../utils/errorHandler';
 import { API_BASE_URL, badgeService } from '../services/api';
 import { useWallet } from '../contexts/WalletContext';
 import { proveTier } from '../utils/zkBadge';
+import { PenLoader } from '../components/ink/PenLoader';
 
 interface BadgeInfo {
   badge: string;
@@ -101,7 +102,7 @@ const InvestorBadge: React.FC<{ userId: string }> = React.memo(({ userId }) => {
     return (
       <div className="bg-cream-deep/70 border border-navy/10 rounded-card p-6 md:p-8 shadow-ink">
         <div className="flex items-center justify-center py-8">
-          <div className="w-8 h-8 border-4 border-dashed rounded-full animate-spin border-primary"></div>
+          <PenLoader />
         </div>
       </div>
     );

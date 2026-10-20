@@ -6,6 +6,7 @@ import { getErrorMessage } from '../../utils/errorHandler';
 import FilterBar from '../../components/FilterBar';
 import { StatusBadge } from '../../components/StatusBadge';
 import { TransactionLinks } from '../../components/TransactionLinks';
+import { PenLoader } from '../../components/ink/PenLoader';
 
 interface Order {
   id: string;
@@ -81,7 +82,7 @@ const OrderList: React.FC = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-16">
-        <div className="w-10 h-10 border-2 border-white/20 border-t-emerald-400 rounded-full animate-spin" />
+        <PenLoader />
       </div>
     );
   }
@@ -194,7 +195,7 @@ const OrderList: React.FC = () => {
                         <button
                           onClick={() => handleCancelOrder(order.id)}
                           disabled={cancellingId === order.id}
-                          className="mt-1 inline-flex items-center gap-1 text-xs text-red-300 hover:text-red-200 disabled:opacity-50"
+                          className="mt-1 inline-flex items-center gap-1 text-xs text-red-300 hover:text-red-300 disabled:opacity-50"
                         >
                           <FiX />
                           <span>
@@ -256,7 +257,7 @@ const OrderList: React.FC = () => {
                     <button
                       onClick={() => handleCancelOrder(order.id)}
                       disabled={cancellingId === order.id}
-                      className="inline-flex items-center gap-1 text-xs text-red-300 hover:text-red-200 disabled:opacity-50"
+                      className="inline-flex items-center gap-1 text-xs text-red-300 hover:text-red-300 disabled:opacity-50"
                     >
                       <FiX />
                       <span>

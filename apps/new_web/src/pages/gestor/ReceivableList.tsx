@@ -114,7 +114,7 @@ export default function ReceivableList() {
               <td className="whitespace-nowrap py-4 pr-5">{formatReceivableDate(item.dueDate)}</td>
               <td className="py-4 pr-5"><span className={'inline-flex whitespace-nowrap rounded-full border px-2.5 py-1 text-xs' + badgeClass(item.status)}>{statusLabel(item.status)}</span></td>
               <td className="py-4 pr-5"><span className={'inline-flex whitespace-nowrap rounded-full border px-2.5 py-1 text-xs' + badgeClass(item.chainStatus)}>{item.chainStatus === 'PENDING' ? 'Registered' : statusLabel(item.chainStatus)}</span></td>
-              <td className="py-4 text-right"><Link to={'/receivables/' + item.id} className="inline-flex items-center gap-1.5 whitespace-nowrap text-sm font-medium text-emerald-300 hover:text-emerald-200 hover:underline">View details<ArrowUpRight size={15} aria-hidden="true" /></Link></td>
+              <td className="py-4 text-right"><Link to={'/receivables/' + item.id} className="inline-flex items-center gap-1.5 whitespace-nowrap text-sm font-medium text-emerald-300 hover:text-emerald-300 hover:underline">View details<ArrowUpRight size={15} aria-hidden="true" /></Link></td>
             </tr>)}</tbody>
           </table>
         </div>}

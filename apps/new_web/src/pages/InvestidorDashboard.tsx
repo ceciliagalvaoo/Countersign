@@ -13,6 +13,7 @@ import { useAuth } from '../contexts/useAuth';
 import { getErrorMessage } from '../utils/errorHandler';
 import InvestorBadge from '../components/InvestorBadge';
 import RecommendedFunds from '../components/RecommendedFunds';
+import { PenLoader } from '../components/ink/PenLoader';
 
 interface Order {
   id: string;
@@ -101,7 +102,7 @@ const InvestidorDashboard: React.FC = () => {
 
       {loading ? (
         <div className="flex items-center justify-center py-16">
-          <div className="w-10 h-10 border-2 border-white/20 border-t-emerald-400 rounded-full animate-spin" />
+          <PenLoader />
         </div>
       ) : (
         <>
@@ -232,19 +233,19 @@ const StatCard: React.FC<{
   const accentClasses: Record<typeof accent, { icon: string; title: string }> = {
     emerald: {
       icon: 'bg-emerald-500/10 border border-emerald-400/40 text-emerald-300',
-      title: 'text-emerald-100',
+      title: 'text-emerald-300',
     },
     sky: {
       icon: 'bg-sky-500/10 border border-sky-400/40 text-sky-300',
-      title: 'text-sky-100',
+      title: 'text-sky-300',
     },
     indigo: {
       icon: 'bg-indigo-500/10 border border-indigo-400/40 text-indigo-300',
-      title: 'text-indigo-100',
+      title: 'text-indigo-300',
     },
     amber: {
       icon: 'bg-amber-500/10 border border-amber-400/40 text-amber-300',
-      title: 'text-amber-100',
+      title: 'text-amber-300',
     },
     slate: {
       icon: 'bg-slate-500/10 border border-slate-400/40 text-slate-200',

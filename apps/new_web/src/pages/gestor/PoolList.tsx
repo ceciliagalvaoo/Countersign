@@ -4,6 +4,7 @@ import { FiPlus, FiTrendingUp, FiDollarSign, FiPercent } from 'react-icons/fi';
 import { poolService, fundService } from '../../services/api';
 import { useWallet } from '../../contexts/WalletContext';
 import UsdcAmount from '../../components/UsdcAmount';
+import { PenLoader } from '../../components/ink/PenLoader';
 
 interface Pool {
   id: string;
@@ -99,7 +100,7 @@ const PoolList: React.FC = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+        <PenLoader />
       </div>
     );
   }

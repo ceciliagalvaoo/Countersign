@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Outlet, Link, NavLink, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/useAuth';
 import { useWallet } from '../contexts/WalletContext';
-import { FiLogOut, FiUsers, FiBox, FiUserCheck, FiHome, FiBriefcase, FiFilePlus, FiFileMinus, FiFileText, FiDollarSign, FiList, FiShoppingCart, FiPenTool } from 'react-icons/fi';
+import { HandIcon } from '../components/ink/HandIcon';
 import { dashboardService, orderService, stellarService } from '../services/api';
 import Wordmark from '../components/Wordmark';
 import { AmbientStroke } from '../components/ink/AmbientStroke';
@@ -10,26 +10,26 @@ import AgentDock from '../components/agent/AgentDock';
 import toast from 'react-hot-toast';
 
 const gestorMenuItems = [
-  { to: '/dashboard', icon: <FiHome />, name: 'Dashboard' },
-  { to: '/consultores', icon: <FiUsers />, name: 'Consultants', countKey: 'consultores' },
-  { to: '/investidores', icon: <FiUserCheck />, name: 'Investors', countKey: 'investidores' },
-  { to: '/fundos', icon: <FiBox />, name: 'Funds', countKey: 'funds' },
-  { to: '/investments', icon: <FiDollarSign />, name: 'Investments', countKey: 'investments' },
-  { to: '/assignors', icon: <FiFilePlus />, name: 'Assignors', countKey: 'assignors' },
-  { to: '/debtors', icon: <FiFileMinus />, name: 'Debtors', countKey: 'debtors' },
-  { to: '/receivables', icon: <FiFileText />, name: 'Receivables' },
+  { to: '/dashboard', icon: <HandIcon name="home" />, name: 'Dashboard' },
+  { to: '/consultores', icon: <HandIcon name="users" />, name: 'Consultants', countKey: 'consultores' },
+  { to: '/investidores', icon: <HandIcon name="userCheck" />, name: 'Investors', countKey: 'investidores' },
+  { to: '/fundos', icon: <HandIcon name="box" />, name: 'Funds', countKey: 'funds' },
+  { to: '/investments', icon: <HandIcon name="coin" />, name: 'Investments', countKey: 'investments' },
+  { to: '/assignors', icon: <HandIcon name="filePlus" />, name: 'Assignors', countKey: 'assignors' },
+  { to: '/debtors', icon: <HandIcon name="fileMinus" />, name: 'Debtors', countKey: 'debtors' },
+  { to: '/receivables', icon: <HandIcon name="file" />, name: 'Receivables' },
 ];
 
 const consultorMenuItems = [
-    { to: '/dashboard', icon: <FiHome />, name: 'My Funds' },
+    { to: '/dashboard', icon: <HandIcon name="home" />, name: 'My Funds' },
 ];
 
 const investidorMenuItems = [
-    { to: '/dashboard', icon: <FiHome />, name: 'Dashboard' },
-    { to: '/agent', icon: <FiPenTool />, name: 'Agent' },
-    { to: '/marketplace', icon: <FiShoppingCart />, name: 'Marketplace' },
-    { to: '/portfolio', icon: <FiBriefcase />, name: 'Portfolio' },
-    { to: '/orders', icon: <FiList />, name: 'Orders' },
+    { to: '/dashboard', icon: <HandIcon name="home" />, name: 'Dashboard' },
+    { to: '/agent', icon: <HandIcon name="pen" />, name: 'Agent' },
+    { to: '/marketplace', icon: <HandIcon name="cart" />, name: 'Marketplace' },
+    { to: '/portfolio', icon: <HandIcon name="briefcase" />, name: 'Portfolio' },
+    { to: '/orders', icon: <HandIcon name="list" />, name: 'Orders' },
 ];
 
 interface PendingCounts {
@@ -51,7 +51,7 @@ const TopNav: React.FC<{ role: string; pendingCounts: PendingCounts | null }> = 
   else if (role === 'INVESTIDOR') menuItems = investidorMenuItems;
 
   return (
-    <nav className="-mx-1 flex items-center gap-1 overflow-x-auto px-1" aria-label="Main">
+    <nav className="-mx-1 flex max-w-full items-center gap-1 overflow-x-auto px-1" aria-label="Main">
       {menuItems.map((item) => {
         const count =
           'countKey' in item && pendingCounts ? (pendingCounts[item.countKey as keyof PendingCounts] ?? 0) : 0;
@@ -70,7 +70,7 @@ const TopNav: React.FC<{ role: string; pendingCounts: PendingCounts | null }> = 
               isActive ? 'bg-cobalt/10 !text-cobalt' : 'hover:!text-navy'
             }`}
           >
-            <span className="text-[13px]" aria-hidden="true">{item.icon}</span>
+            <span className="inline-flex h-4 w-4 [&>svg]:h-4 [&>svg]:w-4" aria-hidden="true">{item.icon}</span>
             {item.name}
             {showBadge && (
               <span className="tabular inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-vermilion px-1 text-[10px] tracking-normal text-cream">
@@ -157,7 +157,7 @@ const Header: React.FC<{ userEmail: string; onLogout: () => void }> = ({ userEma
       )}
       <span className="hidden max-w-56 truncate text-14 text-ink-soft lg:inline">{userEmail}</span>
       <button onClick={onLogout} className="btn btn-sm btn-ghost !px-3" aria-label="Sign out" title="Sign out">
-        <FiLogOut />
+        <HandIcon name="logout" />
       </button>
     </div>
   );
@@ -205,6 +205,13 @@ const DashboardLayout: React.FC = () => {
   return (
     <div className="relative isolate flex min-h-screen flex-col bg-cream">
       <AmbientStroke />
+      {/* Ink texture for every line icon in the app: the same hand as the strokes */}
+      <svg width="0" height="0" className="absolute" aria-hidden="true">
+        <filter id="ink-icon" x="-10%" y="-10%" width="120%" height="120%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.14" numOctaves="2" seed="3" result="n" />
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="1.3" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+      </svg>
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-50 focus:rounded-full focus:bg-cobalt focus:px-4 focus:py-2 focus:text-14 focus:text-cream"
@@ -212,14 +219,14 @@ const DashboardLayout: React.FC = () => {
         Skip to content
       </a>
       <header className="sticky top-0 z-30 border-b border-navy/10 bg-cream/95">
-        <div className="mx-auto flex w-full max-w-[1600px] flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3 md:px-8">
+        <div className="mx-auto grid w-full max-w-[1600px] grid-cols-[auto_1fr] items-center gap-x-6 gap-y-2 px-4 py-3 md:px-8 min-[1900px]:grid-cols-[1fr_auto_1fr]">
           <Link to="/dashboard" className="shrink-0 rounded-sm" aria-label="Countersign, home">
             <Wordmark size="sm" />
           </Link>
-          <div className="order-3 w-full min-w-0 2xl:order-none 2xl:w-auto 2xl:flex-1">
+          <div className="order-3 col-span-2 flex min-w-0 justify-center min-[1900px]:order-none min-[1900px]:col-span-1">
             <TopNav role={user.role} pendingCounts={pendingCounts} />
           </div>
-          <div className="ml-auto">
+          <div className="justify-self-end">
             <Header userEmail={user.email} onLogout={logout} />
           </div>
         </div>

@@ -11,11 +11,12 @@ import DashboardLayout from './layouts/DashboardLayout';
 // Pages - Login e Register carregados imediatamente
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import { PenLoader } from './components/ink/PenLoader';
 
 // Loading fallback component
 const PageLoader = () => (
   <div className="flex items-center justify-center min-h-screen">
-    <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-primary"></div>
+    <PenLoader />
   </div>
 );
 
@@ -68,7 +69,7 @@ const App: React.FC = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-primary"></div>
+        <PenLoader />
       </div>
     );
   }

@@ -5,6 +5,7 @@ import { getErrorMessage } from '../../utils/errorHandler';
 import { useOrderApproval } from '../../hooks/useOrderApproval';
 import FilterBar from '../../components/FilterBar';
 import UsdcAmount from '../../components/UsdcAmount';
+import { PenLoader } from '../../components/ink/PenLoader';
 
 interface Investment {
   id: string;
@@ -103,7 +104,7 @@ const InvestmentList: React.FC = () => {
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center py-16">
-        <div className="w-10 h-10 border-2 border-white/20 border-t-emerald-400 rounded-full animate-spin mb-4" />
+        <PenLoader />
         <p className="text-sm text-white/80">Loading investments…</p>
       </div>
     );
@@ -269,7 +270,7 @@ const InvestmentList: React.FC = () => {
                               href={`https://stellar.expert/explorer/testnet/tx/${item.txHash}`}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-11 text-emerald-200 hover:text-emerald-100"
+                              className="text-11 text-emerald-200 hover:text-emerald-300"
                             >
                               Payment TX
                             </a>
@@ -279,7 +280,7 @@ const InvestmentList: React.FC = () => {
                               href={`https://stellar.expert/explorer/testnet/tx/${item.refundTxHash}`}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-11 text-emerald-200 hover:text-emerald-100"
+                              className="text-11 text-emerald-200 hover:text-emerald-300"
                             >
                               Refund TX
                             </a>
@@ -289,7 +290,7 @@ const InvestmentList: React.FC = () => {
                               href={`https://stellar.expert/explorer/testnet/tx/${item.tokenMintTxHash}`}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-11 text-emerald-200 hover:text-emerald-100"
+                              className="text-11 text-emerald-200 hover:text-emerald-300"
                             >
                               Token mint TX
                             </a>
@@ -395,7 +396,7 @@ const InvestmentList: React.FC = () => {
                           href={`https://stellar.expert/explorer/testnet/tx/${item.txHash}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-11 text-emerald-200 hover:text-emerald-100"
+                          className="text-11 text-emerald-200 hover:text-emerald-300"
                         >
                           View payment transaction
                         </a>
@@ -405,7 +406,7 @@ const InvestmentList: React.FC = () => {
                           href={`https://stellar.expert/explorer/testnet/tx/${item.refundTxHash}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-11 text-emerald-200 hover:text-emerald-100"
+                          className="text-11 text-emerald-200 hover:text-emerald-300"
                         >
                           View refund transaction
                         </a>
@@ -415,7 +416,7 @@ const InvestmentList: React.FC = () => {
                           href={`https://stellar.expert/explorer/testnet/tx/${item.tokenMintTxHash}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-11 text-emerald-200 hover:text-emerald-100"
+                          className="text-11 text-emerald-200 hover:text-emerald-300"
                         >
                           View token mint transaction
                         </a>

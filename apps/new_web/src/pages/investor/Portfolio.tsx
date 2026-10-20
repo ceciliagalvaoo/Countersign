@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 import { FiBriefcase, FiExternalLink, FiCheckCircle } from 'react-icons/fi';
 import { getErrorMessage } from '../../utils/errorHandler';
 import UsdcAmount from '../../components/UsdcAmount';
+import { PenLoader } from '../../components/ink/PenLoader';
 
 interface Order {
     id: string;
@@ -122,7 +123,7 @@ const Portfolio: React.FC = () => {
       {/* Loading, empty or content */}
       {loading ? (
         <div className="flex items-center justify-center py-12">
-          <div className="w-10 h-10 border-2 border-white/20 border-t-emerald-400 rounded-full animate-spin" />
+          <PenLoader />
         </div>
       ) : orders.length === 0 ? (
         <div className="text-center text-white/60 py-12">
@@ -238,7 +239,7 @@ const Portfolio: React.FC = () => {
                           href={`https://stellar.expert/explorer/testnet/tx/${order.txHash}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-emerald-200 hover:text-emerald-100 flex items-center gap-1"
+                          className="text-emerald-200 hover:text-emerald-300 flex items-center gap-1"
                         >
                           <span>View TX</span>
                           <FiExternalLink className="text-[12px]" />

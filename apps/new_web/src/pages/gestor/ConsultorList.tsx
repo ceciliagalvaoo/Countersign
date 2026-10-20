@@ -3,6 +3,7 @@ import toast from 'react-hot-toast';
 import { userService } from '../../services/api';
 import type { User } from '../../contexts/AuthContext';
 import { getErrorMessage } from '../../utils/errorHandler';
+import { PenLoader } from '../../components/ink/PenLoader';
 
 const ConsultorList: React.FC = () => {
     const [consultores, setConsultores] = useState<User[]>([]);
@@ -41,7 +42,7 @@ const ConsultorList: React.FC = () => {
     if (loading) {
         return (
             <div className="flex flex-col items-center justify-center p-8">
-                <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-primary mb-4"></div>
+                <PenLoader />
                 <p className="text-white">Loading consultants...</p>
             </div>
         );

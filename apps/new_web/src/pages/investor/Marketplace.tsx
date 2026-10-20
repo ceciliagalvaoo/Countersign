@@ -6,6 +6,7 @@ import { FiSearch } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import InvestmentModal from '../../components/InvestmentModal';
 import UsdcAmount from '../../components/UsdcAmount';
+import { PenLoader } from '../../components/ink/PenLoader';
 
 interface Fund {
   id: string;
@@ -59,7 +60,7 @@ const Marketplace: React.FC = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-16">
-        <div className="w-10 h-10 border-2 border-white/20 border-t-emerald-400 rounded-full animate-spin" />
+        <PenLoader />
       </div>
     );
   }
@@ -104,7 +105,7 @@ const Marketplace: React.FC = () => {
 
           {/* Wallet notice */}
           {!isConnected && (
-            <div className="mb-6 rounded-card border border-amber-300/40 bg-amber-500/10 px-4 py-3 text-xs md:text-sm text-amber-100 flex gap-2">
+            <div className="mb-6 rounded-card border border-amber-300/40 bg-amber-500/10 px-4 py-3 text-xs md:text-sm text-amber-300 flex gap-2">
               <span>💡</span>
               <p>
                 <strong>Connect your wallet</strong> in the header to invest and

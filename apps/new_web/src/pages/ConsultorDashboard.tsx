@@ -5,6 +5,7 @@ import { fundService } from '../services/api';
 import { getErrorMessage } from '../utils/errorHandler';
 import FundManagement from '../components/FundManagement';
 import { useNavigate } from 'react-router-dom';
+import { PenLoader } from '../components/ink/PenLoader';
 
 interface Fund {
   id: string;
@@ -84,7 +85,7 @@ const ConsultorDashboard: React.FC = () => {
 
         {loading ? (
           <div className="flex justify-center py-12">
-            <div className="w-10 h-10 border-2 border-white/20 border-t-emerald-400 rounded-full animate-spin" />
+            <PenLoader />
           </div>
         ) : funds.length === 0 ? (
           <p className="text-center text-white/60 py-10">No funds created yet.</p>

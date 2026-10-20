@@ -456,3 +456,40 @@
     opacity: 0;
   }
 }
+
+/* The pen loader: ink follows the nib along a signature, then the page clears and it writes again */
+@layer components {
+  .pen-loader__ink {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: pen-write 1.8s cubic-bezier(0.45, 0.05, 0.4, 1) infinite;
+  }
+  .pen-loader__nib {
+    offset-rotate: 0deg;
+    animation: pen-move 1.8s cubic-bezier(0.45, 0.05, 0.4, 1) infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pen-loader__ink { animation: none; stroke-dashoffset: 0; }
+    .pen-loader__nib { animation: none; offset-distance: 100%; }
+  }
+}
+@keyframes pen-write {
+  0% { stroke-dashoffset: 1; opacity: 1; }
+  70% { stroke-dashoffset: 0; opacity: 1; }
+  88% { stroke-dashoffset: 0; opacity: 0; }
+  100% { stroke-dashoffset: 1; opacity: 0; }
+}
+@keyframes pen-move {
+  0% { offset-distance: 0%; opacity: 1; }
+  70% { offset-distance: 100%; opacity: 1; }
+  88% { offset-distance: 100%; opacity: 0; }
+  100% { offset-distance: 0%; opacity: 0; }
+}
+
+/* Line icons (react-icons, lucide, our own) carry the ink texture of the strokes */
+@layer components {
+  main svg[stroke="currentColor"],
+  header svg[stroke="currentColor"] {
+    filter: url(#ink-icon);
+  }
+}

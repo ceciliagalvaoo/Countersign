@@ -4,6 +4,7 @@ import { cedenteService } from '../../services/api';
 import { getErrorMessage } from '../../utils/errorHandler';
 import { useAuth } from '../../contexts/useAuth';
 import { Link, Navigate } from 'react-router-dom';
+import { PenLoader } from '../../components/ink/PenLoader';
 interface Assignor {
   id: string;
   name: string;
@@ -82,7 +83,7 @@ const AssignorList: React.FC = () => {
     if (loading) {
         return (
             <div className="flex flex-col items-center justify-center p-8">
-                <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-primary mb-4"></div>
+                <PenLoader />
                 <p className="text-white">Loading assignors...</p>
             </div>
         );

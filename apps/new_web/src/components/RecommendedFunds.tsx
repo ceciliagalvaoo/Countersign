@@ -6,6 +6,7 @@ import { getErrorMessage } from '../utils/errorHandler';
 import api from '../services/api';
 import { useFundInteraction } from '../hooks/useFundInteraction';
 import { valueLabel } from '../constants/valueLabels';
+import { PenLoader } from '../components/ink/PenLoader';
 
 interface RecommendedFund {
     id: string;
@@ -77,7 +78,7 @@ const RecommendedFunds: React.FC = React.memo(() => {
                     <h2 className="text-28 font-medium text-white">Recommended for You</h2>
                 </div>
                 <div className="flex items-center justify-center py-8">
-                    <div className="w-8 h-8 border-4 border-dashed rounded-full animate-spin border-primary"></div>
+                    <PenLoader />
                 </div>
             </div>
         );
@@ -187,7 +188,7 @@ const RecommendedFunds: React.FC = React.memo(() => {
                         </div>
 
                         <div className="bg-primary/10 border-l-4 border-primary p-3 mb-3">
-                            <p className="text-sm text-primary-200">
+                            <p className="text-sm text-primary-300">
                                 <span className="font-medium">Why recommended:</span> {fund.reason}
                             </p>
                         </div>
