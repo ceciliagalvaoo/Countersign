@@ -205,6 +205,7 @@ tech.append(section("03", "Agent Design", "".join([
        "**Tool use.** The model only produces typed proposals. Third party text (fund and assignor descriptions) is passed as untrusted "
        "data and cannot set a destination or an amount. A failed tool returns as an error result and is never assumed done; the agent "
        "never says \"done\" before `get_status` reports a completed order.\n\n"
+       "**Always at hand.** An orb in the corner of every investor screen opens the same conversation in a side panel; it answers and proposes, signs nothing, and sends her to the agent page when a signature is waiting. It is not shown to the fund manager.\n\n"
        "**State management.** The typed mandate and the decision log live in the API (the agent cannot write the mandate store); the "
        "conversation, plan and turn counter live in the agent service session; balances, allowlists, caps and revocation are read "
        "from the chain at execution time."),
