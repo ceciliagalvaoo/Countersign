@@ -92,13 +92,13 @@ const FundList: React.FC = () => {
                 />
             )}
             
-            <div className="bg-white/[0.04] border border-white/[0.12] backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-[0_18px_60px_rgba(0,0,0,0.45)]">
+            <div className="bg-cream-deep/70 border border-navy/10 rounded-card p-6 md:p-8 shadow-ink">
                 <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-xl font-semibold text-white">Manage Funds</h2>
+                    <h2 className="text-28 font-medium text-white">Manage Funds</h2>
                     {role === 'CONSULTOR' && (
                         <Link
                             to="/fundos/new"
-                            className="px-3 py-2 text-sm text-white bg-primary rounded-md hover:bg-primary/90 transition-colors"
+                            className="px-3 py-2 text-sm text-cream bg-primary rounded-full hover:bg-navy transition-colors"
                         >
                             + Create Fund
                         </Link>
@@ -109,7 +109,7 @@ const FundList: React.FC = () => {
                         <p className="text-center text-gray-400 py-8">No funds found.</p>
                     ) : (
                         funds.map((item) => (
-                            <div key={item.id} className="bg-white/[0.04] border border-white/[0.12] backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-[0_18px_60px_rgba(0,0,0,0.45)]">
+                            <div key={item.id} className="bg-cream-deep/70 border border-navy/10 rounded-card p-6 md:p-8 shadow-ink">
                                 <div className="flex flex-col lg:flex-row justify-between lg:items-center gap-4">
                                     <div className="flex-1">
                                         <p className="font-semibold text-lg text-white">{item.name} ({item.symbol})</p>
@@ -117,10 +117,10 @@ const FundList: React.FC = () => {
                                             <p className="text-gray-300">
                                                 <span className="font-medium">Status:</span>{' '}
                                                 <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${
-                                                    item.status === 'APPROVED' ? 'bg-[#A0E4B0] text-primary-800' :
+                                                    item.status === 'APPROVED' ? 'bg-cobalt/10 text-primary-800' :
                                                     item.status === 'PENDING' ? 'bg-yellow-100 text-yellow-800' :
                                                     item.status === 'CLOSED' ? 'bg-gray-700 text-gray-200' :
-                                                    'bg-[#fa7f7f]-100 text-red-800'
+                                                    'bg-red-100 text-red-800'
                                                 }`}>
                                                     {item.status}
                                                 </span>
@@ -140,7 +140,7 @@ const FundList: React.FC = () => {
                                     <div className="flex flex-wrap items-center gap-2">
                                         <Link
                                             to={`/fundos/${item.id}`}
-                                            className="px-3 py-1.5 text-sm text-primary border border-primary rounded-md hover:bg-primary/10 transition-colors"
+                                            className="btn btn-sm btn-secondary"
                                         >
                                             More info
                                         </Link>
@@ -153,7 +153,7 @@ const FundList: React.FC = () => {
                                             <>
                                                 <button 
                                                     onClick={() => handleIssueQuotas(item)} 
-                                                    className="px-3 py-1.5 text-sm text-white bg-primary rounded-md hover:bg-primary/90 transition-colors"
+                                                    className="btn btn-sm btn-primary"
                                                     disabled={item.totalIssued >= item.maxSupply}
                                                 >
                                                     Issue Quotas
@@ -161,7 +161,7 @@ const FundList: React.FC = () => {
                                                 <PauseFundUnits fund={item} onDone={loadData} />
                                                 <button 
                                                     onClick={() => handleDeactivate(item.id)} 
-                                                    className="px-3 py-1.5 text-sm text-white bg-gray-500 rounded-md hover:bg-gray-600 transition-colors"
+                                                    className="btn btn-sm btn-ghost"
                                                 >
                                                     Deactivate
                                                 </button>
@@ -211,9 +211,9 @@ const IssueQuotasModal: React.FC<{
     };
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="bg-white/[0.04] border border-white/[0.12] backdrop-blur-xl rounded-2xl w-full max-w-md p-6 md:p-8 shadow-[0_18px_60px_rgba(0,0,0,0.45)]">
-                <h2 className="text-xl font-bold mb-4 text-white">Issue Quotas - {fund.name}</h2>
+        <div className="module-scrim fixed inset-0 z-50 flex items-center justify-center bg-navy/30">
+            <div className="bg-cream-deep/70 border border-navy/10 rounded-card w-full max-w-md p-6 md:p-8 shadow-ink">
+                <h2 className="text-28 font-medium mb-4 text-white">Issue Quotas - {fund.name}</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
                         <p className="text-sm text-gray-300 mb-2">
@@ -247,7 +247,7 @@ const IssueQuotasModal: React.FC<{
                         <button
                             type="submit"
                             disabled={loading || !amount}
-                            className="px-4 py-2 text-white bg-primary rounded-md hover:bg-primary/90 disabled:bg-primary/50 transition-colors"
+                            className="px-4 py-2 text-cream bg-primary rounded-full hover:bg-navy disabled:bg-primary/50 transition-colors"
                         >
                             {loading ? 'Issuing...' : 'Issue Quotas'}
                         </button>

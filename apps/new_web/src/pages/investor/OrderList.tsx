@@ -88,14 +88,14 @@ const OrderList: React.FC = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
-      <div className="bg-white/[0.04] border border-white/[0.12] backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-[0_18px_60px_rgba(0,0,0,0.45)]">
+      <div className="bg-cream-deep/70 border border-navy/10 rounded-card p-6 md:p-8 shadow-ink">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
           <div>
             <p className="text-[10px] tracking-[0.2em] uppercase text-emerald-300">
               Investor activity
             </p>
-            <h2 className="text-xl md:text-2xl font-bold text-white">
+            <h2 className="text-28 md:text-28 font-medium text-white">
               My investment orders
             </h2>
           </div>
@@ -130,25 +130,25 @@ const OrderList: React.FC = () => {
             <table className="min-w-full text-sm">
               <thead>
                 <tr className="border-b border-white/10">
-                  <th className="py-3 px-4 text-left text-[11px] font-semibold text-white/60 uppercase tracking-wide">
+                  <th className="py-3 px-4 text-left text-11 font-semibold text-white/60 uppercase tracking-wide">
                     Fund
                   </th>
-                  <th className="py-3 px-4 text-left text-[11px] font-semibold text-white/60 uppercase tracking-wide">
+                  <th className="py-3 px-4 text-left text-11 font-semibold text-white/60 uppercase tracking-wide">
                     Quantity
                   </th>
-                  <th className="py-3 px-4 text-left text-[11px] font-semibold text-white/60 uppercase tracking-wide">
+                  <th className="py-3 px-4 text-left text-11 font-semibold text-white/60 uppercase tracking-wide">
                     Total
                   </th>
-                  <th className="py-3 px-4 text-left text-[11px] font-semibold text-white/60 uppercase tracking-wide">
+                  <th className="py-3 px-4 text-left text-11 font-semibold text-white/60 uppercase tracking-wide">
                     Date
                   </th>
-                  <th className="py-3 px-4 text-left text-[11px] font-semibold text-white/60 uppercase tracking-wide">
+                  <th className="py-3 px-4 text-left text-11 font-semibold text-white/60 uppercase tracking-wide">
                     Payment
                   </th>
-                  <th className="py-3 px-4 text-left text-[11px] font-semibold text-white/60 uppercase tracking-wide">
+                  <th className="py-3 px-4 text-left text-11 font-semibold text-white/60 uppercase tracking-wide">
                     Approval
                   </th>
-                  <th className="py-3 px-4 text-left text-[11px] font-semibold text-white/60 uppercase tracking-wide">
+                  <th className="py-3 px-4 text-left text-11 font-semibold text-white/60 uppercase tracking-wide">
                     Actions
                   </th>
                 </tr>
@@ -218,7 +218,7 @@ const OrderList: React.FC = () => {
             filteredOrders.map((order) => (
               <div
                 key={order.id}
-                className="bg-white/[0.03] border border-white/[0.12] rounded-2xl p-4 shadow-[0_12px_40px_rgba(0,0,0,0.35)] space-y-3"
+                className="bg-cream-deep/70 border border-navy/10 rounded-card p-4 shadow-ink space-y-3"
               >
                 <div className="flex justify-between items-start gap-3">
                   <div>

@@ -49,23 +49,33 @@ export function phaseToView(phase: SignPhase): TxView | null {
 const SignatureRow: React.FC<{ line: SignerLine; signed: boolean; awaiting: boolean }> = ({ line, signed, awaiting }) => (
   <div className="py-2">
     <div className="flex items-baseline justify-between gap-2">
-      <span className="text-sm font-semibold text-gray-100">{line.who}</span>
+      <span className="font-display text-20 font-medium text-navy">{line.who}</span>
       {line.signsThis && (
-        <span className={`text-xs font-semibold ${signed ? 'text-emerald-300' : 'text-amber-300'}`}>
+        <span className={`text-12 font-medium ${signed ? 'text-cobalt' : 'text-ochre'}`}>
           {signed ? 'signed' : awaiting ? 'awaiting your signature' : 'signature required'}
         </span>
       )}
     </div>
     {line.signsThis ? (
-      <div className="relative mt-1 h-px w-full bg-gray-500/30">
+      // The signature line: an empty ochre line breathes until she signs, then her stroke is drawn in ink
+      <svg viewBox="0 0 300 16" preserveAspectRatio="none" className="mt-1 h-4 w-full" aria-hidden="true" fill="none">
+        <path d="M2 13C80 11 220 12 298 13" stroke="#1B2B6B" strokeOpacity={0.18} strokeWidth={1.2} strokeLinecap="round" />
         {signed ? (
-          <div className="cs-sign-line absolute inset-0 h-[2px] -top-px bg-emerald-400" />
+          <path
+            d="M4 12C22 2 34 4 40 9C46 14 54 12 66 6C80 0 92 10 106 9C150 6 230 10 296 8"
+            pathLength={1}
+            stroke="#2547C9"
+            strokeWidth={2.2}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="ink-draw ink-draw--in"
+          />
         ) : (
-          <div className="cs-await-pulse absolute inset-0 h-[2px] -top-px bg-amber-400" />
+          <path d="M2 13C80 11 220 12 298 13" stroke="#A06A12" strokeWidth={2} strokeLinecap="round" strokeDasharray="6 6" className="cs-await-pulse" />
         )}
-      </div>
+      </svg>
     ) : null}
-    <p className="mt-1 text-xs text-gray-400">{line.text}</p>
+    <p className="mt-1 text-12 text-ink-soft">{line.text}</p>
   </div>
 );
 
@@ -80,19 +90,20 @@ const ApprovalCard: React.FC<Props> = ({ prepared, phase, ctx, connectedKey, onS
 
   return (
     <section
-      className="rounded-2xl border border-white/[0.12] bg-white/[0.04] backdrop-blur-xl shadow-[0_18px_60px_rgba(0,0,0,0.45)] text-gray-100 shadow-[0_10px_40px_rgba(0,0,0,0.35)] "
+      className="module-panel rounded-card border border-navy/15 bg-cream text-navy shadow-ink-lg"
       aria-label="Approval card"
       data-testid="approval-card"
     >
-      <header className="border-b border-white/20 px-5 pt-4 pb-3">
-        {model.intro && <p className="text-xs text-gray-400">{model.intro}</p>}
-        <h3 className="text-lg font-semibold !text-white">{model.title}</h3>
+      <header className="border-b border-navy/10 px-5 pt-5 pb-4">
+        <p className="eyebrow">Approval card</p>
+        {model.intro && <p className="mt-1 text-12 text-ink-soft">{model.intro}</p>}
+        <h3 className="mt-1 text-28">{model.title}</h3>
       </header>
 
       {!prepared.check.ok && (
-        <div className="mx-5 mt-3 border-l-2 border-red-400 pl-3 text-sm" role="alert">
-          <p className="font-semibold text-red-300">{'✕'} Do not sign: the decoded view does not match the transaction</p>
-          <ul className="mt-1 list-disc pl-4 text-xs text-gray-100">
+        <div className="mx-5 mt-3 border-l-2 border-vermilion pl-3 text-14" role="alert">
+          <p className="font-semibold text-vermilion">{'✕'} Do not sign: the decoded view does not match the transaction</p>
+          <ul className="mt-1 list-disc pl-4 text-12 text-navy">
             {prepared.check.problems.map((p) => (
               <li key={p}>{p}</li>
             ))}
@@ -102,49 +113,49 @@ const ApprovalCard: React.FC<Props> = ({ prepared, phase, ctx, connectedKey, onS
 
       <div className="grid gap-0 md:grid-cols-2">
         {/* Left: what you sign, decoded from the XDR */}
-        <div className="px-5 py-4 md:border-r border-white/20">
-          <p className="mb-2 text-xs uppercase tracking-wide text-gray-400">What you sign</p>
-          <dl className="space-y-2 text-sm">
+        <div className="px-5 py-4 md:border-r border-navy/10">
+          <p className="eyebrow mb-3">What you sign</p>
+          <dl className="space-y-2.5 text-14">
             <div>
-              <dt className="text-xs text-gray-400">Network</dt>
-              <dd className="font-semibold">{model.network}</dd>
-              <dd className="text-[11px] text-gray-400">{NETWORK_NOTE}</dd>
+              <dt className="text-12 text-ink-soft">Network</dt>
+              <dd className="font-medium">{model.network}</dd>
+              <dd className="text-11 text-ink-soft">{NETWORK_NOTE}</dd>
             </div>
             <div>
-              <dt className="text-xs text-gray-400">Contract</dt>
-              <dd className={model.contract.recognised ? 'font-semibold' : 'font-semibold text-red-300'}>
+              <dt className="text-12 text-ink-soft">Contract</dt>
+              <dd className={model.contract.recognised ? 'font-medium' : 'font-medium text-vermilion'}>
                 {!model.contract.recognised && <span aria-hidden="true">{'✕'} </span>}
                 {model.contract.label}
               </dd>
               {model.contract.id && (
-                <dd className="font-mono text-xs tabular-nums text-gray-400" title={model.contract.id}>
+                <dd className="font-mono text-xs tabular text-gray-400" title={model.contract.id}>
                   {shortAddress(model.contract.id)}
                 </dd>
               )}
-              {model.contract.isMandateWallet && <dd className="text-[11px] text-gray-400">{LABEL_WALLET_CONTRACT}</dd>}
+              {model.contract.isMandateWallet && <dd className="text-11 text-ink-soft">{LABEL_WALLET_CONTRACT}</dd>}
             </div>
             <div>
-              <dt className="text-xs text-gray-400">Function</dt>
+              <dt className="text-12 text-ink-soft">Function</dt>
               <dd className="font-mono">{model.functionName}</dd>
             </div>
             {model.args.map((a, i) => (
               <div key={`${a.label}-${i}`}>
-                <dt className="text-xs text-gray-400">{a.label}</dt>
-                <dd className="font-mono tabular-nums">{a.value}</dd>
-                {a.raw && <dd className="font-mono text-[11px] tabular-nums text-gray-400">{a.raw}</dd>}
+                <dt className="text-12 text-ink-soft">{a.label}</dt>
+                <dd className="font-mono tabular">{a.value}</dd>
+                {a.raw && <dd className="font-mono text-11 tabular text-gray-400">{a.raw}</dd>}
               </div>
             ))}
             {model.maxFee && (
               <div>
-                <dt className="text-xs text-gray-400">Maximum network fee</dt>
-                <dd className="font-mono tabular-nums">{model.maxFee}</dd>
+                <dt className="text-12 text-ink-soft">Maximum network fee</dt>
+                <dd className="font-mono tabular">{model.maxFee}</dd>
               </div>
             )}
             {model.planned && (
-              <div className="border-t border-dashed border-white/20 pt-2">
-                <dt className="text-xs text-gray-400">{model.planned.label}</dt>
-                <dd className="font-mono tabular-nums">{model.planned.value}</dd>
-                {model.planned.note && <dd className="text-[11px] text-gray-400">{model.planned.note}</dd>}
+              <div className="border-t border-dashed border-navy/15 pt-2">
+                <dt className="text-12 text-ink-soft">{model.planned.label}</dt>
+                <dd className="font-mono tabular">{model.planned.value}</dd>
+                {model.planned.note && <dd className="text-11 text-ink-soft">{model.planned.note}</dd>}
               </div>
             )}
           </dl>
@@ -152,66 +163,66 @@ const ApprovalCard: React.FC<Props> = ({ prepared, phase, ctx, connectedKey, onS
 
         {/* Right: who must sign, what you could lose */}
         <div className="px-5 py-4">
-          <p className="text-xs uppercase tracking-wide text-gray-400">Who must sign</p>
-          <div className="divide-y divide-white/10">
+          <p className="eyebrow">Who must sign</p>
+          <div className="divide-y divide-navy/10">
             {model.signers.map((s) => (
               <SignatureRow key={s.who} line={s} signed={s.signsThis && signed} awaiting={phase.kind === 'awaiting_wallet'} />
             ))}
           </div>
           {signer && (
-            <p className="mt-1 text-[11px] text-gray-400">
-              Signing account: <span className="font-mono tabular-nums">{shortAddress(signer)}</span>
+            <p className="mt-1 text-11 text-ink-soft">
+              Signing account: <span className="font-mono tabular">{shortAddress(signer)}</span>
             </p>
           )}
 
-          <p className="mt-4 text-xs uppercase tracking-wide text-gray-400">What you could lose</p>
-          <ul className="mt-1 space-y-1 text-sm">
+          <p className="eyebrow mt-5">What you could lose</p>
+          <ul className="mt-1.5 space-y-1 text-14">
             {model.loss.map((l) => (
               <li key={l}>{l}</li>
             ))}
           </ul>
-          {model.showFundsLabel && <p className="mt-1 text-[11px] text-gray-400">{LABEL_FUNDS}</p>}
-          {model.showEnforced && <p className="mt-3 text-sm font-semibold">{CARD_ENFORCED}</p>}
+          {model.showFundsLabel && <p className="mt-1 text-11 text-ink-soft">{LABEL_FUNDS}</p>}
+          {model.showEnforced && <p className="mt-4 border-l-2 border-cobalt pl-3 font-display text-20 leading-snug">{CARD_ENFORCED}</p>}
         </div>
       </div>
 
-      <div className="border-t border-white/20 px-5 py-3">
+      <div className="border-t border-navy/10 px-5 py-4">
         {view && <TxStatus view={view} onRetry={onRetryConfirm} />}
-        {phase.kind === 'review' && phase.notice && <p className="mb-2 text-xs text-gray-100">{phase.notice}</p>}
+        {phase.kind === 'review' && phase.notice && <p className="mb-2 text-12 text-navy">{phase.notice}</p>}
         {!signed && (
           <div className="mt-2 flex flex-wrap items-center gap-2">
             {!connectedKey ? (
-              <button onClick={onConnect} className="rounded bg-primary-700 hover:bg-primary-600 px-4 py-2 text-sm font-semibold text-white">
+              <button onClick={onConnect} className="btn btn-md btn-primary">
                 Connect your wallet
               </button>
             ) : wrongWallet ? (
-              <p className="text-sm text-gray-100">
+              <p className="text-14 text-navy">
                 Connect the wallet <span className="font-mono">{shortAddress(signer)}</span> to sign this.
               </p>
             ) : (
               <button
                 onClick={onSign}
                 disabled={!canSign}
-                className="rounded bg-primary-700 hover:bg-primary-600 px-4 py-2 text-sm font-semibold text-white disabled:opacity-40"
+                className="btn btn-md btn-primary"
               >
                 {busy ? 'Waiting...' : 'Sign in your wallet'}
               </button>
             )}
             {!busy && (
-              <button onClick={onCancel} className="px-3 py-2 text-sm text-gray-400 underline underline-offset-2">
+              <button onClick={onCancel} className="btn btn-md btn-ghost">
                 Not now
               </button>
             )}
           </div>
         )}
         {signed && (
-          <button onClick={onCancel} className="mt-2 px-3 py-1 text-sm text-gray-400 underline underline-offset-2">
+          <button onClick={onCancel} className="btn btn-sm btn-secondary mt-2">
             Close
           </button>
         )}
       </div>
 
-      <footer className="rounded-b-md border-t border-white/20 bg-white/[0.04] px-5 py-2 text-[11px] text-gray-400">
+      <footer className="rounded-b-card border-t border-navy/10 bg-cream-deep/70 px-5 py-2.5 text-11 text-ink-soft">
         <p>{LABEL_TEST_ASSETS}</p>
         <p>{CARD_FOOTER_DECODED}</p>
       </footer>

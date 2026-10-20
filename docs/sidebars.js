@@ -11,6 +11,7 @@ const sidebars = {
     "evidence",
     "limitations",
     "run-it-yourself",
+    "design",
   ],
 };
 

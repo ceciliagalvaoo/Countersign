@@ -1,32 +1,42 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================
+   INK ON CREAM: navy ink on a cream page, drawn by hand.
+   No dark mode, no glass, no gradients outside the agent's orb.
+   ============================================================ */
+
 @layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  *,
+  *::before,
+  *::after {
+    border-color: rgba(27, 43, 107, 0.1);
+  }
+
   body {
-    @apply text-gray-200 bg-[radial-gradient(circle_at_top,#134e4a_0,#020617_55%,_#020617_100%)];
-    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
-      sans-serif;
-    font-weight: 400;
+    @apply bg-cream text-navy font-sans antialiased;
+    font-size: 1rem;
+    line-height: 1.65;
   }
 
   h1,
   h2,
-  h3,
+  h3 {
+    @apply font-display text-navy;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+  }
+
   h4,
   h5,
   h6 {
-    @apply text-white;
-    font-weight: 700;
-  }
-
-  p,
-  span,
-  label,
-  li {
-    font-weight: 400;
+    @apply text-navy;
+    font-weight: 600;
   }
 
   button,
@@ -35,33 +45,414 @@
   textarea {
     font-weight: 500;
   }
+
+  input,
+  select,
+  textarea {
+    background-color: transparent;
+  }
+
+  ::selection {
+    background-color: rgba(37, 71, 201, 0.18);
+    color: #1b2b6b;
+  }
+
+  :focus-visible {
+    outline: 2px solid #2547c9;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
 }
 
-/*
- * Countersign: the single animation gesture.
- * A signature line draws in ink from left to right once and freezes. The investor's empty line
- * pulses amber until she signs. Nothing else on the /agent page moves.
- */
 @layer components {
-  .cs-sign-line {
-    transform-origin: left center;
-    animation: cs-draw 700ms ease-out 1 both;
+  /* Small caps label above every section */
+  .eyebrow {
+    @apply font-sans text-11 font-medium uppercase text-ink-soft;
+    letter-spacing: 0.18em;
   }
+
+  /* Numbers, hashes and amounts: even figures, always in ink */
+  .tabular {
+    font-variant-numeric: lining-nums tabular-nums;
+    font-feature-settings: 'lnum' 1, 'tnum' 1;
+  }
+
+  /* The default surface: cream-deep on cream, one hairline, almost no shadow */
+  .ink-card {
+    @apply rounded-card border border-navy/10 bg-cream-deep/70 shadow-ink-sm;
+  }
+
+  .ink-well {
+    @apply rounded-well border border-navy/10 bg-cream;
+  }
+
+  .ink-input {
+    @apply rounded-well border border-navy/15 bg-cream px-3 py-2 text-14 text-navy placeholder-ink-soft/60 transition-colors focus:border-cobalt focus:outline-none;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-sans font-medium transition-[background-color,border-color,color,transform] duration-200 active:translate-y-px disabled:pointer-events-none disabled:opacity-45;
+  }
+  .btn-sm {
+    @apply h-9 px-4 text-12;
+    letter-spacing: 0.04em;
+  }
+  .btn-md {
+    @apply h-11 px-6 text-14;
+  }
+  .btn-primary {
+    @apply bg-cobalt text-cream shadow-ink-sm hover:bg-navy;
+  }
+  .btn-secondary {
+    @apply border border-cobalt/35 text-cobalt hover:border-cobalt hover:bg-cobalt/5;
+  }
+  .btn-ghost {
+    @apply text-ink-soft hover:bg-navy/5 hover:text-navy;
+  }
+  .btn-danger {
+    @apply border border-vermilion/40 text-vermilion hover:border-vermilion hover:bg-vermilion/5;
+  }
+
+  .hairline {
+    border-top: 1px solid rgba(27, 43, 107, 0.1);
+  }
+
+  /* ---------- Motion: everything below stops under reduced motion ---------- */
+
+  /* A stroke that paints itself in, once, and stays */
+  .ink-draw {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+  .ink-draw--in {
+    animation: ink-draw 1.2s cubic-bezier(0.22, 0.72, 0.2, 1) forwards;
+  }
+
+  /* The nib floats after it has drawn itself */
+  .nib-body {
+    animation: nib-float 5.4s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: 50% 80%;
+  }
+
+  /* The investor's empty signature line breathes until she signs */
   .cs-await-pulse {
     animation: cs-pulse 1.6s ease-in-out infinite;
   }
+
+  /* Content rises in when it first scrolls into view */
+  .rise {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  .rise--in {
+    animation: rise 0.7s cubic-bezier(0.22, 0.72, 0.2, 1) forwards;
+  }
+
+  /* Panels arrive rather than appear */
+  .module-scrim {
+    animation: module-scrim 0.22s ease-out both;
+  }
+  .module-panel {
+    animation: module-panel 0.32s cubic-bezier(0.22, 0.72, 0.2, 1) both;
+  }
+
+  /* One stroke at a time, painted behind the page and faded out */
+  .ambient-stroke {
+    opacity: 0;
+    animation: ambient-cycle 13s ease-in-out forwards;
+  }
+  .ambient-stroke .ink-draw--in {
+    animation-duration: 5.5s;
+  }
+
+  .skeleton {
+    background-color: rgba(27, 43, 107, 0.07);
+    background-image: linear-gradient(90deg, transparent 0%, rgba(244, 240, 229, 0.6) 50%, transparent 100%);
+    background-size: 220% 100%;
+    animation: skeleton-slide 1.5s ease-in-out infinite;
+    border-radius: 2px;
+  }
+
+  /* ---------- The agent's orb: the only place gradients are allowed ---------- */
+
+  .orb {
+    position: relative;
+    width: var(--orb-size);
+    height: var(--orb-size);
+    flex: none;
+  }
+  .orb-shell {
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    overflow: hidden;
+    isolation: isolate;
+    -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 99%, transparent 100%);
+    mask-image: radial-gradient(circle at 50% 50%, #000 99%, transparent 100%);
+    transform: translateZ(0);
+    background: radial-gradient(circle at 50% 52%, #241463 0%, #0e0930 100%);
+    box-shadow:
+      inset 0 0 calc(var(--orb-size) * 0.05) rgba(255, 255, 255, 0.16),
+      inset 0 calc(var(--orb-size) * -0.09) calc(var(--orb-size) * 0.18) rgba(4, 2, 22, 0.6),
+      0 calc(var(--orb-size) * 0.04) calc(var(--orb-size) * 0.12) rgba(27, 43, 107, 0.16);
+  }
+  .orb-aurora {
+    position: absolute;
+    inset: calc(var(--orb-size) * -0.25);
+    transform-origin: 50% 50%;
+    will-change: transform;
+  }
+  .orb-aurora--1 {
+    background: conic-gradient(from 210deg, #2547c9 0deg, #35c8e8 68deg, #6e4bff 152deg, #3a1f9e 234deg, #2547c9 360deg);
+    filter: blur(calc(var(--orb-size) * 0.1));
+    opacity: 0.8;
+    animation: orb-sweep 20s ease-in-out infinite;
+  }
+  .orb-aurora--2 {
+    background: radial-gradient(circle at 34% 30%, #35c8e8 0%, rgba(53, 200, 232, 0.28) 20%, transparent 44%);
+    filter: blur(calc(var(--orb-size) * 0.06));
+    mix-blend-mode: screen;
+    opacity: 0.95;
+    animation: orb-drift-a 15s ease-in-out infinite;
+  }
+  .orb-aurora--3 {
+    background: radial-gradient(circle at 70% 70%, #7b5bff 0%, rgba(123, 91, 255, 0.22) 22%, transparent 46%);
+    filter: blur(calc(var(--orb-size) * 0.07));
+    mix-blend-mode: screen;
+    opacity: 0.9;
+    animation: orb-drift-b 21s ease-in-out infinite;
+  }
+  .orb-aurora--4 {
+    background: radial-gradient(circle at 64% 22%, #2547c9 0%, transparent 38%);
+    filter: blur(calc(var(--orb-size) * 0.05));
+    mix-blend-mode: screen;
+    opacity: 0.85;
+    animation: orb-drift-c 27s ease-in-out infinite;
+  }
+  .orb-gloss {
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    background:
+      radial-gradient(circle at 34% 22%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.05) 22%, transparent 42%),
+      radial-gradient(circle at 50% 116%, rgba(53, 200, 232, 0.2) 0%, transparent 44%);
+    pointer-events: none;
+  }
+  .orb-body {
+    animation: orb-breathe 6s ease-in-out infinite;
+  }
+  /* Working: the light moves faster while the agent calls its tools */
+  .orb[data-state='thinking'] .orb-aurora--1 {
+    animation-duration: 5s;
+  }
+  .orb[data-state='thinking'] .orb-aurora--2 {
+    animation-duration: 4s;
+  }
+  .orb[data-state='thinking'] .orb-aurora--3 {
+    animation-duration: 6s;
+  }
+  .orb[data-state='thinking'] .orb-ring {
+    display: block;
+  }
+  /* Replied: one short pulse, then back to breathing */
+  .orb[data-state='replied'] .orb-body {
+    animation: orb-pulse 0.82s ease-in-out 2;
+  }
+  .orb-ring {
+    display: none;
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    border: 1px solid rgba(37, 71, 201, 0.45);
+    opacity: 0;
+    animation: orb-ripple 1.9s cubic-bezier(0.2, 0.6, 0.3, 1) infinite;
+    pointer-events: none;
+  }
+  .orb-ring--2 {
+    animation-delay: 0.63s;
+  }
+  .orb-ring--3 {
+    animation-delay: 1.26s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ink-draw,
+    .ink-draw--in {
+      stroke-dashoffset: 0;
+      animation: none;
+    }
+    .nib-body,
+    .cs-await-pulse,
+    .skeleton,
+    .module-scrim,
+    .module-panel,
+    .orb-aurora,
+    .orb-body {
+      animation: none;
+    }
+    .rise {
+      opacity: 1;
+      transform: none;
+    }
+    .rise--in {
+      animation: none;
+    }
+    .orb-ring {
+      animation: none;
+      opacity: 0.28;
+    }
+    .ambient-stroke {
+      display: none;
+    }
+  }
 }
 
-@keyframes cs-draw {
-  from { transform: scaleX(0); }
-  to { transform: scaleX(1); }
+@keyframes ink-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes nib-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-2.5%) rotate(-0.8deg);
+  }
 }
 
 @keyframes cs-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.45; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .cs-sign-line, .cs-await-pulse { animation: none; }
+@keyframes rise {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes module-scrim {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes module-panel {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+@keyframes ambient-cycle {
+  0% {
+    opacity: 0;
+  }
+  14% {
+    opacity: 0.13;
+  }
+  70% {
+    opacity: 0.13;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes skeleton-slide {
+  0% {
+    background-position: 120% 0;
+  }
+  100% {
+    background-position: -120% 0;
+  }
+}
+
+@keyframes orb-sweep {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.09);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+@keyframes orb-drift-a {
+  0%,
+  100% {
+    transform: rotate(0deg) translate(0, 0) scale(1);
+  }
+  33% {
+    transform: rotate(118deg) translate(7%, -5%) scale(1.14);
+  }
+  66% {
+    transform: rotate(242deg) translate(-6%, 6%) scale(0.92);
+  }
+}
+
+@keyframes orb-drift-b {
+  0%,
+  100% {
+    transform: rotate(0deg) translate(0, 0) scale(1.06);
+  }
+  40% {
+    transform: rotate(-140deg) translate(-8%, -7%) scale(0.88);
+  }
+  75% {
+    transform: rotate(-260deg) translate(5%, 8%) scale(1.12);
+  }
+}
+
+@keyframes orb-drift-c {
+  0%,
+  100% {
+    transform: rotate(0deg) translate(0, 0) scale(0.98);
+  }
+  50% {
+    transform: rotate(200deg) translate(-4%, -9%) scale(1.16);
+  }
+}
+
+@keyframes orb-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.022);
+  }
+}
+
+@keyframes orb-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes orb-ripple {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1.55);
+    opacity: 0;
+  }
 }

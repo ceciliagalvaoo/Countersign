@@ -99,7 +99,7 @@ const InvestorBadge: React.FC<{ userId: string }> = React.memo(({ userId }) => {
 
   if (loading) {
     return (
-      <div className="bg-white/[0.04] border border-white/[0.12] backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-[0_18px_60px_rgba(0,0,0,0.45)]">
+      <div className="bg-cream-deep/70 border border-navy/10 rounded-card p-6 md:p-8 shadow-ink">
         <div className="flex items-center justify-center py-8">
           <div className="w-8 h-8 border-4 border-dashed rounded-full animate-spin border-primary"></div>
         </div>
@@ -114,7 +114,7 @@ const InvestorBadge: React.FC<{ userId: string }> = React.memo(({ userId }) => {
   const { badge, progress } = badgeData;
 
   return (
-    <div className="bg-white/[0.04] border border-white/[0.12] backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-[0_18px_60px_rgba(0,0,0,0.45)]">
+    <div className="bg-cream-deep/70 border border-navy/10 rounded-card p-6 md:p-8 shadow-ink">
       <h4 className="text-lg font-semibold text-white mb-3">
         Investor Badge
       </h4>
@@ -176,7 +176,7 @@ const InvestorBadge: React.FC<{ userId: string }> = React.memo(({ userId }) => {
           <button
             onClick={proveOnChain}
             disabled={proving}
-            className="block mt-2 px-3 py-1.5 text-xs font-medium text-white bg-primary rounded-lg hover:bg-primary/90 disabled:opacity-50"
+            className="block mt-2 px-3 py-1.5 text-xs font-medium text-cream bg-primary rounded-full hover:bg-navy disabled:opacity-50"
           >
             {proving ? 'Proving...' : 'Prove tier on Stellar (ZK)'}
           </button>

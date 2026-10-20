@@ -53,7 +53,7 @@ const ConsultorDashboard: React.FC = () => {
           <p className="text-[10px] tracking-[0.2em] uppercase text-emerald-300">
             Consultant workspace
           </p>
-          <h1 className="text-3xl md:text-4xl font-bold text-white">My Funds</h1>
+          <h1 className="text-40 md:text-40 font-medium text-white">My Funds</h1>
           <p className="text-white/70 text-sm mt-1">
             Create and manage structured tokenized receivable funds.
           </p>
@@ -61,7 +61,7 @@ const ConsultorDashboard: React.FC = () => {
 
         <button
           onClick={() => navigate('/fundos/new')}
-          className="flex items-center gap-2 px-5 py-3 rounded-xl bg-white text-black font-medium shadow-[0_10px_30px_rgba(0,0,0,0.35)] hover:scale-[1.02] transition"
+          className="flex items-center gap-2 px-5 py-3 rounded-full bg-cobalt text-cream font-medium shadow-ink transition"
         >
           <FiPlus className="text-lg" />
           Create Fund
@@ -79,8 +79,8 @@ const ConsultorDashboard: React.FC = () => {
       </div>
 
       {/* FUNDS LIST */}
-      <div className="bg-white/[0.03] border border-white/[0.12] backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-[0_18px_60px_rgba(0,0,0,0.45)]">
-        <h2 className="text-xl font-semibold text-white mb-4">Fund Details</h2>
+      <div className="bg-cream-deep/70 border border-navy/10 rounded-card p-6 md:p-8 shadow-ink">
+        <h2 className="text-28 font-medium text-white mb-4">Fund Details</h2>
 
         {loading ? (
           <div className="flex justify-center py-12">
@@ -104,7 +104,7 @@ const ConsultorDashboard: React.FC = () => {
 
 const StatCard: React.FC<{ icon: React.ReactNode; title: string; value: number | string }> = 
 ({ icon, title, value }) => (
-  <div className="p-6 md:p-8 bg-white/[0.03] border border-white/[0.12] backdrop-blur-xl rounded-2xl shadow-[0_18px_60px_rgba(0,0,0,0.45)] flex items-center gap-4">
+  <div className="p-6 md:p-8 bg-cream-deep/70 border border-navy/10 rounded-card shadow-ink flex items-center gap-4">
     <div className="p-3 rounded-full bg-emerald-300/20 text-emerald-200 text-xl">
       {icon}
     </div>
@@ -123,13 +123,13 @@ const FundCard: React.FC<{ fund: Fund; onManage: () => void }> = ({ fund, onMana
   }[fund.status] || "bg-gray-500/20 text-gray-300";
 
   return (
-    <div className="bg-white/[0.03] border border-white/[0.12] backdrop-blur-xl rounded-2xl p-6 md:p-7 shadow-[0_14px_45px_rgba(0,0,0,0.4)] flex flex-col justify-between">
+    <div className="bg-cream-deep/70 border border-navy/10 rounded-card p-6 md:p-7 shadow-ink flex flex-col justify-between">
       <div className="space-y-2">
         <div className="flex justify-between items-start">
-          <h3 className="text-lg font-bold text-white">
+          <h3 className="text-20 font-medium text-white">
             {fund.name} ({fund.symbol})
           </h3>
-          <span className={`px-2 py-1 rounded-full text-[11px] font-medium ${statusColor}`}>
+          <span className={`px-2 py-1 rounded-full text-11 font-medium ${statusColor}`}>
             {fund.status}
           </span>
         </div>
@@ -144,7 +144,7 @@ const FundCard: React.FC<{ fund: Fund; onManage: () => void }> = ({ fund, onMana
 
       <button
         onClick={onManage}
-        className="w-full mt-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 transition text-sm text-white font-medium"
+        className="w-full mt-5 py-2.5 rounded-card bg-white/10 hover:bg-white/20 transition text-sm text-white font-medium"
       >
         Manage Fund
       </button>

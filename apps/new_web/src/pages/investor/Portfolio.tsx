@@ -76,13 +76,13 @@ const Portfolio: React.FC = () => {
 
     if (!isConnected) {
         return (
-            <div className="bg-white/[0.04] border border-white/[0.12] backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-[0_18px_60px_rgba(0,0,0,0.45)] text-center">
+            <div className="bg-cream-deep/70 border border-navy/10 rounded-card p-6 md:p-8 shadow-ink text-center">
                 <FiBriefcase className="mx-auto text-6xl text-gray-300 mb-4" />
-                <h2 className="text-2xl font-bold mb-2">Connect Your Wallet</h2>
+                <h2 className="text-28 font-medium mb-2">Connect Your Wallet</h2>
                 <p className="text-gray-600 mb-6">Please connect your Stellar wallet to view your portfolio.</p>
                 <button
                     onClick={connect}
-                    className="px-6 py-3 text-white bg-primary rounded-lg hover:bg-primary/90 transition-colors"
+                    className="px-6 py-3 text-cream bg-primary rounded-full hover:bg-navy transition-colors"
                 >
                     Connect Wallet
                 </button>
@@ -93,14 +93,14 @@ const Portfolio: React.FC = () => {
     return (
   <div className="max-w-6xl mx-auto px-4 py-10 space-y-6">
     {/* Card principal */}
-    <div className="bg-white/[0.04] border border-white/[0.12] backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-[0_18px_60px_rgba(0,0,0,0.45)]">
+    <div className="bg-cream-deep/70 border border-navy/10 rounded-card p-6 md:p-8 shadow-ink">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
         <div>
           <p className="text-[10px] tracking-[0.2em] uppercase text-emerald-300">
             Investor
           </p>
-          <h2 className="text-xl md:text-2xl font-bold text-white flex items-center gap-2">
+          <h2 className="text-28 md:text-28 font-medium text-white flex items-center gap-2">
             <FiBriefcase className="text-emerald-300" />
             My Portfolio
           </h2>
@@ -137,7 +137,7 @@ const Portfolio: React.FC = () => {
         <>
           {/* Resumo */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-            <div className="bg-white/[0.03] border border-white/[0.12] rounded-2xl p-4 md:p-5">
+            <div className="bg-cream-deep/70 border border-navy/10 rounded-card p-4 md:p-5">
               <p className="text-xs font-semibold text-emerald-200 uppercase tracking-wide mb-1">
                 Total invested
               </p>
@@ -145,7 +145,7 @@ const Portfolio: React.FC = () => {
                 <UsdcAmount amount={totalInvested} />
               </p>
             </div>
-            <div className="bg-white/[0.03] border border-white/[0.12] rounded-2xl p-4 md:p-5">
+            <div className="bg-cream-deep/70 border border-navy/10 rounded-card p-4 md:p-5">
               <p className="text-xs font-semibold text-sky-200 uppercase tracking-wide mb-1">
                 Total quotas
               </p>
@@ -153,7 +153,7 @@ const Portfolio: React.FC = () => {
                 {totalQuotas.toLocaleString()}
               </p>
             </div>
-            <div className="bg-white/[0.03] border border-white/[0.12] rounded-2xl p-4 md:p-5">
+            <div className="bg-cream-deep/70 border border-navy/10 rounded-card p-4 md:p-5">
               <p className="text-xs font-semibold text-indigo-200 uppercase tracking-wide mb-1">
                 Funds invested
               </p>
@@ -165,7 +165,7 @@ const Portfolio: React.FC = () => {
 
           {/* Holdings */}
           <div className="space-y-3 mb-3">
-            <h3 className="text-sm font-semibold text-emerald-300 uppercase tracking-wide">
+            <h3 className="text-emerald-300 eyebrow font-sans">
               Your holdings
             </h3>
             <p className="text-xs text-white/60">
@@ -176,7 +176,7 @@ const Portfolio: React.FC = () => {
             {Object.values(groupedOrders).map((group: any) => (
               <div
                 key={group.symbol}
-                className="bg-white/[0.03] border border-white/[0.12] rounded-2xl p-5 md:p-6 flex flex-col gap-3"
+                className="bg-cream-deep/70 border border-navy/10 rounded-card p-5 md:p-6 flex flex-col gap-3"
               >
                 <div className="flex items-start justify-between">
                   <div>
@@ -230,7 +230,7 @@ const Portfolio: React.FC = () => {
                   {group.orders.map((order: Order) => (
                     <div
                       key={order.id}
-                      className="flex items-center justify-between text-[11px] text-white/55"
+                      className="flex items-center justify-between text-11 text-white/55"
                     >
                       <span>{new Date(order.createdAt).toLocaleDateString()}</span>
                       {order.txHash && (

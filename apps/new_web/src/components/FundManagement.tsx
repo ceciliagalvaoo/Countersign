@@ -114,7 +114,7 @@ const FundManagement: React.FC<FundManagementProps> = ({ fund, onBack }) => {
                     <button onClick={onBack} className="p-2 rounded-full hover:bg-gray-700">
                         <FiArrowLeft />
                     </button>
-                    <h1 className="text-2xl font-bold text-white">Manage: {fund.name}</h1>
+                    <h1 className="text-28 font-medium text-white">Manage: {fund.name}</h1>
                 </div>
 
                 {/* Tabs & Add Button */}
@@ -129,7 +129,7 @@ const FundManagement: React.FC<FundManagementProps> = ({ fund, onBack }) => {
                                 ? navigate(`/assignors/new?fundId=${fund.id}`)
                                 : navigate(`/debtors/new?fundId=${fund.id}`)
                         }
-                        className="flex items-center px-4 py-2 text-sm text-white bg-primary rounded-lg hover:bg-primary/90"
+                        className="flex items-center px-4 py-2 text-sm text-cream bg-primary rounded-full hover:bg-navy"
                     >
                         <FiPlus className="mr-2" />
                         Add {activeTab === 'assignors' ? 'Assignor' : 'Debtor'}
@@ -182,7 +182,7 @@ const PartyList: React.FC<{ items: (Cedente | Sacado)[]; onSelect: (item: Cedent
                                 ? 'bg-primary-100 text-primary-800'
                                 : item.status === 'PENDING'
                                     ? 'bg-yellow-100 text-yellow-800'
-                                    : 'bg-[#fa7f7f]-100 text-red-800'
+                                    : 'bg-red-100 text-red-800'
                         }`}>
                             {item.status}
                         </span>
@@ -213,11 +213,11 @@ const DetailModal: React.FC<{
     onClose: () => void;
 }> = ({ item, onClose }) => {
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-navy/30">
             <div className="bg-dark rounded-lg shadow-xl w-full max-w-3xl p-6 m-4">
                 <div className="flex items-start justify-between gap-3">
                     <div>
-                        <h3 className="text-xl font-semibold text-white">{item.name}</h3>
+                        <h3 className="text-20 font-medium text-white">{item.name}</h3>
                         <p className="text-sm text-gray-300">Document: {item.document}</p>
                         <p className="text-sm text-gray-300">Fund: {item.fund?.name || 'N/A'}</p>
                     </div>
@@ -227,7 +227,7 @@ const DetailModal: React.FC<{
                                 ? 'bg-primary-100 text-primary-800'
                                 : item.status === 'PENDING'
                                     ? 'bg-yellow-100 text-yellow-800'
-                                    : 'bg-[#fa7f7f]-100 text-red-800'
+                                    : 'bg-red-100 text-red-800'
                         }`}>
                             {item.status}
                         </span>

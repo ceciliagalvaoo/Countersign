@@ -29,35 +29,35 @@ const LoginPage: React.FC = () => {
   };
 
   const inputBase =
-    'w-full rounded-lg px-3 py-3 bg-white/5 border border-white/15 text-white text-sm placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#169976] focus:border-transparent transition';
+    'ink-input w-full py-3';
 
   return (
-    <div className="min-h-screen flex flex-col lg:flex-row bg-[#020617] bg-[radial-gradient(circle_at_top,_#134e4a_0,_#020617_55%,_#020617_100%)] text-white">
+    <div className="min-h-screen flex flex-col lg:flex-row bg-cream text-navy">
       {/* Hero topo (mobile) / lateral (desktop) */}
-      <div className="w-full h-40 sm:h-56 lg:h-auto lg:flex-[0.6] relative overflow-hidden">
-        <BrandHero className="absolute inset-0" />
+      <div className="w-full lg:flex-[0.6] relative">
+        <BrandHero className="min-h-full" />
       </div>
 
       {/* Form */}
       <div className="flex-1 lg:flex-[0.4] flex items-center justify-center px-4 sm:px-6 lg:px-10 xl:px-14 py-8 lg:py-0">
         <div className="w-full max-w-sm sm:max-w-md">
-          <div className="bg-white/[0.04] border border-white/[0.12] backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-[0_18px_60px_rgba(0,0,0,0.45)]">
+          <div className="ink-card module-panel p-6 md:p-8">
             <form onSubmit={handleSubmit} className="space-y-8">
               {/* Header */}
               <div className="space-y-2">
-                <p className="text-[10px] sm:text-xs tracking-[0.2em] uppercase text-white/70">
+                <p className="eyebrow">
                   {PRODUCT_NAME}
                 </p>
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white">
+                <h2 className="text-40">
                   Sign in
                 </h2>
-                <p className="text-xs sm:text-sm text-white/70">
+                <p className="text-14 text-ink-soft">
                   Investor, issuer and fund manager access.
                 </p>
               </div>
 
               {error && (
-                <p className="text-sm text-red-400 bg-red-500/10 border border-red-500/40 rounded-lg px-3 py-2">
+                <p role="alert" className="text-14 text-vermilion bg-vermilion/5 border border-vermilion/30 rounded-well px-3 py-2">
                   {error}
                 </p>
               )}
@@ -65,7 +65,7 @@ const LoginPage: React.FC = () => {
               {/* Campos */}
               <div className="space-y-5">
                 <div>
-                  <label className="block text-xs font-semibold text-white/80 mb-1 tracking-wide uppercase">
+                  <label className="eyebrow mb-1.5 block">
                     Email
                   </label>
                   <input
@@ -79,7 +79,7 @@ const LoginPage: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-white/80 mb-1 tracking-wide uppercase">
+                  <label className="eyebrow mb-1.5 block">
                     Password
                   </label>
                   <input
@@ -94,12 +94,12 @@ const LoginPage: React.FC = () => {
               </div>
 
               {/* Link register */}
-              <div className="flex items-center justify-between text-xs sm:text-sm text-white/70">
+              <div className="flex items-center justify-between text-14 text-ink-soft">
                 <div className="flex items-center gap-1">
                   <span>Don&apos;t have an account?</span>
                   <Link
                     to="/register"
-                    className="text-emerald-300 font-semibold hover:text-emerald-200 hover:underline underline-offset-4 transition"
+                    className="font-medium text-cobalt underline-offset-4 hover:underline"
                   >
                     Create one
                   </Link>
@@ -110,7 +110,7 @@ const LoginPage: React.FC = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3.5 text-sm font-medium rounded-2xl bg-white text-black hover:opacity-90 hover:scale-[1.02] shadow-[0_10px_30px_rgba(0,0,0,0.35)] transition disabled:opacity-60 disabled:cursor-not-allowed"
+                className="btn btn-md btn-primary w-full"
               >
                 {loading ? 'Logging in…' : 'Sign in'}
               </button>
@@ -118,9 +118,7 @@ const LoginPage: React.FC = () => {
             </form>
           </div>
 
-          <div className="mt-6 text-center text-[11px] text-white/40">
-            {PRODUCT_NAME}
-          </div>
+          
         </div>
       </div>
     </div>

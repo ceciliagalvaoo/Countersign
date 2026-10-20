@@ -94,7 +94,7 @@ const InvestmentList: React.FC = () => {
       case 'PENDING_APPROVAL':
         return 'bg-amber-500/20 text-amber-200 border border-amber-400/40';
       case 'REJECTED':
-        return 'bg-[#FA7F7F] text-red-200 border border-[#FA7F7F]';
+        return 'bg-vermilion text-red-200 border border-vermilion';
       default:
         return 'bg-slate-600/60 text-slate-100 border border-slate-400/40';
     }
@@ -111,13 +111,13 @@ const InvestmentList: React.FC = () => {
 
   return (
     <div className="max-w-10xl mx-auto px-4 py-8">
-      <div className="bg-white/[0.04] border border-white/[0.12] backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-[0_18px_60px_rgba(0,0,0,0.45)]">
+      <div className="bg-cream-deep/70 border border-navy/10 rounded-card p-6 md:p-8 shadow-ink">
         {/* Header */}
         <div className="mb-6">
           <p className="text-[10px] tracking-[0.2em] uppercase text-emerald-300">
             Fund manager
           </p>
-          <h2 className="text-2xl md:text-3xl font-bold text-white mt-1">
+          <h2 className="text-28 md:text-40 font-medium text-white mt-1">
             Manage investments
           </h2>
           <p className="text-xs md:text-sm text-white/70 mt-1">
@@ -162,25 +162,25 @@ const InvestmentList: React.FC = () => {
               <table className="min-w-full text-sm">
                 <thead>
                   <tr className="border-b border-white/10">
-                    <th className="py-3 px-4 text-left text-[11px] font-semibold text-white/60 uppercase tracking-wide">
+                    <th className="py-3 px-4 text-left text-11 font-semibold text-white/60 uppercase tracking-wide">
                       Investor
                     </th>
-                    <th className="py-3 px-4 text-left text-[11px] font-semibold text-white/60 uppercase tracking-wide">
+                    <th className="py-3 px-4 text-left text-11 font-semibold text-white/60 uppercase tracking-wide">
                       Fund
                     </th>
-                    <th className="py-3 px-4 text-left text-[11px] font-semibold text-white/60 uppercase tracking-wide">
+                    <th className="py-3 px-4 text-left text-11 font-semibold text-white/60 uppercase tracking-wide">
                       Quantity
                     </th>
-                    <th className="py-3 px-4 text-left text-[11px] font-semibold text-white/60 uppercase tracking-wide">
+                    <th className="py-3 px-4 text-left text-11 font-semibold text-white/60 uppercase tracking-wide">
                       Total
                     </th>
-                    <th className="py-3 px-4 text-left text-[11px] font-semibold text-white/60 uppercase tracking-wide">
+                    <th className="py-3 px-4 text-left text-11 font-semibold text-white/60 uppercase tracking-wide">
                       Date
                     </th>
-                    <th className="py-3 px-4 text-left text-[11px] font-semibold text-white/60 uppercase tracking-wide">
+                    <th className="py-3 px-4 text-left text-11 font-semibold text-white/60 uppercase tracking-wide">
                       Status
                     </th>
-                    <th className="py-3 px-4 text-left text-[11px] font-semibold text-white/60 uppercase tracking-wide">
+                    <th className="py-3 px-4 text-left text-11 font-semibold text-white/60 uppercase tracking-wide">
                       Actions
                     </th>
                   </tr>
@@ -212,7 +212,7 @@ const InvestmentList: React.FC = () => {
                       <td className="py-3 px-4 text-sm text-white">
                         {item.quantity.toLocaleString()}
                       </td>
-                      <td className="py-3 px-4 text-sm font-medium font-mono tabular-nums text-white">
+                      <td className="py-3 px-4 text-sm font-medium font-mono tabular text-white">
                         <UsdcAmount amount={item.total} />
                       </td>
                       <td className="py-3 px-4 text-xs text-white/60">
@@ -221,7 +221,7 @@ const InvestmentList: React.FC = () => {
                       <td className="py-3 px-4">
                         <div className="flex flex-col gap-1">
                           <span
-                            className={`px-2 py-1 text-[11px] font-semibold rounded-full text-center ${getStatusBadgeClass(
+                            className={`px-2 py-1 text-11 font-semibold rounded-full text-center ${getStatusBadgeClass(
                               item.status
                             )}`}
                           >
@@ -229,7 +229,7 @@ const InvestmentList: React.FC = () => {
                           </span>
                           {item.approvalStatus && (
                             <span
-                              className={`px-2 py-1 text-[11px] font-semibold rounded-full text-center ${getApprovalBadgeClass(
+                              className={`px-2 py-1 text-11 font-semibold rounded-full text-center ${getApprovalBadgeClass(
                                 item.approvalStatus
                               )}`}
                             >
@@ -246,7 +246,7 @@ const InvestmentList: React.FC = () => {
                                 <button
                                   onClick={() => handleApprove(item)}
                                   disabled={processingId === item.id}
-                                  className="px-3 py-1.5 text-xs rounded-lg bg-emerald-500 hover:bg-emerald-400 text-white font-medium disabled:bg-emerald-500/60 disabled:cursor-not-allowed"
+                                  className="px-3 py-1.5 text-xs rounded-full bg-emerald-500 hover:bg-emerald-400 text-cream font-medium disabled:bg-emerald-500/60 disabled:cursor-not-allowed"
                                 >
                                   {processingId === item.id
                                     ? 'Processing…'
@@ -255,7 +255,7 @@ const InvestmentList: React.FC = () => {
                                 <button
                                   onClick={() => handleReject(item)}
                                   disabled={processingId === item.id}
-                                  className="px-3 py-1.5 text-xs rounded-lg bg-[#FA7F7F] hover:bg-red-400 text-white font-medium disabled:bg-red-500/60 disabled:cursor-not-allowed"
+                                  className="px-3 py-1.5 text-xs rounded-full bg-vermilion hover:bg-red-400 text-cream font-medium disabled:bg-red-500/60 disabled:cursor-not-allowed"
                                 >
                                   {processingId === item.id
                                     ? 'Processing…'
@@ -269,7 +269,7 @@ const InvestmentList: React.FC = () => {
                               href={`https://stellar.expert/explorer/testnet/tx/${item.txHash}`}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-[11px] text-emerald-200 hover:text-emerald-100"
+                              className="text-11 text-emerald-200 hover:text-emerald-100"
                             >
                               Payment TX
                             </a>
@@ -279,7 +279,7 @@ const InvestmentList: React.FC = () => {
                               href={`https://stellar.expert/explorer/testnet/tx/${item.refundTxHash}`}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-[11px] text-emerald-200 hover:text-emerald-100"
+                              className="text-11 text-emerald-200 hover:text-emerald-100"
                             >
                               Refund TX
                             </a>
@@ -289,7 +289,7 @@ const InvestmentList: React.FC = () => {
                               href={`https://stellar.expert/explorer/testnet/tx/${item.tokenMintTxHash}`}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-[11px] text-emerald-200 hover:text-emerald-100"
+                              className="text-11 text-emerald-200 hover:text-emerald-100"
                             >
                               Token mint TX
                             </a>
@@ -307,7 +307,7 @@ const InvestmentList: React.FC = () => {
               {filteredInvestments.map((item) => (
                 <div
                   key={item.id}
-                  className="bg-white/[0.03] border border-white/[0.12] backdrop-blur-xl rounded-2xl p-5 shadow-[0_14px_45px_rgba(0,0,0,0.4)]"
+                  className="bg-cream-deep/70 border border-navy/10 rounded-card p-5 shadow-ink"
                 >
                   <div className="flex justify-between items-start gap-3">
                     <div>
@@ -325,7 +325,7 @@ const InvestmentList: React.FC = () => {
                     </div>
                     <div className="flex flex-col gap-1 items-end">
                       <span
-                        className={`px-2 py-1 text-[11px] font-semibold rounded-full ${getStatusBadgeClass(
+                        className={`px-2 py-1 text-11 font-semibold rounded-full ${getStatusBadgeClass(
                           item.status
                         )}`}
                       >
@@ -333,7 +333,7 @@ const InvestmentList: React.FC = () => {
                       </span>
                       {item.approvalStatus && (
                         <span
-                          className={`px-2 py-1 text-[11px] font-semibold rounded-full ${getApprovalBadgeClass(
+                          className={`px-2 py-1 text-11 font-semibold rounded-full ${getApprovalBadgeClass(
                             item.approvalStatus
                           )}`}
                         >
@@ -352,7 +352,7 @@ const InvestmentList: React.FC = () => {
                     </div>
                     <div>
                       <span className="text-white/60">Total</span>
-                      <p className="font-medium font-mono tabular-nums text-white">
+                      <p className="font-medium font-mono tabular text-white">
                         <UsdcAmount amount={item.total} />
                       </p>
                     </div>
@@ -371,7 +371,7 @@ const InvestmentList: React.FC = () => {
                           <button
                             onClick={() => handleApprove(item)}
                             disabled={processingId === item.id}
-                            className="px-3 py-2 text-xs rounded-lg bg-emerald-500 hover:bg-emerald-400 text-white font-medium disabled:bg-emerald-500/60 disabled:cursor-not-allowed"
+                            className="px-3 py-2 text-xs rounded-full bg-emerald-500 hover:bg-emerald-400 text-cream font-medium disabled:bg-emerald-500/60 disabled:cursor-not-allowed"
                           >
                             {processingId === item.id
                               ? 'Processing…'
@@ -380,7 +380,7 @@ const InvestmentList: React.FC = () => {
                           <button
                             onClick={() => handleReject(item)}
                             disabled={processingId === item.id}
-                            className="px-3 py-2 text-xs rounded-lg bg-[#FA7F7F] hover:bg-red-400 text-white font-medium disabled:bg-red-500/60 disabled:cursor-not-allowed"
+                            className="px-3 py-2 text-xs rounded-full bg-vermilion hover:bg-red-400 text-cream font-medium disabled:bg-red-500/60 disabled:cursor-not-allowed"
                           >
                             {processingId === item.id
                               ? 'Processing…'
@@ -395,7 +395,7 @@ const InvestmentList: React.FC = () => {
                           href={`https://stellar.expert/explorer/testnet/tx/${item.txHash}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-[11px] text-emerald-200 hover:text-emerald-100"
+                          className="text-11 text-emerald-200 hover:text-emerald-100"
                         >
                           View payment transaction
                         </a>
@@ -405,7 +405,7 @@ const InvestmentList: React.FC = () => {
                           href={`https://stellar.expert/explorer/testnet/tx/${item.refundTxHash}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-[11px] text-emerald-200 hover:text-emerald-100"
+                          className="text-11 text-emerald-200 hover:text-emerald-100"
                         >
                           View refund transaction
                         </a>
@@ -415,7 +415,7 @@ const InvestmentList: React.FC = () => {
                           href={`https://stellar.expert/explorer/testnet/tx/${item.tokenMintTxHash}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-[11px] text-emerald-200 hover:text-emerald-100"
+                          className="text-11 text-emerald-200 hover:text-emerald-100"
                         >
                           View token mint transaction
                         </a>

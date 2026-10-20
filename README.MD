@@ -1,6 +1,8 @@
+<img src="docs/static/img/countersign.svg" alt="Countersign: a fountain pen nib drawn from three strokes that meet at one point" width="64" />
+
 # Countersign
 
-**An investing agent that cannot buy a fund unit unless the investor's mandate, the fund's issuer and the network agree.**
+**An investing agent that cannot buy a fund unit unless the investor's mandate, the fund's issuer and a wallet contract the agent cannot change agree.**
 
 *Sign only what you can read.*
 
@@ -21,14 +23,19 @@
 
 All USDC and fund units here are test assets on the Stellar public test network, with no monetary value, except the mainnet transactions of the mainnet slice (section 6, limitation 14). Transaction hashes prove the mechanism, not a market.
 
+**Submission documents** (technical document, presentation deck, security self-assessment, execution evidence, all as PDF): [`deliverables/`](deliverables/README.md).
+
 ---
 
 ## 1. Project Overview
 
 - **Track:** 2026 Shenzhen FinTechathon, International AI Track, Topic F (Agent Wallet)
 - **Team:** Cecília Galvão ([@ceciliagalvaoo](https://github.com/ceciliagalvaoo)) and Pablo Azevedo ([@zzaved](https://github.com/zzaved))
+
+  <img src="docs/static/img/team/Cecilia.png" alt="Cecília Galvão" width="56" /> <img src="docs/static/img/team/Pablo.png" alt="Pablo Azevedo" width="56" />
+
 - **Project name:** Countersign
-- **One-line summary:** An investing agent that cannot buy a fund unit unless the investor's mandate, the fund's issuer and the network agree.
+- **One-line summary:** An investing agent that cannot buy a fund unit unless the investor's mandate, the fund's issuer and a wallet contract the agent cannot change agree.
 
 Countersign is an AI agent (Claude, by Anthropic) with its own mandate wallet on Stellar. It buys units of receivables funds for an investor who already holds USDC. Every first purchase in a new fund waits for a card she can read and sign.
 
@@ -178,7 +185,7 @@ Other third-party components with licenses that are not MIT, ISC, BSD or Apache-
 - `@reown/appkit*` and `@walletconnect/*`: Reown Community License and WalletConnect Community License (source-available, not OSI-approved; see each package's `LICENSE.md`).
 - `@creit.tech/xbull-wallet-connect`, `@hot-wallet/sdk`, `@near-wallet-selector/core` and `text-encoding-utf-8`: no license declared in their package metadata.
 
-Everything else is permissive. Smart contracts: `soroban-sdk` 28.0.0 (Apache-2.0), with permissively licensed transitive crates (MIT, Apache-2.0, BSD, Zlib, Unlicense, Unicode-3.0). API (`apps/api`): Fastify, Prisma, `@stellar/stellar-sdk`, `@blend-capital/blend-sdk`, zod, jsonwebtoken, bcryptjs, dotenv, poseidon-lite (MIT, Apache-2.0, BSD-2-Clause). Agent (`apps/agent`): `@anthropic-ai/sdk`, Fastify, zod, dotenv (MIT, BSD-2-Clause). Web (`apps/new_web`): React, React Router, Vite, Tailwind CSS, recharts, axios, lucide-react, react-icons, react-hot-toast, `@stellar/stellar-sdk` (MIT, ISC, Apache-2.0). Fonts: IBM Plex Sans, IBM Plex Mono, IBM Plex Serif and Inter, loaded from Google Fonts under the SIL Open Font License 1.1 (no font files in the repository).
+Everything else is permissive. Smart contracts: `soroban-sdk` 28.0.0 (Apache-2.0), with permissively licensed transitive crates (MIT, Apache-2.0, BSD, Zlib, Unlicense, Unicode-3.0). API (`apps/api`): Fastify, Prisma, `@stellar/stellar-sdk`, `@blend-capital/blend-sdk`, zod, jsonwebtoken, bcryptjs, dotenv, poseidon-lite (MIT, Apache-2.0, BSD-2-Clause). Agent (`apps/agent`): `@anthropic-ai/sdk`, Fastify, zod, dotenv (MIT, BSD-2-Clause). Web (`apps/new_web`): React, React Router, Vite, Tailwind CSS, recharts, axios, lucide-react, react-icons, react-hot-toast, `@stellar/stellar-sdk` (MIT, ISC, Apache-2.0). Fonts: Cormorant Garamond, Inter and IBM Plex Mono, loaded from Google Fonts under the SIL Open Font License 1.1 (no font files in the repository).
 
 ---
 

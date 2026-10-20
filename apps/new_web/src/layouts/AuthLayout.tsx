@@ -1,13 +1,12 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+import { AmbientStroke } from '../components/ink/AmbientStroke';
 
-const AuthLayout: React.FC = () => {
-  // Full-height container so the child page can control its own split layout
-  return (
-    <div className="min-h-screen bg-dark">
-      <Outlet />
-    </div>
-  );
-};
+const AuthLayout: React.FC = () => (
+  <div className="relative isolate min-h-screen bg-cream">
+    <AmbientStroke />
+    <Outlet />
+  </div>
+);
 
 export default AuthLayout;

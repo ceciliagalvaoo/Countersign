@@ -10,7 +10,7 @@ export default function ReceivableProgress({ item, progress, publicKey }: {
   const completed = steps.filter(s => s.state === 'CONFIRMED').length;
   return <>
     <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
-      <div><h2 className="text-xl font-semibold text-white">Stellar activity</h2>
+      <div><h2 className="text-28 font-medium text-white">Stellar activity</h2>
         <p className="mt-1 text-sm text-white/60">Each registration, payment and distribution is verified separately.</p></div>
       <span className="text-sm text-white/60">{completed} of {steps.length} steps confirmed</span>
     </div>
@@ -21,7 +21,7 @@ export default function ReceivableProgress({ item, progress, publicKey }: {
         // Labels come from step identity; do not expose legacy localized API labels.
         const label = ({ fund: 'Register fund', cedente: 'Register assignor', sacado: 'Register debtor',
           register: 'Register receivable', pay: 'Pay receivable', distribute: 'Distribute payment' } as Record<string, string>)[step.stepId || ''] || step.label;
-        return <li key={step.stepId} className="min-w-0 rounded-xl border border-white/10 bg-white/[0.025] p-4 md:p-5">
+        return <li key={step.stepId} className="min-w-0 rounded-card border border-white/10 bg-white/[0.025] p-4 md:p-5">
           <div className="flex items-start gap-3">
             <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-semibold ${confirmed ? 'bg-emerald-400/15 text-emerald-300' : 'bg-white/10 text-white/60'}`}>
               {confirmed ? <Check size={16} aria-hidden="true" /> : index + 1}
@@ -54,7 +54,7 @@ export default function ReceivableProgress({ item, progress, publicKey }: {
                       <span className="font-mono text-xs">{shortAddress(signer.key)}{publicKey === signer.key && <span className="ml-2 font-sans text-emerald-300">Connected</span>}</span>
                       <span className="text-xs">Weight {signer.weight} · {m.signedBy.includes(signer.key) ? 'Signed' : step.state === 'PENDING_SIGNATURES' ? 'Can sign' : 'Not signed'}</span>
                     </div>
-                    <p className="mt-1 break-all font-mono text-[11px] text-white/40">{signer.key}</p>
+                    <p className="mt-1 break-all font-mono text-11 text-white/40">{signer.key}</p>
                   </li>)}
                 </ul>}
               </details>

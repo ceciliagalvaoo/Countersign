@@ -1,0 +1,354 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Countersign · Technical document</title>
+<link rel="stylesheet" href="ink.css">
+<style>
+@page { size: A4; margin: 0; }
+html { background: #F4F0E5; }
+.flow { width: 210mm; border-collapse: collapse; }
+.flow thead td { height: 16mm; }
+.flow tfoot td { height: 14mm; }
+.flow > tbody > tr > td { padding: 0 20mm; }
+.cover { width: 210mm; height: 297mm; padding: 24mm 20mm; position: relative; page-break-after: always; break-after: page; }
+.cover .meta { position: absolute; left: 20mm; right: 20mm; bottom: 22mm; }
+.cover .meta table td { font-size: 12px; padding: 5px 0; border-bottom: 1px solid rgba(27,43,107,.12); }
+.cover .meta table td:first-child { color: #5A679E; width: 52mm; letter-spacing: .14em; text-transform: uppercase; font-size: 9.5px; }
+.team { display: flex; gap: 18px; margin-top: 14px; }
+.team .m { display: flex; gap: 10px; align-items: center; }
+.team .photo { width: 46px; height: 46px; border: 1.5px solid #2547C9; }
+.doc h2 { page-break-after: avoid; break-after: avoid; margin-top: 4px; }
+.doc h3 { page-break-after: avoid; break-after: avoid; }
+.newsec { page-break-before: always; break-before: page; }
+.doc figure, .doc blockquote, .stat, .callout { page-break-inside: avoid; break-inside: avoid; }
+.doc table { border-collapse: collapse; width: 100%; font-size: 10.5px; margin: 6px 0 12px; }
+.doc table th { font-size: 8.5px; letter-spacing: .12em; text-transform: uppercase; color: #5A679E; font-weight: 500; text-align: left; padding: 6px 7px; border-bottom: 1px solid rgba(27,43,107,.15); }
+.doc table td { padding: 6px 7px; border-bottom: 1px solid rgba(27,43,107,.1); vertical-align: top; line-height: 1.45; }
+.doc table tr { page-break-inside: avoid; break-inside: avoid; }
+.doc table code { font-size: 9.5px; }
+.doc table.dense { font-size: 8.4px; }
+.doc table.dense td { padding: 4px 5px; }
+.doc table.dense code { font-size: 8px; }
+ol.limits li { font-size: 11px; line-height: 1.5; margin-bottom: 4px; }
+.sub { font-family: var(--sans); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: #5A679E; margin: 14px 0 4px; font-weight: 500; }
+</style></head><body class="doc"><svg width="0" height="0" style="position:absolute"><filter id="duotone" color-interpolation-filters="sRGB">
+<feColorMatrix type="matrix" values=".33 .33 .33 0 0 .33 .33 .33 0 0 .33 .33 .33 0 0 0 0 0 1 0"/>
+<feComponentTransfer><feFuncR type="table" tableValues="0.106 0.957"/><feFuncG type="table" tableValues="0.169 0.941"/>
+<feFuncB type="table" tableValues="0.420 0.898"/></feComponentTransfer></filter></svg><div class="cover">
+  <p class="eyebrow">2026 FinTechathon · Submission template · International AI Track | Technical Document</p>
+  <div style="margin-top:26mm"><svg viewBox="0 0 240 240" width="150" height="150" fill="none" stroke="#2547C9" stroke-linecap="round" stroke-linejoin="round">
+<path d="M80 30C63 54 57 82 65 104C77 136 100 166 120 196" stroke-width="8"/><path d="M160 31C177 55 183 82 175 104C163 136 140 166 120 196" stroke-width="8"/>
+<path d="M80 30C98 25 142 25 160 31" stroke-width="7" stroke-opacity=".85"/><path d="M111 104a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" stroke-width="5.5"/>
+<path d="M120 122C118.6 146 121.2 170 120 190" stroke-width="5.5"/><path d="M120 196C134 214 158 220 180 208C194 200 206 202 222 212" stroke-width="5.5" stroke-opacity=".85"/>
+<path d="M20 226C78 220 162 222 222 226" stroke-width="3" stroke-opacity=".4"/></svg></div>
+  <h1 style="font-size:58px;margin-top:10mm">Countersign</h1>
+  <p style="font-family:var(--display);font-size:26px;margin:4px 0 0">Technical document</p>
+  <div style="margin-top:6px"><svg viewBox="0 0 240 36" width="200" height="30" fill="none" stroke="#2547C9" stroke-linecap="round">
+<path d="M5 21C40 9 90 28 140 16S210 8 235 18" stroke-width="9" stroke-opacity=".85"/><path d="M7 27C44 16 94 33 144 22S212 14 233 24" stroke-width="4.5" stroke-opacity=".5"/></svg></div>
+  <p class="lead" style="margin-top:12mm;max-width:150mm">An investing agent that cannot buy a fund unit unless the investor's mandate, the fund's issuer and a wallet contract the agent cannot change agree. Sections follow the official template: 01 Project Overview, 02 System Architecture, 03 Agent Design, 04 Security Design, 05 Deployment and Testing.</p>
+  <div class="meta">
+    <table style="width:100%;border-collapse:collapse">
+      <tr><td>Team name</td><td>Countersign</td></tr>
+      <tr><td>Competition track</td><td>International AI Track, Topic F (Agent Wallet)</td></tr>
+      <tr><td>Submission date</td><td>20 October 2026</td></tr>
+      <tr><td>Links</td><td class="mono" style="font-size:10.5px">countersign-web-rt1a.onrender.com · github.com/ceciliagalvaoo/Countersign · ceciliagalvaoo.github.io/Countersign</td></tr>
+    </table>
+    <div class="team">
+      <div class="m"><div class="photo"><img src="img/team/Pablo.png" alt=""></div><div style="font-size:11px"><b>Pablo de Azevedo</b><br><span class="soft">Team leader · front end and product</span></div></div>
+      <div class="m"><div class="photo"><img src="img/team/Cecilia.png" alt=""></div><div style="font-size:11px"><b>Cecília Galvão</b><br><span class="soft">Blockchain and backend</span></div></div>
+      <div class="m" style="font-size:11px;color:#5A679E">Inteli, Institute of Technology and Leadership, São Paulo</div>
+    </div>
+  </div>
+</div>
+<table class="flow"><thead><tr><td><div style="display:flex;justify-content:space-between;padding:7mm 20mm 0;font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:#5A679E"><span>Countersign · Technical document</span><span>International AI Track · Topic F</span></div></td></tr></thead>
+<tfoot><tr><td></td></tr></tfoot><tbody><tr><td><div><p class="eyebrow">Section 01</p><h2><span class="num">01</span>Project Overview</h2><svg viewBox="0 0 240 36" width="200" height="30" fill="none" stroke="#2547C9" stroke-linecap="round">
+<path d="M5 21C40 9 90 28 140 16S210 8 235 18" stroke-width="9" stroke-opacity=".85"/><path d="M7 27C44 16 94 33 144 22S212 14 233 24" stroke-width="4.5" stroke-opacity=".5"/></svg></div><p class="sub">Problem, target users and selected topic</p><blockquote>An investing agent that cannot buy a fund unit unless the investor's mandate, the fund's issuer and a wallet contract the agent cannot change agree.</blockquote><p><strong>Selected topic:</strong> F, Agent Wallet (autonomous on-chain wallet). <strong>Tagline:</strong> <em>Sign only what you can read.</em></p>
+<p>Countersign is an AI agent (Claude, by Anthropic) with its own mandate wallet on Stellar. It buys units of receivables funds for an investor who already holds USDC. Every first purchase in a new fund waits for a card she can read and sign.</p>
+<p><strong>Target users.</strong> Three parties use the system (Figure 1): <strong>the investor</strong>, who holds USDC, lives under the rules of two countries and wants part of her savings in the real economy (composite persona, built from public data; not validated by interviews); <strong>the agent</strong>, which turns her words into a typed mandate and a plan, and proposes purchases; and <strong>the fund's issuer</strong>, the fund manager's wallet, which countersigns every mint of fund units.</p><figure><img src="../figures/fig-actors.png" alt="Figure 1. The three parties and the wallet contract between them."/><figcaption>Figure 1. The three parties and the wallet contract between them.</figcaption></figure><p><strong>The problem, with numbers and sources.</strong> She gives up at one precise moment: the confirmation screen of her first purchase, in front of something irreversible she cannot read (Figure 2).</p><figure><img src="../figures/fig-persona.png" alt="Figure 2. A day without Countersign. Composite persona, built from public data; times are illustrative."/><figcaption>Figure 2. A day without Countersign. Composite persona, built from public data; times are illustrative.</figcaption></figure><table>
+<thead>
+<tr>
+<th>Fact</th>
+<th>Number</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>People who already hold digital dollars on this network</td>
+<td>USDC: 2,481,283 trustlines on Stellar mainnet</td>
+<td>stellar.expert API</td>
+</tr>
+<tr>
+<td>Retail investors are entering receivables funds (Brazil, as an example)</td>
+<td>Net assets of FIDCs R$741.1 billion, +22.5% in 12 months to Nov 2025; "general" investor accounts from 2.4 thousand to 34.3 thousand (+1,329.2%)</td>
+<td><a href="https://www.anbima.com.br/pt_br/imprensa/fidcs-ampliam-base-de-investidores-com-destaque-para-o-varejo.htm">ANBIMA, 24 Dec 2025</a></td>
+</tr>
+<tr>
+<td>The risk of a receivables fund is existence and concentration</td>
+<td>Credit Suisse closed 4 funds linked to Greensill with "around ten billion US dollars" of client money</td>
+<td><a href="https://www.finma.ch/en/news/2023/02/20230228-mm-greensill/">FINMA, 28 Feb 2023</a></td>
+</tr>
+<tr>
+<td>A language model refusing does not protect money</td>
+<td>Freysa: 482 messages, 13.19 ETH (about US$47 thousand)</td>
+<td><a href="https://simonwillison.net/2024/Nov/29/0xfreysaagent/">Simon Willison</a></td>
+</tr>
+<tr>
+<td>The operator's panel is an attack surface</td>
+<td>AIXBT: 55.5 ETH (about US$106,200)</td>
+<td><a href="https://incidentdatabase.ai/cite/1003">AIID 1003</a></td>
+</tr>
+<tr>
+<td>The human approves what the screen shows</td>
+<td>Bybit: about US$1.5 billion, tampered signing interface</td>
+<td><a href="https://www.bloomberg.com/news/articles/2025-02-21/bybit-says-exchange-wallet-hacked-1-5-billion-estimated-loss">Bloomberg</a></td>
+</tr>
+<tr>
+<td>The regulator's position on our object</td>
+<td>Yinfa [2026] No. 42 (6 Feb 2026): tokenized real world assets "prohibited onshore"</td>
+<td><a href="https://www.chinaservicesinfo.com/s/202602/09/WS6989841b498e36855033a830/tokenization-of-real-world-assets-banned.html">China Services Info</a></td>
+</tr>
+</tbody>
+</table><p class="sub">Core value and innovation</p><p>Agents that move money have already lost it through a chat instruction (Freysa), through the operator's panel (AIXBT) and through a signing screen that showed one thing while the transaction did another (Bybit). In most agent wallet designs the language model proposes and a policy on the server decides; if the server falls, the policy falls with it. Countersign puts the limits where our server cannot reach: in the agent's wallet contract, and in the fund issuer's signature on every mint.</p><blockquote>The agent's wallet is a contract on Stellar: it can only pay fund wallets the investor approved, within limits she signed, and it cannot change those limits. Nobody holds a fund unit unless the fund's issuer signs the mint.</blockquote><p>Those limits are enforced by our wallet contract on Stellar, not audited.</p>
+<p><strong>What is new.</strong> (1) A wallet contract per investor that only pays fund wallets she approved, within per purchase, per period and per fund caps she signed, and never reuses a decision. (2) An approval card decoded from the exact transaction bytes, never from the model's words, checked a second time in the browser. (3) A hash chained decision log whose line hash travels on chain as the <code>decision</code> argument of every agent purchase; the contract refuses a reused value but cannot check a new one against our log, so the evidence script checks it afterwards (limitation 3). (4) The issuer's countersignature on every mint. (5) A zero-knowledge tier proof verified on chain, so the agent only learns "eligible" or "not eligible".</p><figure><img src="../figures/fig-market.png" alt="Figure 3. Why now: retail money entering receivables funds, and people who already hold USDC on Stellar."/><figcaption>Figure 3. Why now: retail money entering receivables funds, and people who already hold USDC on Stellar.</figcaption></figure><div class="newsec"><p class="eyebrow">Section 02</p><h2><span class="num">02</span>System Architecture</h2><svg viewBox="0 0 240 36" width="200" height="30" fill="none" stroke="#2547C9" stroke-linecap="round">
+<path d="M5 21C40 9 90 28 140 16S210 8 235 18" stroke-width="9" stroke-opacity=".85"/><path d="M7 27C44 16 94 33 144 22S212 14 233 24" stroke-width="4.5" stroke-opacity=".5"/></svg></div><p class="sub">Architecture diagram and component responsibilities</p><figure><img src="../figures/fig-architecture.png" alt="Figure 4. Components. The agent service has no database and no keys; the agent key lives in the API's signer; the limits live in the mandate wallet contract."/><figcaption>Figure 4. Components. The agent service has no database and no keys; the agent key lives in the API's signer; the limits live in the mandate wallet contract.</figcaption></figure><table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Path</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Agent page</td>
+<td><code>apps/new_web</code> (React, Vite)</td>
+<td>Chat, typed mandate, plan DAG with the tier of each node, approval card decoded from the transaction bytes (a second decode in the browser blocks signing if it differs from the API), pending and confirmed states, interrupt, recurring, revoke, evidence panel</td>
+</tr>
+<tr>
+<td>Manager pages</td>
+<td><code>apps/new_web</code></td>
+<td>Issuer approves an order (<code>whitelist_add</code> and <code>mint</code>), pauses the FundToken</td>
+</tr>
+<tr>
+<td>Agent service</td>
+<td><code>apps/agent</code> (Node, Fastify, <code>@anthropic-ai/sdk</code>)</td>
+<td>Claude with strict tools, typed mandate, plan DAG, interrupt and resume, untrusted text marking, data minimisation before every model call; no database, no keys</td>
+</tr>
+<tr>
+<td>Policy and decision log</td>
+<td><code>apps/api/src/policy</code></td>
+<td>Deterministic rules, mandate store the agent cannot write, append only hash chained log (<code>hash = sha256(prevHash || canonical(payload))</code>), approval valid for 15 minutes</td>
+</tr>
+<tr>
+<td>Agent signer</td>
+<td><code>apps/api/src/agentSigner</code></td>
+<td>One agent key per investor, encrypted at rest (AES-256-GCM); signs only a <code>subscribe</code> identical to an approved decision</td>
+</tr>
+<tr>
+<td>Soroban integration</td>
+<td><code>apps/api/src/services</code>, <code>apps/api/src/routes</code></td>
+<td>Builds and simulates every transaction, the right wallet signs, then decodes the confirmed call and checks it before writing to the database</td>
+</tr>
+<tr>
+<td><code>mandate-wallet</code></td>
+<td><code>contracts/mandate-wallet</code> (Rust, <code>soroban-sdk</code> 28.0.0)</td>
+<td>Fund allowlist, per purchase, per period and per fund caps, revocation, refusal of a reused <code>decision</code>; no upgrade function, no platform admin</td>
+</tr>
+<tr>
+<td><code>fund-token</code></td>
+<td><code>contracts/fund-token</code></td>
+<td>Fund units (SEP-41 token), allowlist of holders, mint only by the fund wallet, pause</td>
+</tr>
+<tr>
+<td><code>receivable-vault</code></td>
+<td><code>contracts/receivable-vault</code></td>
+<td>Receivables registry, <code>pay</code>, <code>distribute</code> pro rata to every holder</td>
+</tr>
+<tr>
+<td><code>badge-verifier</code></td>
+<td><code>contracts/badge-verifier</code>, <code>zk/badge</code></td>
+<td>Groth16 verification (BN254) of an investor tier proof</td>
+</tr>
+<tr>
+<td>Suites and evidence</td>
+<td><code>tests/suites</code>, <code>scripts/evidence</code>, <code>scripts/e2e</code></td>
+<td>Benign B01 to B12 and adversarial A01 to A12 in one command; evidence export with decision checks</td>
+</tr>
+</tbody>
+</table><p class="sub">Models, tools, data sources and external services</p><p>Models and external services: Claude (<code>claude-opus-5-5</code> by default, Anthropic API), Stellar testnet RPC and Horizon, stellar.expert as the public explorer, Freighter as the browser wallet.</p>
+<p><strong>Tools.</strong> Ten strict tools (schemas with <code>strict: true</code>): <code>get_mandate</code>, <code>propose_mandate</code>, <code>list_funds</code>, <code>get_fund</code>, <code>check_eligibility</code>, <code>quote_subscription</code>, <code>propose_subscription</code>, <code>execute_approved_purchase</code>, <code>get_status</code>, <code>get_holdings</code>.</p>
+<p><strong>Data sources.</strong> The investor's messages; the demonstration fund catalogue in our database (simulated funds and debtors; concentration and default data are synthetic); balances, allowlists and caps read from the chain; the decision log.</p>
+<p><strong>Why this infrastructure.</strong> Without Stellar's USDC being the same asset as a trustline and as a contract (the Stellar Asset Contract), with authorization done by the host for any address, the investor's existing USDC could not sit in an agent wallet contract and be paid to a fund wallet in one contract call; the caps would move back to our server, which is exactly the design we reject. Stellar's Protocol 25 also made BN254 and Poseidon native, which lets our <code>badge-verifier</code> check a Groth16 eligibility proof on chain. And every judge can open each hash in a public explorer. This is an advantage of cost and simplicity, not exclusivity: the same rules could be written as a smart account on another chain.</p><div class="newsec"><p class="eyebrow">Section 03</p><h2><span class="num">03</span>Agent Design</h2><svg viewBox="0 0 240 36" width="200" height="30" fill="none" stroke="#2547C9" stroke-linecap="round">
+<path d="M5 21C40 9 90 28 140 16S210 8 235 18" stroke-width="9" stroke-opacity=".85"/><path d="M7 27C44 16 94 33 144 22S212 14 233 24" stroke-width="4.5" stroke-opacity=".5"/></svg></div><p class="sub">Intent understanding, planning, tool use and state management</p><p><strong>Intent understanding.</strong> She writes her goal in one sentence. The agent asks only what is missing (residences, horizon, liquidity, maximum loss, amount, recurrence) and fills a typed mandate shown next to the chat. Nothing is valid until she approves it; the approved mandate hash is anchored on chain with the wallet deploy or with <code>set_limits</code>.</p>
+<p><strong>Residence is declared, not verified.</strong> The perimeter rule reads the residences she states in the chat or the mandate; a production deployment would check them against KYC data from a licensed partner.</p>
+<p><strong>Planning.</strong> The plan is a state machine shown as a graph: profile, perimeter, eligibility, screening, proposal, investor signature, agent purchase, issuer countersign, confirmed. Nodes move only on tool results, and each node shows its tier. A correction ("make it 4") replans without starting over; she can interrupt and resume at any node.</p>
+<p><strong>Tool use.</strong> The model only produces typed proposals. Third party text (fund and assignor descriptions) is passed as untrusted data and cannot set a destination or an amount. A failed tool returns as an error result and is never assumed done; the agent never says "done" before <code>get_status</code> reports a completed order.</p>
+<p><strong>State management.</strong> The typed mandate and the decision log live in the API (the agent cannot write the mandate store); the conversation, plan and turn counter live in the agent service session; balances, allowlists, caps and revocation are read from the chain at execution time.</p><figure><img src="../figures/fig-sequence.png" alt="Figure 5. A first purchase in a new fund: who signs what, in order, with the tier of each step."/><figcaption>Figure 5. A first purchase in a new fund: who signs what, in order, with the tier of each step.</figcaption></figure><p><strong>The steps, in order</strong> (the same order as the demo video):</p>
+<ol>
+<li><strong>Mandate wallet.</strong> The investor deploys her own <code>mandate-wallet</code> contract from the browser (owner = her wallet, agent = an agent key generated for her, USDC, caps, hash of her mandate) and deposits test USDC. She signs in Freighter.</li>
+<li><strong>Clarification.</strong> She writes her goal in one sentence. The agent asks only what is missing (residences, horizon, liquidity, maximum loss, amount, recurrence) and fills a typed mandate shown next to the chat. Nothing is valid until she approves it; the approved mandate hash is anchored on chain.</li>
+<li><strong>Perimeter.</strong> A declared residence in Mainland China is refused by the policy rule <code>perimeter_mainland_china</code>, and the reply names the notice (Yinfa [2026] No. 42).</li>
+<li><strong>Screening and eligibility.</strong> For each approved fund: sector, largest debtor in %, liquidity and a loss scenario; no return figure. Text written by funds and assignors is marked untrusted. Funds that require a tier need a zero-knowledge tier proof verified on chain; the agent only learns "eligible" or "not eligible".</li>
+<li><strong>Quote and correction.</strong> Units are computed by code, never by the model. "Make it 500, only the agri fund" replans the visible plan (a DAG) without starting over.</li>
+<li><strong>Proposal and decision.</strong> The agent calls <code>propose_subscription</code>. Our policy service (deterministic code, separate from the model) checks perimeter, eligibility, destination (always the fund wallet from our database, never from text) and caps, and writes a hash chained decision-log line. That line's 32 byte hash becomes the <code>decision</code>.</li>
+<li><strong>First purchase in a new fund (Red tier).</strong> The flow stops. The approval card shows <code>allow_fund(fund_wallet, fund_token, fund_cap)</code> decoded from the transaction bytes she will sign, not written by the agent, with the loss scenario and "The agent cannot change these limits." She signs.</li>
+<li><strong>Agent purchase (Yellow tier).</strong> The agent's signer, held by our server and never seen by the model, signs only a <code>subscribe(decision, fund_wallet, amount)</code> identical to the approved decision. Our wallet contract checks allowlist, caps, revocation and reuse of <code>decision</code>, then pays the fund wallet.</li>
+<li><strong>Verification.</strong> The API decodes the confirmed transaction (contract, method, <code>decision</code>, destination, amount) before changing its database. The screen says "pending, not done" until the ledger closes.</li>
+<li><strong>Issuer countersignature.</strong> The fund wallet signs <code>whitelist_add</code> (first time) and <code>mint</code> of units to her mandate wallet. Until then the screen says "awaiting issuer countersignature".</li>
+<li><strong>Recurring purchases.</strong> "Run recurring now: pre-authorised within mandate" repeats steps 6, 8 to 10 for funds already allowed, without a new signature from her, with a window to interrupt. The time trigger is simulated; the on-chain transactions are real.</li>
+<li><strong>Kill switch and freeze.</strong> She signs <code>revoke_agent()</code>, and our wallet contract refuses the agent's next purchase. The issuer signs <code>set_pause(true)</code> on the FundToken, and mints stop.</li>
+<li><strong>Income back to the wallet.</strong> A paid receivable is distributed by the vault to every holder, including her mandate wallet: <a href="https://stellar.expert/explorer/testnet/tx/1a951aee3f1b529d9c5ada42302a53edf09ed5c24eca3b644a072e054d747d3b"><code>1a951aee...747d3b</code></a> paid 10 USDC to it on testnet.</li>
+<li><strong>Evidence.</strong> One command recomputes the decision-log chain and compares every <code>decision</code> read from a confirmed transaction with its log line.</li>
+</ol><p class="sub">Core algorithms and evaluation approach</p><p><strong>Deterministic policy (L1).</strong> Pure functions with stable rule names: <code>perimeter_mainland_china</code>, <code>mandate_not_active</code>, <code>fund_not_investable</code>, <code>eligibility_zk_tier</code>, <code>amount_over_purchase_cap</code>, <code>amount_over_period_cap</code>, <code>sector_not_allowed</code>, <code>sector_concentration</code>, <code>risk_above_tolerance</code>, <code>liquidity_mismatch</code>, <code>untrusted_text_cannot_set_destination_or_amount</code>. An approval is valid for 15 minutes and is evaluated again at execution against the chain.</p>
+<p><strong>Hash chained decision log.</strong> Canonical JSON (sorted keys, integers only, money as strings in 7 decimal units); <code>hash = sha256(prevHash || canonical(payload))</code>, genesis of 32 zero bytes; the database refuses UPDATE, DELETE and TRUNCATE through a trigger. The approved line's hash is the <code>decision</code> argument of <code>subscribe</code> (Figure 6).</p>
+<p><strong>Quote.</strong> Units are computed by code, rounded down, never above the amount asked; never by the model.</p>
+<p><strong>Zero-knowledge tier.</strong> A Groth16 proof (BN254, Poseidon commitment) that the total invested on this platform reaches a threshold, verified on chain by <code>badge-verifier</code>.</p>
+<p><strong>Evaluation approach.</strong> Two suites in one command: benign tasks B01 to B12, run live with the real model, scored by completion and turns; adversarial cases A01 to A12, scored by blocking and by the layer that blocked. Rates use every defined case as the denominator. The evidence export recomputes every chain and compares every on-chain decision with its line.</p>
+<p><strong>What the numbers are, and are not.</strong> Each benign case ran once live with the real model; the table consolidates per case results from several runs (<code>evidence/suites-2026-10-19T05-43-22-039Z.json</code>). We report no pass rate over repeated runs. A spending cap of US$0.30 per case stops a case before it overspends; B11 stopped there after a correct first turn (about US$0.32) and is reported as an error. Of the 37 agent purchases in the evidence, 15 come from the scripted end to end runs (no model), 11 from benign suite dry runs with a scripted model client, 10 from suite runs and 1 through the app.</p><figure><img src="../figures/fig-decision.png" alt="Figure 6. The decision travels with the money."/><figcaption>Figure 6. The decision travels with the money.</figcaption></figure><figure><img src="../figures/fig-benign.png" alt="Figure 7. Benign suite: 11 of 12 completed (91.7%), 1.09 turns on average."/><figcaption>Figure 7. Benign suite: 11 of 12 completed (91.7%), 1.09 turns on average.</figcaption></figure><div class="newsec"><p class="eyebrow">Section 04</p><h2><span class="num">04</span>Security Design</h2><svg viewBox="0 0 240 36" width="200" height="30" fill="none" stroke="#2547C9" stroke-linecap="round">
+<path d="M5 21C40 9 90 28 140 16S210 8 235 18" stroke-width="9" stroke-opacity=".85"/><path d="M7 27C44 16 94 33 144 22S212 14 233 24" stroke-width="4.5" stroke-opacity=".5"/></svg></div><p class="sub">Tiered permissions and confirmation for sensitive actions</p><figure><img src="../figures/fig-tiers.png" alt="Figure 8. Permission tiers."/><figcaption>Figure 8. Permission tiers.</figcaption></figure><table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>Operations</th>
+<th>Who signs</th>
+<th>Where it is enforced</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Green (automatic)</td>
+<td>Read funds, quote, status, balances, tier eligibility (yes or no only)</td>
+<td>nobody</td>
+<td>API (role from the JWT)</td>
+</tr>
+<tr>
+<td>Yellow (agent, within the mandate)</td>
+<td><code>subscribe</code> to a fund already allowed, within the caps</td>
+<td>agent key, after the policy</td>
+<td>Policy <strong>and</strong> our wallet contract</td>
+</tr>
+<tr>
+<td>Red (investor)</td>
+<td>Create the wallet, <code>set_limits</code> (mandate), <code>allow_fund</code> (first purchase in a fund), <code>withdraw</code>, <code>revoke_agent</code>, <code>set_agent</code></td>
+<td>owner in Freighter, after reading the card</td>
+<td>Our wallet contract (<code>owner.require_auth</code>)</td>
+</tr>
+<tr>
+<td>Issuer</td>
+<td><code>whitelist_add</code>, <code>mint</code>, <code>set_pause</code>, refund</td>
+<td>fund wallet</td>
+<td>FundToken contract and API</td>
+</tr>
+<tr>
+<td>Never</td>
+<td>Agent writing mandate, policy or caps; paying outside the allowlist; signing as owner</td>
+<td>n/a</td>
+<td>Our wallet contract and the policy</td>
+</tr>
+</tbody>
+</table><p><strong>Confirmation for sensitive operations.</strong> Every Red operation shows an approval card decoded from the exact transaction bytes, with the network stated separately ("The network is not part of the transaction; this app states it separately."), the function, the fund, the caps, the loss scenario and "The agent cannot change these limits. Enforced by our wallet contract on Stellar, not audited." The browser decodes the bytes a second time and blocks signing ("Do not sign") if its reading differs from the API's. A policy approval is valid for 15 minutes; at execution the policy re-reads the mandate hash, caps, spending and revocation on chain. Nothing is shown as done before the ledger confirms it and the issuer mints.</p><figure><img src="../figures/fig-layers.png" alt="Figure 9. Who enforces what, and what each layer does not hold."/><figcaption>Figure 9. Who enforces what, and what each layer does not hold.</figcaption></figure><p class="sub">Protection against prompt injection, privilege escalation and privacy leakage</p><p><strong>Prompt injection.</strong> Third party text is marked untrusted and can never set a destination or an amount (A01, A02); the destination always comes from our database; the amount must come from her messages or the mandate; instructions to ignore the rules are refused by the cap rules (A10).</p>
+<p><strong>Privilege escalation.</strong> The agent calls the API with her token restricted to an agent scope (denied by default, allowlisted routes only), so it cannot act as a manager (A05). On chain, only the owner can call <code>set_limits</code>, <code>allow_fund</code>, <code>withdraw</code>, <code>revoke_agent</code> and <code>set_agent</code>; the agent key is refused even if it signs as owner (A06); a used decision is refused (A07).</p>
+<p><strong>Privacy leakage.</strong> No tool returns other investors (A08); the agent holds no key and does not reproduce its system prompt (A09). Before every model call, Stellar addresses, secret keys, email addresses and access tokens are removed, and the call is aborted if any remain. Eligibility is shown only as "eligible" or "not eligible".</p><figure><img src="../figures/fig-adversarial.png" alt="Figure 10. Adversarial suite: 12 of 12 blocked; 4 refused on chain by our wallet contract."/><figcaption>Figure 10. Adversarial suite: 12 of 12 blocked; 4 refused on chain by our wallet contract.</figcaption></figure><table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Enforced by</th>
+<th>What it holds</th>
+<th>What it does not hold</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Language model</td>
+<td>the model</td>
+<td>nothing; it only produces a typed proposal and never sees a key</td>
+<td>everything</td>
+</tr>
+<tr>
+<td>Policy</td>
+<td>our server (API), a process separate from the model, deterministic, hash chained log</td>
+<td>perimeter, eligibility, destination from the database, untrusted origin, fund choice, mirrored caps</td>
+<td>a bug or compromise of our server</td>
+</tr>
+<tr>
+<td>Agent signer</td>
+<td>our server: holds the agent key, signs only a <code>subscribe</code> matching an approved decision</td>
+<td>the model never has the key</td>
+<td>a compromise of our server (then the next line holds)</td>
+</tr>
+<tr>
+<td>Mandate wallet</td>
+<td>our contract on Stellar, public, no upgrade function, not audited</td>
+<td>pays only fund wallets she approved on chain; per purchase, per period and per fund caps she signed; never the same <code>decision</code> twice; a revoked agent cannot pay; the agent cannot change allowlist, caps or agent</td>
+<td>a bug in our contract; within the limits, the agent can buy an approved fund she did not want at that moment</td>
+</tr>
+<tr>
+<td>Issuer</td>
+<td>the fund wallet (a human manager) signing on the FundToken</td>
+<td>nobody receives a unit without its <code>whitelist_add</code> and <code>mint</code>; <code>pause</code> freezes</td>
+<td>a manager who signs wrongly</td>
+</tr>
+<tr>
+<td>FundToken and vault</td>
+<td>our contracts on Stellar, not audited</td>
+<td>only the admin mints; recipients must be allowlisted; a distribution must cover every holder</td>
+<td>a bug in the contracts</td>
+</tr>
+<tr>
+<td>Kill switch</td>
+<td>the investor</td>
+<td><code>revoke_agent</code> cuts the agent on chain</td>
+<td>n/a</td>
+</tr>
+</tbody>
+</table><div class="newsec"><p class="eyebrow">Section 05</p><h2><span class="num">05</span>Deployment and Testing</h2><svg viewBox="0 0 240 36" width="200" height="30" fill="none" stroke="#2547C9" stroke-linecap="round">
+<path d="M5 21C40 9 90 28 140 16S210 8 235 18" stroke-width="9" stroke-opacity=".85"/><path d="M7 27C44 16 94 33 144 22S212 14 233 24" stroke-width="4.5" stroke-opacity=".5"/></svg></div><p class="sub">Environment, deployment instructions, test cases and known limitations</p><ul>
+<li><strong>Operating system:</strong> Linux or macOS; Windows through WSL2 (tested on WSL2 Ubuntu).</li>
+<li><strong>Runtime versions:</strong> Node.js 24 with npm 11 (the web app's dependencies require Node.js 22.12 or later; CI and the hosted demo use 24); Rust stable with the <code>wasm32v1-none</code> target; Stellar CLI 25.2.0 or later (28.1.0 recommended); Docker (PostgreSQL 16 for local databases); a browser with the Freighter extension set to Testnet.</li>
+<li><strong>Main dependencies:</strong> API: Fastify 5, Prisma 5, <code>@stellar/stellar-sdk</code> 16.3.0. Agent: <code>@anthropic-ai/sdk</code>, Fastify, zod. Web: React 19, Vite, Tailwind CSS, <code>@stellar/stellar-sdk</code> 17, <code>@creit.tech/stellar-wallets-kit</code>. Contracts: <code>soroban-sdk</code> 28.0.0. ZK: circom, snarkjs.</li>
+<li><strong>Environment variables:</strong> never commit real secrets or sensitive data. Every <code>.env</code> file is ignored by git; only <code>.env.example</code> files are committed, with empty values.</li>
+</ul><p><strong>Deployment.</strong> Contracts: <code>contracts/scripts/deploy-testnet.sh</code>. API, agent and web app: <code>render.yaml</code>, a Render Blueprint for the three services (secrets entered in the dashboard, never in the repository). Web: <code>npm run build</code> in <code>apps/new_web</code> with <code>VITE_API_URL</code> and <code>VITE_AGENT_URL</code>. Live demo: countersign-web-rt1a.onrender.com (Stellar testnet). Full instructions for a clean machine: README section 4 and the Run it yourself page of the documentation site.</p><p><strong>Test cases.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What it does</th>
+<th>Last result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cargo test</code> in <code>contracts/mandate-wallet</code></td>
+<td>Passing and refusing tests for each rule (allowlist, caps, period window, fund cap, decision reuse, revocation, owner and agent authorization)</td>
+<td>23/23</td>
+</tr>
+<tr>
+<td><code>npm test</code> in <code>apps/agent</code></td>
+<td>Agent with a scripted model client (no Anthropic call)</td>
+<td>54/54</td>
+</tr>
+<tr>
+<td><code>npm --prefix tests run suites</code></td>
+<td>Benign B01 to B12 and adversarial A01 to A12 in one command; prints two tables and two rates; writes <code>evidence/suites-&lt;timestamp&gt;.json</code></td>
+<td>Adversarial 12/12 blocked (100%); benign 11/12 completed (91.7%), average turns 1.09</td>
+</tr>
+<tr>
+<td><code>npm --prefix tests run suites:adversarial</code> / <code>suites:benign</code></td>
+<td>One suite only</td>
+<td>as above</td>
+</tr>
+<tr>
+<td><code>scripts/e2e/run.sh</code></td>
+<td>End to end on testnet with CLI identities: deploy, deposit, limits, allow_fund, agent subscribe, whitelist and mint, refund, revoke, pause</td>
+<td>42/42 checks (run a40494)</td>
+</tr>
+<tr>
+<td><code>npm --prefix tests run check:m1 -- --subscribe &lt;hash&gt; --mint &lt;hash&gt; [--tests-db or --api &lt;url&gt;]</code></td>
+<td>Read only: checks on chain that <code>subscribe</code> carried a <code>decision</code> equal to an approved decision-log line and that the issuer minted to the same wallet after it</td>
+<td>15/15 on-chain checks for the purchase made through the UI; log part confirmed by <code>npm --prefix tests run evidence</code> against the team database (decision = line #5)</td>
+</tr>
+<tr>
+<td><code>npm --prefix tests run evidence</code></td>
+<td>Exports <code>evidence/EVIDENCE.md</code> and <code>evidence/evidence.json</code>; recomputes every chain; fails on any hash without task or log line or any divergent <code>decision</code></td>
+<td>158 transactions; 37 of 37 agent purchases with <code>decision</code> equal to an APPROVED decision-log line; 36 on-chain refusals with no log line by design; 0 gaps; 0 divergences</td>
+</tr>
+</tbody>
+</table><figure><img src="../figures/fig-evidence.png" alt="Figure 11. Execution evidence in numbers."/><figcaption>Figure 11. Execution evidence in numbers.</figcaption></figure><p><b>Known limitations (identical in every document, the video and the submission form)</b></p><ol class="limits"><li>Test assets. All USDC and fund units in this submission are test assets on the Stellar public test network and have no monetary value, except the mainnet transactions described in item 14. Transaction hashes prove the mechanism, not a market.</li><li>Our contract, not audited. The mandate wallet is a contract we wrote. It is public and has no upgrade function, but it has not been audited. A bug in it would be our bug.</li><li>Agent key custody. The agent's signing key is held by our server, separate from the language model, which never sees it. If the server were compromised, the attacker could only make payments our wallet contract allows: to fund wallets the investor approved, within the per purchase, per period and per fund caps she signed. The contract refuses a decision value it has already used, but it cannot check that a new value matches our decision log; that check is made afterwards by our verification script.</li><li>Within the mandate, the agent chooses. Our wallet contract enforces where money can go and how much; it does not judge whether a purchase inside those limits was wise.</li><li>Simulated compliance. KYC/KYB, suitability and the jurisdiction perimeter are simulated checks, designed with reference to FINRA 2111, ESMA35-43-3172 and CSRC suitability measures. Funds and debtors are simulated; concentration and default data are synthetic.</li><li>Zero-knowledge eligibility. The tier proof shows that the total an investor has invested on this platform reaches a threshold, without revealing it. It is not a regulatory investor status. The platform attests the committed total, and the circuit's phase 2 trusted setup has a single contribution, so whoever controls the setup or the attestation could forge a tier.</li><li>Perimeter. The system is not offered to, and is not designed for, persons or entities in Mainland China. We are aware of the February 2026 notice (Yinfa [2026] No. 42) that prohibits RWA tokenization onshore except on designated financial infrastructure with approval. Nothing in this submission is an offer or solicitation to buy or sell securities or fund units in any jurisdiction.</li><li>Discretionary management and key custody without a licence. Executing within a mandate is discretionary portfolio management, and holding the agent's signing key is a form of custody. This prototype holds no licence; a production deployment would require licensed partners (fund administrator, custodian, regulated on/off-ramp, key custody) and local authorisation in each target market.</li><li>Recurring purchases. Recurring purchases are pre-authorised within the investor's mandate and started by a manual "run recurring now" trigger for the demo. The time trigger is simulated; the on-chain transactions are real.</li><li>No return promise. The agent never states or implies a guaranteed or expected return. The demonstration funds state no return figure; every fund is shown with a loss scenario.</li><li>What the language model sees. Our agent service sends the LLM provider (Anthropic, Claude) the investor's chat messages and typed tool results: mandate fields, including countries of residence; fund facts; policy outcomes; transaction hashes. Fund texts written by third parties are sent marked as untrusted data. Before every call the service removes Stellar account and contract addresses, secret keys, email addresses and access tokens, and aborts the call if any remain. No private key and no identity document is sent; amounts the investor types in the chat are sent as she typed them.</li><li>Composite persona. The investor persona is a composite persona, built from public data. It was not validated by interviews.</li><li>Contract refusals. When our wallet contract refuses a transaction, the error code we show (Error(Contract, #N)) comes from the RPC's diagnostic events, which are not part of consensus. What the ledger guarantees is the transaction hash, the FAILED result and the fee charged.</li><li>Mainnet slice. One mandate wallet was deployed on Stellar mainnet and funded with less than US$5 in USDC; the agent made one purchase from it to a fund wallet controlled by the team. These are the only mainnet transactions of the mechanism; the team's other mainnet operations were account setup (XLM funding and USDC trustlines). Everything else runs on the Stellar test network. The fund unit token on mainnet is a test asset issued by the team; the purchase proposal there was entered by the operator and decided by our policy code.</li></ol></td></tr></tbody></table></body></html>

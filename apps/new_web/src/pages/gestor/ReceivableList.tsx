@@ -62,7 +62,7 @@ export default function ReceivableList() {
     <section className={receivablePanel}>
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div><p className="text-xs uppercase tracking-[0.2em] text-emerald-300">Fund manager</p>
-          <h1 className="mt-1 text-2xl font-semibold text-white">Receivables</h1>
+          <h1 className="mt-1 text-28 font-medium text-white">Receivables</h1>
           <p className="mt-2 text-sm text-white/60">Manage receivables, record payments and track their Stellar activity.</p>
         </div>
         <button disabled={loading || creating} onClick={() => void loadData()} className={secondaryButton}>
@@ -96,8 +96,8 @@ export default function ReceivableList() {
     </section>
 
     <section className={receivablePanel}>
-      <div className="mb-5 flex items-center justify-between gap-3"><h2 className="text-lg font-semibold text-white">All receivables</h2><span className="text-xs text-white/50">{receivables.length} total</span></div>
-      {error && <p role="alert" className="mb-4 rounded-xl border border-red-400/20 bg-red-400/10 p-3 text-sm text-red-200">{error}</p>}
+      <div className="mb-5 flex items-center justify-between gap-3"><h2 className="text-20 font-medium text-white">All receivables</h2><span className="text-xs text-white/50">{receivables.length} total</span></div>
+      {error && <p role="alert" className="mb-4 rounded-card border border-red-400/20 bg-red-400/10 p-3 text-sm text-red-200">{error}</p>}
       {loading ? <p className="py-8 text-center text-sm text-white/60">Loading receivables...</p> : receivables.length === 0 ?
         <p className="py-8 text-center text-sm text-white/50">No receivables yet.</p> :
         <div className="overflow-x-auto">
@@ -112,8 +112,8 @@ export default function ReceivableList() {
               <td className="py-4 pr-5"><p>{item.cedente?.name || '-'}</p><p className="mt-1 text-xs text-white/50">{item.sacado?.name}</p></td>
               <td className="whitespace-nowrap py-4 pr-5"><UsdcAmount amount={item.faceValue} /></td>
               <td className="whitespace-nowrap py-4 pr-5">{formatReceivableDate(item.dueDate)}</td>
-              <td className="py-4 pr-5"><span className={'inline-flex whitespace-nowrap rounded-full border px-2.5 py-1 text-xs ' + badgeClass(item.status)}>{statusLabel(item.status)}</span></td>
-              <td className="py-4 pr-5"><span className={'inline-flex whitespace-nowrap rounded-full border px-2.5 py-1 text-xs ' + badgeClass(item.chainStatus)}>{item.chainStatus === 'PENDING' ? 'Registered' : statusLabel(item.chainStatus)}</span></td>
+              <td className="py-4 pr-5"><span className={'inline-flex whitespace-nowrap rounded-full border px-2.5 py-1 text-xs' + badgeClass(item.status)}>{statusLabel(item.status)}</span></td>
+              <td className="py-4 pr-5"><span className={'inline-flex whitespace-nowrap rounded-full border px-2.5 py-1 text-xs' + badgeClass(item.chainStatus)}>{item.chainStatus === 'PENDING' ? 'Registered' : statusLabel(item.chainStatus)}</span></td>
               <td className="py-4 text-right"><Link to={'/receivables/' + item.id} className="inline-flex items-center gap-1.5 whitespace-nowrap text-sm font-medium text-emerald-300 hover:text-emerald-200 hover:underline">View details<ArrowUpRight size={15} aria-hidden="true" /></Link></td>
             </tr>)}</tbody>
           </table>

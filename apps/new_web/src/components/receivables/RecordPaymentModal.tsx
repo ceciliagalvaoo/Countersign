@@ -50,17 +50,17 @@ export default function RecordPaymentModal({ item, onClose, onConfirm }: Props) 
   };
 
   return createPortal(
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-navy/30 p-4"
       onClick={event => { if (event.target === event.currentTarget && !busyRef.current) onClose(); }}>
       <div ref={dialog} role="dialog" aria-modal="true" aria-labelledby={titleId} aria-describedby={descriptionId}
         aria-busy={busy} tabIndex={-1}
-        className="max-h-[90dvh] w-full max-w-md overflow-y-auto rounded-2xl border border-white/[0.12] bg-[#0c1723]/95 p-6 text-white shadow-[0_18px_60px_rgba(0,0,0,0.45)] backdrop-blur-xl md:p-8">
+        className="max-h-[90dvh] w-full max-w-md overflow-y-auto rounded-card border border-navy/10 bg-cream/95 p-6 text-white shadow-ink md:p-8">
         <div className="flex items-start justify-between gap-4">
           <div><p className="text-xs uppercase tracking-[0.2em] text-emerald-300">Receivable payment</p>
             <h2 id={titleId} className="mt-1 text-xl font-semibold">Record payment</h2></div>
           <button type="button" onClick={onClose} disabled={busy} aria-label="Close payment dialog" className="rounded-lg p-1 text-white/60 hover:bg-white/10 hover:text-white disabled:opacity-50"><X size={20} /></button>
         </div>
-        <div className="my-5 rounded-xl border border-white/10 bg-white/5 p-4 text-sm">
+        <div className="my-5 rounded-card border border-white/10 bg-white/5 p-4 text-sm">
           <p className="font-medium">{item.fund?.name}</p>
           <p className="mt-1 text-white/60">Debtor: {item.sacado?.name}</p>
           <p className="mt-2 text-white/80">Face value: <UsdcAmount amount={item.faceValue} /></p>

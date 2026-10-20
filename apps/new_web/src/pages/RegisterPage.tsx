@@ -27,14 +27,14 @@ const RegisterPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex bg-dark text-gray-200">
-      <BrandHero className="hidden lg:flex flex-[0.65]" />
+    <div className="min-h-screen flex bg-cream text-navy">
+      <BrandHero className="hidden lg:flex flex-[0.6]" />
 
-      <div className="flex-1 lg:flex-[0.35] flex items-center justify-center px-6 lg:px-10 xl:px-14">
+      <div className="flex-1 lg:flex-[0.4] flex items-center justify-center px-6 lg:px-10 xl:px-14">
         <div className="w-full max-w-2xl px-3 sm:px-6">
           {success ? (
             <div className="space-y-6">
-              <h2 className="text-4xl font-semibold text-white">Registration Successful!</h2>
+              <h2 className="text-40">Registration Successful!</h2>
               <p className="text-gray-300 text-base">
                 Your account has been created and is now awaiting approval from an administrator.
               </p>
@@ -48,42 +48,42 @@ const RegisterPage: React.FC = () => {
           ) : (
             <form onSubmit={handleSubmit} className="space-y-8 px-2 sm:px-3">
               <div>
-                <h2 className="text-3xl sm:text-4xl font-semibold text-white">Create Account</h2>
+                <h2 className="text-40">Create Account</h2>
               </div>
 
               {error && <p className="text-red-500 text-sm">{error}</p>}
 
               <div className="space-y-5">
                 <div>
-                  <label className="block text-sm font-semibold text-gray-300 mb-2">Email</label>
+                  <label className="eyebrow mb-1.5 block">Email</label>
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="w-full bg-dark-200 border border-gray-600 rounded-lg px-3 py-3 text-base placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary"
+                    className="ink-input w-full py-3"
                     placeholder="you@example.com"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-300 mb-2">Password</label>
+                  <label className="eyebrow mb-1.5 block">Password</label>
                   <input
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    className="w-full bg-dark-200 border border-gray-600 rounded-lg px-3 py-3 text-base placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary"
+                    className="ink-input w-full py-3"
                     placeholder="Create a password"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-300 mb-2">I am a...</label>
+                  <label className="eyebrow mb-1.5 block">I am a...</label>
                   <select
                     value={role}
                     onChange={(e) => setRole(e.target.value as any)}
-                    className="w-full bg-dark-200 border border-gray-600 rounded-lg px-3 py-3 text-base focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary"
+                    className="ink-input w-full py-3"
                   >
                     <option value="INVESTIDOR">Investor</option>
                     <option value="CONSULTOR">Consultant</option>
@@ -95,7 +95,7 @@ const RegisterPage: React.FC = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-4 text-white rounded-lg bg-primary hover:shadow-lg transition-all disabled:opacity-60"
+                className="btn btn-md btn-primary w-full"
               >
                 {loading ? 'Creating Account...' : 'Register'}
               </button>

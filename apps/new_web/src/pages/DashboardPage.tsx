@@ -11,7 +11,7 @@ const DashboardPage: React.FC = () => {
     // This should ideally not happen due to the ProtectedRoute, but it's a good fallback.
     return (
         <div className="p-8 bg-dark rounded-lg shadow-lg">
-            <h1 className="text-2xl font-bold text-white">Loading...</h1>
+            <h1 className="text-28 font-medium text-white">Loading...</h1>
       </div>
     );
   }
@@ -27,7 +27,7 @@ const DashboardPage: React.FC = () => {
       // This case handles any unexpected roles.
       return (
         <div className="p-8 bg-dark rounded-lg shadow-lg">
-            <h1 className="text-2xl font-bold text-red-500">Access Denied</h1>
+            <h1 className="text-28 font-medium text-red-500">Access Denied</h1>
             <p className="mt-2 text-gray-300">Your user role is not recognized.</p>
         </div>
       );

@@ -88,7 +88,7 @@ const GestorDashboard: React.FC = () => {
         <p className="text-[10px] tracking-[0.2em] uppercase text-emerald-300">
           Platform oversight
         </p>
-        <h1 className="text-3xl md:text-4xl font-bold text-white mt-1">
+        <h1 className="text-40 md:text-40 font-medium text-white mt-1">
           Management Dashboard
         </h1>
         <p className="text-sm text-white/70 mt-1">
@@ -130,16 +130,16 @@ const GestorDashboard: React.FC = () => {
 
       {/* Pending Approvals Alert */}
       {stats && totalPending > 0 && (
-        <div className="bg-white/[0.04] border border-white/[0.12] backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-[0_18px_60px_rgba(0,0,0,0.45)]">
+        <div className="bg-cream-deep/70 border border-navy/10 rounded-card p-6 md:p-8 shadow-ink">
           <div className="flex items-start gap-3">
-            <FiAlertCircle className="text-[#F8FBA2] text-2xl mt-0.5 flex-shrink-0" />
+            <FiAlertCircle className="text-ochre text-2xl mt-0.5 flex-shrink-0" />
             <div>
-              <h3 className="font-semibold text-lg text-white">
+              <h3 className="font-medium text-20 text-white">
                 Pending approvals
               </h3>
               <p className="text-sm text-white/70 mt-1">
                 You have{' '}
-                <span className="font-semibold text-[#F8FBA2]">
+                <span className="font-semibold text-ochre">
                   {totalPending}
                 </span>{' '}
                 items waiting for review.
@@ -182,8 +182,8 @@ const GestorDashboard: React.FC = () => {
       )}
 
       {/* Quick Actions */}
-      <div className="bg-white/[0.04] border border-white/[0.12] backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-[0_18px_60px_rgba(0,0,0,0.45)]">
-        <h2 className="text-xl font-semibold mb-2 text-white">Quick actions</h2>
+      <div className="bg-cream-deep/70 border border-navy/10 rounded-card p-6 md:p-8 shadow-ink">
+        <h2 className="text-28 font-medium mb-2 text-white">Quick actions</h2>
         <p className="text-xs md:text-sm text-white/70 mb-4">
           Jump directly into the main review and management flows.
         </p>
@@ -236,7 +236,7 @@ const StatCard: React.FC<{
   const cls = accentStyles[accent];
 
   return (
-    <div className="bg-white/[0.03] border border-white/[0.12] backdrop-blur-xl rounded-2xl p-5 md:p-6 shadow-[0_14px_45px_rgba(0,0,0,0.4)]">
+    <div className="bg-cream-deep/70 border border-navy/10 rounded-card p-5 md:p-6 shadow-ink">
       <div className="flex items-start justify-between mb-4">
         <div
           className={`p-3 rounded-full text-xl flex items-center justify-center ${cls.icon}`}
@@ -245,13 +245,13 @@ const StatCard: React.FC<{
         </div>
         {pending > 0 && (
           <span
-            className={`px-2 py-1 rounded-full text-[11px] font-medium flex items-center gap-1 ${cls.pill}`}
+            className={`px-2 py-1 rounded-full text-11 font-medium flex items-center gap-1 ${cls.pill}`}
           >
             {pending} pending
           </span>
         )}
       </div>
-      <h3 className="text-xs font-medium text-white/60 uppercase tracking-wide">
+      <h3 className="text-white/60 eyebrow font-sans">
         {title}
       </h3>
       <p className={`text-3xl font-bold mt-2 ${cls.value}`}>{value}</p>
@@ -265,7 +265,7 @@ const QuickActionButton: React.FC<{ to: string; label: string }> = ({
 }) => (
   <Link
     to={to}
-    className="block px-4 py-3 text-xs md:text-sm font-medium text-white/80 bg-white/5 border border-white/12 rounded-2xl shadow-[0_14px_45px_rgba(0,0,0,0.4)] hover:bg-white/10 hover:text-white transition"
+    className="block px-4 py-3 text-xs md:text-sm font-medium text-white/80 bg-white/5 border border-white/12 rounded-card shadow-ink hover:bg-white/10 hover:text-white transition"
   >
     {label}
   </Link>
