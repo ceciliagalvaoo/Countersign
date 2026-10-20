@@ -1,8 +1,10 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+import { AmbientStroke } from '../components/ink/AmbientStroke';
 
 const AuthLayout: React.FC = () => (
-  <div className="min-h-screen bg-cream">
+  <div className="relative isolate min-h-screen bg-cream">
+    <AmbientStroke />
     <Outlet />
   </div>
 );

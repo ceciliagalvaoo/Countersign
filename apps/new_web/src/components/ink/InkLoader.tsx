@@ -3,7 +3,7 @@ import { cn } from './cn';
 
 /**
  * The loading state for anything that takes a beat: the nib's three strokes draw one by one (her
- * mandate, the issuer, the network), then clear and start again. Never a spinner.
+ * mandate, the issuer, the wallet contract), then clear and start again. Never a spinner.
  */
 const STROKES = ['M4 22C6 14 9 8 12 3', 'M20 3C23 8 26 14 28 22', 'M16 6C15.6 11 16.4 16 16 22'];
 

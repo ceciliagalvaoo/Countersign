@@ -5,6 +5,8 @@ import { useWallet } from '../contexts/WalletContext';
 import { FiLogOut, FiUsers, FiBox, FiUserCheck, FiHome, FiBriefcase, FiFilePlus, FiFileMinus, FiFileText, FiDollarSign, FiList, FiShoppingCart, FiPenTool } from 'react-icons/fi';
 import { dashboardService, orderService, stellarService } from '../services/api';
 import Wordmark from '../components/Wordmark';
+import { AmbientStroke } from '../components/ink/AmbientStroke';
+import AgentDock from '../components/agent/AgentDock';
 import toast from 'react-hot-toast';
 
 const gestorMenuItems = [
@@ -201,7 +203,8 @@ const DashboardLayout: React.FC = () => {
   if (!user) return null; // Should be handled by ProtectedRoute, but good practice
 
   return (
-    <div className="flex min-h-screen flex-col bg-cream">
+    <div className="relative isolate flex min-h-screen flex-col bg-cream">
+      <AmbientStroke />
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-50 focus:rounded-full focus:bg-cobalt focus:px-4 focus:py-2 focus:text-14 focus:text-cream"
@@ -224,6 +227,7 @@ const DashboardLayout: React.FC = () => {
       <main id="main" className="mx-auto w-full min-w-0 max-w-[1600px] flex-1 px-4 py-6 md:px-8 md:py-8">
         <Outlet />
       </main>
+      <AgentDock />
     </div>
   );
 };

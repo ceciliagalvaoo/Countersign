@@ -20,7 +20,7 @@ const HANDS = [
   {
     eyebrow: 'Left stroke',
     title: 'Her mandate',
-    body: "The agent's wallet is a contract on Stellar: it can only pay fund wallets the investor approved, within limits she signed, and it cannot change those limits.",
+    body: 'She approves the mandate, and every first purchase in a new fund waits for a card she can read and sign.',
   },
   {
     eyebrow: 'Right stroke',
@@ -29,8 +29,8 @@ const HANDS = [
   },
   {
     eyebrow: 'The slit',
-    title: 'The network',
-    body: 'Nothing is shown as done before the ledger confirms it. Every step is a transaction anyone can open in a public explorer.',
+    title: 'A wallet contract',
+    body: "The agent's wallet is a contract on Stellar: it can only pay fund wallets the investor approved, within limits she signed, and it cannot change those limits. Ours, not audited.",
   },
 ];
 

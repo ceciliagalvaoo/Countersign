@@ -3,7 +3,7 @@ import { cn } from './cn';
 /*
  * The Countersign nib. A fountain pen nib drawn from three strokes that meet at one point: the
  * left flank is the investor's mandate, the right flank is the fund's issuer, the slit is the
- * network. Ink only reaches the paper where all three meet, and the stroke that leaves the tip is
+ * wallet contract the agent cannot change. Ink only reaches the paper where all three meet, and the stroke that leaves the tip is
  * the signature. Same hand as every other stroke in the product: round caps, never filled.
  */
 const SHOULDER = 'M80 30C98 25 142 25 160 31';

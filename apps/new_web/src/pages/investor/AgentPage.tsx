@@ -6,6 +6,7 @@ import { useAuth } from '../../contexts/useAuth';
 import { useWallet } from '../../contexts/WalletContext';
 import { fundService } from '../../services/api';
 import { agentClient } from '../../services/agentClient';
+import { newSessionId, sessionKey } from '../../services/agentSession';
 import {
   decisionLogService,
   mandateService,
@@ -45,15 +46,6 @@ type ActiveCall = 'deploy' | 'deposit' | 'set_limits' | 'allow_fund' | 'revoke_a
 
 const SESSION_POLL_MS = 1500;
 const CHAIN_POLL_MS = 4000;
-
-function sessionKey(userId: string) {
-  return `countersign.agentSession.${userId}`;
-}
-
-function newSessionId() {
-  const rnd = typeof crypto !== 'undefined' && 'randomUUID' in crypto ? crypto.randomUUID() : `${Date.now()}${Math.random().toString(36).slice(2)}`;
-  return `cs_${rnd.replace(/[^A-Za-z0-9]/g, '')}`.slice(0, 60);
-}
 
 const AgentPage: React.FC = () => {
   const { user } = useAuth();

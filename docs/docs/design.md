@@ -18,7 +18,7 @@ Countersign is drawn in ink on cream. The interface has one job, which is in its
 
 </div>
 
-The mark is a fountain pen nib drawn from three strokes that meet at one point. The left flank is the investor's mandate, the right flank is the fund's issuer, and the slit is the network. Ink reaches the paper only where all three meet, which is the one line summary drawn as a picture: *an investing agent that cannot buy a fund unit unless the investor's mandate, the fund's issuer and the network agree.* The stroke that leaves the tip is the signature, written on a signature line.
+The mark is a fountain pen nib drawn from three strokes that meet at one point. The left flank is the investor's mandate, the right flank is the fund's issuer, and the slit is the wallet contract the agent cannot change, our contract on Stellar (not audited). Ink reaches the paper only where all three meet, which is the one line summary drawn as a picture: *an investing agent that cannot buy a fund unit unless the investor's mandate, the fund's issuer and a wallet contract the agent cannot change agree.* The stroke that leaves the tip is the signature, written on a signature line.
 
 The nib is drawn in the same hand as every other stroke in the product: one weight, round caps, never a filled shape. A heavier version sits beside the wordmark and in the favicon.
 
@@ -48,13 +48,16 @@ All three are loaded from Google Fonts under the SIL Open Font License 1.1.
 
 The agent is shown as an orb: a sphere of blue light, the only gradient in the product. It breathes while it waits, its light runs faster while it calls its tools, and it pulses once when a reply lands. A small orb glyph marks everything the agent wrote: its messages and the mandate draft it filled from the investor's words.
 
+On every investor screen, an orb in the corner opens the same conversation in a side panel, so she can ask a question wherever she is. The panel proposes and answers; it signs nothing, and when a signature is waiting it sends her to the agent page. It is not shown to the fund manager: the agent has no manager tools, by design.
+
 **The orb never appears on the approval card.** The card is decoded from the transaction the investor will sign, not written by the agent, and the design keeps that visible: where the model was, there is an orb; where the bytes are, there is none.
 
 ## Motion
 
 | Gesture | Where | What it says |
 |---|---|---|
-| A stroke paints itself in, once, and stays | The nib, the underline under each headline, the strokes in the page margins | Drawn by hand, not generated |
+| A stroke paints itself in, once, and stays | The nib, the underline under each headline | Drawn by hand, not generated |
+| One pen stroke wanders the margins, painting itself slowly and fading before the next | Behind every screen, at low opacity | A hand at work, never more than one mark at a time |
 | The empty signature line breathes in ochre | Each "Who must sign" row of the approval card | Your signature is still missing |
 | The signature is drawn in cobalt on the line | The same row, after the ledger confirms | Signed, confirmed on-chain |
 | Three short strokes draw one by one | Anything that takes a beat | Working; never a spinner |

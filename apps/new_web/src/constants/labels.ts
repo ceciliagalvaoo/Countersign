@@ -8,7 +8,7 @@ export const PRODUCT_NAME = 'Countersign';
 export const TAGLINE = 'Sign only what you can read.';
 /** One line summary, identical in README, technical document and video (condition 5) */
 export const ONE_LINE =
-  "An investing agent that cannot buy a fund unit unless the investor's mandate, the fund's issuer and the network agree.";
+  "An investing agent that cannot buy a fund unit unless the investor's mandate, the fund's issuer and a wallet contract the agent cannot change agree.";
 
 export const LABEL_TEST_ASSETS =
   'test USDC on Stellar testnet and units of demonstration funds; no monetary value';

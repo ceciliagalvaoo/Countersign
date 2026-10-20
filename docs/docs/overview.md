@@ -7,7 +7,7 @@ sidebar_position: 1
 
 # Countersign
 
-**An investing agent that cannot buy a fund unit unless the investor's mandate, the fund's issuer and the network agree.**
+**An investing agent that cannot buy a fund unit unless the investor's mandate, the fund's issuer and a wallet contract the agent cannot change agree.**
 
 *Sign only what you can read.*
 

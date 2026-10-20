@@ -2,7 +2,7 @@
 
 # Countersign
 
-**An investing agent that cannot buy a fund unit unless the investor's mandate, the fund's issuer and the network agree.**
+**An investing agent that cannot buy a fund unit unless the investor's mandate, the fund's issuer and a wallet contract the agent cannot change agree.**
 
 *Sign only what you can read.*
 
@@ -35,7 +35,7 @@ All USDC and fund units here are test assets on the Stellar public test network,
   <img src="docs/static/img/team/Cecilia.png" alt="Cecília Galvão" width="56" /> <img src="docs/static/img/team/Pablo.png" alt="Pablo Azevedo" width="56" />
 
 - **Project name:** Countersign
-- **One-line summary:** An investing agent that cannot buy a fund unit unless the investor's mandate, the fund's issuer and the network agree.
+- **One-line summary:** An investing agent that cannot buy a fund unit unless the investor's mandate, the fund's issuer and a wallet contract the agent cannot change agree.
 
 Countersign is an AI agent (Claude, by Anthropic) with its own mandate wallet on Stellar. It buys units of receivables funds for an investor who already holds USDC. Every first purchase in a new fund waits for a card she can read and sign.
 

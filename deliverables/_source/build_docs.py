@@ -113,7 +113,7 @@ def page(title, kind, cover_html, body):
 <tfoot><tr><td></td></tr></tfoot><tbody><tr><td>{body}</td></tr></tbody></table></body></html>"""
 
 
-ONE_LINE = "An investing agent that cannot buy a fund unit unless the investor's mandate, the fund's issuer and the network agree."
+ONE_LINE = "An investing agent that cannot buy a fund unit unless the investor's mandate, the fund's issuer and a wallet contract the agent cannot change agree."
 AUTHORISED = ("The agent's wallet is a contract on Stellar: it can only pay fund wallets the investor approved, within limits "
               "she signed, and it cannot change those limits. Nobody holds a fund unit unless the fund's issuer signs the mint.")
 
