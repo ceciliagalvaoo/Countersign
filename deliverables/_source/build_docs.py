@@ -152,6 +152,13 @@ tech = []
 tech.append(section("01", "Project Overview", "".join([
     subtitle("Problem, target users and selected topic"),
     f"<blockquote>{ONE_LINE}</blockquote>",
+    md("**The scenario in one paragraph.** A trade receivable is a payment a company will receive later for goods or services it "
+       "already delivered. A receivables fund buys many of these receivables from the companies that sell them (the assignors) and "
+       "collects when the customers who owe them (the debtors) pay. The fund's manager (in our app, the issuer account) issues fund "
+       "units, and investors buy those units; if debtors do not pay, units can lose value, up to the whole amount invested. In Brazil "
+       "these funds are FIDCs, regulated by the CVM, Brazil's securities regulator. Countersign covers one step of this chain: an AI "
+       "agent buying fund units for an investor. Our data model keeps the same actors (assignors, debtors, receivables, funds); in this "
+       "submission they are simulated test data, and the fund units are test assets on the Stellar test network."),
     md("**Selected topic:** F, Agent Wallet (autonomous on-chain wallet). **Tagline:** *Sign only what you can read.*\n\n"
        "Countersign is an AI agent (Claude, by Anthropic) with its own mandate wallet on Stellar. It buys units of receivables funds "
        "for an investor who already holds USDC. Every first purchase in a new fund waits for a card she can read and sign.\n\n"
@@ -337,6 +344,7 @@ sec.append(section("01", "Permission Model", "".join([
     fig("fig-layers", "Figure 2. Who enforces what."),
     subtitle("Confirmation, verification and rollback mechanisms"),
     md(ROLLBACK),
+    fig("stills/refused-chat", "Figure 3. Rollback in practice: after revocation, the next recurring purchase is refused before anything is built or signed (screenshot from the app, demo video 3:58)."),
 ]), new_page=False))
 sec.append(section("02", "Security Tests", "".join([
     subtitle("Prompt injection, social engineering, privilege escalation and failure recovery tests"),
@@ -344,11 +352,12 @@ sec.append(section("02", "Security Tests", "".join([
        "wallet whose agent key is a test identity, simulating a compromised server that leaked the agent key, and call the contract "
        "directly, without our API."),
     md(TEST_FAMILIES),
-    fig("fig-adversarial", "Figure 3. Adversarial suite: 12 of 12 blocked; 4 by our wallet contract, 5 by the policy, 1 by the API scope, 2 by the agent layer."),
+    fig("fig-adversarial", "Figure 4. Adversarial suite: 12 of 12 blocked; 4 by our wallet contract, 5 by the policy, 1 by the API scope, 2 by the agent layer."),
     md(ADVERSARIAL),
     md("12 of 12 blocked (100%), with 7 FAILED transaction hashes from contract refusals. The table merges two runs: A08 and A09 ran on 2026-10-19, the other ten on 2026-10-18; each case ran once. For the contract refusals, \"transaction "
        "failed on-chain\" is consensus; the error names and numbers come from the RPC's diagnostic events (limitation 13). Full table "
        "with hashes: `evidence/EVIDENCE.md`."),
+    fig("stills/explorer-failed", "Figure 5. A contract refusal as the public explorer shows it: the hash, the FAILED result and the fee are consensus (limitation 13). Screenshot of stellar.expert, Stellar test network."),
 ])))
 sec.append(section("03", "Data and Privacy", "".join([
     subtitle("Data provenance, consent, minimisation, storage and deletion"),
@@ -369,6 +378,15 @@ sec.append(section("04", "Known Risks", "".join([
     "".join(sec)))
 
 # ------------------------------------------------------------------ Execution evidence
+# The transactions shown in the demo video (checked on Horizon testnet), in the order of the video
+DEMO_TXS = [
+    ("1:36", "Deploy her mandate wallet, with her caps", "the investor", "92ba7f33af72c45e70b170a0d930a8c498956fef648832fcce24f328687e425e", "08:55:37"),
+    ("1:41", "Deposit 20 test USDC into the mandate wallet", "the investor", "a346a735133cc3a560d59fcfa4aeb66c4ca1f5ba6fc731f09f8f5a9e6e4a3cab", "08:56:42"),
+    ("2:10", "allow_fund: approve the fund for her agent", "the investor", "07b93ea15b157f586e7e1a87aca71c9f25948320cbd60ddbfffaf606a57f4de9", "09:00:07"),
+    ("2:14 and 2:25", "Agent purchase of 4 USDC; decision = log line #20 (all_rules_passed)", "the agent key, within the mandate", "1253808e53f862eb96667f09e453fb9a0de8fa6c1f6953a8de9e5730bd086660", "11:19:52"),
+    ("2:58", "Issuer countersigns: mint of 4 CSAGRI fund units", "the fund's issuer", "24c318596d180ca6fc7992db4549e91993504e6148cfef07747ec68e65c0a601", "11:31:57"),
+    ("3:51", "revoke_agent: the agent loses the right to buy", "the investor", "2e1142c7fe7317db3286c6a8e254d829b9b55e0c5fef0e14f4a7adba0fe7f4e6", "11:40:32"),
+]
 ev = EVIDENCE
 summary = re.search(r"## 01 Evidence Summary\n\n(.*?)\n\n## 02", ev, re.S).group(1)
 logs = re.search(r"## 02 Logs or Transactions\n\n(.*?)\n\n## 03", ev, re.S).group(1)
@@ -391,6 +409,14 @@ evb.append(section("01", "Evidence Summary", "".join([
     md("**Selected transactions** (the purchase made through the app, its countersignature, an end to end run and a contract "
        "refusal):\n\n" + ui),
     md("**Mainnet slice** (from the README; the table in section 02 covers the test network only; real USDC, less than US$5 in total):\n\n" + mainnet.group(1) + "\n\n" + mainnet.group(2)),
+    md("**Transactions in the demo video** (recorded on 2026-10-20 with a new test investor account; every one is on the Stellar test "
+       "network and opens on stellar.expert; times in UTC):\n\n" + "\n".join(
+           ["| Video (about) | Step | Signed by | Transaction | Time |", "|---|---|---|---|---|"]
+           + [f"| {v} | {step} | {who} | [{h[:8]}...{h[-6:]}](https://stellar.expert/explorer/testnet/tx/{h}) | {t} |" for v, step, who, h, t in DEMO_TXS])),
+    md("**Screenshots** of three of those steps, taken from the screen recordings behind the demo video:"),
+    fig("stills/needs-signature", "Figure 3. Task: a first purchase in a new fund. Result: the policy stops it with NEEDS_INVESTOR_SIGNATURE and asks for her signature; no money moved (demo video, 1:57)."),
+    fig("stills/issuer-approved", "Figure 4. The issuer's countersignature: both purchases approved, each with its payment and mint transaction (fund manager view, demo video, 2:56)."),
+    fig("stills/explorer-decision", "Figure 5. Anyone can open the agent purchase on stellar.expert and read the decision argument of subscribe (transaction 1253808e...086660, Stellar test network)."),
 ]), new_page=False))
 evb.append(section("02", "Logs or Transactions", subtitle("Transaction hashes for Topic F; timestamp, action, result and link") + logs_html))
 evb.append(section("03", "Reproduction Guide", subtitle("Steps required for judges to reproduce or verify the evidence") + md(repro)))

@@ -6,7 +6,7 @@
 |---|---|---|---|
 | 1 | Technical documentation | [`01-technical-document/Countersign-Technical-Document.pdf`](01-technical-document/Countersign-Technical-Document.pdf) | Ready |
 | 2 | Presentation deck (10 minutes or less) | [`02-presentation-deck/Countersign-Presentation-Deck.pdf`](02-presentation-deck/Countersign-Presentation-Deck.pdf) · narrative and spoken lines in [`STORY.md`](02-presentation-deck/STORY.md) | Ready |
-| 3 | Demo video (5 minutes or less) | [`03-demo-video/`](03-demo-video/README.md) | To record |
+| 3 | Demo video (5 minutes or less) | [`03-demo-video/InternationalAI-Countersign-DemoVideo.mp4`](03-demo-video/InternationalAI-Countersign-DemoVideo.mp4) (4:57, 1080p, English narration and subtitles; `.en.srt` beside it) | Done |
 | 4 | Source code | This repository; [`README.MD`](../README.MD) follows the official README template | Ready |
 | 5 | Security self-assessment | [`05-security-self-assessment/Countersign-Security-Self-Assessment.pdf`](05-security-self-assessment/Countersign-Security-Self-Assessment.pdf) | Ready |
 | 6 | Execution evidence | [`06-execution-evidence/Countersign-Execution-Evidence.pdf`](06-execution-evidence/Countersign-Execution-Evidence.pdf) · source table in [`evidence/EVIDENCE.md`](../evidence/EVIDENCE.md) | Ready |

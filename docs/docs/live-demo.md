@@ -23,7 +23,7 @@ Everything in the live demo uses test USDC and units of demonstration funds on t
 
 ## A first purchase, in the live app
 
-1. **Register as an investor.** New accounts are approved by hand by the team, through the platform's manager account, before their first login; until then the account stays pending.
+1. **Register as an investor.** New accounts are approved by hand by the team, through the platform's manager account, before their first login; until then the account stays pending. Reviewers: ready investor accounts, one per reviewer, are in the submission form.
 2. **Open the agent page** (`/agent`) and connect Freighter.
 3. **Describe your mandate in one message.** For example: "I live in Brazil. I want to invest 100 USDC over 12 months, keep 20% available within 3 months, low loss tolerance, at most 10 USDC per purchase and 30 USDC per 30 days, sectors agribusiness and services." The typed mandate fills in next to the chat; approve it.
 4. **Get test USDC** from the mandate wallet panel. You sign a USDC trustline in Freighter, then the platform sends test USDC to your account.

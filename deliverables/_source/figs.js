@@ -352,3 +352,27 @@ FIGS['fig-evidence'] = () => {
   return svg(W, H, b);
 };
 
+
+/* ---------------------------------------------------------------- The scenario: a receivables fund */
+FIGS['fig-receivables'] = () => {
+  const W = 1600, H = 900;
+  let b = eyebrow(80, 60, 'The scenario');
+  b += text(80, 104, 'A receivables fund buys payments that companies will receive later', { size: 40, font: 'display' });
+  const n = (x, y, h, ic, t, s, seed, o = {}) => node({ x, y, w: 430, h, icon: ic, title: t, sub: s, seed, subMax: 44, titleSize: 25, subSize: 17, ...o });
+  b += n(60, 170, 200, 'doc', 'The assignor (a company)', 'Sells goods today and will be paid later. It sells that future payment, the receivable, to get cash now.', 41);
+  b += n(60, 560, 170, 'clock', 'The debtor', 'The customer who owes the payment and pays it on the due date.', 43);
+  b += n(615, 375, 175, 'layers', 'The fund', 'Buys many receivables. When debtors pay, the fund collects.', 45, { w: 370, subMax: 36, stroke: C.navy });
+  b += n(1110, 170, 200, 'bank', "The fund's manager", 'In our app, the issuer account. Runs the fund and issues its units. In Countersign, it countersigns every mint.', 47);
+  b += n(1110, 560, 200, 'person', 'The investor', 'Buys units of the fund with her money. If debtors do not pay, units can lose value, up to the whole amount invested.', 49);
+  b += arrow({ x1: 492, y1: 300, x2: 612, y2: 420, bend: 20 });
+  b += label(395, 405, 'sells the receivable', { anchor: 'start' });
+  b += arrow({ x1: 492, y1: 640, x2: 612, y2: 520, bend: -20 });
+  b += label(515, 668, 'pays on the due date');
+  b += arrow({ x1: 1105, y1: 300, x2: 990, y2: 420, bend: -20, color: C.navy });
+  b += label(1050, 335, 'runs it, issues units', { color: C.navy, anchor: 'end' });
+  b += arrow({ x1: 1105, y1: 650, x2: 990, y2: 520, bend: 20, color: C.vermilion });
+  b += label(1035, 615, 'buys units', { color: C.vermilion, anchor: 'end' });
+  b += text(1110, 800, 'Countersign works on this last step: an agent buys the units for her, within her mandate.', { size: 22, font: 'display', color: C.cobalt, max: 46, lh: 1.3, italic: true });
+  b += label(60, 862, "In Brazil these funds are FIDCs, regulated by the CVM, Brazil's securities regulator. In Countersign the assignors, debtors and receivables are simulated test data; the fund units are test assets on the Stellar test network.", { size: 15, max: 200 });
+  return svg(W, H, b);
+};

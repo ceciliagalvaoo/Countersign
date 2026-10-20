@@ -171,7 +171,62 @@ ol.limits li { font-size: 11px; line-height: 1.5; margin-bottom: 4px; }
 </tr>
 </tbody>
 </table>
-<p>Mandate wallet on mainnet: <a href="https://stellar.expert/explorer/public/contract/CAIUDASJVR5XHXQDGBKDFUYGNL7BQJAQPWLBCA4OFHSYYVFL7GP34HVV"><code>CAIUDASJVR5XHXQDGBKDFUYGNL7BQJAQPWLBCA4OFHSYYVFL7GP34HVV</code></a>. The <code>decision</code> argument of the agent's <code>subscribe</code> is <code>b5a949daddd3e3d8fd88caea696f30fdd2075afd230fe6f88477d7d70fdf0324</code>, the hash of line 6 (APPROVED, <code>all_rules_passed</code>) of the slice's own decision log (<code>scripts/mainnet/out/decision-log.jsonl</code>, 7 lines, same serialization and hash chaining as the API). The log's label, literally: "mainnet slice: the fund unit token is a team-issued test asset (Stellar Asset Contract); the purchase proposal was entered by the operator and decided by our policy code; the issuer countersignature is demonstrated on testnet". Every amount is real USDC, less than US$5 in total.</p><div class="newsec"><p class="eyebrow">Section 02</p><h2><span class="num">02</span>Logs or Transactions</h2><svg viewBox="0 0 240 36" width="200" height="30" fill="none" stroke="#2547C9" stroke-linecap="round">
+<p>Mandate wallet on mainnet: <a href="https://stellar.expert/explorer/public/contract/CAIUDASJVR5XHXQDGBKDFUYGNL7BQJAQPWLBCA4OFHSYYVFL7GP34HVV"><code>CAIUDASJVR5XHXQDGBKDFUYGNL7BQJAQPWLBCA4OFHSYYVFL7GP34HVV</code></a>. The <code>decision</code> argument of the agent's <code>subscribe</code> is <code>b5a949daddd3e3d8fd88caea696f30fdd2075afd230fe6f88477d7d70fdf0324</code>, the hash of line 6 (APPROVED, <code>all_rules_passed</code>) of the slice's own decision log (<code>scripts/mainnet/out/decision-log.jsonl</code>, 7 lines, same serialization and hash chaining as the API). The log's label, literally: "mainnet slice: the fund unit token is a team-issued test asset (Stellar Asset Contract); the purchase proposal was entered by the operator and decided by our policy code; the issuer countersignature is demonstrated on testnet". Every amount is real USDC, less than US$5 in total.</p><p><strong>Transactions in the demo video</strong> (recorded on 2026-10-20 with a new test investor account; every one is on the Stellar test network and opens on stellar.expert; times in UTC):</p>
+<table>
+<thead>
+<tr>
+<th>Video (about)</th>
+<th>Step</th>
+<th>Signed by</th>
+<th>Transaction</th>
+<th>Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1:36</td>
+<td>Deploy her mandate wallet, with her caps</td>
+<td>the investor</td>
+<td><a href="https://stellar.expert/explorer/testnet/tx/92ba7f33af72c45e70b170a0d930a8c498956fef648832fcce24f328687e425e">92ba7f33...7e425e</a></td>
+<td>08:55:37</td>
+</tr>
+<tr>
+<td>1:41</td>
+<td>Deposit 20 test USDC into the mandate wallet</td>
+<td>the investor</td>
+<td><a href="https://stellar.expert/explorer/testnet/tx/a346a735133cc3a560d59fcfa4aeb66c4ca1f5ba6fc731f09f8f5a9e6e4a3cab">a346a735...4a3cab</a></td>
+<td>08:56:42</td>
+</tr>
+<tr>
+<td>2:10</td>
+<td>allow_fund: approve the fund for her agent</td>
+<td>the investor</td>
+<td><a href="https://stellar.expert/explorer/testnet/tx/07b93ea15b157f586e7e1a87aca71c9f25948320cbd60ddbfffaf606a57f4de9">07b93ea1...7f4de9</a></td>
+<td>09:00:07</td>
+</tr>
+<tr>
+<td>2:14 and 2:25</td>
+<td>Agent purchase of 4 USDC; decision = log line #20 (all_rules_passed)</td>
+<td>the agent key, within the mandate</td>
+<td><a href="https://stellar.expert/explorer/testnet/tx/1253808e53f862eb96667f09e453fb9a0de8fa6c1f6953a8de9e5730bd086660">1253808e...086660</a></td>
+<td>11:19:52</td>
+</tr>
+<tr>
+<td>2:58</td>
+<td>Issuer countersigns: mint of 4 CSAGRI fund units</td>
+<td>the fund's issuer</td>
+<td><a href="https://stellar.expert/explorer/testnet/tx/24c318596d180ca6fc7992db4549e91993504e6148cfef07747ec68e65c0a601">24c31859...c0a601</a></td>
+<td>11:31:57</td>
+</tr>
+<tr>
+<td>3:51</td>
+<td>revoke_agent: the agent loses the right to buy</td>
+<td>the investor</td>
+<td><a href="https://stellar.expert/explorer/testnet/tx/2e1142c7fe7317db3286c6a8e254d829b9b55e0c5fef0e14f4a7adba0fe7f4e6">2e1142c7...e7f4e6</a></td>
+<td>11:40:32</td>
+</tr>
+</tbody>
+</table><p><strong>Screenshots</strong> of three of those steps, taken from the screen recordings behind the demo video:</p><figure><img src="../figures/stills/needs-signature.png" alt="Figure 3. Task: a first purchase in a new fund. Result: the policy stops it with NEEDS_INVESTOR_SIGNATURE and asks for her signature; no money moved (demo video, 1:57)."/><figcaption>Figure 3. Task: a first purchase in a new fund. Result: the policy stops it with NEEDS_INVESTOR_SIGNATURE and asks for her signature; no money moved (demo video, 1:57).</figcaption></figure><figure><img src="../figures/stills/issuer-approved.png" alt="Figure 4. The issuer's countersignature: both purchases approved, each with its payment and mint transaction (fund manager view, demo video, 2:56)."/><figcaption>Figure 4. The issuer's countersignature: both purchases approved, each with its payment and mint transaction (fund manager view, demo video, 2:56).</figcaption></figure><figure><img src="../figures/stills/explorer-decision.png" alt="Figure 5. Anyone can open the agent purchase on stellar.expert and read the decision argument of subscribe (transaction 1253808e...086660, Stellar test network)."/><figcaption>Figure 5. Anyone can open the agent purchase on stellar.expert and read the decision argument of subscribe (transaction 1253808e...086660, Stellar test network).</figcaption></figure><div class="newsec"><p class="eyebrow">Section 02</p><h2><span class="num">02</span>Logs or Transactions</h2><svg viewBox="0 0 240 36" width="200" height="30" fill="none" stroke="#2547C9" stroke-linecap="round">
 <path d="M5 21C40 9 90 28 140 16S210 8 235 18" stroke-width="9" stroke-opacity=".85"/><path d="M7 27C44 16 94 33 144 22S212 14 233 24" stroke-width="4.5" stroke-opacity=".5"/></svg></div><p class="sub">Transaction hashes for Topic F; timestamp, action, result and link</p><table class="dense">
 <thead>
 <tr>

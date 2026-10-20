@@ -44,28 +44,13 @@ Pablo drops his recordings in `raw/` with the exact file names below. Claude cut
 
 Total about 4:58. The text of every subtitle is the narration column.
 
-## Status
+## Status: final cut (2026-10-20)
 
-Claude's 16 clips are recorded (`clips/`, 2:42 in total) and a first cut exists in `cut/`, with a cream card in place of each shot still to record. To stay under 5:00, Pablo's shots should come in close to these lengths (2:18 in total):
+The U shots were recorded in one guided session on 2026-10-20 (Pablo's screen, Claude driving the browser, Pablo signing every Freighter popup) and cut by `_source/edit_demo.py`, which replaces `_source/assemble.py` for the final video. What it adds over the shot list above:
 
-| Shot | Target length |
-|---|---|
-| U00 card cold open | 10 s |
-| U07 mandate | 18 s |
-| U08 wallet deploy and deposit | 14 s |
-| U09 ask and correct | 14 s |
-| U10 first purchase signature | 12 s |
-| U11 agent buys | 16 s |
-| U13 issuer countersigns | 16 s |
-| U14 recurring and interrupt | 12 s |
-| U16 pause and revoke | 16 s |
-| U17 dock (optional) | 5 s |
+- a badge on every product shot that names whose screen it is: INVESTOR VIEW, FUND MANAGER VIEW, HER WALLET, ISSUER WALLET, PUBLIC LEDGER, TEST SUITE, DOCUMENTATION;
+- smooth zooms on the element that matters (the approval card, the agent's reply, the APPROVED row, the refusal);
+- the e-mail in the header and the investor e-mails in the manager's table blurred;
+- shot 16 says what the recording shows: after the revocation, the next recurring purchase is approved by the policy and refused at execution (`agent_revoked`), before anything is built or signed.
 
-Longer takes are fine: Claude cuts the waiting (the agent thinking, the Freighter popup loading) when it assembles. Run `python3 _source/assemble.py` again after adding files; it warns if the cut passes 5:00.
-
-
-1. The nine **U** files above (U00, U07, U08, U09, U10, U11, U13, U14, U16; U17 is optional). They follow `Roteiro Demo.md` Part 1 in that order, so one pass through the roteiro produces them all: start a new file at each shot.
-2. The narration: read the narration column into one audio file per shot, or one take of the whole script (`raw/narration.m4a`). A quiet room and a phone held close are enough.
-3. Write down the hash of the purchase in step 9 (the "Latest agent purchase" link) so shot 12 shows that same transaction.
-
-When the files are in `raw/`, ask Claude to check them: it watches every file, checks length and what is on screen, and lists any take to redo before it assembles the cut.
+Output: `cut/InternationalAI-Countersign-DemoVideo.mp4` (4:55, 1920x1080, 30 fps, English subtitles burned in) and `cut/InternationalAI-Countersign-DemoVideo.en.srt`. The raw recordings stay outside the repository. The transactions the video shows are listed in the execution evidence, "Transactions in the demo video".
