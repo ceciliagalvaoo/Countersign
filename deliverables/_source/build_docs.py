@@ -36,11 +36,12 @@ STYLE = """
 @page { size: A4; margin: 0; }
 html { background: #F4F0E5; }
 .flow { width: 210mm; border-collapse: collapse; }
-.flow thead td { height: 16mm; }
-.flow tfoot td { height: 14mm; }
-.flow > tbody > tr > td { padding: 0 20mm; }
-.cover { width: 210mm; height: 297mm; padding: 24mm 20mm; position: relative; page-break-after: always; break-after: page; }
-.cover .meta { position: absolute; left: 20mm; right: 20mm; bottom: 22mm; }
+.flow thead td { height: 26mm; }
+.flow tfoot td { height: 10mm; }
+.flow > tbody > tr > td { padding: 0 27mm; }
+.flow > tbody > tr > td > * { max-width: 156mm; margin-left: auto; margin-right: auto; }
+.cover { width: 210mm; height: 281mm; padding: 34mm 27mm; position: relative; page-break-after: always; break-after: page; }
+.cover .meta { position: absolute; left: 27mm; right: 27mm; bottom: 16mm; }
 .cover .meta table td { font-size: 12px; padding: 5px 0; border-bottom: 1px solid rgba(27,43,107,.12); }
 .cover .meta table td:first-child { color: #5A679E; width: 52mm; letter-spacing: .14em; text-transform: uppercase; font-size: 9.5px; }
 .team { display: flex; gap: 18px; margin-top: 14px; }
@@ -109,7 +110,7 @@ def cover(kind, title, lead):
 def page(title, kind, cover_html, body):
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Countersign · {title}</title>
 <link rel="stylesheet" href="ink.css">{STYLE}</head><body class="doc">{DUOTONE}{cover_html}
-<table class="flow"><thead><tr><td><div style="display:flex;justify-content:space-between;padding:7mm 20mm 0;font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:#5A679E"><span>Countersign · {kind}</span><span>International AI Track · Topic F</span></div></td></tr></thead>
+<table class="flow"><thead><tr><td></td></tr></thead>
 <tfoot><tr><td></td></tr></tfoot><tbody><tr><td>{body}</td></tr></tbody></table></body></html>"""
 
 

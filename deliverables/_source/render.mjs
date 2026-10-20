@@ -19,6 +19,9 @@ if (what === 'figures' || what === 'all') {
   }
   await page.close();
 }
+// Only a page number, centred at the foot; the margin boxes are painted cream so the page bleeds edge to edge
+const foot = (size) => `<div style="width:100%;height:100%;margin:0;background:#F4F0E5;-webkit-print-color-adjust:exact;display:flex;align-items:flex-end;justify-content:center;padding-bottom:${size === 'deck' ? '34px' : '7mm'};font-family:'IBM Plex Mono',monospace;font-size:${size === 'deck' ? '15px' : '8px'};color:#5A679E"><span class="pageNumber"></span></div>`;
+const head = `<div style="width:100%;height:100%;margin:0;background:#F4F0E5;-webkit-print-color-adjust:exact"></div>`;
 const pdf = async (src, dest, opts) => {
   const page = await browser.newPage();
   await page.goto(url(src), { waitUntil: 'networkidle' });
@@ -29,9 +32,10 @@ const pdf = async (src, dest, opts) => {
   await page.close();
 };
 if (what === 'docs' || what === 'all') {
-  await pdf('technical-document.html', '01-technical-document/Countersign-Technical-Document.pdf', { format: 'A4' });
-  await pdf('security-self-assessment.html', '05-security-self-assessment/Countersign-Security-Self-Assessment.pdf', { format: 'A4' });
-  await pdf('execution-evidence.html', '06-execution-evidence/Countersign-Execution-Evidence.pdf', { format: 'A4' });
+  const a4 = { format: 'A4', displayHeaderFooter: true, headerTemplate: head, footerTemplate: foot('a4'), margin: { top: '0', bottom: '16mm', left: '0', right: '0' } };
+  await pdf('technical-document.html', '01-technical-document/Countersign-Technical-Document.pdf', a4);
+  await pdf('security-self-assessment.html', '05-security-self-assessment/Countersign-Security-Self-Assessment.pdf', a4);
+  await pdf('execution-evidence.html', '06-execution-evidence/Countersign-Execution-Evidence.pdf', a4);
 }
 if (what === 'deck' || what === 'all') {
   await pdf('deck.html', '02-presentation-deck/Countersign-Presentation-Deck.pdf', { width: '1920px', height: '1080px' });

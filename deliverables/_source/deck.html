@@ -6,7 +6,10 @@
 <link rel="stylesheet" href="ink.css" />
 <style>
   @page { size: 1920px 1080px; margin: 0; }
-  .figslide { padding: 24px 60px 96px; display: flex; align-items: center; justify-content: center; }
+  .deck .slide { padding: 120px 180px 120px; display: flex; flex-direction: column; justify-content: center; }
+  .deck .slide .folio { position: absolute; left: 0; right: 0; bottom: 44px; text-align: center; font-family: var(--mono); font-size: 16px; color: var(--ink-soft); }
+  .deck .slide > .chrome { display: none; }
+  .figslide { padding: 70px 150px 110px; display: flex; align-items: center; justify-content: center; }
   .figslide img { width: 100%; height: 100%; object-fit: contain; display: block; }
   .split { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; height: 100%; }
   .stack > * + * { margin-top: 28px; }
@@ -54,7 +57,7 @@ const tiny = (inner, w, h) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="
 const ic = (name, size = 52, color = C.cobalt) => tiny(icon(name, 0, 0, size, color, 1.7), size, size);
 const nibSvg = (size, baseline = true) => tiny(nib(0, 0, size, C.cobalt, baseline), size, size);
 const underline = (w) => tiny(brush(0, 0, w), w, w * 0.16);
-const chromeBar = (n) => `<div class="chrome"><div class="brand">${tiny(nib(0, 0, 30, C.cobalt, false), 30, 30)} Countersign</div><div>International AI Track · Topic F, Agent Wallet</div><div class="mono">${String(n).padStart(2, '0')}</div></div>`;
+const chromeBar = (n) => `<div class="folio">${n}</div>`;
 const fig = (name, eyebrow) => `<div class="slide figslide"><img src="../figures/${name}.png" alt="${eyebrow}"/>CHROME</div>`;
 
 const S = [];
@@ -189,7 +192,7 @@ S.push(`<div class="slide">
   CHROME</div>`);
 
 // 11 Architecture with "why Stellar"
-S.push(`<div class="slide" style="padding:30px 80px 100px;display:grid;grid-template-columns:1.6fr .4fr;gap:44px;align-items:center">
+S.push(`<div class="slide" style="padding:80px 150px 110px;display:grid;grid-template-columns:1.6fr .4fr;gap:44px;align-items:center">
   <img src="../figures/fig-architecture.png" style="width:100%;max-height:950px;object-fit:contain" alt="Architecture"/>
   <div class="stack">
     <p class="eyebrow">Why this infrastructure</p>
@@ -206,7 +209,7 @@ S.push(fig('fig-tiers', 'Permission tiers'));
 S.push(fig('fig-adversarial', 'Adversarial suite'));
 S.push(fig('fig-benign', 'Benign suite'));
 S.push(fig('fig-decision', 'Decision hash on chain'));
-S.push(`<div class="slide" style="padding:70px 140px 110px">
+S.push(`<div class="slide" style="padding:90px 180px 110px">
   <img src="../figures/fig-evidence.png" style="width:100%" alt="Evidence"/>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:10px">
     <div class="card" style="padding:26px 30px"><p class="eyebrow">Open one yourself</p><p class="mono" style="font-size:19px;margin-top:10px">stellar.expert/explorer/testnet/tx/<br>ca28550282a909fc3d625dc3ef09825bd53a1be100d87f057b4b1d54a6b47bd1</p><p class="small soft" style="margin-top:8px">The agent's purchase through the app; its decision argument is line #5 of her log.</p></div>
