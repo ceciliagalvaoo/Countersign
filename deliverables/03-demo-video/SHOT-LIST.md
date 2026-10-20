@@ -44,7 +44,25 @@ Pablo drops his recordings in `raw/` with the exact file names below. Claude cut
 
 Total about 4:58. The text of every subtitle is the narration column.
 
-## What Pablo still records
+## Status
+
+Claude's 16 clips are recorded (`clips/`, 2:42 in total) and a first cut exists in `cut/`, with a cream card in place of each shot still to record. To stay under 5:00, Pablo's shots should come in close to these lengths (2:18 in total):
+
+| Shot | Target length |
+|---|---|
+| U00 card cold open | 10 s |
+| U07 mandate | 18 s |
+| U08 wallet deploy and deposit | 14 s |
+| U09 ask and correct | 14 s |
+| U10 first purchase signature | 12 s |
+| U11 agent buys | 16 s |
+| U13 issuer countersigns | 16 s |
+| U14 recurring and interrupt | 12 s |
+| U16 pause and revoke | 16 s |
+| U17 dock (optional) | 5 s |
+
+Longer takes are fine: Claude cuts the waiting (the agent thinking, the Freighter popup loading) when it assembles. Run `python3 _source/assemble.py` again after adding files; it warns if the cut passes 5:00.
+
 
 1. The nine **U** files above (U00, U07, U08, U09, U10, U11, U13, U14, U16; U17 is optional). They follow `Roteiro Demo.md` Part 1 in that order, so one pass through the roteiro produces them all: start a new file at each shot.
 2. The narration: read the narration column into one audio file per shot, or one take of the whole script (`raw/narration.m4a`). A quiet room and a phone held close are enough.

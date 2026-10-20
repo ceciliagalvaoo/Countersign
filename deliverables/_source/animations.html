@@ -11,17 +11,17 @@
   .clip .label { position: absolute; top: 12px; left: 16px; font: 500 12px Inter, sans-serif; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-soft); }
   body.solo .clip { margin: 0; }
   body.solo .clip .label { display: none; }
-  .fig { position: absolute; inset: 70px 80px 70px; display: flex; align-items: center; justify-content: center; }
+  .fig { position: absolute; inset: 50px 120px 190px; display: flex; align-items: center; justify-content: center; }
   .fig svg { width: 100%; height: 100%; }
-  .center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 26px; }
-  .pad { position: absolute; inset: 0; padding: 140px 190px; display: flex; flex-direction: column; justify-content: center; }
+  .center { position: absolute; inset: 0 0 150px 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 26px; }
+  .pad { position: absolute; inset: 0; padding: 90px 230px 230px; display: flex; flex-direction: column; justify-content: center; }
   [data-s] { opacity: 0; }
   .tier { display: grid; grid-template-columns: 260px 1fr; align-items: center; padding: 26px 34px; border-radius: 6px; background: rgba(235,229,214,.75); border: 2px solid rgba(27,43,107,.12); }
   .tier + .tier { margin-top: 18px; }
   .tier b { font-family: var(--display); font-weight: 600; font-size: 54px; }
   .tier span { font-size: 32px; }
   .inc { padding: 40px 44px; border-radius: 6px; background: rgba(235,229,214,.75); border: 2px solid rgba(27,43,107,.12); }
-  .inc .big { font-family: var(--display); font-size: 100px; line-height: 1; margin: 16px 0 10px; }
+  .inc .big { font-family: var(--display); font-size: 78px; white-space: nowrap; line-height: 1; margin: 16px 0 10px; }
   .inc h3 { font-size: 42px; }
   .inc p { font-size: 24px; color: var(--ink-soft); margin: 12px 0 0; line-height: 1.45; }
   .word { display: inline-block; opacity: 0; margin-right: .26em; }
@@ -49,7 +49,7 @@ const CLIPS = {
       <div data-s="3" data-draw>${BRUSH(420)}</div>
       <p data-s="4" style="font-family:var(--display);font-size:52px">Sign only what you can read.</p></div>` },
 
-  P02: { label: 'The question', ms: 11000, html: `<div class="pad">
+  P02: { label: 'The question', ms: 10000, html: `<div class="pad">
       <p data-s="0" class="eyebrow" style="font-size:20px">The organiser's own banking agent brief</p>
       <h2 data-s="1" style="font-size:84px;margin:18px 0 50px">What should an AI agent be allowed to sign for you?</h2>
       <div data-s="2" class="tier"><b class="cobalt">Green</b><span>Automatic: balance and information queries</span></div>
@@ -58,9 +58,9 @@ const CLIPS = {
       <p data-s="6" style="font-family:var(--display);font-size:48px;margin-top:46px">The hard part is not talking about an investment. <span class="cobalt">It is buying one.</span></p>
       <p data-s="6" class="source" style="font-size:18px;margin-top:14px">Source: 2026 FinTechathon, Domestic AI Track brief.</p></div>` },
 
-  P03: { label: 'Her day', ms: 14000, fig: 'fig-persona' },
+  P03: { label: 'Her day', ms: 11500, fig: 'fig-persona' },
 
-  P04: { label: 'What has gone wrong', ms: 12000, html: `<div class="pad">
+  P04: { label: 'What has gone wrong', ms: 10500, html: `<div class="pad">
       <p data-s="0" class="eyebrow" style="font-size:20px">What has already gone wrong</p>
       <h2 data-s="0" style="font-size:80px;margin:18px 0 50px">A refusal written in a prompt does not hold money</h2>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:40px">
@@ -69,7 +69,7 @@ const CLIPS = {
         <div data-s="5" class="inc" style="border:3px solid var(--vermilion)">${ICON('eye', 64, C.vermilion)}<div class="big">~US$1.5bn</div><h3>Bybit</h3><p>A signing screen that showed one thing while the transaction did another.</p><p class="source" style="font-size:17px">Source: Bloomberg</p></div>
       </div></div>` },
 
-  P05: { label: 'The one line', ms: 11000, html: `<div class="pad" style="display:grid;grid-template-columns:1.25fr .75fr;gap:60px;align-items:center">
+  P05: { label: 'The one line', ms: 10000, html: `<div class="pad" style="display:grid;grid-template-columns:1.25fr .75fr;gap:60px;align-items:center">
       <div><p data-s="0" class="eyebrow" style="font-size:20px;margin-bottom:24px">So we built</p>
       <h2 style="font-size:84px;line-height:1.12" data-words>An investing agent that cannot buy a fund unit unless the investor's mandate, the fund's issuer and a wallet contract the agent cannot change agree.</h2></div>
       <div style="position:relative;height:640px">
@@ -79,13 +79,13 @@ const CLIPS = {
         <div data-s="13" style="position:absolute;left:150px;top:600px;font-family:var(--display);font-style:italic;font-size:34px" class="cobalt">a wallet contract</div>
       </div></div>` },
 
-  P06: { label: 'Three parties', ms: 14000, fig: 'fig-actors' },
-  P15: { label: 'The attack suite', ms: 10000, fig: 'fig-adversarial' },
+  P06: { label: 'Three parties', ms: 11500, fig: 'fig-actors' },
+  P15: { label: 'The attack suite', ms: 8500, fig: 'fig-adversarial' },
   P18a: { label: 'Tasks', ms: 7000, fig: 'fig-benign' },
   P18b: { label: 'Evidence', ms: 6500, fig: 'fig-evidence' },
-  P12: { label: 'Decision on chain', ms: 9000, fig: 'fig-decision' },
+  P12: { label: 'Decision on chain', ms: 7500, fig: 'fig-decision' },
 
-  P19: { label: 'Compliance', ms: 10000, html: `<div class="pad">
+  P19: { label: 'Compliance', ms: 9000, html: `<div class="pad">
       <p data-s="0" class="eyebrow" style="font-size:20px">Compliance, before you ask</p>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:56px 80px;margin-top:40px">
         <div data-s="1" class="bul">${ICON('globe')}<div><h3>Perimeter</h3><p>Not offered in Mainland China. We name the February 2026 notice, Yinfa [2026] No. 42.</p></div></div>
