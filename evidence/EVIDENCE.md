@@ -2,7 +2,7 @@
 
 > Transaction hashes prove the mechanism, not a market.
 
-Network: Stellar testnet only (test assets; no mainnet transaction in this file). Generated 2026-10-19T10:25:45.650Z by `npm --prefix tests run evidence`. The wallet contract is ours and not audited.
+Network: Stellar testnet (test assets) for every transaction in this file; the mainnet slice is documented separately in the README. Generated 2026-10-19T10:25:45.650Z by `npm --prefix tests run evidence`. The wallet contract is ours and not audited.
 
 ## 01 Evidence Summary
 

@@ -71,7 +71,7 @@ ol.limits li { font-size: 11px; line-height: 1.5; margin-bottom: 4px; }
 <path d="M5 21C40 9 90 28 140 16S210 8 235 18" stroke-width="9" stroke-opacity=".85"/><path d="M7 27C44 16 94 33 144 22S212 14 233 24" stroke-width="4.5" stroke-opacity=".5"/></svg></div><p class="sub">Selected topic and scenario</p><p>Topic F, Agent Wallet. The scenario: an investor who holds USDC lets an AI agent buy units of receivables funds within a mandate she signed; her first purchase in each fund needs her signature on a decoded card, and the fund's issuer countersigns every mint.</p><p class="sub">What the evidence demonstrates</p><blockquote>
 <p>Transaction hashes prove the mechanism, not a market.</p>
 </blockquote>
-<p>Network: Stellar testnet only (test assets; no mainnet transaction in this file). Generated 2026-10-19T10:25:45.650Z by <code>npm --prefix tests run evidence</code>. The wallet contract is ours and not audited.</p>
+<p>Network: Stellar testnet (test assets) for every transaction in this file; the mainnet slice is documented separately in the README. Generated 2026-10-19T10:25:45.650Z by <code>npm --prefix tests run evidence</code>. The wallet contract is ours and not audited.</p>
 <ul>
 <li>Transactions in the evidence table: 158; each has a task and a decision-log line.</li>
 <li>Agent purchases (subscribe) checked: 37; decision argument equal to the hash of an APPROVED decision-log line with the same amount: 37.</li>
