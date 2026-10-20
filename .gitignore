@@ -43,3 +43,7 @@ apps/new_web/dist/
 
 # Mainnet slice: keep the public log and state, not the local XDR files
 scripts/mainnet/out/*.xdr
+
+# Team registration form: passport, student ID and phone numbers. Never in the public repository.
+deliverables/team-form/*
+!deliverables/team-form/README.md

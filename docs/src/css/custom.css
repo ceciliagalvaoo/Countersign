@@ -191,3 +191,8 @@ blockquote {
     animation: none;
   }
 }
+
+/* Team */
+.cs-team { display: flex; flex-wrap: wrap; gap: 1.5rem; margin: 1rem 0 1.25rem; }
+.cs-member { display: flex; align-items: center; gap: 1rem; padding: 0.9rem 1.1rem; border: 1px solid rgba(27, 43, 107, 0.12); border-radius: 4px; background: rgba(235, 229, 214, 0.7); font-size: 0.92rem; line-height: 1.5; }
+.cs-member img { width: 72px; height: 72px; border-radius: 999px; object-fit: cover; border: 2px solid var(--cs-cobalt); filter: grayscale(1) contrast(1.05); }

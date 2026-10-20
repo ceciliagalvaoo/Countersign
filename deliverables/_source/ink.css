@@ -1,0 +1,141 @@
+/*
+ * Countersign deliverables: Ink on Cream, the same tokens as the web app and the documentation site.
+ * Cream page, navy ink, cobalt for the hand that acts, ochre for waiting, vermilion for refusals.
+ * Cormorant Garamond for headings, Inter for text, IBM Plex Mono for values and hashes.
+ */
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap");
+
+:root {
+  --cream: #f4f0e5;
+  --cream-deep: #ebe5d6;
+  --cobalt: #2547c9;
+  --navy: #1b2b6b;
+  --ink-soft: #5a679e;
+  --vermilion: #c0391b;
+  --ochre: #a06a12;
+  --hair: rgba(27, 43, 107, 0.12);
+  --display: "Cormorant Garamond", Georgia, serif;
+  --sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--cream);
+  color: var(--navy);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+h1, h2, h3 { font-family: var(--display); font-weight: 500; letter-spacing: -0.005em; margin: 0; color: var(--navy); }
+code, .mono { font-family: var(--mono); font-size: 0.92em; }
+a { color: var(--cobalt); text-decoration: none; }
+
+.eyebrow {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.tabular { font-variant-numeric: lining-nums tabular-nums; }
+.soft { color: var(--ink-soft); }
+.cobalt { color: var(--cobalt); }
+.ochre { color: var(--ochre); }
+.vermilion { color: var(--vermilion); }
+
+.card {
+  background: rgba(235, 229, 214, 0.7);
+  border: 1px solid rgba(27, 43, 107, 0.1);
+  border-radius: 4px;
+}
+
+.source {
+  font-size: 11px;
+  color: var(--ink-soft);
+  letter-spacing: 0.01em;
+}
+
+table.ink { border-collapse: collapse; width: 100%; font-size: 12.5px; }
+table.ink th {
+  font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft);
+  font-weight: 500; text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--hair);
+}
+table.ink td { padding: 8px 10px; border-bottom: 1px solid var(--hair); vertical-align: top; line-height: 1.45; }
+table.ink tr:last-child td { border-bottom: none; }
+table.ink td code { font-size: 11.5px; }
+
+/* ------------------------------------------------------------------ A4 documents */
+@page { size: A4; margin: 0; }
+.doc { width: 210mm; margin: 0 auto; }
+.page {
+  width: 210mm; min-height: 297mm; padding: 22mm 20mm 20mm; position: relative;
+  page-break-after: always; break-after: page; overflow: hidden;
+}
+.page:last-child { page-break-after: auto; break-after: auto; }
+.page .runner {
+  position: absolute; top: 9mm; left: 20mm; right: 20mm; display: flex; justify-content: space-between;
+  font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-soft);
+}
+.page .folio { position: absolute; bottom: 9mm; right: 20mm; font-size: 9px; color: var(--ink-soft); font-family: var(--mono); }
+.doc h1 { font-size: 40px; line-height: 1.05; }
+.doc h2 { font-size: 30px; line-height: 1.1; margin: 0 0 4px; }
+.doc h2 .num { color: var(--cobalt); margin-right: 10px; }
+.doc h3 { font-size: 20px; margin: 18px 0 6px; }
+.doc p, .doc li { font-size: 12.5px; line-height: 1.62; }
+.doc p { margin: 0 0 9px; }
+.doc ul, .doc ol { margin: 0 0 10px; padding-left: 18px; }
+.doc .lead { font-size: 15px; line-height: 1.55; color: var(--ink-soft); }
+.doc blockquote {
+  margin: 10px 0 14px; padding: 8px 14px; border-left: 3px solid var(--cobalt); background: rgba(37, 71, 201, 0.05);
+  font-family: var(--display); font-size: 17px; line-height: 1.4; color: var(--navy);
+}
+.doc pre {
+  font-family: var(--mono); font-size: 9.6px; line-height: 1.5; background: rgba(27, 43, 107, 0.04);
+  border: 1px solid var(--hair); border-radius: 4px; padding: 10px 12px; white-space: pre-wrap; margin: 0 0 10px;
+}
+.doc figure { margin: 10px 0 14px; text-align: center; }
+.doc figure img { width: 100%; border-radius: 4px; border: 1px solid var(--hair); display: block; }
+.doc figcaption { font-size: 11px; color: var(--ink-soft); margin-top: 6px; font-style: italic; }
+.section-head { display: flex; align-items: flex-end; gap: 14px; margin-bottom: 10px; }
+.section-head svg { flex: none; }
+.callout { padding: 10px 14px; margin: 8px 0 12px; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.stat { padding: 12px 14px; }
+.stat .n { font-family: var(--display); font-size: 34px; line-height: 1; color: var(--navy); }
+.stat .l { font-size: 11px; color: var(--ink-soft); margin-top: 4px; line-height: 1.4; }
+
+/* ------------------------------------------------------------------ 16:9 deck */
+.deck .slide {
+  width: 1920px; height: 1080px; position: relative; overflow: hidden; padding: 110px 140px 90px;
+  page-break-after: always; break-after: page; background: var(--cream);
+}
+.deck .slide:last-child { page-break-after: auto; }
+.deck .slide .chrome {
+  position: absolute; left: 140px; right: 140px; bottom: 46px; display: flex; justify-content: space-between;
+  align-items: center; font-size: 15px; color: var(--ink-soft); letter-spacing: 0.04em;
+}
+.deck .slide .chrome .brand { display: flex; align-items: center; gap: 10px; font-family: var(--display); font-size: 22px; color: var(--navy); font-weight: 600; }
+.deck .eyebrow { font-size: 17px; }
+.deck h1 { font-size: 120px; line-height: 0.98; }
+.deck h2 { font-size: 76px; line-height: 1.02; max-width: 1500px; }
+.deck h3 { font-size: 38px; line-height: 1.1; }
+.deck p { font-size: 26px; line-height: 1.5; margin: 0; }
+.deck .small { font-size: 20px; line-height: 1.5; }
+.deck .source { font-size: 15px; }
+.deck .card { border-radius: 6px; }
+.deck table.ink { font-size: 21px; }
+.deck table.ink th { font-size: 14px; padding: 12px 16px; }
+.deck table.ink td { padding: 12px 16px; }
+.deck .num-big { font-family: var(--display); font-size: 150px; line-height: 0.9; color: var(--navy); }
+.pill {
+  display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; padding: 6px 16px;
+  font-size: 17px; letter-spacing: 0.06em; border: 1px solid currentColor;
+}
+.photo { border-radius: 999px; overflow: hidden; background: var(--cream-deep); }
+.photo img { width: 100%; height: 100%; object-fit: cover; filter: url(#duotone); }

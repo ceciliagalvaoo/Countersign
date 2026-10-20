@@ -54,6 +54,21 @@ You do not need to run anything to check the central claim.
 4. Open a refusal: [`cfff9ced...3a3b5c`](https://stellar.expert/explorer/testnet/tx/cfff9ced3f87e3ce9ef712fa90a287bd77aad95ba6ea96b17214b328033a3b5c). The agent's key tried to pay a wallet outside the allowlist, with our server out of the path, and our wallet contract refused it (FAILED).
 5. Read the [Limitations](limitations.md), and why each one is there.
 
+## Team
+
+<div className="cs-team">
+  <div className="cs-member">
+    <img src={require('@site/static/img/team/Pablo.png').default} alt="Pablo de Azevedo" />
+    <div><strong>Pablo de Azevedo</strong><br />Team leader, front end and product<br /><a href="https://github.com/zzaved">@zzaved</a></div>
+  </div>
+  <div className="cs-member">
+    <img src={require('@site/static/img/team/Cecilia.png').default} alt="Cecília Galvão" />
+    <div><strong>Cecília Galvão</strong><br />Blockchain and backend<br /><a href="https://github.com/ceciliagalvaoo">@ceciliagalvaoo</a></div>
+  </div>
+</div>
+
+Computer Engineering students at Inteli, Institute of Technology and Leadership (São Paulo, Brazil).
+
 ## Where to read next
 
 - [Live demo](live-demo.md): the deployed app on testnet, and a first purchase step by step.
@@ -64,6 +79,7 @@ You do not need to run anything to check the central claim.
 - [Limitations](limitations.md): the literal list, identical in every document, and why each one is there.
 - [Run it yourself](run-it-yourself.md): from a clean machine.
 - [Design](design.md): the nib, the palette, the type, and where the agent is shown.
+- Submission deliverables: technical document, deck, security self-assessment and execution evidence as PDF, in [`deliverables/`](https://github.com/ceciliagalvaoo/Countersign/tree/main/deliverables) of the repository.
 
 ## Roadmap
 

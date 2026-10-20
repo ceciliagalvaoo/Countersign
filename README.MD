@@ -23,12 +23,17 @@
 
 All USDC and fund units here are test assets on the Stellar public test network, with no monetary value, except the mainnet transactions of the mainnet slice (section 6, limitation 14). Transaction hashes prove the mechanism, not a market.
 
+**Submission documents** (technical document, presentation deck, security self-assessment, execution evidence, all as PDF): [`deliverables/`](deliverables/README.md).
+
 ---
 
 ## 1. Project Overview
 
 - **Track:** 2026 Shenzhen FinTechathon, International AI Track, Topic F (Agent Wallet)
 - **Team:** Cecília Galvão ([@ceciliagalvaoo](https://github.com/ceciliagalvaoo)) and Pablo Azevedo ([@zzaved](https://github.com/zzaved))
+
+  <img src="docs/static/img/team/Cecilia.png" alt="Cecília Galvão" width="56" /> <img src="docs/static/img/team/Pablo.png" alt="Pablo Azevedo" width="56" />
+
 - **Project name:** Countersign
 - **One-line summary:** An investing agent that cannot buy a fund unit unless the investor's mandate, the fund's issuer and the network agree.
 
