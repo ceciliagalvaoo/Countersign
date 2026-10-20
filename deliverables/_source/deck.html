@@ -90,7 +90,7 @@ S.push(`<div class="slide" style="padding:0">
     <h1 style="font-size:168px">Countersign</h1>
     <div>${underline(380)}</div>
     <h2 style="font-size:64px">Sign only what you can read.</h2>
-    <p class="soft" style="max-width:960px">An investing agent that cannot buy a fund unit unless the investor's mandate, the fund's issuer and a wallet contract the agent cannot change agree.</p>
+    <p class="soft" style="max-width:960px">An AI agent that invests for you in receivables funds, with every decision and every purchase traceable on chain.</p>
   </div>
   <div style="position:absolute;left:140px;bottom:90px;display:flex;gap:40px;align-items:center">
     <div class="photo" style="width:84px;height:84px"><img src="img/team/Pablo.png" alt=""></div>
@@ -156,7 +156,7 @@ S.push(`<div class="slide">
 S.push(`<div class="slide" style="display:grid;grid-template-columns:1.2fr .8fr;gap:60px;align-items:center">
   <div class="stack">
     <p class="eyebrow">So we built</p>
-    <h2 style="font-size:68px;line-height:1.08">An investing agent that cannot buy a fund unit unless the investor's mandate, the fund's issuer and a wallet contract the agent cannot change agree.</h2>
+    <h2 style="font-size:68px;line-height:1.08">An AI agent that invests for you in receivables funds, with every decision and every purchase traceable on chain.</h2>
     <div>${underline(460)}</div>
     <p class="small soft">Of the frictions in this market, we take on two: a confirmation she cannot read, and an agent she cannot bound. Onboarding and paperwork stay simulated here. Her limits live in our wallet contract on Stellar, not audited, which the agent cannot change; the issuer signs every mint; every payment, decision hash and mint is a public record on the Stellar test network that anyone can open.</p>
   </div>
@@ -184,7 +184,7 @@ S.push(`<div class="slide" style="padding:80px 200px 100px">
       <div class="bullet">${ic('eye', 46)}<p class="small"><b>Decoded from the exact bytes</b> she will sign, not written by the model. The network is stated separately: it is not part of the transaction.</p></div>
       <div class="bullet">${ic('alert', 46, C.vermilion)}<p class="small">The browser decodes the bytes a second time and shows <b class="vermilion">Do not sign</b> if its reading differs from our API. That guards against our API, not against a compromised front end: the independent check is her wallet's own display of the transaction.</p></div>
       <div class="bullet">${ic('pen', 46)}<p class="small">Her wallet opens only after she presses <b>Sign in your wallet</b> on the card.</p></div>
-      <p class="source">Screenshots from the app (demo video, 0:05 and 2:03); test assets on the Stellar test network.</p>
+      <p class="source">Screenshots of the original interface, which you can open at countersign-web-rt1a.onrender.com; test assets on the Stellar test network.</p>
     </div>
   </div>
   CHROME</div>`);
@@ -247,9 +247,9 @@ S.push(`<div class="slide" style="padding:80px 150px 110px;display:grid;grid-tem
 // 12 Layers, 13 Tiers, 14 Adversarial, 15 Benign, 16 Decision, 17 Evidence
 S.push(fig('fig-layers', 'Who enforces what'));
 S.push(fig('fig-tiers', 'Permission tiers'));
-S.push(figShot('fig-adversarial', 'Adversarial suite', 'revoked-tight.png', 'Separate from the 12 tests: after one signature from her, the next recurring purchase was refused before anything was built or signed (demo video, 3:54).', 460));
+S.push(figShot('fig-adversarial', 'Adversarial suite', 'revoked-tight.png', 'Separate from the 12 tests: after one signature from her, the next recurring purchase was refused before anything was built or signed. Screenshot of the original interface (countersign-web-rt1a.onrender.com).', 460));
 S.push(fig('fig-benign', 'Benign suite'));
-S.push(figShot('fig-decision', 'Decision hash on chain', 'decision-tight.png', 'The same link in the app: the payment\'s decision argument is log line #20 (demo video, 3:03).', 460));
+S.push(figShot('fig-decision', 'Decision hash on chain', 'decision-tight.png', 'The same link in the app: the payment\'s decision argument is log line #20. Screenshot of the original interface (countersign-web-rt1a.onrender.com).', 460));
 S.push(`<div class="slide" style="padding:90px 180px 110px">
   <div style="height:560px">${centreTitle(FIGS['fig-evidence']())}</div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:10px">

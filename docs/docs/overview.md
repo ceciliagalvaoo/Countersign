@@ -7,7 +7,7 @@ sidebar_position: 1
 
 # Countersign
 
-**An investing agent that cannot buy a fund unit unless the investor's mandate, the fund's issuer and a wallet contract the agent cannot change agree.**
+**An AI agent that invests for you in receivables funds, with every decision and every purchase traceable on chain.**
 
 *Sign only what you can read.*
 

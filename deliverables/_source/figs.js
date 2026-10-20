@@ -269,7 +269,7 @@ FIGS['fig-persona'] = () => {
     b += text(1560, 200, '"If I press it and it is wrong,', { size: 26, font: 'display', italic: true, color: C.vermilion, anchor: 'end' });
   b += text(1560, 232, 'there is no way back."', { size: 26, font: 'display', italic: true, color: C.vermilion, anchor: 'end' });
   b += arrow({ x1: 1420, y1: 250, x2: 1375, y2: 585, bend: 40, color: C.vermilion, sw: 2 });
-  b += label(60, 790, 'Composite persona, built from public data; not validated by interviews. Times are illustrative.', { size: 15 });
+  b += label(60, 790, 'Composite persona, built from public data. Times are illustrative.', { size: 15 });
   return svg(W, H, b);
 };
 

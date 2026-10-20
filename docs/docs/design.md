@@ -18,7 +18,7 @@ Countersign is drawn in ink on cream. The interface has one job, which is in its
 
 </div>
 
-The mark is a fountain pen nib drawn from three strokes that meet at one point. The left flank is the investor's mandate, the right flank is the fund's issuer, and the slit is the wallet contract the agent cannot change, our contract on Stellar (not audited). Ink reaches the paper only where all three meet, which is the one line summary drawn as a picture: *an investing agent that cannot buy a fund unit unless the investor's mandate, the fund's issuer and a wallet contract the agent cannot change agree.* The stroke that leaves the tip is the signature, written on a signature line.
+The mark is a fountain pen nib drawn from three strokes that meet at one point. The left flank is the investor's mandate, the right flank is the fund's issuer, and the slit is the wallet contract the agent cannot change, our contract on Stellar (not audited). Ink reaches the paper only where all three meet, which is the one line summary drawn as a picture: *an AI agent that invests for you in receivables funds, with every decision and every purchase traceable on chain.* The stroke that leaves the tip is the signature, written on a signature line.
 
 The nib is drawn in the same hand as every other stroke in the product: one weight, round caps, never a filled shape. A heavier version sits beside the wordmark and in the favicon.
 

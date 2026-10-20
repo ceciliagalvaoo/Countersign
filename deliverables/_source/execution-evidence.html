@@ -1,15 +1,13 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><title>Countersign · Execution evidence</title>
 <link rel="stylesheet" href="ink.css">
 <style>
-@page { size: A4; margin: 0; }
+@page { size: A4; margin: 22mm 0 18mm 0; background: #F4F0E5; @bottom-center { content: counter(page); font-family: "IBM Plex Mono", monospace; font-size: 8px; color: #5A679E; vertical-align: bottom; padding-bottom: 7mm; } }
+@page :first { @bottom-center { content: none; } }
 html { background: #F4F0E5; }
-.flow { width: 210mm; border-collapse: collapse; }
-.flow thead td { height: 26mm; }
-.flow tfoot td { height: 10mm; }
-.flow > tbody > tr > td { padding: 0 27mm; }
-.flow > tbody > tr > td > * { max-width: 156mm; margin-left: auto; margin-right: auto; }
-.cover { width: 210mm; height: 281mm; padding: 34mm 27mm; position: relative; page-break-after: always; break-after: page; }
-.cover .meta { position: absolute; left: 27mm; right: 27mm; bottom: 16mm; }
+.flow { width: 210mm; padding: 0 27mm; }
+.flow > * { max-width: 156mm; }
+.cover { width: 210mm; height: 248mm; padding: 12mm 27mm; position: relative; page-break-after: always; break-after: page; }
+.cover .meta { position: absolute; left: 27mm; right: 27mm; bottom: 4mm; }
 .cover .meta table td { font-size: 12px; padding: 5px 0; border-bottom: 1px solid rgba(27,43,107,.12); }
 .cover .meta table td:first-child { color: #5A679E; width: 52mm; letter-spacing: .14em; text-transform: uppercase; font-size: 9.5px; }
 .team { display: flex; gap: 18px; margin-top: 14px; }
@@ -22,13 +20,24 @@ html { background: #F4F0E5; }
 .doc table { border-collapse: collapse; width: 100%; font-size: 10.5px; margin: 6px 0 12px; }
 .doc table th { font-size: 8.5px; letter-spacing: .12em; text-transform: uppercase; color: #5A679E; font-weight: 500; text-align: left; padding: 6px 7px; border-bottom: 1px solid rgba(27,43,107,.15); }
 .doc table td { padding: 6px 7px; border-bottom: 1px solid rgba(27,43,107,.1); vertical-align: top; line-height: 1.45; }
-.doc table tr { page-break-inside: avoid; break-inside: avoid; }
+.doc table tr { page-break-inside: auto; break-inside: auto; }
 .doc table code { font-size: 9.5px; }
 .doc table.dense { font-size: 8.4px; }
 .doc table.dense td { padding: 4px 5px; }
 .doc table.dense code { font-size: 8px; }
 ol.limits li { font-size: 11px; line-height: 1.5; margin-bottom: 4px; }
-.sub { font-family: var(--sans); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: #5A679E; margin: 14px 0 4px; font-weight: 500; }
+.sub { font-family: var(--sans); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: #5A679E; margin: 20px 0 8px; font-weight: 500; page-break-after: avoid; break-after: avoid; }
+.newsec { padding-top: 2mm; margin-bottom: 6mm; }
+.newsec h2 { font-size: 32px; }
+.doc p, .doc li { orphans: 3; widows: 3; }
+.doc figure { margin: 14px 0 18px; }
+.doc figcaption { font-size: 10.5px; line-height: 1.45; margin-top: 7px; padding: 0 6mm; }
+.doc table { margin: 8px 0 16px; }
+.doc table thead { display: table-header-group; }
+.doc table th { border-bottom: 1.5px solid rgba(27,43,107,.28); }
+.doc table tbody tr:nth-child(even) td { background: rgba(235,229,214,.45); }
+.doc table tr:last-child td { border-bottom: none; }
+.doc blockquote { margin: 12px 0 16px; }
 </style></head><body class="doc"><svg width="0" height="0" style="position:absolute"><filter id="duotone" color-interpolation-filters="sRGB">
 <feColorMatrix type="matrix" values=".33 .33 .33 0 0 .33 .33 .33 0 0 .33 .33 .33 0 0 0 0 0 1 0"/>
 <feComponentTransfer><feFuncR type="table" tableValues="0.106 0.957"/><feFuncG type="table" tableValues="0.169 0.941"/>
@@ -58,8 +67,7 @@ ol.limits li { font-size: 11px; line-height: 1.5; margin-bottom: 4px; }
     </div>
   </div>
 </div>
-<table class="flow"><thead><tr><td></td></tr></thead>
-<tfoot><tr><td></td></tr></tfoot><tbody><tr><td><div><p class="eyebrow">Section 01</p><h2><span class="num">01</span>Evidence Summary</h2><svg viewBox="0 0 240 36" width="200" height="30" fill="none" stroke="#2547C9" stroke-linecap="round">
+<div class="flow"><div><p class="eyebrow">Section 01</p><h2><span class="num">01</span>Evidence Summary</h2><svg viewBox="0 0 240 36" width="200" height="30" fill="none" stroke="#2547C9" stroke-linecap="round">
 <path d="M5 21C40 9 90 28 140 16S210 8 235 18" stroke-width="9" stroke-opacity=".85"/><path d="M7 27C44 16 94 33 144 22S212 14 233 24" stroke-width="4.5" stroke-opacity=".5"/></svg></div><p class="sub">Selected topic and scenario</p><p>Topic F, Agent Wallet. The scenario: an investor who holds USDC lets an AI agent buy units of receivables funds within a mandate she signed; her first purchase in each fund needs her signature on a decoded card, and the fund's issuer countersigns every mint.</p><p class="sub">What the evidence demonstrates</p><blockquote>
 <p>Transaction hashes prove the mechanism, not a market.</p>
 </blockquote>
@@ -175,7 +183,6 @@ ol.limits li { font-size: 11px; line-height: 1.5; margin-bottom: 4px; }
 <table>
 <thead>
 <tr>
-<th>Video (about)</th>
 <th>Step</th>
 <th>Signed by</th>
 <th>Transaction</th>
@@ -184,49 +191,43 @@ ol.limits li { font-size: 11px; line-height: 1.5; margin-bottom: 4px; }
 </thead>
 <tbody>
 <tr>
-<td>1:36</td>
 <td>Deploy her mandate wallet, with her caps</td>
 <td>the investor</td>
 <td><a href="https://stellar.expert/explorer/testnet/tx/92ba7f33af72c45e70b170a0d930a8c498956fef648832fcce24f328687e425e">92ba7f33...7e425e</a></td>
 <td>08:55:37</td>
 </tr>
 <tr>
-<td>1:41</td>
 <td>Deposit 20 test USDC into the mandate wallet</td>
 <td>the investor</td>
 <td><a href="https://stellar.expert/explorer/testnet/tx/a346a735133cc3a560d59fcfa4aeb66c4ca1f5ba6fc731f09f8f5a9e6e4a3cab">a346a735...4a3cab</a></td>
 <td>08:56:42</td>
 </tr>
 <tr>
-<td>2:10</td>
 <td>allow_fund: approve the fund for her agent</td>
 <td>the investor</td>
 <td><a href="https://stellar.expert/explorer/testnet/tx/07b93ea15b157f586e7e1a87aca71c9f25948320cbd60ddbfffaf606a57f4de9">07b93ea1...7f4de9</a></td>
 <td>09:00:07</td>
 </tr>
 <tr>
-<td>2:14 and 2:25</td>
 <td>Agent purchase of 4 USDC; decision = log line #20 (all_rules_passed)</td>
 <td>the agent key, within the mandate</td>
 <td><a href="https://stellar.expert/explorer/testnet/tx/1253808e53f862eb96667f09e453fb9a0de8fa6c1f6953a8de9e5730bd086660">1253808e...086660</a></td>
 <td>11:19:52</td>
 </tr>
 <tr>
-<td>2:58</td>
 <td>Issuer countersigns: mint of 4 CSAGRI fund units</td>
 <td>the fund's issuer</td>
 <td><a href="https://stellar.expert/explorer/testnet/tx/24c318596d180ca6fc7992db4549e91993504e6148cfef07747ec68e65c0a601">24c31859...c0a601</a></td>
 <td>11:31:57</td>
 </tr>
 <tr>
-<td>3:51</td>
 <td>revoke_agent: the agent loses the right to buy</td>
 <td>the investor</td>
 <td><a href="https://stellar.expert/explorer/testnet/tx/2e1142c7fe7317db3286c6a8e254d829b9b55e0c5fef0e14f4a7adba0fe7f4e6">2e1142c7...e7f4e6</a></td>
 <td>11:40:32</td>
 </tr>
 </tbody>
-</table><p><strong>Screenshots</strong> of three of those steps, taken from the screen recordings behind the demo video:</p><figure><img src="../figures/stills/needs-signature.png" alt="Figure 3. Task: a first purchase in a new fund. Result: the policy stops it with NEEDS_INVESTOR_SIGNATURE and asks for her signature; no money moved (demo video, 1:57)."/><figcaption>Figure 3. Task: a first purchase in a new fund. Result: the policy stops it with NEEDS_INVESTOR_SIGNATURE and asks for her signature; no money moved (demo video, 1:57).</figcaption></figure><figure><img src="../figures/stills/issuer-approved.png" alt="Figure 4. The issuer's countersignature: both purchases approved, each with its payment and mint transaction (fund manager view, demo video, 2:56)."/><figcaption>Figure 4. The issuer's countersignature: both purchases approved, each with its payment and mint transaction (fund manager view, demo video, 2:56).</figcaption></figure><figure><img src="../figures/stills/explorer-decision.png" alt="Figure 5. Anyone can open the agent purchase on stellar.expert and read the decision argument of subscribe (transaction 1253808e...086660, Stellar test network)."/><figcaption>Figure 5. Anyone can open the agent purchase on stellar.expert and read the decision argument of subscribe (transaction 1253808e...086660, Stellar test network).</figcaption></figure><div class="newsec"><p class="eyebrow">Section 02</p><h2><span class="num">02</span>Logs or Transactions</h2><svg viewBox="0 0 240 36" width="200" height="30" fill="none" stroke="#2547C9" stroke-linecap="round">
+</table><p><strong>Screenshots</strong> of three of those steps, from the original interface (https://countersign-web-rt1a.onrender.com):</p><figure><img src="../figures/stills/needs-signature.png" alt="Figure 3. Task: a first purchase in a new fund. Result: the policy stops it with NEEDS_INVESTOR_SIGNATURE and asks for her signature; no money moved. Screenshot of the original interface, which you can open at https://countersign-web-rt1a.onrender.com."/><figcaption>Figure 3. Task: a first purchase in a new fund. Result: the policy stops it with NEEDS_INVESTOR_SIGNATURE and asks for her signature; no money moved. Screenshot of the original interface, which you can open at https://countersign-web-rt1a.onrender.com.</figcaption></figure><figure><img src="../figures/stills/issuer-approved.png" alt="Figure 4. The issuer's countersignature: both purchases approved, each with its payment and mint transaction (fund manager view). Screenshot of the original interface, which you can open at https://countersign-web-rt1a.onrender.com."/><figcaption>Figure 4. The issuer's countersignature: both purchases approved, each with its payment and mint transaction (fund manager view). Screenshot of the original interface, which you can open at https://countersign-web-rt1a.onrender.com.</figcaption></figure><figure><img src="../figures/stills/explorer-decision.png" alt="Figure 5. Anyone can open the agent purchase on stellar.expert and read the decision argument of subscribe (transaction 1253808e...086660, Stellar test network)."/><figcaption>Figure 5. Anyone can open the agent purchase on stellar.expert and read the decision argument of subscribe (transaction 1253808e...086660, Stellar test network).</figcaption></figure><div class="newsec"><p class="eyebrow">Section 02</p><h2><span class="num">02</span>Logs or Transactions</h2><svg viewBox="0 0 240 36" width="200" height="30" fill="none" stroke="#2547C9" stroke-linecap="round">
 <path d="M5 21C40 9 90 28 140 16S210 8 235 18" stroke-width="9" stroke-opacity=".85"/><path d="M7 27C44 16 94 33 144 22S212 14 233 24" stroke-width="4.5" stroke-opacity=".5"/></svg></div><p class="sub">Transaction hashes for Topic F; timestamp, action, result and link</p><table class="dense">
 <thead>
 <tr>
@@ -2167,4 +2168,4 @@ ol.limits li { font-size: 11px; line-height: 1.5; margin-bottom: 4px; }
 <h3>Setup transactions (not evidence)</h3>
 <p>37 transactions: test or account setup (friendbot, faucet, trustline, dedicated test wallet of the bypass cases); not an investor task; fund onboarding: FundToken deploy by the fund wallet (manager flow); the decision log covers investor tasks. Full list in <code>evidence/evidence.json</code>.</p><div class="newsec"><p class="eyebrow">Section 03</p><h2><span class="num">03</span>Reproduction Guide</h2><svg viewBox="0 0 240 36" width="200" height="30" fill="none" stroke="#2547C9" stroke-linecap="round">
 <path d="M5 21C40 9 90 28 140 16S210 8 235 18" stroke-width="9" stroke-opacity=".85"/><path d="M7 27C44 16 94 33 144 22S212 14 233 24" stroke-width="4.5" stroke-opacity=".5"/></svg></div><p class="sub">Steps required for judges to reproduce or verify the evidence</p><p><strong>Verify without running anything:</strong> open any link above on stellar.expert (testnet). For an agent purchase, the first argument of <code>subscribe</code> is the decision; it equals the hash of the decision-log line shown in the table.</p>
-<p><strong>Reproduce:</strong> follow <code>tests/RUNBOOK.md</code>: deploy the contracts, seed the demo funds, run the API and the agent, then <code>npm --prefix tests run suites</code> (suites) and <code>npm --prefix tests run evidence</code> (this file). The command recomputes each decision-log chain, reads every transaction from Horizon testnet, decodes it, and fails on any hash without task or log line, any action that differs from its line, any decision that differs, or a broken chain.</p></td></tr></tbody></table></body></html>
+<p><strong>Reproduce:</strong> follow <code>tests/RUNBOOK.md</code>: deploy the contracts, seed the demo funds, run the API and the agent, then <code>npm --prefix tests run suites</code> (suites) and <code>npm --prefix tests run evidence</code> (this file). The command recomputes each decision-log chain, reads every transaction from Horizon testnet, decodes it, and fails on any hash without task or log line, any action that differs from its line, any decision that differs, or a broken chain.</p></div></body></html>

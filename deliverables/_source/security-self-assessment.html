@@ -1,15 +1,13 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><title>Countersign · Security self-assessment</title>
 <link rel="stylesheet" href="ink.css">
 <style>
-@page { size: A4; margin: 0; }
+@page { size: A4; margin: 22mm 0 18mm 0; background: #F4F0E5; @bottom-center { content: counter(page); font-family: "IBM Plex Mono", monospace; font-size: 8px; color: #5A679E; vertical-align: bottom; padding-bottom: 7mm; } }
+@page :first { @bottom-center { content: none; } }
 html { background: #F4F0E5; }
-.flow { width: 210mm; border-collapse: collapse; }
-.flow thead td { height: 26mm; }
-.flow tfoot td { height: 10mm; }
-.flow > tbody > tr > td { padding: 0 27mm; }
-.flow > tbody > tr > td > * { max-width: 156mm; margin-left: auto; margin-right: auto; }
-.cover { width: 210mm; height: 281mm; padding: 34mm 27mm; position: relative; page-break-after: always; break-after: page; }
-.cover .meta { position: absolute; left: 27mm; right: 27mm; bottom: 16mm; }
+.flow { width: 210mm; padding: 0 27mm; }
+.flow > * { max-width: 156mm; }
+.cover { width: 210mm; height: 248mm; padding: 12mm 27mm; position: relative; page-break-after: always; break-after: page; }
+.cover .meta { position: absolute; left: 27mm; right: 27mm; bottom: 4mm; }
 .cover .meta table td { font-size: 12px; padding: 5px 0; border-bottom: 1px solid rgba(27,43,107,.12); }
 .cover .meta table td:first-child { color: #5A679E; width: 52mm; letter-spacing: .14em; text-transform: uppercase; font-size: 9.5px; }
 .team { display: flex; gap: 18px; margin-top: 14px; }
@@ -22,13 +20,24 @@ html { background: #F4F0E5; }
 .doc table { border-collapse: collapse; width: 100%; font-size: 10.5px; margin: 6px 0 12px; }
 .doc table th { font-size: 8.5px; letter-spacing: .12em; text-transform: uppercase; color: #5A679E; font-weight: 500; text-align: left; padding: 6px 7px; border-bottom: 1px solid rgba(27,43,107,.15); }
 .doc table td { padding: 6px 7px; border-bottom: 1px solid rgba(27,43,107,.1); vertical-align: top; line-height: 1.45; }
-.doc table tr { page-break-inside: avoid; break-inside: avoid; }
+.doc table tr { page-break-inside: auto; break-inside: auto; }
 .doc table code { font-size: 9.5px; }
 .doc table.dense { font-size: 8.4px; }
 .doc table.dense td { padding: 4px 5px; }
 .doc table.dense code { font-size: 8px; }
 ol.limits li { font-size: 11px; line-height: 1.5; margin-bottom: 4px; }
-.sub { font-family: var(--sans); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: #5A679E; margin: 14px 0 4px; font-weight: 500; }
+.sub { font-family: var(--sans); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: #5A679E; margin: 20px 0 8px; font-weight: 500; page-break-after: avoid; break-after: avoid; }
+.newsec { padding-top: 2mm; margin-bottom: 6mm; }
+.newsec h2 { font-size: 32px; }
+.doc p, .doc li { orphans: 3; widows: 3; }
+.doc figure { margin: 14px 0 18px; }
+.doc figcaption { font-size: 10.5px; line-height: 1.45; margin-top: 7px; padding: 0 6mm; }
+.doc table { margin: 8px 0 16px; }
+.doc table thead { display: table-header-group; }
+.doc table th { border-bottom: 1.5px solid rgba(27,43,107,.28); }
+.doc table tbody tr:nth-child(even) td { background: rgba(235,229,214,.45); }
+.doc table tr:last-child td { border-bottom: none; }
+.doc blockquote { margin: 12px 0 16px; }
 </style></head><body class="doc"><svg width="0" height="0" style="position:absolute"><filter id="duotone" color-interpolation-filters="sRGB">
 <feColorMatrix type="matrix" values=".33 .33 .33 0 0 .33 .33 .33 0 0 .33 .33 .33 0 0 0 0 0 1 0"/>
 <feComponentTransfer><feFuncR type="table" tableValues="0.106 0.957"/><feFuncG type="table" tableValues="0.169 0.941"/>
@@ -58,8 +67,7 @@ ol.limits li { font-size: 11px; line-height: 1.5; margin-bottom: 4px; }
     </div>
   </div>
 </div>
-<table class="flow"><thead><tr><td></td></tr></thead>
-<tfoot><tr><td></td></tr></tfoot><tbody><tr><td><div><p class="eyebrow">Section 01</p><h2><span class="num">01</span>Permission Model</h2><svg viewBox="0 0 240 36" width="200" height="30" fill="none" stroke="#2547C9" stroke-linecap="round">
+<div class="flow"><div><p class="eyebrow">Section 01</p><h2><span class="num">01</span>Permission Model</h2><svg viewBox="0 0 240 36" width="200" height="30" fill="none" stroke="#2547C9" stroke-linecap="round">
 <path d="M5 21C40 9 90 28 140 16S210 8 235 18" stroke-width="9" stroke-opacity=".85"/><path d="M7 27C44 16 94 33 144 22S212 14 233 24" stroke-width="4.5" stroke-opacity=".5"/></svg></div><p class="sub">Roles, operations and permission boundaries</p><table>
 <thead>
 <tr>
@@ -154,7 +162,7 @@ ol.limits li { font-size: 11px; line-height: 1.5; margin-bottom: 4px; }
 <li><strong>Time bound.</strong> A policy approval is valid for 15 minutes; at execution the policy evaluates the proposal again and re-reads the mandate hash, caps, spending and revocation on chain (<code>decision_expired</code> otherwise).</li>
 <li><strong>Interrupt.</strong> A recurring purchase waits in a visible window before execution; <em>Interrupt</em> stops it, and the plan starts no execution until she resumes.</li>
 <li><strong>Rollback.</strong> A settled transaction cannot be reversed, so the design stops harm before and after it: she can <code>revoke_agent</code> (the contract then refuses the agent) and <code>withdraw</code> her USDC; the issuer can <code>set_pause</code> the fund units, and refunds a paid order it does not approve, so no investor loses funds to an order that is never minted.</li>
-</ul><p><strong>What a fund operations analyst asked for.</strong> In one of our two exploratory usability sessions (n = 2, moderated, on the testnet app; not statistically meaningful), a junior operations analyst at a receivables fund named four conditions before accepting an agent, before seeing the product: (1) the agent does not decide where the money goes, only to the fund's account; (2) it cannot change its own limit; (3) the fund keeps issuing the unit ("if I do not sign, nobody receives anything"); (4) every execution can be audited afterwards. They map to the allowlist of fund wallets, the caps in our wallet contract on Stellar (not audited) that the agent cannot change, the issuer's countersignature on every mint, and the decision hash on every agent purchase. The full write-up is in the technical document, section 01.</p><figure><img src="../figures/stills/refused-chat.png" alt="Figure 3. Rollback in practice: after revocation, the next recurring purchase is refused before anything is built or signed (screenshot from the app, demo video 3:58)."/><figcaption>Figure 3. Rollback in practice: after revocation, the next recurring purchase is refused before anything is built or signed (screenshot from the app, demo video 3:58).</figcaption></figure><div class="newsec"><p class="eyebrow">Section 02</p><h2><span class="num">02</span>Security Tests</h2><svg viewBox="0 0 240 36" width="200" height="30" fill="none" stroke="#2547C9" stroke-linecap="round">
+</ul><p><strong>What a fund operations analyst asked for.</strong> In one of our two exploratory usability sessions (n = 2, moderated, on the testnet app; not statistically meaningful), a junior operations analyst at a receivables fund named four conditions before accepting an agent, before seeing the product: (1) the agent does not decide where the money goes, only to the fund's account; (2) it cannot change its own limit; (3) the fund keeps issuing the unit ("if I do not sign, nobody receives anything"); (4) every execution can be audited afterwards. They map to the allowlist of fund wallets, the caps in our wallet contract on Stellar (not audited) that the agent cannot change, the issuer's countersignature on every mint, and the decision hash on every agent purchase. The full write-up is in the technical document, section 01.</p><figure><img src="../figures/stills/refused-chat.png" alt="Figure 3. Rollback in practice: after revocation, the next recurring purchase is refused before anything is built or signed. Screenshot of the original interface, which you can open at https://countersign-web-rt1a.onrender.com."/><figcaption>Figure 3. Rollback in practice: after revocation, the next recurring purchase is refused before anything is built or signed. Screenshot of the original interface, which you can open at https://countersign-web-rt1a.onrender.com.</figcaption></figure><div class="newsec"><p class="eyebrow">Section 02</p><h2><span class="num">02</span>Security Tests</h2><svg viewBox="0 0 240 36" width="200" height="30" fill="none" stroke="#2547C9" stroke-linecap="round">
 <path d="M5 21C40 9 90 28 140 16S210 8 235 18" stroke-width="9" stroke-opacity=".85"/><path d="M7 27C44 16 94 33 144 22S212 14 233 24" stroke-width="4.5" stroke-opacity=".5"/></svg></div><p class="sub">Prompt injection, social engineering, privilege escalation and failure recovery tests</p><p>One command runs both suites: <code>npm --prefix tests run suites</code>. The bypass cases (A03, A04, A06, A07) use a dedicated test wallet whose agent key is a test identity, simulating a compromised server that leaked the agent key, and call the contract directly, without our API.</p><table>
 <thead>
 <tr>
@@ -420,4 +428,4 @@ ol.limits li { font-size: 11px; line-height: 1.5; margin-bottom: 4px; }
 <td>5, 8</td>
 </tr>
 </tbody>
-</table></td></tr></tbody></table></body></html>
+</table></div></body></html>

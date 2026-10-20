@@ -33,15 +33,13 @@ DUOTONE = """<svg width="0" height="0" style="position:absolute"><filter id="duo
 
 STYLE = """
 <style>
-@page { size: A4; margin: 0; }
+@page { size: A4; margin: 22mm 0 18mm 0; background: #F4F0E5; @bottom-center { content: counter(page); font-family: "IBM Plex Mono", monospace; font-size: 8px; color: #5A679E; vertical-align: bottom; padding-bottom: 7mm; } }
+@page :first { @bottom-center { content: none; } }
 html { background: #F4F0E5; }
-.flow { width: 210mm; border-collapse: collapse; }
-.flow thead td { height: 26mm; }
-.flow tfoot td { height: 10mm; }
-.flow > tbody > tr > td { padding: 0 27mm; }
-.flow > tbody > tr > td > * { max-width: 156mm; margin-left: auto; margin-right: auto; }
-.cover { width: 210mm; height: 281mm; padding: 34mm 27mm; position: relative; page-break-after: always; break-after: page; }
-.cover .meta { position: absolute; left: 27mm; right: 27mm; bottom: 16mm; }
+.flow { width: 210mm; padding: 0 27mm; }
+.flow > * { max-width: 156mm; }
+.cover { width: 210mm; height: 248mm; padding: 12mm 27mm; position: relative; page-break-after: always; break-after: page; }
+.cover .meta { position: absolute; left: 27mm; right: 27mm; bottom: 4mm; }
 .cover .meta table td { font-size: 12px; padding: 5px 0; border-bottom: 1px solid rgba(27,43,107,.12); }
 .cover .meta table td:first-child { color: #5A679E; width: 52mm; letter-spacing: .14em; text-transform: uppercase; font-size: 9.5px; }
 .team { display: flex; gap: 18px; margin-top: 14px; }
@@ -54,13 +52,24 @@ html { background: #F4F0E5; }
 .doc table { border-collapse: collapse; width: 100%; font-size: 10.5px; margin: 6px 0 12px; }
 .doc table th { font-size: 8.5px; letter-spacing: .12em; text-transform: uppercase; color: #5A679E; font-weight: 500; text-align: left; padding: 6px 7px; border-bottom: 1px solid rgba(27,43,107,.15); }
 .doc table td { padding: 6px 7px; border-bottom: 1px solid rgba(27,43,107,.1); vertical-align: top; line-height: 1.45; }
-.doc table tr { page-break-inside: avoid; break-inside: avoid; }
+.doc table tr { page-break-inside: auto; break-inside: auto; }
 .doc table code { font-size: 9.5px; }
 .doc table.dense { font-size: 8.4px; }
 .doc table.dense td { padding: 4px 5px; }
 .doc table.dense code { font-size: 8px; }
 ol.limits li { font-size: 11px; line-height: 1.5; margin-bottom: 4px; }
-.sub { font-family: var(--sans); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: #5A679E; margin: 14px 0 4px; font-weight: 500; }
+.sub { font-family: var(--sans); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: #5A679E; margin: 20px 0 8px; font-weight: 500; page-break-after: avoid; break-after: avoid; }
+.newsec { padding-top: 2mm; margin-bottom: 6mm; }
+.newsec h2 { font-size: 32px; }
+.doc p, .doc li { orphans: 3; widows: 3; }
+.doc figure { margin: 14px 0 18px; }
+.doc figcaption { font-size: 10.5px; line-height: 1.45; margin-top: 7px; padding: 0 6mm; }
+.doc table { margin: 8px 0 16px; }
+.doc table thead { display: table-header-group; }
+.doc table th { border-bottom: 1.5px solid rgba(27,43,107,.28); }
+.doc table tbody tr:nth-child(even) td { background: rgba(235,229,214,.45); }
+.doc table tr:last-child td { border-bottom: none; }
+.doc blockquote { margin: 12px 0 16px; }
 </style>"""
 
 
@@ -110,11 +119,10 @@ def cover(kind, title, lead):
 def page(title, kind, cover_html, body):
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Countersign · {title}</title>
 <link rel="stylesheet" href="ink.css">{STYLE}</head><body class="doc">{DUOTONE}{cover_html}
-<table class="flow"><thead><tr><td></td></tr></thead>
-<tfoot><tr><td></td></tr></tfoot><tbody><tr><td>{body}</td></tr></tbody></table></body></html>"""
+<div class="flow">{body}</div></body></html>"""
 
 
-ONE_LINE = "An investing agent that cannot buy a fund unit unless the investor's mandate, the fund's issuer and a wallet contract the agent cannot change agree."
+ONE_LINE = "An AI agent that invests for you in receivables funds, with every decision and every purchase traceable on chain."
 AUTHORISED = ("The agent's wallet is a contract on Stellar: it can only pay fund wallets the investor approved, within limits "
               "she signed, and it cannot change those limits. Nobody holds a fund unit unless the fund's issuer signs the mint.")
 
@@ -377,7 +385,7 @@ sec.append(section("01", "Permission Model", "".join([
        "(4) every execution can be audited afterwards. They map to the allowlist of fund wallets, the caps in our wallet contract on "
        "Stellar (not audited) that the agent cannot change, the issuer's countersignature on every mint, and the decision hash on "
        "every agent purchase. The full write-up is in the technical document, section 01."),
-    fig("stills/refused-chat", "Figure 3. Rollback in practice: after revocation, the next recurring purchase is refused before anything is built or signed (screenshot from the app, demo video 3:58)."),
+    fig("stills/refused-chat", "Figure 3. Rollback in practice: after revocation, the next recurring purchase is refused before anything is built or signed. Screenshot of the original interface, which you can open at https://countersign-web-rt1a.onrender.com."),
 ]), new_page=False))
 sec.append(section("02", "Security Tests", "".join([
     subtitle("Prompt injection, social engineering, privilege escalation and failure recovery tests"),
@@ -444,11 +452,11 @@ evb.append(section("01", "Evidence Summary", "".join([
     md("**Mainnet slice** (from the README; the table in section 02 covers the test network only; real USDC, less than US$5 in total):\n\n" + mainnet.group(1) + "\n\n" + mainnet.group(2)),
     md("**Transactions in the demo video** (recorded on 2026-10-20 with a new test investor account; every one is on the Stellar test "
        "network and opens on stellar.expert; times in UTC):\n\n" + "\n".join(
-           ["| Video (about) | Step | Signed by | Transaction | Time |", "|---|---|---|---|---|"]
-           + [f"| {v} | {step} | {who} | [{h[:8]}...{h[-6:]}](https://stellar.expert/explorer/testnet/tx/{h}) | {t} |" for v, step, who, h, t in DEMO_TXS])),
-    md("**Screenshots** of three of those steps, taken from the screen recordings behind the demo video:"),
-    fig("stills/needs-signature", "Figure 3. Task: a first purchase in a new fund. Result: the policy stops it with NEEDS_INVESTOR_SIGNATURE and asks for her signature; no money moved (demo video, 1:57)."),
-    fig("stills/issuer-approved", "Figure 4. The issuer's countersignature: both purchases approved, each with its payment and mint transaction (fund manager view, demo video, 2:56)."),
+           ["| Step | Signed by | Transaction | Time |", "|---|---|---|---|"]
+           + [f"| {step} | {who} | [{h[:8]}...{h[-6:]}](https://stellar.expert/explorer/testnet/tx/{h}) | {t} |" for v, step, who, h, t in DEMO_TXS])),
+    md("**Screenshots** of three of those steps, from the original interface (https://countersign-web-rt1a.onrender.com):"),
+    fig("stills/needs-signature", "Figure 3. Task: a first purchase in a new fund. Result: the policy stops it with NEEDS_INVESTOR_SIGNATURE and asks for her signature; no money moved. Screenshot of the original interface, which you can open at https://countersign-web-rt1a.onrender.com."),
+    fig("stills/issuer-approved", "Figure 4. The issuer's countersignature: both purchases approved, each with its payment and mint transaction (fund manager view). Screenshot of the original interface, which you can open at https://countersign-web-rt1a.onrender.com."),
     fig("stills/explorer-decision", "Figure 5. Anyone can open the agent purchase on stellar.expert and read the decision argument of subscribe (transaction 1253808e...086660, Stellar test network)."),
 ]), new_page=False))
 evb.append(section("02", "Logs or Transactions", subtitle("Transaction hashes for Topic F; timestamp, action, result and link") + logs_html))

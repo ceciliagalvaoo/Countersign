@@ -13,6 +13,8 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 
+from recolor_cursor import main as recolor_cursor
+
 HERE = Path(__file__).resolve().parent
 VID = HERE.parent / "03-demo-video"
 CLIPS, CUT = VID / "clips", VID / "cut"
@@ -60,9 +62,9 @@ SHOTS = [
     ]),
     ("01", "This is Countersign. A receivables fund buys payments that companies will receive later, and investors buy its units. Our agent buys those units for her.", [("C", "P01", None, None, 3.0)]),
     ("02", "This competition's banking brief puts investment subscription in the red tier. The hard part for an agent is not talking about an investment. It is buying one.", [("C", "P02", 10.2)]),
-    ("03", "Our composite persona, built from public data and not validated by interviews, keeps savings in USDC. She gives up at one screen: the confirmation of her first purchase.", [("C", "P03", 10.5)]),
+    ("03", "Our composite persona, built from public data, keeps savings in USDC. She gives up at one screen: the confirmation of her first purchase.", [("C", "P03", 10.5)]),
     ("04", "Agents have already lost money through a chat, through an operator panel, and through a signing screen that showed one thing while the transaction did another.", [("C", "P04", 10.5)]),
-    ("05", "So we built an investing agent that cannot buy a fund unit unless the investor's mandate, the fund's issuer and a wallet contract the agent cannot change agree.", [("C", "P05")]),
+    ("05", "So we built an AI agent that invests for you in receivables funds, with every decision and every purchase traceable on chain.", [("C", "P05")]),
     ("06", "The agent's wallet is a contract on Stellar: it can only pay fund wallets the investor approved, within limits she signed, and it cannot change those limits. Nobody holds a fund unit unless the fund's issuer signs the mint.", [("C", "P06")]),
     ("07", "She states her goal in one sentence. The agent asks only what is missing and fills a typed mandate. Nothing is valid until she approves it.", [
         ("U", 2, "1:06", "1:17", 1.4, "investor", False, [(0, 330, 330, 820), (2.5, 330, 330, 820), (5.0, 670, 330, 760)]),
@@ -257,6 +259,8 @@ def render_u(dst, fi, a, b, speed, badge, blur_table, keys, sub):
     run("ffmpeg", "-y", "-ss", str(secs(a)), "-t", str(secs(b) - secs(a)), "-i", str(FILES[fi]),
         "-i", str(badge_png(badge)), "-i", str(sub), "-filter_complex_script", str(script), "-map", "[v]", "-an",
         "-c:v", "libx264", "-preset", "veryfast" if PREVIEW else "medium", "-crf", "19", "-r", "30", str(dst))
+    if not PREVIEW:
+        recolor_cursor(dst)          # the orange pointer of the recording, made cobalt
 
 
 def render_c(dst, clip, max_s, badge, sub, hold=0):
