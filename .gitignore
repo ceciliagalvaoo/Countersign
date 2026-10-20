@@ -47,3 +47,7 @@ scripts/mainnet/out/*.xdr
 # Team registration form: passport, student ID and phone numbers. Never in the public repository.
 deliverables/team-form/*
 !deliverables/team-form/README.md
+
+# Demo video working files (recordings, clips, cuts, narration, sound); only the final video is versioned
+deliverables/03-demo-video/*
+!deliverables/03-demo-video/InternationalAI-Countersign-DemoVideo.mp4

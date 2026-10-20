@@ -123,6 +123,22 @@ S.push(`<div class="slide">
 S.push(fig('fig-receivables', 'The scenario'));
 S.push(fig('fig-market', 'Why now'));
 S.push(fig('fig-persona', 'A day without Countersign'));
+// 6 Validation
+S.push(`<div class="slide">
+  <p class="eyebrow">Validation, n = 2</p>
+  <h2 style="margin-top:18px">Two people used it on the testnet app; both finished their tasks</h2>
+  <div style="margin-top:44px;display:grid;grid-template-columns:1fr 1fr;gap:40px">
+    <div class="card" style="padding:34px">${ic('person', 52)}<h3 style="margin-top:12px">An investor: junior developer paid in USDC</h3>
+      <p style="margin-top:14px;font-size:26px"><b class="cobalt" style="font-size:44px;font-family:var(--display)">9 of 9</b> tasks unaided</p>
+      <p style="font-size:26px"><b class="cobalt" style="font-size:44px;font-family:var(--display)">4 of 5</b> card questions right without looking at the screen</p>
+      <p style="margin-top:16px;font-family:var(--display);font-size:30px;line-height:1.3">"The card is the best part. For the first time I know what I am signing."</p></div>
+    <div class="card" style="padding:34px">${ic('bank', 52)}<h3 style="margin-top:12px">A junior operations analyst at a receivables fund</h3>
+      <p style="margin-top:14px;font-size:26px"><b class="cobalt" style="font-size:44px;font-family:var(--display)">4 of 5</b> tasks unaided, 1 with a pointer</p>
+      <p style="margin-top:16px;font-family:var(--display);font-size:30px;line-height:1.3">"What convinces me is that the fund still issues the unit and the agent does not choose where the money goes."</p></div>
+  </div>
+  <p class="small" style="margin-top:32px"><b>What we heard, what we will change:</b> show that the money in the mandate wallet stays hers; explain what happens if the issuer never countersigns; show the policy decision on the manager's order screen.</p>
+  <p class="source" style="margin-top:14px">n = 2, exploratory, moderated usability sessions (think aloud, about 60 min each, October 2026) on the testnet app; not statistically meaningful. Junior profiles; the fund manager's own view was not interviewed. Quotes translated from Portuguese. Full write-up: technical document, section 01.</p>
+  CHROME</div>`);
 
 // 5 Incidents
 S.push(`<div class="slide">

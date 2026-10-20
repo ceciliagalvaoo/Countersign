@@ -171,6 +171,32 @@ tech.append(section("01", "Project Overview", "".join([
        "in front of something irreversible she cannot read (Figure 2)."),
     fig("fig-persona", "Figure 2. A day without Countersign. Composite persona, built from public data; times are illustrative."),
     md(PROBLEM_TABLE),
+    subtitle("Validation: two moderated usability sessions"),
+    md("**Method.** In October 2026 Cecília Galvão ran two moderated usability sessions with think aloud, about 60 minutes each, on "
+       "the published app on the Stellar test network (no real money; nobody from the team as a participant). Each session opened with "
+       "a context interview before the participant saw the product, then tasks, a short questionnaire and a debrief. n = 2, "
+       "exploratory, moderated usability sessions on the testnet app; not statistically meaningful. These sessions tested the product, "
+       "not the persona.\n\n"
+       "**Participants.** P1: a junior developer working remotely for a foreign client and paid partly in USDC, with ties to two "
+       "countries, who had used a crypto wallet. P2: a junior operations analyst at a receivables fund who checks registrations and "
+       "orders and prepares the approval the fund manager signs. The fund manager's own view was not interviewed; P2 only assumed it.\n\n"
+       "**Tasks.** Investor (P1): connect and state the goal; complete and approve the mandate; create the agent's wallet; deposit; ask "
+       "for a purchase and correct it; read the first purchase card; read the purchase status; run and interrupt a recurring purchase; "
+       "revoke the agent. Fund side (P2): approve an investor; assess the agent's order; approve it (two signatures); pause and resume "
+       "the fund units; find evidence for an auditor.\n\n"
+       "**Results.** P1 completed 9 of 9 tasks unaided. On the first purchase card, P1 answered 4 of 5 comprehension questions correctly "
+       "without looking at the screen (the miss: who else signs, the issuer). P2 completed 4 of 5 tasks unaided and 1 with a pointer "
+       "(finding evidence for an auditor). P1, in the debrief: \"The card is the best part. For the first time I know what I am "
+       "signing.\" P2: \"What convinces me is that the fund still issues the unit and the agent does not choose where the money "
+       "goes.\"\n\n"
+       "**Findings and planned changes** (what we will change; none of this is in the submitted build):\n\n"
+       "| # | Finding | Who, task | Severity | Planned change |\n|---|---|---|---|---|\n"
+       "| 1 | It is not clear that the money in the mandate wallet is still hers | P1, deposit | High | State on the deposit and wallet screens that she owns the balance and can withdraw it |\n"
+       "| 2 | Nothing explains what happens if the issuer never countersigns | P1, purchase status | High | Explain the pending state and what happens to her USDC if the mint never comes |\n"
+       "| 3 | The fund manager's order screen does not show the policy decision | P2, assess the order | High | Show the policy rule and the decision log line on the order screen |\n"
+       "| 4 | \"Mandate hash\" has no explanation | P1, mandate | Medium | Add a one-line explanation next to the hash |\n"
+       "| 5 | The issuer's role on the card goes unnoticed | P1, first purchase card | Medium | Make the issuer row on the card more prominent |\n"
+       "| 6 | The evidence has no plain-language summary for compliance | P2, evidence for an auditor | Medium | Add a plain-language report per execution |"),
     subtitle("Core value and innovation"),
     md("Agents that move money have already lost it through a chat instruction (Freysa), through the operator's panel (AIXBT) and "
        "through a signing screen that showed one thing while the transaction did another (Bybit). In most agent wallet designs the "
@@ -344,6 +370,13 @@ sec.append(section("01", "Permission Model", "".join([
     fig("fig-layers", "Figure 2. Who enforces what."),
     subtitle("Confirmation, verification and rollback mechanisms"),
     md(ROLLBACK),
+    md("**What a fund operations analyst asked for.** In one of our two exploratory usability sessions (n = 2, moderated, on the "
+       "testnet app; not statistically meaningful), a junior operations analyst at a receivables fund named four conditions before "
+       "accepting an agent, before seeing the product: (1) the agent does not decide where the money goes, only to the fund's account; "
+       "(2) it cannot change its own limit; (3) the fund keeps issuing the unit (\"if I do not sign, nobody receives anything\"); "
+       "(4) every execution can be audited afterwards. They map to the allowlist of fund wallets, the caps in our wallet contract on "
+       "Stellar (not audited) that the agent cannot change, the issuer's countersignature on every mint, and the decision hash on "
+       "every agent purchase. The full write-up is in the technical document, section 01."),
     fig("stills/refused-chat", "Figure 3. Rollback in practice: after revocation, the next recurring purchase is refused before anything is built or signed (screenshot from the app, demo video 3:58)."),
 ]), new_page=False))
 sec.append(section("02", "Security Tests", "".join([

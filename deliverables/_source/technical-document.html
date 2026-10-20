@@ -107,6 +107,65 @@ ol.limits li { font-size: 11px; line-height: 1.5; margin-bottom: 4px; }
 <td><a href="https://www.chinaservicesinfo.com/s/202602/09/WS6989841b498e36855033a830/tokenization-of-real-world-assets-banned.html">China Services Info</a></td>
 </tr>
 </tbody>
+</table><p class="sub">Validation: two moderated usability sessions</p><p><strong>Method.</strong> In October 2026 Cecília Galvão ran two moderated usability sessions with think aloud, about 60 minutes each, on the published app on the Stellar test network (no real money; nobody from the team as a participant). Each session opened with a context interview before the participant saw the product, then tasks, a short questionnaire and a debrief. n = 2, exploratory, moderated usability sessions on the testnet app; not statistically meaningful. These sessions tested the product, not the persona.</p>
+<p><strong>Participants.</strong> P1: a junior developer working remotely for a foreign client and paid partly in USDC, with ties to two countries, who had used a crypto wallet. P2: a junior operations analyst at a receivables fund who checks registrations and orders and prepares the approval the fund manager signs. The fund manager's own view was not interviewed; P2 only assumed it.</p>
+<p><strong>Tasks.</strong> Investor (P1): connect and state the goal; complete and approve the mandate; create the agent's wallet; deposit; ask for a purchase and correct it; read the first purchase card; read the purchase status; run and interrupt a recurring purchase; revoke the agent. Fund side (P2): approve an investor; assess the agent's order; approve it (two signatures); pause and resume the fund units; find evidence for an auditor.</p>
+<p><strong>Results.</strong> P1 completed 9 of 9 tasks unaided. On the first purchase card, P1 answered 4 of 5 comprehension questions correctly without looking at the screen (the miss: who else signs, the issuer). P2 completed 4 of 5 tasks unaided and 1 with a pointer (finding evidence for an auditor). P1, in the debrief: "The card is the best part. For the first time I know what I am signing." P2: "What convinces me is that the fund still issues the unit and the agent does not choose where the money goes."</p>
+<p><strong>Findings and planned changes</strong> (what we will change; none of this is in the submitted build):</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Finding</th>
+<th>Who, task</th>
+<th>Severity</th>
+<th>Planned change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>It is not clear that the money in the mandate wallet is still hers</td>
+<td>P1, deposit</td>
+<td>High</td>
+<td>State on the deposit and wallet screens that she owns the balance and can withdraw it</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Nothing explains what happens if the issuer never countersigns</td>
+<td>P1, purchase status</td>
+<td>High</td>
+<td>Explain the pending state and what happens to her USDC if the mint never comes</td>
+</tr>
+<tr>
+<td>3</td>
+<td>The fund manager's order screen does not show the policy decision</td>
+<td>P2, assess the order</td>
+<td>High</td>
+<td>Show the policy rule and the decision log line on the order screen</td>
+</tr>
+<tr>
+<td>4</td>
+<td>"Mandate hash" has no explanation</td>
+<td>P1, mandate</td>
+<td>Medium</td>
+<td>Add a one-line explanation next to the hash</td>
+</tr>
+<tr>
+<td>5</td>
+<td>The issuer's role on the card goes unnoticed</td>
+<td>P1, first purchase card</td>
+<td>Medium</td>
+<td>Make the issuer row on the card more prominent</td>
+</tr>
+<tr>
+<td>6</td>
+<td>The evidence has no plain-language summary for compliance</td>
+<td>P2, evidence for an auditor</td>
+<td>Medium</td>
+<td>Add a plain-language report per execution</td>
+</tr>
+</tbody>
 </table><p class="sub">Core value and innovation</p><p>Agents that move money have already lost it through a chat instruction (Freysa), through the operator's panel (AIXBT) and through a signing screen that showed one thing while the transaction did another (Bybit). In most agent wallet designs the language model proposes and a policy on the server decides; if the server falls, the policy falls with it. Countersign puts the limits where our server cannot reach: in the agent's wallet contract, and in the fund issuer's signature on every mint.</p><blockquote>The agent's wallet is a contract on Stellar: it can only pay fund wallets the investor approved, within limits she signed, and it cannot change those limits. Nobody holds a fund unit unless the fund's issuer signs the mint.</blockquote><p>Those limits are enforced by our wallet contract on Stellar, not audited.</p>
 <p><strong>What is new.</strong> (1) A wallet contract per investor that only pays fund wallets she approved, within per purchase, per period and per fund caps she signed, and never reuses a decision. (2) An approval card decoded from the exact transaction bytes, never from the model's words, checked a second time in the browser. (3) A hash chained decision log whose line hash travels on chain as the <code>decision</code> argument of every agent purchase; the contract refuses a reused value but cannot check a new one against our log, so the evidence script checks it afterwards (limitation 3). (4) The issuer's countersignature on every mint. (5) A zero-knowledge tier proof verified on chain, so the agent only learns "eligible" or "not eligible".</p><figure><img src="../figures/fig-market.png" alt="Figure 3. Why now: retail money entering receivables funds, and people who already hold USDC on Stellar."/><figcaption>Figure 3. Why now: retail money entering receivables funds, and people who already hold USDC on Stellar.</figcaption></figure><div class="newsec"><p class="eyebrow">Section 02</p><h2><span class="num">02</span>System Architecture</h2><svg viewBox="0 0 240 36" width="200" height="30" fill="none" stroke="#2547C9" stroke-linecap="round">
 <path d="M5 21C40 9 90 28 140 16S210 8 235 18" stroke-width="9" stroke-opacity=".85"/><path d="M7 27C44 16 94 33 144 22S212 14 233 24" stroke-width="4.5" stroke-opacity=".5"/></svg></div><p class="sub">Architecture diagram and component responsibilities</p><figure><img src="../figures/fig-architecture.png" alt="Figure 4. Components. The agent service has no database and no keys; the agent key lives in the API's signer; the limits live in the mandate wallet contract."/><figcaption>Figure 4. Components. The agent service has no database and no keys; the agent key lives in the API's signer; the limits live in the mandate wallet contract.</figcaption></figure><table>

@@ -30,7 +30,8 @@ async function record(id, run) {
 
 // Pitch animations: each plays once and holds its last frame
 const lab = pathToFileURL(join(here, 'animations.html')).href;
-const ids = ['P01', 'P02', 'P03', 'P04', 'P05', 'P06', 'P12', 'P15', 'P18a', 'P18b', 'P19', 'P21'];
+const ALL = ['P01', 'P02', 'P03', 'P04', 'P05', 'P06', 'PV', 'P12', 'P15', 'P18a', 'P18b', 'P19', 'P21'];
+const ids = process.argv.slice(2).length ? ALL.filter((x) => process.argv.slice(2).includes(x)) : ALL;
 for (const id of ids) {
   await record(id, async (page, now) => {
     await page.goto(`${lab}?clip=${id}`, { waitUntil: 'networkidle' });

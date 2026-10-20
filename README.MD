@@ -23,7 +23,7 @@
 
 All USDC and fund units here are test assets on the Stellar public test network, with no monetary value, except the mainnet transactions of the mainnet slice (section 6, limitation 14). Transaction hashes prove the mechanism, not a market.
 
-**Submission documents** (technical document, presentation deck, security self-assessment, execution evidence, all as PDF): [`deliverables/`](deliverables/README.md).
+**Submission documents** (technical document, presentation deck, security self-assessment and execution evidence as PDF, and the demo video as MP4): [`deliverables/`](deliverables/README.md).
 
 ---
 
@@ -56,6 +56,10 @@ Those limits are enforced by our wallet contract on Stellar, not audited.
 | The regulator's position on our object | Yinfa [2026] No. 42 (6 Feb 2026): tokenized real world assets "prohibited onshore" | [China Services Info](https://www.chinaservicesinfo.com/s/202602/09/WS6989841b498e36855033a830/tokenization-of-real-world-assets-banned.html) |
 
 The person we design for (composite persona, built from public data; not validated by interviews) keeps part of her savings in USDC, lives under the rules of two countries, and gives up at one precise moment: the confirmation screen of her first purchase, in front of something irreversible she cannot read. Agents that move money have already lost it through a chat instruction (Freysa), through the operator's panel (AIXBT) and through a signing screen that showed one thing while the transaction did another (Bybit). In most agent wallet designs the language model proposes and a policy on the server decides; if the server falls, the policy falls with it. Countersign puts the limits where our server cannot reach: in the agent's wallet contract, and in the fund issuer's signature on every mint.
+
+### User validation (n = 2)
+
+Two exploratory, moderated usability sessions on the testnet app (October 2026, about 60 minutes each: a context interview first, then tasks with think aloud; not statistically meaningful). An investor profile (a junior developer paid partly in USDC) finished all 9 tasks unaided and answered 4 of 5 questions about the approval card without looking at the screen; the one miss was who else signs (the issuer). A fund operations profile (a junior analyst at a receivables fund) finished 4 of 5 tasks unaided and 1 with a pointer; the fund manager's own view was not interviewed. "The card is the best part. For the first time I know what I am signing." The three main findings and what we will change are in the technical document, section 01.
 
 ### How it works
 

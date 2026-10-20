@@ -5,8 +5,8 @@
 | # | Item | File | Status |
 |---|---|---|---|
 | 1 | Technical documentation | [`01-technical-document/Countersign-Technical-Document.pdf`](01-technical-document/Countersign-Technical-Document.pdf) | Ready |
-| 2 | Presentation deck (10 minutes or less) | [`02-presentation-deck/Countersign-Presentation-Deck.pdf`](02-presentation-deck/Countersign-Presentation-Deck.pdf) · narrative and spoken lines in [`STORY.md`](02-presentation-deck/STORY.md) | Ready |
-| 3 | Demo video (5 minutes or less) | [`03-demo-video/InternationalAI-Countersign-DemoVideo.mp4`](03-demo-video/InternationalAI-Countersign-DemoVideo.mp4) (4:57, 1080p, English narration and subtitles; `.en.srt` beside it) | Done |
+| 2 | Presentation deck (10 minutes or less) | [`02-presentation-deck/Countersign-Presentation-Deck.pdf`](02-presentation-deck/Countersign-Presentation-Deck.pdf) | Ready |
+| 3 | Demo video (5 minutes or less) | [`03-demo-video/InternationalAI-Countersign-DemoVideo.mp4`](03-demo-video/InternationalAI-Countersign-DemoVideo.mp4) (4:54, 1080p, English narration and subtitles) | Done |
 | 4 | Source code | This repository; [`README.MD`](../README.MD) follows the official README template | Ready |
 | 5 | Security self-assessment | [`05-security-self-assessment/Countersign-Security-Self-Assessment.pdf`](05-security-self-assessment/Countersign-Security-Self-Assessment.pdf) | Ready |
 | 6 | Execution evidence | [`06-execution-evidence/Countersign-Execution-Evidence.pdf`](06-execution-evidence/Countersign-Execution-Evidence.pdf) · source table in [`evidence/EVIDENCE.md`](../evidence/EVIDENCE.md) | Ready |
@@ -18,7 +18,7 @@ Every diagram and chart is in [`figures/`](figures) as PNG, drawn in the product
 
 ## Rebuilding
 
-The PDFs and PNGs are generated from [`_source/`](_source): `ink.css` and `ink.js` (tokens and hand-drawn primitives), `figures.html`, `deck.html`, and `build_docs.py`, which copies the README's tables and the literal limitations block into the documents so they stay identical.
+The PDFs and PNGs are generated from [`_source/`](_source), and the video from the screen recordings by `edit_demo.py` (cuts, zooms, badges, the pen transition of `transition.py`, narration from `narrate.py` and ElevenLabs sound and music): `ink.css` and `ink.js` (tokens and hand-drawn primitives), `figures.html`, `deck.html`, and `build_docs.py`, which copies the README's tables and the literal limitations block into the documents so they stay identical.
 
 ```bash
 cd deliverables/_source

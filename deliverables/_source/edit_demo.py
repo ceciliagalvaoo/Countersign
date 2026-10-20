@@ -45,6 +45,7 @@ BADGES = {
     "ledger": ("PUBLIC LEDGER", "stellar.expert, Stellar testnet", COBALT, "chain"),
     "docs": ("DOCUMENTATION", "the same limitations in every document", SOFT, "page"),
     "suite": ("TEST SUITE", "from our recorded runs", SOFT, "page"),
+    "validation": ("USER VALIDATION", "n = 2, moderated sessions, testnet", SOFT, "person"),
 }
 
 # Header e-mail, always blurred; investor e-mails in the manager's tables, blurred on those shots (recording pixels)
@@ -97,7 +98,7 @@ SHOTS = [
         ("U", 4, "9:55", "10:00", 1.0, "investor", False, [(0, 700, 420, 800), (2.0, 600, 400, 620)]),
         ("U", 4, "10:18", "10:25", 1.2, "investor", False, [(0, 650, 440, 640)]),
     ]),
-    ("15", "From our test suite: twelve adversarial cases, all blocked or recovered. Four were refused on chain by our wallet contract, even with the agent key in hand.", [("C", "P15", None, "suite"), ("C", "W15", None, "ledger")]),
+    ("15", "From our test suite: twelve adversarial cases, all blocked or recovered. Four were refused on chain by our wallet contract, even with the agent key in hand. A refused transaction stays on the ledger as FAILED, with its fee charged: that is our wallet contract saying no.", [("C", "P15", None, "suite"), ("C", "W15", None, "ledger")]),
     ("16", "The issuer can freeze the units. She can revoke the agent with one signature; our wallet contract on Stellar, not audited, then refuses its purchases: the next recurring purchase was refused before anything was built or signed.", [
         ("U", 4, "3:57", "4:01", 1.0, "manager", False, [(0, 700, 400, 1000)]),
         ("U", 4, "4:28", "4:33", 1.0, "manager", False, [(0, 800, 270, 900)]),
@@ -107,9 +108,9 @@ SHOTS = [
         ("U", 4, "12:40", "12:45", 1.0, "investor", False, [(0, 650, 400, 720), (1.5, 650, 430, 520)]),
         ("U", 4, "13:22", "13:27", 1.0, "investor", False, [(0, 260, 640, 640)]),
     ]),
+    ("17", "Two people tested it in moderated sessions on the testnet app. The investor finished all nine tasks on her own. Two sessions: exploratory, not statistics.", [("C", "PV", None, "validation")]),
     ("18", "Eleven of twelve scripted tasks completed, in about one turn each. Every hash has a task and a log line.", [("C", "P18a", None, "suite"), ("C", "P18b", None, "suite")]),
-    ("19", "Not offered in Mainland China; we name the February 2026 notice. No licence, simulated KYC, test assets.", [("C", "P19", 9.2)]),
-    ("20", "These are our limitations, the same in every document: our contracts are not audited, the checks are simulated, and every asset is a test asset. Please read them before anything else we showed.", [("C", "W20", None, "docs")]),
+    ("19", "Not offered in Mainland China; no licence; simulated KYC; test assets. All fourteen limitations are listed in our documents.", [("C", "P19", 8.0)]),
     ("21", "Countersign. Sign only what you can read. Reviewers: live demo accounts are in our submission form.", [("C", "P21")]),
 ]
 
@@ -281,6 +282,7 @@ def srt_time(t):
 
 
 NARR = VID / "narration"      # one voice file per shot, made by narrate.py (ElevenLabs)
+SOUND = VID / "sound"        # intro, transition and outro effects and the music, made with the ElevenLabs API
 LEAD, TAIL = 0.5, 0.45       # the voice starts once the transition ink has cleared, and leaves a short breath after
 TRANS, TRANS_CUT = TMP / "transition.mov", 14 / 30   # made by transition.py; the cut falls 14 frames into it
 
@@ -340,13 +342,32 @@ def main():
         silent = joined
     out = CUT / f"{name}.mp4"
     if voices:
-        ins, chains = [], []
-        for k, (at, v) in enumerate(voices):
+        total_v = duration(silent)
+        # sound: the narration; a soft pen-and-whoosh on every cut, a chime at the start and at the end (ElevenLabs
+        # sound effects); calm music under everything, ducked while she speaks (ElevenLabs Music). Files in SOUND.
+        fx = [(0.0, SOUND / "intro.mp3", 0.55)] + [(max(c - TRANS_CUT - 0.05, 0), SOUND / "transition.mp3", 0.38) for c in cuts]
+        fx.append((subs[-1][0], SOUND / "outro.mp3", 0.6))
+        ins, chains, n = [], [], 1
+        for at, v in voices:
             ins += ["-i", str(v)]
+            chains.append(f"[{n}:a]aresample=48000,aformat=channel_layouts=mono,adelay={int(at * 1000)}[v{n}]")
+            n += 1
+        vlabels = "".join(f"[v{k}]" for k in range(1, n))
+        chains.append(f"{vlabels}amix=inputs={n - 1}:normalize=0,pan=stereo|c0=c0|c1=c0,apad,atrim=0:{total_v:.2f},asplit=2[voice][key]")
+        f0 = n
+        for at, f, vol in fx:
+            ins += ["-i", str(f)]
             ms = int(at * 1000)
-            chains.append(f"[{k + 1}:a]aresample=48000,aformat=channel_layouts=mono,adelay={ms}[a{k}]")
-        mix = ";".join(chains) + ";" + "".join(f"[a{k}]" for k in range(len(voices))) + f"amix=inputs={len(voices)}:normalize=0,pan=stereo|c0=c0|c1=c0,loudnorm=I=-16:TP=-1.5[aout]"   # the voice centred: same signal on both channels
-        run("ffmpeg", "-y", "-i", str(silent), *ins, "-filter_complex", mix, "-map", "0:v", "-map", "[aout]",
+            chains.append(f"[{n}:a]aresample=48000,aformat=channel_layouts=stereo,volume={vol},adelay={ms}|{ms}[f{n}]")
+            n += 1
+        flabels = "".join(f"[f{k}]" for k in range(f0, n))
+        chains.append(f"{flabels}amix=inputs={n - f0}:normalize=0,apad,atrim=0:{total_v:.2f}[fx]")
+        ins += ["-i", str(SOUND / "music.mp3")]
+        chains.append(f"[{n}:a]aresample=48000,aformat=channel_layouts=stereo,atrim=0:{total_v:.2f},volume=0.16,"
+                      f"afade=t=in:d=2,afade=t=out:st={total_v - 4:.2f}:d=4[mraw]")
+        chains.append("[mraw][key]sidechaincompress=threshold=0.02:ratio=5:attack=40:release=600:makeup=1[music]")
+        chains.append("[voice][fx][music]amix=inputs=3:normalize=0,loudnorm=I=-16:TP=-1.5:LRA=11[aout]")
+        run("ffmpeg", "-y", "-i", str(silent), *ins, "-filter_complex", ";".join(chains), "-map", "0:v", "-map", "[aout]",
             "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", str(out))
     else:
         run("ffmpeg", "-y", "-i", str(silent), "-c", "copy", "-movflags", "+faststart", str(out))
