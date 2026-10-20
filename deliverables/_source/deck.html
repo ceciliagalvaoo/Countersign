@@ -6,11 +6,14 @@
 <link rel="stylesheet" href="ink.css" />
 <style>
   @page { size: 1920px 1080px; margin: 0; }
-  .deck .slide { padding: 120px 180px 120px; display: flex; flex-direction: column; justify-content: center; }
+  .deck .slide { padding: 120px 230px 120px; display: flex; flex-direction: column; justify-content: center; }
+  /* Titles sit centred at the top of every content slide */
+  .deck .slide > p.eyebrow:first-child { text-align: center; }
+  .deck .slide > p.eyebrow:first-child + h2 { text-align: center; margin-left: auto; margin-right: auto; }
   .deck .slide .folio { position: absolute; left: 0; right: 0; bottom: 44px; text-align: center; font-family: var(--mono); font-size: 16px; color: var(--ink-soft); }
   .deck .slide > .chrome { display: none; }
-  .figslide { padding: 70px 150px 110px; display: flex; align-items: center; justify-content: center; }
-  .figslide img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .figslide { padding: 70px 190px 110px; display: flex; align-items: center; justify-content: center; }
+  .figslide > svg { width: 100%; height: 100%; display: block; }
   .split { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; height: 100%; }
   .stack > * + * { margin-top: 28px; }
   .tierrow { display: grid; grid-template-columns: 220px 1fr; gap: 24px; align-items: center; padding: 22px 28px; }
@@ -38,6 +41,7 @@
   .dagnode small { font-size: 13px; letter-spacing: .12em; text-transform: uppercase; }
 </style>
 <script src="ink.js"></script>
+<script src="figs.js"></script>
 </head>
 <body class="deck">
 <svg width="0" height="0" style="position:absolute">
@@ -52,13 +56,26 @@
 </svg>
 <div id="deck"></div>
 <script>
-const { C, nib, brush, icon, orb, svg } = ink;
 const tiny = (inner, w, h) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" style="overflow:visible">${ink.defs()}${inner}</svg>`;
 const ic = (name, size = 52, color = C.cobalt) => tiny(icon(name, 0, 0, size, color, 1.7), size, size);
 const nibSvg = (size, baseline = true) => tiny(nib(0, 0, size, C.cobalt, baseline), size, size);
 const underline = (w) => tiny(brush(0, 0, w), w, w * 0.16);
 const chromeBar = (n) => `<div class="folio">${n}</div>`;
-const fig = (name, eyebrow) => `<div class="slide figslide"><img src="../figures/${name}.png" alt="${eyebrow}"/>CHROME</div>`;
+const fig = (name, eyebrow) => `<div class="slide figslide" aria-label="${eyebrow}">${centreTitle(FIGS[name]())}CHROME</div>`;
+/** The figure's eyebrow and title move to the centre for the deck (the PNGs keep them left for the documents) */
+function centreTitle(svgText) {
+  const box = document.createElement('div');
+  box.innerHTML = svgText;
+  const el = box.querySelector('svg');
+  const w = Number(el.getAttribute('viewBox').split(' ')[2]);
+  [...el.querySelectorAll('text')].slice(0, 2).forEach((t) => {
+    t.setAttribute('text-anchor', 'middle'); t.setAttribute('x', String(w / 2));
+    t.querySelectorAll('tspan').forEach((ts) => ts.setAttribute('x', String(w / 2)));
+  });
+  el.removeAttribute('width'); el.removeAttribute('height');
+  el.setAttribute('style', 'width:100%;height:100%');
+  return el.outerHTML;
+}
 
 const S = [];
 
@@ -85,14 +102,14 @@ S.push(`<div class="slide" style="padding:0">
 S.push(`<div class="slide">
   <p class="eyebrow">The question</p>
   <h2 style="margin-top:18px">What should an AI agent be allowed to sign for you?</h2>
-  <div style="margin-top:56px;display:grid;grid-template-columns:1.15fr .85fr;gap:70px;align-items:start">
+  <div style="margin-top:56px;display:grid;grid-template-columns:1.15fr .85fr;gap:70px;align-items:center">
     <div>
       <div class="card tierrow"><span class="name cobalt">Green</span><span style="font-size:26px">Automatic: balance and information queries</span></div>
       <div class="card tierrow"><span class="name ochre">Yellow</span><span style="font-size:26px">User confirmation: small transfers</span></div>
       <div class="card tierrow" style="border:3px solid var(--vermilion)"><span class="name vermilion">Red</span><span style="font-size:26px">Strong verification: <b>investment subscription</b></span></div>
       <p class="source" style="margin-top:18px">Source: 2026 FinTechathon, Domestic AI Track brief, risk tiers of the banking agent (Green, Yellow, Red).</p>
     </div>
-    <div class="stack" style="padding-top:20px">
+    <div class="stack">
       <p style="font-family:var(--display);font-size:48px;line-height:1.2">The hardest thing for an agent is not talking about an investment.</p>
       <p style="font-family:var(--display);font-size:48px;line-height:1.2" class="cobalt">It is buying one.</p>
     </div>
@@ -138,7 +155,7 @@ S.push(fig('fig-actors', 'Three parties'));
 S.push(`<div class="slide">
   <p class="eyebrow">Before every first purchase in a new fund</p>
   <h2 style="margin-top:18px">She reads before she signs</h2>
-  <div style="margin-top:44px;display:grid;grid-template-columns:1.25fr .75fr;gap:60px;align-items:start">
+  <div style="margin-top:44px;display:grid;grid-template-columns:1.25fr .75fr;gap:60px;align-items:center">
     <div class="cardmock">
       <div class="hd"><p class="eyebrow">Approval card</p><h3 style="font-size:40px;margin-top:6px">Approve a fund for your agent</h3></div>
       <div class="bd">
@@ -177,6 +194,30 @@ S.push(fig('fig-sequence', 'A first purchase'));
 const dag = ['Profile', 'Perimeter', 'Eligibility', 'Screening', 'Proposal', 'Investor signature', 'Agent purchase', 'Issuer countersign', 'Confirmed'];
 const dagTier = ['Green', 'Green', 'Green', 'Green', 'Green', 'Red', 'Yellow', 'Issuer', ''];
 const dagCol = { Green: 'cobalt', Red: 'vermilion', Yellow: 'ochre', Issuer: '', '': 'soft' };
+/** The plan as two centred rows: the first five steps, then a hand drawn arrow down to the last four */
+function planGraph() {
+  const W = 1460, H = 330, bw = 236, bh = 92, gap = 48;
+  const col = { Green: C.cobalt, Red: C.vermilion, Yellow: C.ochre, Issuer: C.navy, '': C.soft };
+  const rows = [[0, 1, 2, 3, 4], [5, 6, 7, 8]];
+  const pos = {};
+  let b = '';
+  rows.forEach((r, ri) => {
+    const total = r.length * bw + (r.length - 1) * gap, x0 = (W - total) / 2, y = 10 + ri * 200;
+    r.forEach((i, k) => {
+      const x = x0 + k * (bw + gap); pos[i] = { x, y };
+      const c = col[dagTier[i]];
+      b += ink.box({ x, y, w: bw, h: bh, r: 10, seed: 900 + i, stroke: c, sw: 2.4 });
+      b += ink.text(x + 20, y + 42, dag[i], { size: 25, font: 'display', weight: 600 });
+      b += ink.text(x + 20, y + 72, dagTier[i] || 'done', { size: 14, color: c, weight: 600, spacing: 1.6, upper: true });
+      if (k > 0) b += ink.arrow({ x1: x - gap + 6, y1: y + bh / 2, x2: x - 6, y2: y + bh / 2, sw: 2.4 });
+    });
+  });
+  const a = pos[4], z = pos[5];
+  b += `<g filter="url(#roughBig)" fill="none" stroke="${C.cobalt}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M${a.x + bw / 2} ${a.y + bh + 6} C${a.x + bw / 2 + 40} ${a.y + bh + 70} ${z.x + bw / 2 + 280} ${z.y - 100} ${z.x + bw / 2} ${z.y - 8}"/>
+    <path d="M${z.x + bw / 2 - 12} ${z.y - 22} L${z.x + bw / 2} ${z.y - 8} L${z.x + bw / 2 + 14} ${z.y - 20}"/></g>`;
+  return `<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;overflow:visible">${ink.defs()}${b}</svg>`;
+}
 S.push(`<div class="slide">
   <p class="eyebrow">Agent design</p>
   <h2 style="margin-top:18px">The agent asks only what is missing, and shows its plan</h2>
@@ -186,14 +227,12 @@ S.push(`<div class="slide">
     <div class="card" style="padding:30px">${ic('refresh', 52)}<h3 style="margin-top:14px">Correct, stop, fall back</h3><p class="small soft" style="margin-top:10px">"Make it 4" replans without starting over. She can interrupt and resume. "What will I earn?" gets no figure. A failed tool is never assumed done. An orb on every investor screen opens the same conversation; it signs nothing.</p></div>
   </div>
   <p class="eyebrow" style="margin-top:46px">The plan, a visible graph; each node shows its tier</p>
-  <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:14px;align-items:center">
-    ${dag.map((n, i) => `<div class="dagnode"><b>${n}</b><small class="${dagCol[dagTier[i]]}">${dagTier[i] || 'done'}</small></div>${i < dag.length - 1 ? '<span class="cobalt" style="font-size:30px">→</span>' : ''}`).join('')}
-  </div>
+  <div style="margin-top:22px">${planGraph()}</div>
   CHROME</div>`);
 
 // 11 Architecture with "why Stellar"
 S.push(`<div class="slide" style="padding:80px 150px 110px;display:grid;grid-template-columns:1.6fr .4fr;gap:44px;align-items:center">
-  <img src="../figures/fig-architecture.png" style="width:100%;max-height:950px;object-fit:contain" alt="Architecture"/>
+  <div style="height:880px">${centreTitle(FIGS['fig-architecture']())}</div>
   <div class="stack">
     <p class="eyebrow">Why this infrastructure</p>
     <h3>USDC is the same asset as a trustline and as a contract</h3>
@@ -210,7 +249,7 @@ S.push(fig('fig-adversarial', 'Adversarial suite'));
 S.push(fig('fig-benign', 'Benign suite'));
 S.push(fig('fig-decision', 'Decision hash on chain'));
 S.push(`<div class="slide" style="padding:90px 180px 110px">
-  <img src="../figures/fig-evidence.png" style="width:100%" alt="Evidence"/>
+  <div style="height:560px">${centreTitle(FIGS['fig-evidence']())}</div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:10px">
     <div class="card" style="padding:26px 30px"><p class="eyebrow">Open one yourself</p><p class="mono" style="font-size:19px;margin-top:10px">stellar.expert/explorer/testnet/tx/<br>ca28550282a909fc3d625dc3ef09825bd53a1be100d87f057b4b1d54a6b47bd1</p><p class="small soft" style="margin-top:8px">The agent's purchase through the app; its decision argument is line #5 of her log.</p></div>
     <div class="card" style="padding:26px 30px"><p class="eyebrow">Reproduce</p><p class="mono" style="font-size:21px;margin-top:10px">npm --prefix tests run suites<br>npm --prefix tests run evidence</p><p class="small soft" style="margin-top:8px">The export fails on any hash without a task or a log line, and on any divergent decision.</p></div>
